@@ -1,11 +1,9 @@
 import {Layout} from "./layout"
-import React from "react"
-import HomePageHeader from "../header/homePageHeader"
+import LargeHeader from "../headers/largeHeader";
 
-export function HomePageLayout({ preview, children }) {
+export function HomePageLayout({  children ,facebook , telegram ,gmail}) {
     return <Layout
-        preview={preview}
+        header={<LargeHeader facebook={facebook} telegram={telegram} gmail={gmail}/>}
         children={children}
-        header={<HomePageHeader/>}
     />
 }

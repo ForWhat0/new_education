@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 
 
 const client = new ApolloClient({
-	uri:'http://education.local/graphql',
+	uri:'http://testkp.flexreality.pro/graphql',
 	cache: new InMemoryCache()
 })
 

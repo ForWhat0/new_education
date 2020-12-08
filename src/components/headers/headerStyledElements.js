@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import React from "react";
-import Link from "next/link";
-import {StyledButton} from "../button/button";
+import React from "react"
+import Link from "next/link"
+import {StyledButton} from "../button/button"
 import {ChangeLanguageSelector} from './changeLanguageSelector'
-import {SearchBarStyled} from "../searchBar/searchBar";
+import {SearchBarStyled} from "../searchBar/searchBar"
+import Icon from "../icon/icon";
 
 export const HeaderWrapper = styled.header`
     justify-content: flex-start;
@@ -132,8 +133,8 @@ export const Main =({logo1,logo2,title,subtitle})=>{
     return (
         <MainContent>
             <Logos>
-                <Logo width='136px' color='unset' padding='unset' right='10px' radius='unset' height='50px' src={logo1}/>
-                <Logo width='136px' color='unset' padding='unset' right='10px' radius='unset' height='50px' src={logo2}/>
+                <Icon src={logo1} width='150px' height='60px'/>
+                <Icon src={logo2} width='70px' height='60px'/>
             </Logos>
             <Title>
                 {title}
@@ -153,54 +154,42 @@ margin-top:40px;
 const ChangeLanguageContainer = styled.div`
 display:flex;
 align-items: center;
+margin-left:20px;
 `
-
-export const Footer =({inputName,inputFunc,inputPlaceholder})=>{
+const LinkIcon = styled.i`
+background-color: white;
+    border-radius: 30px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #0072BC;
+    margin-right:30px;
+`
+export const Footer =({inputName,inputFunc,inputPlaceholder,telegram,facebook,gmail})=>{
     return (
         <FooterContainer>
             <Logos>
-                <Logo
-                    width='30px'
-                    height='30px'
-                    right='20px'
-                    color='#ffffffff'
-                    padding='3px'
-                    radius='30px'
-                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png'/>
-                <Logo
-                    width='30px'
-                    height='30px'
-                    right='20px'
-                    color='#ffffffff'
-                    padding='3px'
-                    radius='30px'
-                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png'/>
-                <Logo
-                    width='30px'
-                    height='30px'
-                    right='20px'
-                    color='#ffffffff'
-                    radius='30px'
-                    padding='3px'
-                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png'/>
+                <a href={telegram}  target="_blank">
+                    <LinkIcon  className="fa fa-paper-plane" aria-hidden="true"/>
+                </a>
+                <a href={facebook} target="_blank">
+                    <LinkIcon  className="fa fa-facebook" aria-hidden="true"/>
+                </a>
+                <a href={gmail} target="_blank">
+                    <LinkIcon  className="fa fa-envelope" aria-hidden="true"/>
+                </a>
             </Logos>
 
-            <SearchBarStyled width='80%' inputFunc={inputFunc} name={inputName} inputPlaceholder={inputPlaceholder}/>
+            <SearchBarStyled border='none' width='60%' inputFunc={inputFunc} name={inputName} inputPlaceholder={inputPlaceholder}/>
 
             <ChangeLanguageContainer>
-                <Logo
-                    width='30px'
-                    left='30px'
-                    height='30px'
-                    padding='3px'
-                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png'/>
+                <Icon src='/changeLanguageIcon.svg'  width={'30px'} height='60px'/>
                 <ChangeLanguageSelector/>
-                <Logo
-                    width='30px'
-                    left='20px'
-                    height='30px'
-                    padding='3px'
-                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png'/>
+                <Icon src='/glassIcon.svg'  width={'30px'} height='60px'/>
             </ChangeLanguageContainer>
         </FooterContainer>
     )

@@ -2,10 +2,9 @@ import React from "react"
 import {HeaderWrapper,WrapperInner,Main,NavBar,Footer} from './headerStyledElements'
 import {headerLsi} from '../../Lsi/lsi'
 import {useSelector} from "react-redux"
-
 const {navButtons,register,logIn,title,subtitle,inputPlaceholder} = headerLsi
 
-export default function HomePageHeader() {
+export default function LargeHeader({gmail,telegram,facebook}) {
     const {language} = useSelector(state=>state.app)
     return (
         <HeaderWrapper>
@@ -17,12 +16,15 @@ export default function HomePageHeader() {
                     logIn={logIn}
                 />
                 <Main
-                    logo1='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png'
-                    logo2='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png'
+                    logo1='/headerLogo.svg'
+                    logo2='/headerSecondLogo.svg'
                     title={title[language]}
                     subtitle={subtitle[language]}
                 />
                 <Footer
+                    gmail={gmail}
+                    telegram={telegram}
+                    facebook={facebook}
                     inputName='search'
                     inputFunc={()=>{return null}}
                     inputPlaceholder={inputPlaceholder[language]}

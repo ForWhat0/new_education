@@ -1,8 +1,9 @@
-import React from 'react'
 import styled from 'styled-components'
 
 const SearchBar = styled.span`
  position: relative;
+     display: flex;
+    align-items: center;
  width:${props => props.width};
  border:${props => props.border};
  border-radius:28px;
@@ -11,7 +12,6 @@ const SearchBar = styled.span`
 `
 const Icon = styled.i`
    position: absolute; 
-  top:15px;!important;
   right: 20px; 
   z-index: 1; 
   font-size:20px;
@@ -20,16 +20,16 @@ const Input = styled.input.attrs(props => ({
     type: "text",
     name:props.name,
     onChange:props.func,
-    placeholderTextColor: "red",
     placeholder :props.inputPlaceholder,
 }))`
 &.hasFocus:focus
-font-family: 'Roboto', sans-serif;
   color: #333;
-  padding: 10px 20px;
+ padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
   font-size: 1.2rem;
   border-radius: 0.2rem;
-  border: 1 px solid green;
+  border: none;
   width: 100%;
   background: #FFFFFF;
 border-radius: 28px;

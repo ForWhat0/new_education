@@ -12,11 +12,12 @@ const rotate = keyframes`
 
 const Loader = styled.div`
 align-self: center;
+position:absolute;
     border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #3498db;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
    animation: ${rotate} 2s linear infinite;
 `
 const StyledLoader =()=>{

@@ -7,12 +7,15 @@ import {ChangeLanguage} from "../../redux/actions/actions"
 const SelectWrapper = styled.div`
 position: relative;
  width: min-content;
+ margin-left:10px;
+ margin-right:10px;
+ display: flex;
+align-items: center;
 :after{
 font-family: FontAwesome;
   content: '\f107';
   font-size: 28px;
   position: absolute;
-  top: 12px;
   right:-1px;
   color: #434B67;
   pointer-events: none;
@@ -20,7 +23,8 @@ font-family: FontAwesome;
 }
 `
 const Select = styled.select`
-padding: 20px;
+padding-right: 20px;
+border:none;
 font-size: 16px;
 color: #3F3F3F;
 background-color: transparent;
