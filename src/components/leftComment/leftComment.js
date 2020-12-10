@@ -72,7 +72,7 @@ export const StyledLeftComment =({display,src,align})=>{
     return (
         <Container src={src} display={display} align={align}>
             <Title>
-                aks dmlask dnkjas ndk
+               Маєш пропозицію?
             </Title>
             <ContainerWrapper>
                 <Text>

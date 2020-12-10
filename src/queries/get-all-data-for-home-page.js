@@ -41,28 +41,39 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: String) {
       startCursor
     }
   }
+  services {
+    nodes {
+      title
+      databaseId
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
+   projects {
+    nodes {
+    title
+      databaseId
+      date
+      excerpt
+      slug
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+    }
+  }
   pageBy(uri: $uri) {
     mainPageFields {
-      titleServices
-      titleProject
-      titleOffer
-      titleEvent
-      titleCommand
+        tekst
       titleBanner
-      textOffer
-      textCommand
-      telegram
-      register
-      knp
-      gmail
-      footerPhone
-      footerGmail
-      footerAdress
-      fieldGroupName
-      facebook
-      employees {
-        name
-        fotoSpivrobitnika {
+      zagolovok
+      sotrudniki {
+        imya
+        foto {
           sourceUrl
         }
       }

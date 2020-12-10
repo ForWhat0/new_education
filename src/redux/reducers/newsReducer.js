@@ -1,9 +1,10 @@
-import {  getNews  , getNewsById} from "../types/types"
+import {getNews, getNewsById, getNewsForMobile} from "../types/types"
 
 
 const initialState={
     newsReducer:null,
-    newsByID:null
+    newsByID:null,
+    allNewsForMobileSliderReducer:null
 }
 
 export const newsReducer = ( state = initialState , action )=>{
@@ -12,6 +13,12 @@ export const newsReducer = ( state = initialState , action )=>{
             return {
                 ...state,
                 newsReducer:action.payload
+            }
+        }
+        case getNewsForMobile:{
+            return {
+                ...state,
+                allNewsForMobileSliderReducer:action.payload
             }
         }
         case getNewsById:{

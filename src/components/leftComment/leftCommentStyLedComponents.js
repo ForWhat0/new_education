@@ -61,7 +61,7 @@ height:100%;
 position:absolute;
 opacity:0.5;
 z-index:0;
-background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1000px-Apple_logo_black.svg.png');
+background-image: url('/back.svg');
   background-position: unset; 
   background-repeat: no-repeat; 
   background-size: contain; 
