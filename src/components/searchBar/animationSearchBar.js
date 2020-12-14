@@ -1,8 +1,11 @@
 import styled from 'styled-components'
+import {device} from "../deviceSizes/deviceSizes";
 
 const SearchBar = styled.span`
  position: relative;
- width:80%;
+ margin-right: 10px;
+ display: flex;
+    align-items: center;
  border:${props => props.border};
  border-radius:28px;
  position:${props => props.position};
@@ -10,10 +13,12 @@ const SearchBar = styled.span`
 `
 const Icon = styled.i`
    position: absolute; 
-  top:15px;!important;
-  right: 20px; 
-  z-index: 1; 
+  right: 7px; 
+  z-index: 3; 
   font-size:20px;
+  @media screen and ${device.laptop}{
+     font-size:25px;
+  }
 `
 const Input = styled.input.attrs(props => ({
     type: "text",
@@ -23,40 +28,36 @@ const Input = styled.input.attrs(props => ({
 }))`
   ::placeholder,
   ::-webkit-input-placeholder {
-    color: transparent;
+    color:  #4F4F4F;
   }
   :-ms-input-placeholder {
-     color: transparent;
+     color:  #4F4F4F;
   }
-  color: transparent;
+  color: black;
   cursor:pointer;
-   background-color: transparent;
-  padding: 10px 20px;
+   background-color: ${props=>props.color};
+  padding: 5px 15px;
   font-size: 16px;
   border: 1px solid #000000;
    transition: width 0.25s;    
-    width: 60px;
+    width: 0;
   position:absolute;
   right:0;
   z-index:2;
 border-radius: 28px;
-&:hover  {
-    width: 380px;
-    color:red;
-     ::placeholder,
-  ::-webkit-input-placeholder {
-    color: red;
+   @media screen and ${device.laptop}{
+    padding: 9px 18px;
   }
-  :-ms-input-placeholder {
-     color: red;
-  }
+    ${SearchBar}:hover & {
+    width: 100px;
+    background-color: white;
   }
 `;
-export const AnimationSearchBarStyled = ({inputName,inputFunc,inputPlaceholder})=>{
+export const AnimationSearchBarStyled = ({color,inputName,inputFunc,inputPlaceholder})=>{
     return(
         <SearchBar>
             <Icon className="fa fa-search" aria-hidden="true"/>
-            <Input name={inputName} func={inputFunc}  inputPlaceholder={inputPlaceholder}/>
+            <Input color={color} name={inputName} func={inputFunc}  inputPlaceholder={inputPlaceholder}/>
         </SearchBar>
     )
 }

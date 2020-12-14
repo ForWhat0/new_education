@@ -3,13 +3,14 @@ import styled from 'styled-components'
 
 const AlertDiv = styled.div`
   width:80%;
+      position: fixed;
+    top: 0;
+    z-index: 3;
   margin-left:10%;
   text-align:center;
   background-color: ${props => props.colorType};
   color:white;
   padding:10px;
-      position: absolute;
-    z-index: 1;
 `
 
 export const Alert = ()=>{

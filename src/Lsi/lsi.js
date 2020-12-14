@@ -32,6 +32,11 @@ export const headerLsi={
             href:'/News'
         },
         {
+            ukr:"Контакти",
+            eng:"Contacts",
+            href:'/Contacts'
+        },
+        {
             ukr:"Звернення",
             eng:"Appeal",
             href:'/Appeal'

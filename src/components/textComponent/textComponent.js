@@ -22,6 +22,9 @@ const Review = styled.div`
    align-items: center;
    position:relative;
    padding-top: 20px;
+    @media screen and ${device.mobileL}{
+   display:none;
+  }
 }
 `
 const IconText = styled.div`
@@ -44,9 +47,6 @@ const ArrowIcon = styled.i`
     color: #000000;
     border:1px solid #000000;
     border-radius:29px;
-     @media screen and ${device.mobileL}{
-   display:none;
-  }
 `
 const StyledTextComponent =({title,excerpt,textForIcon ,date})=>{
     const border = excerpt ? 'unset' : '2px solid #1D1D1B;'

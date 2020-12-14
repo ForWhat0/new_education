@@ -5,7 +5,8 @@ import {
     hideAlert,
     changeLanguage,
     showExtraLoader,
-    hideExtraLoader
+    hideExtraLoader,
+    clickBurger
 } from '../types/types'
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
     alert:null,
     title:'HOME',
     type:'success',
-    language:'ukr'
+    language:'ukr',
+    menuBurgerIsOpen:false
 }
 
 export const appReducer = ( state = initialState,action ) =>{
@@ -60,6 +62,12 @@ export const appReducer = ( state = initialState,action ) =>{
             return {
                 ...state,
                 alert: null
+            }
+        }
+        case clickBurger:{
+            return {
+                ...state,
+                menuBurgerIsOpen: !state.menuBurgerIsOpen
             }
         }
         default:return state

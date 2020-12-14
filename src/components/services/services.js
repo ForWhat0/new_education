@@ -37,7 +37,7 @@ export default function Services({posts}){
                             databaseId={node.databaseId}
                             key={node.databaseId}
                             title={node.title}
-                            coverImage={node.img}
+                            coverImage={node.featuredImage?.node.sourceUrl}
                         />
                 )}
             </ServicesContainer>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {device} from "../deviceSizes/deviceSizes";
 
 const SearchBar = styled.span`
  position: relative;
@@ -8,7 +9,10 @@ const SearchBar = styled.span`
  border:${props => props.border};
  border-radius:28px;
  position:${props => props.position};
- right:${props => props.right}
+ right:${props => props.right};
+ @media screen and (max-width:1200px){
+   width:${props => props.width === '60%' && '50%'};
+  }
 `
 const Icon = styled.i`
    position: absolute; 

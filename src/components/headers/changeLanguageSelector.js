@@ -17,7 +17,7 @@ font-family: FontAwesome;
   font-size: 28px;
   position: absolute;
   right:-1px;
-  color: #434B67;
+  color: ${props=>props.color};
   pointer-events: none;
 }
 }
@@ -26,7 +26,7 @@ const Select = styled.select`
 padding-right: 20px;
 border:none;
 font-size: 16px;
-color: #3F3F3F;
+color: ${props=>props.color};
 background-color: transparent;
 cursor:pointer;
 
@@ -45,26 +45,29 @@ box-shadow: none!important;
 display: none;
 }
 `
+const Option = styled.option`
+color: ${props=>props.color};
+`
 
-export const ChangeLanguageSelector=()=>{
+export const ChangeLanguageSelector=({color})=>{
     const dispatch = useDispatch()
     const {languages} = app
-
     const changeLanguageCallback=(e)=>{
         let {value} = e.target;
         dispatch(ChangeLanguage(value))
     }
 
     return(
-        <SelectWrapper >
+        <SelectWrapper color={color}>
             <Select
+                color={color}
                 onChange={changeLanguageCallback}
             >
                 {
                     languages.map(language=>
-                        <option value={language.languageType}>
+                        <Option color='#3F3F3F' value={language.languageType}>
                             {language.languageName}
-                        </option>)
+                        </Option>)
                 }
             </Select>
         </SelectWrapper>

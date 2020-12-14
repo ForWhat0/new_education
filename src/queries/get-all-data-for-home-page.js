@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: String) {
+const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
   news(where: {orderby: {field: DATE, order: ASC}}, first: 3) {
     nodes {
       title
@@ -66,14 +66,38 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: String) {
       }
     }
   }
-  pageBy(uri: $uri) {
+   page(id: $uri, idType: URI) {
     mainPageFields {
-        tekst
+     text
       titleBanner
-      zagolovok
-      sotrudniki {
-        imya
-        foto {
+      titleCommand
+      titleEvent
+      titleOffers
+      titleProject
+      titleServices
+      titleNews
+     projectPopular {
+        ... on Project {
+          title
+          slug
+          excerpt
+          featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+          projectFields {
+            app
+            bgColor
+            bgImg {
+              sourceUrl
+            }
+          }
+        }
+      }
+      employees {
+        name
+        photo {
           sourceUrl
         }
       }

@@ -19,9 +19,11 @@ const ServicesContainer = styled.div`
 `
 const GlobalContainer = styled.div`
  @media screen and ${device.mobileL} {
+ display:none;
      width: 96%;
     margin-left: 2%;
   }
+   display:block;
  width: 80%;
   margin-left: 10%;
 `
@@ -30,14 +32,12 @@ export default function Events({posts}){
     const {language} = useSelector(state=>state.app)
     return(
         <GlobalContainer>
-            <TitleForComponent text='Послуги'/>
+            <TitleForComponent text='Найближчі події'/>
             <ServicesContainer>
-                {posts.map(node =>
+                {posts.map((node,i) =>
                     <Event
-                        date={node.date}
-                        key={node.databaseId}
-                        text={node.text}
-                        time={node.time}
+                        borderLeftColor={i === 0 ? '#0072BC' : i === 1 ? ' #FFDE00' : '#00AEEF'}
+                        choosenData={node.choosenData}
                     />
                 )}
             </ServicesContainer>

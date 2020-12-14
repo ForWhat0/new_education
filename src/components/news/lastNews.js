@@ -52,7 +52,7 @@ margin-top:40px;
 display:${props => props.display};
 justify-content:center;
 `
-const ArrowIcon = styled.i`
+ const ArrowIcon = styled.i`
     display: flex;
     padding: 20px;
     font-size: 50px;

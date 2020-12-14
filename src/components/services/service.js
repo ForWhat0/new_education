@@ -34,7 +34,7 @@ const StyledPhoto = styled.img`
  @media screen and ${device.mobileL} {
      margin-left:unset;
   }
-margin-left:50px;
+margin-left:30px;
    border-radius: 30px;
      position: relative;
     width:100px;
@@ -47,12 +47,16 @@ const StyledText = styled.span`
      margin-left: unset;
     position: relative;
     margin-top:15px;
+        font-size: 16px;
+         width: auto;
   }
+      text-align: initial;
     font-size: 24px;
+    width: 150px;
     line-height: 30px;
-    margin-left:145px;
+    margin-left: 110px;
     z-index: 2;
-    position:absolute;
+    position: absolute;
 `
 const ButtonContainer = styled.div`
 @media screen and ${device.mobileL} {

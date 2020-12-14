@@ -4,10 +4,8 @@ import {
     showAlert,
     hideAlert,
     changeLanguage,
-    getNewsById,
-    getProjects,
     getNews,
-    showExtraLoader, hideExtraLoader, getProjectById, getNewsForMobile
+    showExtraLoader, hideExtraLoader, getProjectById, getNewsForMobile, clickBurger
 } from '../types/types'
 import client from "../../apollo/client"
 import GET_NEWS from "../../queries/getNews"
@@ -57,7 +55,13 @@ export function ChangeLanguage(language){
         })
     }
 }
-
+export function actionClickBurger(){
+    return dispatch=>{
+        dispatch({
+            type:clickBurger
+        })
+    }
+}
 export function ShowAlert(text,type){
     return dispatch=>{
         dispatch({

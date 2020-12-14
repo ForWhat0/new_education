@@ -1,19 +1,21 @@
 import Head from "next/head";
 import client from "../../apollo/client"
-import Router from "next/router"
-import NProgress from "nprogress"
 import { ApolloProvider } from "@apollo/client"
 import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 import {StyledLeftComment} from "../leftComment/leftComment"
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {Alert} from "../alert/alert"
+import Menu from "../burgerMenu/menu";
+import React, { useState, useRef } from 'react';
+import { useOnClickOutside } from '../hooks/hooks';
+import {actionClickBurger} from "../../redux/actions/actions";
 
-
-Router.events.on("routeChangeStart", () => NProgress.start());
-Router.events.on("routeChangeComplete", () => NProgress.done());
-Router.events.on("routeChangeError", () => NProgress.done());
 
 export  const Layout = ({children , header}) => {
+    const node = useRef();
+    const dispatch = useDispatch()
+    const {menuBurgerIsOpen} = useSelector(state=>state.app)
+    useOnClickOutside(node,  () => menuBurgerIsOpen === true  &&  dispatch(actionClickBurger()));
     const {alert} = useSelector(state=>state.app)
     return (
             <ApolloProvider client={client}>
@@ -23,10 +25,13 @@ export  const Layout = ({children , header}) => {
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                         <title>Woocommerce React Theme</title>
                     </Head>
-                    {header}
+                    <div  ref={node}>
+                        {header}
+                        <Menu/>
+                    </div>
                     {alert && <Alert/>}
                     {children}
-                    <StyledLeftComment />
+                    <StyledLeftComment/>
                  </ApolloHooksProvider>
             </ApolloProvider>
     );

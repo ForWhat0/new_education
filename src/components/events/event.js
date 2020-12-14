@@ -1,78 +1,193 @@
 import styled, {keyframes} from 'styled-components'
-import React from "react"
-import StyledTextComponent from "../textComponent/textComponent"
 import Link from "next/link"
-import {StyledButton} from "../button/button";
 import {device} from "../deviceSizes/deviceSizes";
 
-const ServiceContainer = styled.div`
+const opacity = keyframes`
+ 0%   { opacity: 0; }
+  100% { opacity: 1; }
+`;
+const EventContainer = styled.div`
+min-width:30%; 
+min-height:280px;
+padding-top:50px;
+padding-bottom:50px;
+background: #FFFFFF;
+box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
+border-radius: 28px;
+position:relative;
+cursor:pointer;
  @media screen and ${device.mobileL} {
-         border-bottom:none;
-         margin-bottom:30px;
-           padding-bottom: unset;
-          justify-content: center;
+  animation: ${opacity} 1s linear;
+box-shadow: unset;
+background: unset;
+min-width:unset;
+min-height:unset;
+padding-top:unset;
+padding-bottom:unset;
+transition:all 1s linear;
   }
-   display:flex ;
-       position: relative;
-    border-bottom: 1px solid;
-    padding-bottom: 20px;
+`
+const TimeContainer = styled.div`
+border-left: 5px solid ${props=>props.borderLeftColor};
+display:flex;
+align-items: center;
+padding-left:20px;
+padding-right:20px;
+position: relative;
+@media screen and (max-width:1200px) {
+padding-left:15px;
+padding-right:15px;
+  }
+ @media screen and ${device.mobileL} {
+border-left: unset;
+padding-left:10px;
+margin-bottom: 20px;
+  }
+`
+const MonthAndDay = styled.div`
+display:flex;
+flex-direction:column;
+margin-left:30px;
+@media screen and (max-width:1200px) {
+margin-left:10px;
+  }
+  @media screen and ${device.laptop} {
+margin-left:30px;
+  }
+ @media screen and ${device.mobileL} {
+display:none;
+  }
+`
+const Time = styled.div`
+display:flex;
+ top:6px;
+flex-direction:row;
+margin-left:40px;
+align-items:center;
+position: absolute;
+    right: 20px;
+    @media screen and (max-width:1200px) {
+  right: 15px;
+  }
+     @media screen and ${device.mobileL} {
+ right: unset;
+  top:unset;
+ margin-left:unset;
+  }
+`
+const Icon = styled.i`
+    display: flex;
+    font-size: 20px;
+    color: #000000;
     cursor:pointer;
-    margin-bottom: 50px;
-`
-const ContainerWrapper = styled.div`
- @media screen and ${device.mobileL} {
-    flex-direction: column;
-  }
-   display:flex ;
-   align-items:center;
-`
-const Global = styled.div`
-       display: block;
-       text-align:center;
-`
-const StyledPhoto = styled.img`
- @media screen and ${device.mobileL} {
-     margin-left:unset;
-  }
-margin-left:50px;
-   border-radius: 30px;
-     position: relative;
-    width:100px;
-    height:100px;
-    z-index: 1;
-    opacity: 0.9;
-`
-const StyledText = styled.span`
-@media screen and ${device.mobileL} {
-     margin-left: unset;
-    position: relative;
-    margin-top:15px;
-  }
-    font-size: 24px;
-    line-height: 30px;
-    margin-left:145px;
-    z-index: 2;
-    position:absolute;
-`
-const ButtonContainer = styled.div`
-@media screen and ${device.mobileL} {
-   display:none;
-  }
-`
-export default function Event({date}) {
-    const day = new Date() === date ? 'сьогодні' : date.getUTCDate()
-    const month = date.toLocaleString('default', { month: 'long' })
-    const year = date.getUTCFullYear()
-    return (
-        <Link href={`/service/[databaseId]`} as={`/service/${props.databaseId}`}>
-            <div>
-                <h1>day</h1>
-                <div>
-                    <stong>
+    margin-right:5px;
+    border: ${props=>props.border};
+    border-radius: ${props=>props.radius};
+    padding:${props=>props.padding};
 
-                    </stong>
-                </div>
-            </div>>
+     @media screen and ${device.mobileL} {
+ right: unset;
+ margin-right:10px;
+  }
+`
+const TextField = styled.span`
+padding:0;
+margin:0;
+font-size:${props=>props.fontSize};
+font-weight:${props=>props.fontWeight};
+ @media screen and ${device.mobileL} {
+display:none;
+  }
+`
+const Text = styled.p`
+    line-height: 27px;
+    font-weight:500;
+    margin: 80px 20px 0px;
+     @media screen and (max-width:1200px) {
+      margin: 30px 20px 0px;
+    @media screen and ${device.mobileL} {
+     border-left: 1px solid;
+     margin:0 0 20px 19px;
+     padding: 0 20px 20px 12px;
+  }
+`
+const Review = styled.div`
+    display:flex;
+   align-items: center;
+   position:absolute;
+   right:20px;
+       bottom: 40px;
+       @media screen and ${device.mobileL} {
+display:none;
+  }
+`
+const IconText = styled.div`
+   
+   font-weight:bold;
+   line-height:15px;  
+`
+export default function Event({borderLeftColor,choosenData}) {
+    const renderDay=()=>{
+        const inputDate = new Date(choosenData.data)
+        const todaysDate = new Date()
+
+        if(inputDate.setHours(0,0,0,0) === todaysDate.setHours(0,0,0,0)) {
+           return  'сьогодні'
+        }
+        else{
+            return choosenData.data.toLocaleString('default', { weekday: 'long' })
+        }
+    }
+    return (
+        <Link href={`/service/[databaseId]`} as={`/service/2`}>
+            <EventContainer >
+               <TimeContainer borderLeftColor={borderLeftColor}>
+                   <TextField
+                       fontSize='40px'
+                       fontWeight='bold'
+                   >
+                       {choosenData.data.getDate()}
+                   </TextField>
+                   <MonthAndDay>
+                       <TextField
+                           fontSize='16px'
+                           fontWeight='500'
+                       >
+                           {`${choosenData.data.toLocaleString('default', { month: 'long' })} ${choosenData.data.getUTCFullYear()}`}
+                       </TextField>
+                       <TextField
+                           fontSize='16px'
+                           fontWeight='100'
+                       >
+                         {renderDay()}
+                       </TextField>
+                   </MonthAndDay>
+                       <Time>
+                           <Icon
+                               className="fa fa-clock-o"
+                               aria-hidden="true"
+                           />
+                           {`${choosenData.data.getHours()}:${choosenData.data.getMinutes()<10?'0':''}${choosenData.data.getMinutes()}`}
+                       </Time>
+               </TimeContainer>
+                <Text>
+                    {
+                        choosenData.text
+                    }
+                </Text>
+                <Review >
+                    <Icon
+                        border='1px solid black'
+                        radius='29px'
+                        padding='5px'
+                        className="fa fa-long-arrow-right"
+                        aria-hidden="true"
+                    />
+                    <IconText>
+                        Переглянути
+                    </IconText>
+                </Review>
+            </EventContainer>
         </Link>
     )
 }

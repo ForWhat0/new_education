@@ -13,10 +13,10 @@ margin-top:40px;
 display:flex;
 justify-content:center;
 `
-export default function ProjectsWrapper({language,posts,title}){
+export default function ProjectsWrapper({language,posts}){
     return(
         <section>
-            <Projects title='Проекти' textForIcon={review[language]} posts={posts}/>
+            <Projects title={posts.title} textForIcon={review[language]} posts={posts.projects}/>
             <Link href={'/projects'}>
                 <a>
                     <ButtonContainer>

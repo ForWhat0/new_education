@@ -1,5 +1,5 @@
 import React from "react"
-import {HeaderWrapper,WrapperInner,Main,NavBar,Footer} from './headerStyledElements'
+import {HeaderWrapper, WrapperInner, Main, NavBar, Footer, LogoImgMain} from './headerStyledElements'
 import {headerLsi} from '../../Lsi/lsi'
 import {useSelector} from "react-redux"
 const {navButtons,register,logIn,title,subtitle,inputPlaceholder} = headerLsi
@@ -9,6 +9,11 @@ export default function LargeHeader({gmail,telegram,facebook}) {
     return (
         <HeaderWrapper>
             <WrapperInner>
+                <LogoImgMain
+                    height='70px'
+                    width='70px'
+                    src='/headerLogo.svg'
+                />
                 <NavBar
                     language={language}
                     navButtons={navButtons}

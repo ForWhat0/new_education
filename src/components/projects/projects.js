@@ -17,10 +17,10 @@ export default function Projects({textForIcon,posts,title,databaseId}){
           {posts.map((node,i) =>
               <Project
                   flexDirection={i%2 ? 'row-reverse':'row'}
-                  background={i%2 ? "#FFFFFF" : "rgba(0, 143, 213, 0.05)"}
+                  background={i%2 ? "#FFFFFF" : node.projectFields?.bgColor? node.projectFields.bgColor :"#FFFFFF"}
                   backgroundIconAlign='right'
                   backgroundIconDisplay={i%2 ? "none":'block'}
-                  backgroundIcon='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Check_green_icon.svg/1200px-Check_green_icon.svg.png'
+                  backgroundIcon={i%2 ? null : node.projectFields?.bgImg?.sourceUrl? node.projectFields.bgImg.sourceUrl : null}
                   key={node.slug}
                   title={node.title}
                   coverImage={node.featuredImage?.node}

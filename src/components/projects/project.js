@@ -8,13 +8,12 @@ import {StyledDivWithIconBackGround} from "./backgroundWithIcon";
 import {device} from "../deviceSizes/deviceSizes";
 
 const Container = styled.div`
+min-height:350px;
 background-color:${props => props.background};
 width:100%;
 display: flex;
+align-items:center;
 justify-content: center;
-margin-top:20px;
-padding-top: 30px;
-adding-bottom: 30px;
 overflow: hidden;
 position: relative;
 `
@@ -22,8 +21,11 @@ const ContainerWrapper = styled.div`
 z-index:1;
 width:80%;
 display:flex;
+align-items: center;
 flex-direction:${props => props.flexDirection};
 @media screen and ${device.tablet} {
+padding-top: 20px;
+padding-bottom:20px;
    flex-direction:column;
        align-items: center;
   }
@@ -54,7 +56,7 @@ margin-right: 5%;
 
 export default function Project(props) {
     return (
-        <Link href={`/projects/[databaseId]`} as={`/projects/${props.databaseId}`}>
+        <Link href={`/projects/[slug]`} as={`/projects/${props.slug}`}>
             <a>
                 <Container background={props.background}>
                     <StyledDivWithIconBackGround
