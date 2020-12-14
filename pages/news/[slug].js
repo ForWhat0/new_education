@@ -23,8 +23,6 @@ const LoaderContainer = styled.div`
                 margin-bottom: 70px;
 `
 export default function MicrophoneDetail({newBySlug,news}) {
-    const { title, date, content } = newBySlug
-    const { nodes, pageInfo } = news
     const router = useRouter();
 
     if (router.isFallback) {
@@ -44,14 +42,14 @@ export default function MicrophoneDetail({newBySlug,news}) {
                     <>
                         <Container>
 
-                            <TitleForComponent marginBottom='40px' text={title} fontSize='40px'/>
-                            <Date date={date}/>
-                            <PostBody content={content} />
+                            <TitleForComponent marginBottom='40px' text={newBySlug.title} fontSize='40px'/>
+                            <Date date={newBySlug.date}/>
+                            <PostBody content={newBySlug.content} />
                         </Container>
                         <LastNews background='rgba(157, 157, 157, 0.08);'
                                   title='інші новини'
-                                  posts={nodes}
-                                  pageInfo={pageInfo}
+                                  posts={news.nodes}
+                                  pageInfo={news.pageInfo}
                                   language='ukr'
                                   buttonHide={true}
                         />

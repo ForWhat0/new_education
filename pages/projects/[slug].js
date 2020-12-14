@@ -23,8 +23,6 @@ const LoaderContainer = styled.div`
                 margin-bottom: 70px;
 `
 export default function MicrophoneDetail({projectBySlug}) {
-    console.log(projectBySlug)
-    const { title, content } = projectBySlug
     const router = useRouter();
 
     if (router.isFallback) {
@@ -43,8 +41,8 @@ export default function MicrophoneDetail({projectBySlug}) {
                 projectBySlug ?
                     <>
                         <Container>
-                            <TitleForComponent marginBottom='40px' text={title} fontSize='40px'/>
-                            <PostBody content={content} />
+                            <TitleForComponent marginBottom='40px' text={projectBySlug.title} fontSize='40px'/>
+                            <PostBody content={projectBySlug.content} />
                         </Container>
                     </>
                     :
