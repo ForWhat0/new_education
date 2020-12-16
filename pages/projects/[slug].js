@@ -87,7 +87,6 @@ margin-left:${props=>props.marginR};
   }
 `
 export default function MicrophoneDetail({projectBySlug}) {
-    const {siteLink,playLink,appLink,title,content} = projectBySlug
      const router = useRouter();
 
     if (router.isFallback) {
@@ -112,31 +111,31 @@ export default function MicrophoneDetail({projectBySlug}) {
                     >
                         <ContainerWrapper>
                             <Header>
-                                <TitleForComponent text={title} fontSize='40px'/>
+                                <TitleForComponent text={projectBySlug.title} fontSize='40px'/>
                                 <Icons>
                                     {
-                                        !playLink &&
+                                        !projectBySlug.playLink &&
                                         <IconItem marginR='20px'>
-                                            <a href={playLink}>
+                                            <a href={projectBySlug.playLink}>
                                                 <Icon src='/googlePlayIcon.svg' width='120px' height='36px'/>
                                             </a>
                                         </IconItem>
                                     }
                                     {
-                                        !appLink &&
+                                        !projectBySlug.appLink &&
                                         <IconItem marginR='20px'>
-                                            <a href={appLink}>
+                                            <a href={projectBySlug.appLink}>
                                                 <Icon src='/appStore.svg' width='120px' height='36px'/>
                                             </a>
                                         </IconItem>
                                     }
                                     {
-                                        !siteLink &&
+                                        !projectBySlug.siteLink &&
                                         <IconItem marginR='60px'>
-                                            <a href={siteLink}>
+                                            <a href={projectBySlug.siteLink}>
                                                 <Icon src='/linkIconDark.svg' width='36px' height='36px'/>
                                                 <div>
-                                                    <span>asjdokashnd</span>
+                                                    <span>{projectBySlug.siteLink}</span>
                                                 </div>
 
                                             </a>
@@ -146,7 +145,7 @@ export default function MicrophoneDetail({projectBySlug}) {
                             </Header>
 
                             <PostBody
-                                content={content} />
+                                content={projectBySlug.content} />
                         </ContainerWrapper>
                     </Container>
                     :
