@@ -7,6 +7,11 @@ $slug:ID!
     slug
     content
     title
+     projectFields {
+      bgImg {
+        sourceUrl
+      }
+    }
   }
 }
 `

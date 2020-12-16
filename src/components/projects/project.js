@@ -44,6 +44,9 @@ max-height: 288px;
 width:100%;
 border-radius: 30px;
 box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+@media screen and (min-width:1400px) {
+   width: auto;
+  }
 `
 const Text = styled.div`
 width:50%;

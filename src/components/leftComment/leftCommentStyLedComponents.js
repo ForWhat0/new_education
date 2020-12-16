@@ -4,6 +4,7 @@ import {device} from "../deviceSizes/deviceSizes";
 export  const LoaderContainer = styled.div`
 display: flex;
 margin-top:20px;
+width:100%;
 align-items:center;
 `
 export  const Title = styled.h1`

@@ -25,7 +25,7 @@ export const StyledLeftComment =({display,src,align})=>{
     const [email, setEmail] = useState('')
     const [comment, setComment] = useState('')
 
-    let [ addToCart, {  data, error, loading }] = useMutation( SEND_COMMENT, {
+    let [ send, {  data, error, loading }] = useMutation( SEND_COMMENT, {
         variables: {
             input:{
                 commentOn: 1,
@@ -46,12 +46,12 @@ export const StyledLeftComment =({display,src,align})=>{
         }
     } )
 
-    const handleAddToCartClick = () => {
+    const handleSendClick = () => {
         if (name && phone && email && comment){
            if ( phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)){
                if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)){
                    if (comment.length > 6 ){
-                       addToCart()
+                       send()
                    }
                    else{
                        dispatch(ShowAlert('comment too short','error'))
@@ -91,7 +91,7 @@ export const StyledLeftComment =({display,src,align})=>{
                     <InputStyled text="Коментар" onChange={e => setComment(e.target.value)} width='100%'/>
                     <LoaderContainer>
                         {loading &&  <StyledLoader/>}
-                        <SendButton error={error} done={data} loading={loading} click={handleAddToCartClick}/>
+                        <SendButton error={error} done={data} loading={loading} click={handleSendClick}/>
                     </LoaderContainer>
                 </InputsFields>
             </ContainerWrapper>

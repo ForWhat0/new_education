@@ -5,7 +5,7 @@ import {
     hideAlert,
     changeLanguage,
     getNews,
-    showExtraLoader, hideExtraLoader, getProjectById, getNewsForMobile, clickBurger
+    showExtraLoader, hideExtraLoader, getProjectById, getNewsForMobile, clickBurger, clickModal
 } from '../types/types'
 import client from "../../apollo/client"
 import GET_NEWS from "../../queries/getNews"
@@ -59,6 +59,13 @@ export function actionClickBurger(){
     return dispatch=>{
         dispatch({
             type:clickBurger
+        })
+    }
+}
+export function actionClickModal(){
+    return dispatch=>{
+        dispatch({
+            type:clickModal
         })
     }
 }

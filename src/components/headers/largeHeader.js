@@ -1,7 +1,7 @@
 import React from "react"
 import {HeaderWrapper, WrapperInner, Main, NavBar, Footer, LogoImgMain} from './headerStyledElements'
 import {headerLsi} from '../../Lsi/lsi'
-import {useSelector} from "react-redux"
+import { useSelector} from "react-redux"
 const {navButtons,register,logIn,title,subtitle,inputPlaceholder} = headerLsi
 
 export default function LargeHeader({gmail,telegram,facebook}) {

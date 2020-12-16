@@ -10,14 +10,13 @@ import Events from "../src/components/events/events";
 import EventsMobile from "../src/components/events/eventsMobile";
 
 export default function Home({news,events,data,projects,services}) {
-  console.log(news)
   const {mainPageFields} = data
 
-    const teamData =  {
+    /*const teamData =  {
       text:mainPageFields.text,
       title:mainPageFields.titleCommand,
       employees:mainPageFields.employees
-    }
+    }*/
     const popularProjectsData={
       title:mainPageFields.titleProject,
       projects:mainPageFields.projectPopular
@@ -91,8 +90,8 @@ export default function Home({news,events,data,projects,services}) {
         <Events posts={eventsData}/>
         <EventsMobile posts={eventsData[0]}/>
         {services?.nodes.length > 0 &&<Services  posts={services.nodes}  pageInfo={services.pageInfo} />}
-        {popularProjectsData.projects.length > 0 &&<ProjectsWrapper  posts={popularProjectsData}/>}
-        {teamData?.employees.length > 0 &&<Team  posts={teamData}/>}
+        {popularProjectsData?.projects?.length > 0 &&<ProjectsWrapper  posts={popularProjectsData}/>}
+        {/*{teamData?.employees.length > 0 &&<Team  posts={teamData}/>}*/}
         {news.nodes.length > 0 &&<LastNews  posts={news.nodes}  pageInfo={news.pageInfo} />}
       </HomePageLayout>
   )
@@ -104,10 +103,10 @@ export async function getStaticProps(){
       uri:"/"
       }
   } )
+
   return {
     props: {
       services:data?.services?.nodes ? data.services : [],
-      projects:data?.projects?.nodes ? data.projects : [],
       news: data?.news?.nodes ? data.news : [],
       events: data?.events?.nodes ? data.events : [],
       data: data?.page ? data.page : []

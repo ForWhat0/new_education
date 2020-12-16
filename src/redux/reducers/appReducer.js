@@ -6,7 +6,8 @@ import {
     changeLanguage,
     showExtraLoader,
     hideExtraLoader,
-    clickBurger
+    clickBurger,
+    clickModal,
 } from '../types/types'
 
 const initialState = {
@@ -16,11 +17,18 @@ const initialState = {
     title:'HOME',
     type:'success',
     language:'ukr',
-    menuBurgerIsOpen:false
+    menuBurgerIsOpen:false,
+    modal:false
 }
 
 export const appReducer = ( state = initialState,action ) =>{
     switch (action.type){
+        case clickModal:{
+            return {
+                ...state,
+                modal: !state.modal
+            }
+        }
         case changeLanguage:{
             return {
                 ...state,

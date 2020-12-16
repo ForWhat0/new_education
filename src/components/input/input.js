@@ -19,8 +19,9 @@ box-sizing: border-box;
 border-radius: 9px;
 padding:10px;
 `;
-const Text = styled.span`
+const Text = styled.label`
 font-weight: normal;
+text-align:start;
 font-size: 16px;
 margin-bottom: 5px;
 color: #1D1D1B;

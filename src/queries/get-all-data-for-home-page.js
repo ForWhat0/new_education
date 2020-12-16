@@ -52,20 +52,6 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
       }
     }
   }
-   projects {
-    nodes {
-    title
-      databaseId
-      date
-      excerpt
-      slug
-      featuredImage {
-        node {
-          sourceUrl
-        }
-      }
-    }
-  }
    page(id: $uri, idType: URI) {
     mainPageFields {
      text
@@ -87,7 +73,7 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
         }
       }
           projectFields {
-            app
+            
             bgColor
             bgImg {
               sourceUrl

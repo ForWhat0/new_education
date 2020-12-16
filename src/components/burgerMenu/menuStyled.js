@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {device} from "../deviceSizes/deviceSizes";
 
 export const StyledMenu = styled.nav`
   display: flex;

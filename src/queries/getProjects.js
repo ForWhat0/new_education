@@ -18,6 +18,12 @@ const GET_PROJECTS = gql`
           sourceUrl
         }
       }
+       projectFields {
+            bgColor
+            bgImg {
+              sourceUrl
+            }
+          }
     }
   pageInfo {
       endCursor

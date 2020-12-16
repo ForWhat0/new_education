@@ -7,6 +7,9 @@ import 'swiper/swiper.scss'
 import Router from 'next/router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import {ApolloProvider} from "@apollo/client";
+import client from "../src/apollo/client";
+import {ApolloProvider as ApolloHooksProvider} from "react-apollo-hooks/lib/ApolloContext";
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
@@ -14,9 +17,13 @@ Router.events.on('routeChangeError', () => NProgress.done())
 
 function MyApp({ Component, pageProps }) {
   return (
+      <ApolloProvider client={client}>
+          <ApolloHooksProvider client={client}>
       <Provider store={store}>
             <Component {...pageProps} />
       </Provider>
+          </ApolloHooksProvider>
+      </ApolloProvider>
   )
 }
 
