@@ -114,7 +114,7 @@ export default function MicrophoneDetail({projectBySlug}) {
                                 <TitleForComponent text={projectBySlug.title} fontSize='40px'/>
                                 <Icons>
                                     {
-                                        !projectBySlug.playLink &&
+                                        projectBySlug.playLink &&
                                         <IconItem marginR='20px'>
                                             <a href={projectBySlug.playLink}>
                                                 <Icon src='/googlePlayIcon.svg' width='120px' height='36px'/>
@@ -122,7 +122,7 @@ export default function MicrophoneDetail({projectBySlug}) {
                                         </IconItem>
                                     }
                                     {
-                                        !projectBySlug.appLink &&
+                                        projectBySlug.appLink &&
                                         <IconItem marginR='20px'>
                                             <a href={projectBySlug.appLink}>
                                                 <Icon src='/appStore.svg' width='120px' height='36px'/>
@@ -130,7 +130,7 @@ export default function MicrophoneDetail({projectBySlug}) {
                                         </IconItem>
                                     }
                                     {
-                                        !projectBySlug.siteLink &&
+                                        projectBySlug.siteLink &&
                                         <IconItem marginR='60px'>
                                             <a href={projectBySlug.siteLink}>
                                                 <Icon src='/linkIconDark.svg' width='36px' height='36px'/>
