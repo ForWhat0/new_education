@@ -17,7 +17,8 @@ import GET_SERVICE_BY_SLUG from "../../src/queries/get_serviceby_slug";
 const { useState, Fragment } = React;
 
  const Container = styled.div`
- width:100%;
+ width:80%;
+ margin-left:10%;
 background: url(${props=>props.bgImg}) no-repeat center center fixed;   
 @media screen and (max-width:700px) {
  background:unset;
@@ -183,43 +184,7 @@ export default function GetEvent({serviceBySlug,menu}) {
                 <Header>
                     <TitleForComponent marginBottom='40px' borderBottom='unset' text={serviceBySlug.title}  />
                 </Header>
-
-
-
-                <DownloadContent
-                    height ={ShownAccordion[index] ? '500px' : '0' }
-                    border = {ShownAccordion[index] ? '1px solid' : 'unset' }
-                    pTop = {ShownAccordion[index] ? '40px' : 'unset' }
-                    mTop = {ShownAccordion[index] ? '20px' : 'unset' }
-                >
-                    {el.filePdf?.map(file =>
-                        <DownloadItem href={file.downloadPdf.mediaItemUrl} download target='_blank'>
-                            <Icon src='/pdf.svg' width='50px' height='100px' alt='PDF File'/>
-                            <DownloadFile>
-                                <DownloadFileText
-                                    top='0'
-                                    bottom='unset'
-                                    mTop='15px'
-                                    mBottom='unset'
-                                >
-                                    {`Звіт за 
-                                                    ${file.dateFile? file.dateFile : null}
-                                                   
-                                ( Дата розміщення ${getDateIn_DD_MM_YYYY_Format(file.downloadPdf.dateGmt)} )`}
-                                </DownloadFileText>
-                                <DownloadFileTextAndArrow
-                                    top='unset'
-                                    bottom='0'
-                                    mTop='unset'
-                                    mBottom='15px'
-                                >
-                                    <Icon src='/arrow-right-in-circle.svg' width='20px' height='20px'/>
-                                    <span>Завантажити ({formatBytes(file.downloadPdf.fileSize)})</span>
-                                </DownloadFileTextAndArrow>
-                            </DownloadFile>
-                        </DownloadItem>
-                    )}
-                </DownloadContent>
+           <PostBody content={serviceBySlug.content}/>
             </Container>
         </MainLayout>
     );
