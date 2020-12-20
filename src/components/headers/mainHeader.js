@@ -5,7 +5,8 @@ import {useSelector} from "react-redux"
 
 const {navButtons,register,logIn,title,subtitle,inputPlaceholder} = headerLsi
 
-export default function MainHeader({whiteTheme}) {
+export default function MainHeader({whiteTheme,menu}) {
+   console.log(menu)
     const {language} = useSelector(state=>state.app)
    const color = whiteTheme ? '#FFFFFF' : '#000'
     const searchBarColor = whiteTheme ? '#FFFFFF' : 'transition'
@@ -24,7 +25,7 @@ export default function MainHeader({whiteTheme}) {
                     glassIcon= {whiteTheme ? '/glassIcon.svg' : '/glassIconDark.svg'}
                     changeLanguageIcon= {whiteTheme ? '/changeLanguageIcon.svg' : '/changeLanguageIconDark.svg'}
                     language={language}
-                    navButtons={navButtons}
+                    navButtons={menu}
                     register={register}
                     logIn={logIn}
                 />

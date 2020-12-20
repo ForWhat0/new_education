@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Link from "next/link"
+import { Link as ScrollLink} from 'react-scroll'
 import {StyledButton} from "../button/button"
 import {ChangeLanguageSelector} from './changeLanguageSelector'
 import {SearchBarStyled} from "../searchBar/searchBar"
@@ -32,7 +33,7 @@ padding: 30px;
   
 `
  const Nav = styled.nav`
-  width:100%;
+ width:100%;
   position:relative;
   display:flex;
      justify-content: space-between;
@@ -105,7 +106,7 @@ export const RestPagesHeaderWrapper = styled.div`
 `
 const LargeLinks = styled.a`
    @media screen and ${device.laptop}{
-    display:none;
+    display:none!important;
   }
 `
 const RegisterLink = styled.a`
@@ -121,7 +122,7 @@ const RegisterLink = styled.a`
 `
  const SignIn = styled.div`
 display:flex;
-@media screen and (max-width:1170px){
+@media screen and (max-width:1300px){
       top:${props=>props.top};
     position: absolute;
     right: 0;
@@ -133,7 +134,8 @@ display:flex;
 `
 const SignInMain = styled.div`
 display:flex;
-@media screen and (max-width:1170px){
+padding-bottom: 10px;
+@media screen and (max-width:1300px){
       top:${props=>props.top};
     position: absolute;
     right: 0;
@@ -199,6 +201,7 @@ export const LogoImgMain = styled.img`
   padding: ${props => props.padding};
      @media screen and ${device.laptop}{
     display:block;
+    top:8%;
   }
 `
 const Title = styled.h1`
@@ -230,19 +233,203 @@ const Subtitle = styled.span`
     display:none;
   }
 `
+const Dropdown = styled.div`
+    float: left;
+  overflow: hidden;
+  `
+
+const DropdownButton = styled.button`
+    font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+`
+const DropdopwContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  ${Dropdown}:hover & {
+    display: block;
+  }
+  a{
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  &:hover{
+   background-color: #ddd;
+  }
+  } 
+`
+const DropLink = styled.a`
+ font-size: 16px;
+  line-height: 15px;
+      margin-right: 40px;
+    list-style: none;
+    text-decoration: none;
+    display: inline;
+`
+const Drop = styled.div`
+
+`
+const DropContent = styled.div`
+display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  ${Drop}:hover & {
+    display: block;
+  }
+`
+export const Navmanu = styled.nav`
+a {
+  text-decoration: none;
+}
+ul {
+  display:${props=>props.display};
+  flex-direction:${props=>props.fDirection};
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+li {
+  color: #1D1D1B;
+  display: block;
+  float: left;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+  padding:0 40px 10px 5px;
+  margin-right:1px;
+  @media screen and ${device.laptop}{
+    float: unset;
+  }
+}
+  
+li a {
+  color: ${props=>props.color};
+   @media screen and ${device.laptop}{
+    text-align:left;
+  }
+}
+
+li:hover,
+li:focus-within {
+  cursor: pointer;
+ border-left:1px solid;
+}
+
+li:focus-within a {
+  outline: none;
+}
+
+ul li ul {
+box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
+  z-index:5;
+  background:#fff;
+  padding: 20px 20px 0 20px;
+  width: max-content;
+  border-radius:29px;
+  visibility: hidden;
+  opacity: 0;
+  min-width: 200px;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 10px;
+  left: 0;
+  display: none;
+   @media screen and ${device.laptop}{
+    padding:unset;
+     position: relative;
+  }
+}
+ul li ul li{
+padding:unset;
+margin-bottom:20px;
+@media screen and ${device.laptop}{
+    padding:10px;
+  }
+}
+ul li ul li a{
+color:black;
+}
+ul li:hover > ul,
+ul li:focus-within > ul,
+ul li ul:hover,
+ul li ul:focus {
+   visibility: visible;
+   opacity: 1;
+   display: block;
+}
+
+ul li ul li {
+  clear: both;
+  width: 100%;
+}
+
+i {
+color:${props=>props.color};
+margin-left:10px;
+font-size:17px;
+}
+`
 
 export const NavBar =({language,navButtons,register,logIn})=>{
     return (
+
         <Nav>
             <LargeLinks>
-                {navButtons.map(button=>
-                    <Link href={button.href}>
-                        <ALink>
-                            {button[language]}
-                        </ALink>
-                    </Link>
-                )}
+                <Navmanu role="navigation">
+                    <ul>
+                        {
+                            navButtons.map(button=>
+                                button.children.length > 0 ?
+                                    <li><a href="#" aria-haspopup="true">{button.title} <i className="fa fa-caret-down"></i></a>
+                                        <ul className="dropdown" aria-label="submenu">
+                                            {
+                                                button.children.map(el=>
+                                                    el.path.charAt(0) === '#' ?
+                                                        <ScrollLink to={el.path}  hashSpy={true}   offset={-100} spy={true} smooth={true}  duration={500} >
+                                                            <li><a href="#">{el.title}</a></li>
+                                                        </ScrollLink>
+                                                        :
+                                                        <Link href={el.path}>
+                                                            <li>
+                                                                <a href="#">
+                                                                    {el.title}
+                                                                </a>
+                                                            </li>
+                                                        </Link>
+                                                )
+                                            }
+                                        </ul>
+                                    </li>
+                                    :
+                                    <Link href={button.path}>
+                                        <li>
+                                            <a href="#">
+                                                {button.title}
+                                            </a>
+                                        </li>
+                                    </Link>
+                            )
+                        }
+                    </ul>
+                </Navmanu>
             </LargeLinks>
+
             <SignInMain top='45px'>
                 <Link href='/register'>
                     <RegisterLink>
@@ -270,14 +457,45 @@ export const NavBarMain =({searchBarColor,color,language,navButtons,register,log
     return (
         <NavMain>
             <Links>
-
-                {navButtons.map(button=>
-                    <Link href={button.href}>
-                        <ALink color={color}>
-                            {button[language]}
-                        </ALink>
-                    </Link>
-                )}
+                <Navmanu color={color} role="navigation">
+                    <ul>
+                        {
+                            navButtons.map(button=>
+                                button.children.length > 0 ?
+                                    <li><a href="#" aria-haspopup="true">{button.title} <i  className="fa fa-caret-down"></i></a>
+                                        <ul className="dropdown" aria-label="submenu">
+                                            {
+                                                button.children.map(el=>
+                                                    el.path.charAt(0) === '#' ?
+                                                        <Link href='/'>
+                                                            <ScrollLink to={el.path}  hashSpy={true}   offset={-100} spy={true} smooth={true}  duration={500} >
+                                                                <li><a href="#">{el.title}</a></li>
+                                                            </ScrollLink>
+                                                        </Link>
+                                                        :
+                                                        <Link href={el.path}>
+                                                            <li>
+                                                                <a href="#">
+                                                                    {el.title}
+                                                                </a>
+                                                            </li>
+                                                        </Link>
+                                                )
+                                            }
+                                        </ul>
+                                    </li>
+                                    :
+                                    <Link href={button.path}>
+                                        <li>
+                                            <a href="#">
+                                                {button.title}
+                                            </a>
+                                        </li>
+                                    </Link>
+                            )
+                        }
+                    </ul>
+                </Navmanu>
             </Links>
             <ChangeLanguageContainer top='10px' position='absolute' right='100px'>
                 <Icon src={changeLanguageIcon}  width={'30px'} height='60px'/>
@@ -330,7 +548,7 @@ align-items: center;
 margin-left:20px;
 position:${props=>props.position};
 right:${props=>props.right};
-@media screen and (max-width:1170px){
+@media screen and (max-width:1300px){
       top:${props=>props.top};
   }
    @media screen and ${device.laptop}{

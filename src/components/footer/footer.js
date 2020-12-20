@@ -1,10 +1,10 @@
 import MainHeader from "../headers/mainHeader";
 import {FooterWrapper, Logos, Text,Company} from "./footerStyled";
 
-export const PageFooter = ({telegram,facebook,gmail})=>{
+export const PageFooter = ({menu,telegram,facebook,gmail})=>{
     return(
         <FooterWrapper >
-            <MainHeader whiteTheme={true}/>
+            <MainHeader menu={menu} whiteTheme={true}/>
             <Logos telegram={telegram} facebook={facebook} gmail={gmail}/>
             <Text/>
             <Company/>

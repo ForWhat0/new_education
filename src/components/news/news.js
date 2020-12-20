@@ -2,7 +2,6 @@ import styled, {keyframes} from 'styled-components'
 import React from "react"
 import StyledTextComponent from "../textComponent/textComponent"
 import Link from 'next/link';
-import { isEmpty } from 'lodash';
 
 const opacity = keyframes`
  0%   { opacity: 0; }
@@ -11,6 +10,10 @@ const opacity = keyframes`
 
 const NewsContainer = styled.div`
     animation: ${opacity} 1s linear;
+    height:100%;
+    width:100%;
+    position:relative;
+    padding-bottom: 10px;
 `
 
 const PhotoContainer = styled.div`
@@ -32,8 +35,7 @@ const StyledPhoto = styled.img`
     width: 100%;
     height: 250px;
     background: #c5d2d9 no-repeat 50%;
-    object-fit: cover;
-
+    object-fit: cover
 `
 
 export default function News(props) {
@@ -45,7 +47,7 @@ export default function News(props) {
                 src={props.coverImage?.sourceUrl}
             />
         </PhotoContainer>
-        <StyledTextComponent title={props.title} date={props.date} textForIcon={props.textForIcon}/>
+        <StyledTextComponent bottom={true} title={props.title} date={props.date} textForIcon={props.textForIcon}/>
     </NewsContainer>
         </Link>
     )

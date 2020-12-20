@@ -34,7 +34,7 @@ export default function Services({posts}){
             <ServicesContainer>
                 {posts.map(node =>
                         <Service
-                            databaseId={node.databaseId}
+                            slug={node.slug}
                             key={node.databaseId}
                             title={node.title}
                             coverImage={node.featuredImage?.node.sourceUrl}

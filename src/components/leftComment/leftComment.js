@@ -18,7 +18,7 @@ import {
 } from "./leftCommentStyLedComponents"
 import {PageFooter} from "../footer/footer";
 
-export const StyledLeftComment =({display,src,align})=>{
+export const StyledLeftComment =({menu,display,src,align})=>{
     const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -95,7 +95,7 @@ export const StyledLeftComment =({display,src,align})=>{
                     </LoaderContainer>
                 </InputsFields>
             </ContainerWrapper>
-            <PageFooter/>
+            <PageFooter menu={menu}/>
         </Container>
     )
 }

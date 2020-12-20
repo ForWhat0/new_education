@@ -1,6 +1,31 @@
 import { gql } from "@apollo/client";
 
 const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
+    events(first: 3, where: {status: FUTURE, orderby: {field: DATE, order: ASC}}) {
+    nodes {
+      dateGmt
+      eventsFields {
+        hours {
+          ... on Time {
+            databaseId
+            title
+            hoursEvents {
+              hoursEvents
+            }
+          }
+        }
+        hoursOne {
+          ... on Time {
+            databaseId
+            title
+            hoursEvents {
+              hoursEvents
+            }
+          }
+        }
+      }
+    }
+  }
   news(where: {orderby: {field: DATE, order: ASC}}, first: 3) {
     nodes {
       title
@@ -21,30 +46,19 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
       startCursor
     }
   }
-  events(where: {orderby: {field: DATE, order: ASC}}, first: 3) {
+   menuItems {
     nodes {
-      title
-      databaseId
-      date
-      excerpt
-      slug
-      featuredImage {
-        node {
-          sourceUrl
-        }
-      }
-    }
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
+       key: id
+      parentId
+      path
+      title: label
+      url
     }
   }
   services {
     nodes {
       title
-      databaseId
+      slug
       featuredImage {
         node {
           sourceUrl

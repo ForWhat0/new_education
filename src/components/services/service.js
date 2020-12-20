@@ -65,7 +65,7 @@ const ButtonContainer = styled.div`
 `
 export default function Service(props) {
     return (
-        <Link href={`/service/[databaseId]`} as={`/service/${props.databaseId}`}>
+        <Link href={`/service/[slug]`} as={`/service/${props.slug}`}>
             <Global>
                 <ServiceContainer>
                     <ContainerWrapper>

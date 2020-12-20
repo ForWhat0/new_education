@@ -126,34 +126,38 @@ const IconText = styled.div`
    font-weight:bold;
    line-height:15px;  
 `
-export default function Event({borderLeftColor,choosenData}) {
-    const renderDay=()=>{
-        const inputDate = new Date(choosenData.data)
-        const todaysDate = new Date()
 
-        if(inputDate.setHours(0,0,0,0) === todaysDate.setHours(0,0,0,0)) {
-           return  'сьогодні'
+
+export default function Event({borderLeftColor,hoursOne}) {
+
+    const inputDate = new Date(hoursOne?.hoursEvents?.hoursEvents)
+
+    const renderDay=()=>{
+        const todayDate = new Date()
+        if(inputDate.getDay()+inputDate.getMonth()+inputDate.getFullYear() ===
+            todayDate.getDay()+todayDate.getMonth()+todayDate.getFullYear() ){
+            return  'сьогодні'
         }
         else{
-            return choosenData.data.toLocaleString('default', { weekday: 'long' })
+            return inputDate.toLocaleString('default', { weekday: 'long' })
         }
     }
+
     return (
-        <Link href={`/service/[databaseId]`} as={`/service/2`}>
             <EventContainer >
                <TimeContainer borderLeftColor={borderLeftColor}>
                    <TextField
                        fontSize='40px'
                        fontWeight='bold'
                    >
-                       {choosenData.data.getDate()}
+                       {inputDate.getDate()}
                    </TextField>
                    <MonthAndDay>
                        <TextField
                            fontSize='16px'
                            fontWeight='500'
                        >
-                           {`${choosenData.data.toLocaleString('default', { month: 'long' })} ${choosenData.data.getUTCFullYear()}`}
+                           {`${inputDate.toLocaleString('default', { month: 'long' })} ${inputDate.getUTCFullYear()}`}
                        </TextField>
                        <TextField
                            fontSize='16px'
@@ -167,13 +171,13 @@ export default function Event({borderLeftColor,choosenData}) {
                                className="fa fa-clock-o"
                                aria-hidden="true"
                            />
-                           {`${choosenData.data.getHours()}:${choosenData.data.getMinutes()<10?'0':''}${choosenData.data.getMinutes()}`}
+                           {`${inputDate.getHours()}:${inputDate.getMinutes()<10?'0':''}${inputDate.getMinutes()}`}
                        </Time>
                </TimeContainer>
                 <Text>
-                    {
-                        choosenData.text
-                    }
+
+                    {hoursOne?.title}
+
                 </Text>
                 <Review >
                     <Icon
@@ -188,6 +192,5 @@ export default function Event({borderLeftColor,choosenData}) {
                     </IconText>
                 </Review>
             </EventContainer>
-        </Link>
     )
 }

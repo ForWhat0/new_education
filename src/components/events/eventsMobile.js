@@ -7,6 +7,7 @@ import {StyledButton} from '../button/button'
 import {TitleForComponent} from "../titleForComponent/title";
 import {device} from "../deviceSizes/deviceSizes";
 import Event from "./event";
+import Link from "next/link";
 const {review} = NewsLsi
 
 
@@ -34,15 +35,26 @@ export default function EventsMobile({posts}){
             <TitleForComponent text='Послуги'/>
             {
                 !open ?
+                    <Link href={`/calendar/[currentHourId]`} as={`/calendar/${posts.hoursOne.databaseId}`}>
+                        <a>
                     <Event
-                        choosenData={posts.choosenData}
+                        hoursOne={posts.hoursOne}
                     />
+                        </a>
+                    </Link>
 
             :
-                    posts.allData.map(el=>
+
+                    posts.hours.sort(function(a,b){
+                        return new Date(a.hoursEvents.hoursEvents) - new Date(b.hoursEvents.hoursEvents)
+                    }).map(el=>
+                        <Link href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
+                            <a>
                         <Event
-                            choosenData={el}
+                            hoursOne={el}
                         />
+                            </a>
+                        </Link>
                     )
                 }
                 <ButtonContainer>

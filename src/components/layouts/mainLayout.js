@@ -1,11 +1,12 @@
 import {Layout} from "./layout"
-import React from "react"
 import MainHeader from "../headers/mainHeader"
 
-export function MainLayout({ preview, children }) {
+export function MainLayout({ hideLeftComponent , menu, children ,facebook , telegram ,gmail}) {
+
     return <Layout
-             preview={preview}
-             children={children}
-             header={<MainHeader />}
-            />
+        menu={menu}
+        hideLeftComponent={hideLeftComponent}
+        header={<MainHeader menu={menu} />}
+        children={children}
+    />
 }

@@ -4,7 +4,7 @@ import {headerLsi} from '../../Lsi/lsi'
 import { useSelector} from "react-redux"
 const {navButtons,register,logIn,title,subtitle,inputPlaceholder} = headerLsi
 
-export default function LargeHeader({gmail,telegram,facebook}) {
+export default function LargeHeader({menu,gmail,telegram,facebook}) {
     const {language} = useSelector(state=>state.app)
     return (
         <HeaderWrapper>
@@ -16,7 +16,7 @@ export default function LargeHeader({gmail,telegram,facebook}) {
                 />
                 <NavBar
                     language={language}
-                    navButtons={navButtons}
+                    navButtons={menu}
                     register={register}
                     logIn={logIn}
                 />

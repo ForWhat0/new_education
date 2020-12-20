@@ -11,9 +11,11 @@ import { useOnClickOutside } from '../hooks/hooks';
 import {actionClickBurger} from "../../redux/actions/actions";
 import {ModalRegisterEvent} from "../modal/modalRegistOnEvent";
 import {Bubblee} from "../bubleee";
+import {PageFooter} from "../footer/footer";
 
 
-export  const Layout = ({children , header}) => {
+export  const Layout = ({menu,hideLeftComponent,children , header}) => {
+    console.log(hideLeftComponent)
    /* useEffect(() => {
         delay()
     }, [])
@@ -108,12 +110,16 @@ export  const Layout = ({children , header}) => {
 
                     <div  ref={node}>
                         {header}
-                        <Menu/>
+                        <Menu menu={menu}/>
                         <ModalRegisterEvent/>
                     </div>
                     {alert && <Alert/>}
                     {children}
-                    <StyledLeftComment/>
+                     {
+                         hideLeftComponent ?
+                             <PageFooter menu={menu}/> : <StyledLeftComment menu={menu}/>
+
+                     }
                 </>
     );
 };

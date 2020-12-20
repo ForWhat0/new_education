@@ -10,6 +10,7 @@ import GET_ALL_SLUG_FROM_PROJECTS from "../../src/queries/get-all-slug-from-proj
 import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
 import React from "react";
 import Icon from "../../src/components/icon/icon";
+import {ParcMenu} from "../../src/components/hooks/hooks";
 
  const Container = styled.div`
  width:100%;
@@ -86,9 +87,9 @@ margin-left:${props=>props.marginR};
     margin-bottom:10px;
   }
 `
-export default function MicrophoneDetail({projectBySlug}) {
+export default function MicrophoneDetail({projectBySlug,menu}) {
      const router = useRouter();
-
+    const parsedMenu = ParcMenu(menu)
     if (router.isFallback) {
         return (
             <MainLayout>
@@ -100,7 +101,7 @@ export default function MicrophoneDetail({projectBySlug}) {
     }
 
     return (
-        <MainLayout>
+        <MainLayout menu={parsedMenu}>
             {
                 projectBySlug ?
                     <Container
@@ -171,6 +172,7 @@ export const getStaticProps = async (
 
     return {
         props: {
+            menu: data?.menuItems?.nodes || [],
             projectBySlug:data.project
         },
         revalidate: 1

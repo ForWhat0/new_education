@@ -9,6 +9,7 @@ import LastNews from "../../src/components/news/lastNews";
 import styled from "styled-components";
 import GET_NEWS_BY_SLUG_AND_FIRST_THREE_NEWS from "../../src/queries/get-news-by-slug";
 import {MainLayout} from "../../src/components/layouts/mainLayout";
+import {ParcMenu} from "../../src/components/hooks/hooks";
 
 export const Container = styled.div`
 position:relative;
@@ -22,9 +23,9 @@ const LoaderContainer = styled.div`
                 margin-top: 70px;
                 margin-bottom: 70px;
 `
-export default function MicrophoneDetail({newBySlug,news}) {
+export default function MicrophoneDetail({newBySlug,news,menu}) {
     const router = useRouter();
-
+    const parsedMenu = ParcMenu(menu)
     if (router.isFallback) {
         return (
             <MainLayout>
@@ -36,7 +37,7 @@ export default function MicrophoneDetail({newBySlug,news}) {
     }
 
     return (
-        <MainLayout>
+        <MainLayout menu={parsedMenu}>
             {
                 newBySlug || news ?
                     <>
@@ -78,7 +79,8 @@ export const getStaticProps = async (
     return {
         props: {
             newBySlug:data.new,
-            news: data.news
+            news: data.news,
+            menu: data?.menuItems?.nodes || [],
         },
         revalidate: 1
     }

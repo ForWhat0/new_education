@@ -17,10 +17,12 @@ const TextContent = styled.div`
   }
 `
 const Review = styled.div`
+  bottom:0;
+  width:${props=>props.width};
   border-top:${props => props.border};
     display:flex;
    align-items: center;
-   position:relative;
+   position:${props=>props.position};
    padding-top: 20px;
     @media screen and ${device.mobileL}{
    display:none;
@@ -48,18 +50,20 @@ const ArrowIcon = styled.i`
     border:1px solid #000000;
     border-radius:29px;
 `
-const StyledTextComponent =({title,excerpt,textForIcon ,date})=>{
+const StyledTextComponent =({bottom,title,excerpt,textForIcon ,date})=>{
     const border = excerpt ? 'unset' : '2px solid #1D1D1B;'
+    const position = bottom ? 'absolute' : 'relative'
+    const width = bottom ? '100%' : 'auto'
     return (
         <>
-            <TitleForComponent text={title} fontSize='30px' />
+            <TitleForComponent paddingBottom='30px' text={title} fontSize='30px' />
             {
                 excerpt &&
             <TextContent
                 dangerouslySetInnerHTML={{ __html:excerpt }}
             />
             }
-            <Review border={border}>
+            <Review width={width} position={position} border={border}>
                 <ArrowIcon
                     className="fa fa-long-arrow-right"
                     aria-hidden="true"

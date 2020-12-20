@@ -1,12 +1,12 @@
 import gql from "graphql-tag";
+import {Menu} from "./get-menus";
 const GET_PROJECTS = gql`
   query GET_PAGINATED_PROJECTS(
-      $after: String,
-    $before: String,
-    $first: Int,
-    $last: Int
+    $size: Int,
+    $offset: Int
   ) {
-    projects (first:$first, last:$last, after:$after, before:$before){
+    ${Menu}
+    projects(where: { offsetPagination: { size:$size, offset:  $offset } }) {
     nodes {
     title
       databaseId
@@ -25,12 +25,13 @@ const GET_PROJECTS = gql`
             }
           }
     }
-  pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
+   pageInfo {
+            offsetPagination {
+                hasMore
+                hasPrevious
+                total
+            }
+        }
   }
   }
 `

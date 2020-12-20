@@ -7,6 +7,7 @@ import {StyledButton} from '../button/button'
 import {TitleForComponent} from "../titleForComponent/title";
 import {device} from "../deviceSizes/deviceSizes";
 import Event from "./event";
+import Link from "next/link";
 const {review} = NewsLsi
 
 const ServicesContainer = styled.div`
@@ -16,6 +17,11 @@ const ServicesContainer = styled.div`
  display: grid;
     grid-template-columns: 1fr 1fr 1fr;
    grid-gap: 30px;
+`
+const ButtonContainer = styled.div`
+display:flex;
+justify-content:center;
+margin-top:40px;
 `
 const GlobalContainer = styled.div`
  @media screen and ${device.mobileL} {
@@ -30,17 +36,31 @@ const GlobalContainer = styled.div`
 export default function Events({posts}){
     const {loading} = useSelector(state=>state.app)
     const {language} = useSelector(state=>state.app)
+    const func = ()=>{
+        return null
+    }
     return(
         <GlobalContainer>
             <TitleForComponent text='Найближчі події'/>
             <ServicesContainer>
                 {posts.map((node,i) =>
-                    <Event
-                        borderLeftColor={i === 0 ? '#0072BC' : i === 1 ? ' #FFDE00' : '#00AEEF'}
-                        choosenData={node.choosenData}
-                    />
+                    <Link href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt}`}>
+                        <a>
+                            <Event
+                                borderLeftColor={i === 0 ? '#0072BC' : i === 1 ? ' #FFDE00' : '#00AEEF'}
+                                hoursOne={node.eventsFields.hoursOne}
+                            />
+                        </a>
+                    </Link>
                 )}
             </ServicesContainer>
+            <ButtonContainer>
+                <Link href={`/calendar`}>
+                    <a>
+                        <StyledButton func={func} text="Календар Подій"/>
+                    </a>
+                </Link>
+            </ButtonContainer>
         </GlobalContainer>
     )
 }

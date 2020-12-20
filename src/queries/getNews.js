@@ -1,12 +1,12 @@
 import gql from "graphql-tag";
+import {Menu} from "./get-menus";
 const GET_NEWS = gql`
   query GET_PAGINATED_NEWS(
-    $after: String,
-    $before: String,
-    $first: Int,
-    $last: Int
+    $size: Int,
+    $offset: Int
   ) {
-    news (first:$first, last:$last, after:$after, before:$before){
+    ${Menu}
+    news (where: { offsetPagination: { size:$size, offset:  $offset } }){
     nodes {
       title
       databaseId
@@ -19,12 +19,13 @@ const GET_NEWS = gql`
         }
       }
     }
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
+   pageInfo {
+            offsetPagination {
+                hasMore
+                hasPrevious
+                total
+            }
+        }
   }
   }
 `

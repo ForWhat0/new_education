@@ -13,9 +13,8 @@ flex-wrap: wrap;
 `
 const StyledContainer = styled.div`
  display:flex;
- justify-content: center;
  cursor:pointer;
- flex: 1 1 250px;
+ flex: 1 1 300px;
  flex-direction: column;
  overflow: hidden;
  margin: 0 0 40px;
@@ -27,7 +26,6 @@ const StyledContainer = styled.div`
     transform: scale(1.01);
   }
  @media (max-width: 768px) {
-   flex: 1 1 301px;
     flex-direction: column;
     padding-bottom: 40px;
     border-top: 0;
