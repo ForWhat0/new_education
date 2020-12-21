@@ -31,7 +31,7 @@ export async function getStaticProps(ctx){
     const currentDate = ctx.params?.currentDate
 
     const today = new Date()
-    const currentDateFormatDate =  currentDate && new Date(currentDate)
+    const currentDateFormatDate =  currentDate && new Date(`${currentDate}T23:59:00`)
     const statusFromCurrentDate = currentDate && currentDateFormatDate > today ? "FUTURE" : "PUBLISH"
 
     const status = currentDate ? statusFromCurrentDate : "FUTURE"

@@ -2,10 +2,12 @@ import { gql } from "@apollo/client";
 import {Menu} from "../get-menus";
 
 export const GET_PAGE = gql`
-	query GET_PAGE($uri: String) {
+	query GET_PAGE($name: String) {
       ${Menu}
-	  page: pageBy(uri: $uri) {
-	    id
+	 pages(where: {name: $name}) {
+	 nodes{
+	 
+	id
 	    title
 	    content
 	    slug
@@ -27,6 +29,8 @@ export const GET_PAGE = gql`
         
       }
     }
+	 }
+	    
 	  }
 	}
 `;

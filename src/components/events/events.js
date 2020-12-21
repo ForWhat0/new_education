@@ -44,7 +44,7 @@ export default function Events({posts}){
             <TitleForComponent text='Найближчі події'/>
             <ServicesContainer>
                 {posts.map((node,i) =>
-                    <Link href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt}`}>
+                    <Link href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt.substring(0,10)}`}>
                         <a>
                             <Event
                                 borderLeftColor={i === 0 ? '#0072BC' : i === 1 ? ' #FFDE00' : '#00AEEF'}

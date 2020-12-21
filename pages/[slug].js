@@ -15,6 +15,7 @@ import {TitleForComponent} from "../src/components/titleForComponent/title";
 import Icon from "../src/components/icon/icon";
 import {InputStyled} from "../src/components/input/input";
 import {SearchBarStyled} from "../src/components/searchBar/searchBar";
+import GET_NEWS_BY_SLUG_AND_FIRST_THREE_NEWS from "../src/queries/get-news-by-slug";
 const { useState, Fragment } = React;
 
 const Container = styled.div`
@@ -125,7 +126,8 @@ right:0;
   }
 `
 
-const Pages = ({ menu,page }) => {
+const Pages = ({ menu,pages }) => {
+    const page = pages[0]
     const router = useRouter()
     const parsedMenu = ParcMenu(menu)
     const [shownComments, setShownComments] = useState({});
@@ -243,62 +245,38 @@ const Pages = ({ menu,page }) => {
 
 export default Pages;
 
-export async function getStaticProps({ params }) {
-    const { data } = await client.query({
+export const getStaticProps = async (
+    ctx
+) => {
+    const name = ctx.params.slug
+    const { data } = await client.query( {
         query: GET_PAGE,
-        variables: {
-            uri: params?.slug.join("/"),
-        },
-    });
+        variables:{
+            name
+        }
+    } )
 
     return {
         props: {
-                menu: data?.menuItems?.nodes || [],
-                page: data?.page ?? {},
-                path: params?.slug.join("/"),
+            menu: data?.menuItems?.nodes || [],
+            pages: data?.pages?.nodes
         },
-        /**
-         * Revalidate means that if a new request comes to server, then every 1 sec it will check
-         * if the data is changed, if it is changed then it will update the
-         * static file inside .next folder with the new data, so that any 'SUBSEQUENT' requests should have updated data.
-         */
-        revalidate: 1,
-    };
-}
+        revalidate: 1
+    }
+};
 
-/**
- * Since the page name uses catch-all routes,
- * for example [...slug],
- * that's why params would contain slug which is an array.
- * For example, If we need to have dynamic route '/foo/bar'
- * Then we would add paths: [ params: { slug: ['foo', 'bar'] } } ]
- * Here slug will be an array is ['foo', 'bar'], then Next.js will statically generate the page at /foo/bar
- *
- * At build time next js will will make an api call get the data and
- * generate a page bar.js inside .next/foo directory, so when the page is served on browser
- * data is already present, unlike getInitialProps which gets the page at build time but makes an api
- * call after page is served on the browser.
- *
- * @see https://nextjs.org/docs/basic-features/data-fetching#the-paths-key-required
- *
- * @returns {Promise<{paths: [], fallback: boolean}>}
- */
 export async function getStaticPaths() {
     const { data } = await client.query({
         query: GET_PAGES_URI
     });
 
-    const pathsData = [];
 
-    data?.pages?.nodes && data?.pages?.nodes.map( page => {
-
-        	const slugs = page?.uri?.split('/').filter( pageSlug => pageSlug );
-            pathsData.push( {params: { slug: slugs }} )
-
+    const paths = data?.pages?.nodes?.map(item => {
+        return { params: {slug: item.slug}}
     })
 
     return {
-        paths: pathsData,
-        fallback: true
+        paths,
+        fallback: false
     };
 }

@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
     const pathDate = data?.events?.nodes?.concat(publishDate?.data?.events?.nodes);
 
     const paths = pathDate.map(item => {
-        return { params: {currentDate: item.dateGmt}}
+        return { params: {currentDate: item.dateGmt.toString().substring(0,10)}}
     })
 
     return {
