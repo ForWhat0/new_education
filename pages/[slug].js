@@ -269,14 +269,14 @@ export async function getStaticPaths() {
     const { data } = await client.query({
         query: GET_PAGES_URI
     });
-
-
     const paths = data?.pages?.nodes?.map(item => {
-        return { params: {slug: item.slug}}
+        return { params: {slug: item.slug.substring(1)}}
     })
 
     return {
-        paths,
+        paths: [
+            { params: { slug: 'finansovaya-otchetnost' } }
+        ],
         fallback: false
     };
 }
