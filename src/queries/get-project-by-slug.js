@@ -10,6 +10,10 @@ ${Menu}
     content
     title
      projectFields {
+      appLink
+        bgColor
+        playLink
+        siteLink
       bgImg {
         sourceUrl
       }

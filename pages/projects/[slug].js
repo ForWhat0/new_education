@@ -110,12 +110,13 @@ export default function MicrophoneDetail({projectBySlug,menu}) {
                             && projectBySlug.projectFields.bgImg.sourceUrl
                         }
                     >
+
                         <ContainerWrapper>
                             <Header>
                                 <TitleForComponent text={projectBySlug.title} fontSize='40px'/>
                                 <Icons>
                                     {
-                                        projectBySlug.playLink &&
+                                        projectBySlug.projectFields.playLink &&
                                         <IconItem marginR='20px'>
                                             <a href={projectBySlug.playLink}>
                                                 <Icon src='/googlePlayIcon.svg' width='120px' height='36px'/>
@@ -123,7 +124,7 @@ export default function MicrophoneDetail({projectBySlug,menu}) {
                                         </IconItem>
                                     }
                                     {
-                                        projectBySlug.appLink &&
+                                        projectBySlug.projectFields.appLink &&
                                         <IconItem marginR='20px'>
                                             <a href={projectBySlug.appLink}>
                                                 <Icon src='/appStore.svg' width='120px' height='36px'/>
@@ -131,7 +132,7 @@ export default function MicrophoneDetail({projectBySlug,menu}) {
                                         </IconItem>
                                     }
                                     {
-                                        projectBySlug.siteLink &&
+                                        projectBySlug.projectFields.siteLink &&
                                         <IconItem marginR='60px'>
                                             <a href={projectBySlug.siteLink}>
                                                 <Icon src='/linkIconDark.svg' width='36px' height='36px'/>
