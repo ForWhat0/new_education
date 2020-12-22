@@ -106,10 +106,8 @@ export  const Layout = ({menu,hideLeftComponent,children , header,showZNORegiste
            <>
                     <Head>
                         <link
-                            rel="preload"
+                            rel="stylesheet"
                             href="/fonts/e-Ukraine_font/e-Ukraine-Light.ttf"
-                            as="font"
-                            crossOrigin=""
                         />
                         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
