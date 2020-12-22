@@ -10,6 +10,7 @@ import 'nprogress/nprogress.css'
 import {ApolloProvider} from "@apollo/client";
 import client from "../src/apollo/client";
 import {ApolloProvider as ApolloHooksProvider} from "react-apollo-hooks/lib/ApolloContext";
+import Head from "next/head";
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
@@ -20,6 +21,9 @@ function MyApp({ Component, pageProps }) {
       <ApolloProvider client={client}>
           <ApolloHooksProvider client={client}>
       <Provider store={store}>
+          <Head>
+              <link href="/fonts/style.css" rel="stylesheet"/>
+          </Head>
             <Component {...pageProps} />
       </Provider>
           </ApolloHooksProvider>
