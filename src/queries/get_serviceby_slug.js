@@ -9,12 +9,13 @@ ${Menu}
     slug
     content
     title
-     serveicesFields {
-      accardion2{
-        titleAccardion
-        descrAccardion
+     serveicesFields{
+        showZno
+        accardion2{
+          titleAccardion
+          descrAccardion
+        }
       }
-    }
   }
 }
 `

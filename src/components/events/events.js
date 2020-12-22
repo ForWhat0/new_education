@@ -24,6 +24,7 @@ justify-content:center;
 margin-top:40px;
 `
 const GlobalContainer = styled.div`
+margin-bottom:80px;
  @media screen and ${device.mobileL} {
  display:none;
      width: 96%;

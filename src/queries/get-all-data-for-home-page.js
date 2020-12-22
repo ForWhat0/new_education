@@ -26,7 +26,7 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
       }
     }
   }
-  news(where: {orderby: {field: DATE, order: ASC}}, first: 3) {
+ news (where: {orderby: {field: DATE, order: DESC}  offsetPagination: { size:3, offset: 0 } }){
     nodes {
       title
       databaseId
@@ -39,12 +39,13 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
         }
       }
     }
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
+   pageInfo {
+            offsetPagination {
+                hasMore
+                hasPrevious
+                total
+            }
+        }
   }
    menuItems {
     nodes {

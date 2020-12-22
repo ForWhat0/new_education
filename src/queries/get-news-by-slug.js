@@ -11,7 +11,7 @@ $slug:ID!
     title
   }
  ${Menu}
-  news (first:3){
+  news (where: {orderby: {field: DATE, order: DESC}  offsetPagination: { size:3, offset: 0 } }){
     nodes {
       title
       databaseId
@@ -24,12 +24,13 @@ $slug:ID!
         }
       }
     }
-    pageInfo {
-      endCursor
-      hasNextPage
-      hasPreviousPage
-      startCursor
-    }
+   pageInfo {
+            offsetPagination {
+                hasMore
+                hasPrevious
+                total
+            }
+        }
   }
 }
 `

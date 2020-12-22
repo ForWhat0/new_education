@@ -7,24 +7,21 @@ import {
     getNews,
     showExtraLoader, hideExtraLoader, getProjectById, getNewsForMobile, clickBurger, clickModal
 } from '../types/types'
-import client from "../../apollo/client"
-import GET_NEWS from "../../queries/getNews"
-import GET_NEWS_ALL_NEWS from "../../queries/getAllNews";
+import GET_MOORE_NEWS from "../../queries/get_moore_news";
+import reduxClient from "../../apollo/reduxClient";
 
-export function actionGetNews({after,before,first,last}) {
+export function actionGetNews(offset) {
     return async dispatch=>{
         try{
             dispatch(ShowLoader())
-            const news = await client.query( {
-                query: GET_NEWS,
+            const news = await reduxClient.query( {
+                query: GET_MOORE_NEWS,
                 variables: {
-                    after:after,
-                    before:before,
-                    first:first,
-                    last:last
+                    size:3,
+                    offset
                 }
             } )
-            dispatch({type:getNews,payload:news})
+            dispatch({type:getNews,payload:{news,offset}})
             dispatch(HideLoader())
         }
         catch (e){
@@ -32,14 +29,18 @@ export function actionGetNews({after,before,first,last}) {
         }
     }
 }
-export function actionGetNextNewsForMobile() {
+export function actionGetNextNewsForMobile(offset,data) {
     return async dispatch=>{
         try{
             dispatch(ShowLoader())
-            const news = await client.query( {
-                query: GET_NEWS_ALL_NEWS
+            const news = await reduxClient.query( {
+                query: GET_MOORE_NEWS,
+                variables: {
+                    size:3,
+                    offset
+                }
             } )
-            dispatch({type:getNewsForMobile,payload:news})
+            dispatch({type:getNewsForMobile,payload:{news,offset,data}})
             dispatch(HideLoader())
         }
         catch (e){

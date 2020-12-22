@@ -17,6 +17,7 @@ const {button} = NewsLsi
 export const Back = styled.div`
 width:100%;
 background-color:${props => props.background};
+margin-bottom:${props => props.margin};
 `
 
 export const Container = styled.div`
@@ -100,52 +101,56 @@ const ScrollBarStyledInner = styled.div`
  cursor:pointer;
  flex-direction: row;
 `
-export default function LastNews({title,language,posts,pageInfo,background,buttonHide,fetchMoreNews}){
+export default function LastNews({margin,title,language,posts,pageInfo,background,buttonHide,fetchMoreNews}){
+
     const buttonDisplay = buttonHide ? 'none' : 'flex';
     const {loading} = useSelector(state=>state.app)
     const {newsReducer} = useSelector(state=>state.news)
-    const {allNewsForMobileSliderReducer} = useSelector(state=>state.news)
+    const {offset} = useSelector(state=>state.news)
+    const {offsetMobile} = useSelector(state=>state.news)
+    const {newsForMobileSliderReducer} = useSelector(state=>state.news)
+    const {newsForMobileSliderReducerPageInfo} = useSelector(state=>state.news)
     const dispatch = useDispatch()
-    const pageInfos = newsReducer?.data ? newsReducer.data.news.pageInfo : pageInfo
-    const pageInfosForMobile = allNewsForMobileSliderReducer?.data ? allNewsForMobileSliderReducer.data.news.pageInfo : pageInfo
+
     const news = newsReducer?.data?.news?.nodes ? newsReducer.data.news.nodes : posts
-    const newsForMobile = allNewsForMobileSliderReducer?.data?.news?.nodes ? allNewsForMobileSliderReducer.data.news.nodes : posts
-    const after = newsReducer?.data?.news?.pageInfo ? newsReducer.data.news.pageInfo.endCursor : pageInfo.endCursor
-    const before = newsReducer?.data?.news?.pageInfo ? newsReducer.data.news.pageInfo.startCursor : pageInfo.startCursor
+    const newsForMobile = newsForMobileSliderReducer ? newsForMobileSliderReducer : posts
+
+    const hasNextPageForMobile = newsForMobileSliderReducer ? newsForMobileSliderReducerPageInfo : pageInfo.offsetPagination.hasMore
+    const hasNextPage = newsReducer?.data?.news?.pageInfo?.offsetPagination ? newsReducer.data.news.pageInfo.offsetPagination.hasMore : pageInfo.offsetPagination.hasMore
+    const hasPreviousPage = newsReducer?.data?.news?.pageInfo?.offsetPagination ? newsReducer.data.news.pageInfo.offsetPagination.hasPrevious : pageInfo.offsetPagination.hasPrevious
+
     const inputRef = React.createRef();
     const nextNews=()=>{
-        if (loading || !pageInfos.hasNextPage){
+        if (loading || !hasNextPage){
             return null
         }
-        dispatch(actionGetNews({first:3,last:null,after,before:null}))
+        dispatch(actionGetNews(!newsReducer ? offset :  offset+3))
     }
     const nextNewsForMobile=()=>{
-        if (loading || !pageInfosForMobile.hasNextPage){
+        if (loading || !hasNextPageForMobile){
             return null
         }
-        dispatch(actionGetNextNewsForMobile())
+        dispatch(actionGetNextNewsForMobile(!newsForMobileSliderReducer ? offsetMobile :  offsetMobile+3 ,!newsForMobileSliderReducer ? newsForMobile :  null))
     }
     const prevNews=()=>{
-        if (loading || !pageInfos.hasPreviousPage){
+        if (loading || !hasPreviousPage){
             return null
         }
-        dispatch(actionGetNews({first:null,last:3,before,after:null}))
+        dispatch(actionGetNews(offset-3))
     }
 
     const checkScroll = e => {
         const scrollWidth = inputRef.current.scrollWidth;
         const scrollBarWidth =  inputRef.current.offsetWidth
         const newScrollLeft = inputRef.current.scrollLeft;
-        console.log(scrollWidth,scrollBarWidth,newScrollLeft)
         if (parseInt(scrollWidth - scrollBarWidth) === parseInt(newScrollLeft) ) {
             nextNewsForMobile()
-            console.log('asd')
         }
     };
 
     return(
         <section>
-            <Back background={background}>
+            <Back margin={margin} background={background}>
                 <Container>
                     <Header>
                         <TitleForComponent text='Останні новини' fontSize='40px' />
@@ -153,13 +158,13 @@ export default function LastNews({title,language,posts,pageInfo,background,butto
                             <ArrowIcon
                                 className="fa fa-long-arrow-left"
                                 aria-hidden="true"
-                                opacity={loading || !pageInfos.hasPreviousPage ? '0.5' : 'unset'}
+                                opacity={loading || !hasPreviousPage ? '0.5' : 'unset'}
                                 onClick={()=>prevNews()}
                             />
                             <ArrowIcon
                                 className="fa fa-long-arrow-right"
                                 aria-hidden="true"
-                                opacity={loading || !pageInfos.hasNextPage ? '0.5' : 'unset'}
+                                opacity={loading || !hasNextPage ? '0.5' : 'unset'}
                                 onClick={()=>nextNews()}
                             />
                         </Arrows>

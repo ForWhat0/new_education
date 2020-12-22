@@ -2,26 +2,28 @@ import { useRouter } from 'next/router'
 import client from "../../src/apollo/client"
 import StyledLoader from "../../src/components/loader/loader";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
-import PostBody from "../../src/components/post-body/post-body";
-import LastNews from "../../src/components/news/lastNews";
 import styled from "styled-components";
 import {MainLayout} from "../../src/components/layouts/mainLayout";
-import GET_ALL_SLUG_FROM_PROJECTS from "../../src/queries/get-all-slug-from-projects";
-import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
 import React from "react";
-import Icon from "../../src/components/icon/icon";
 import GET_ALL_SLUG_FROM_SERVICES from "../../src/queries/get_all_slug_from_services";
 import {formatBytes, getDateIn_DD_MM_YYYY_Format, ParcMenu} from "../../src/components/hooks/hooks";
-import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
 import GET_SERVICE_BY_SLUG from "../../src/queries/get_serviceby_slug";
-const { useState, Fragment } = React;
+import {Link as ScrollLink} from "react-scroll";
+import {StyledButton} from "../../src/components/button/button";
+import {PostBodyZNO} from "../../src/components/post-body/post-body";
+import Icon from "../../src/components/icon/icon";
+import {device} from "../../src/components/deviceSizes/deviceSizes";
+const { useState } = React;
 
  const Container = styled.div`
  width:80%;
  margin-left:10%;
+ margin-bottom:40px;
 background: url(${props=>props.bgImg}) no-repeat center center fixed;   
 @media screen and (max-width:700px) {
  background:unset;
+ width:94%;
+ margin-left:3%;
   }
 
 `
@@ -79,59 +81,9 @@ margin-left:${props=>props.marginR};
     margin-bottom:10px;
   }
 `
-const DownloadFile = styled.ul`
-position: relative;
- width: 100%;
- margin: 0;
- padding-left: 20px;
-`
-const DownloadFileText = styled.li`
-display:flex;
-align-items:center;
- position:absolute;
- list-style-type:none;
- top:${props=>props.top};
- bottom:${props=>props.bottom};
- margin-top:${props=>props.mTop};
- margin-bottom:${props=>props.mBottom};
-  @media screen and (max-width:700px) {
-font-size:14px;
-  }  
-`
-const DownloadFileTextAndArrow = styled.li`
-display:flex;
-align-items:center;
- position:absolute;
- list-style-type:none;
- top:${props=>props.top};
- bottom:${props=>props.bottom};
- margin-top:${props=>props.mTop};
- margin-bottom:${props=>props.mBottom};
-  @media screen and (max-width:700px) {
-font-size:16px;
-  }  
-  @media screen and (max-width:450px){
-  bottom: -40px;
-    left: -15px;
-  }
- span{
- margin-left:5px;
- font:size:16px;
- }
-`
-const DownloadContent = styled.div`
-    max-height: ${props=>props.height};
-    transition: max-height 0.15s ease-out;
-    overflow: hidden;
-    border-top: ${props=>props.border};
-    padding-top: ${props=>props.pTop};
-    margin-bottom: ${props=>props.pTop};
-    margin-top: ${props=>props.mTop};
-    @media screen and (max-width:700px) {
-   padding-top: unset!important;
-    margin-bottom: unset!important;
-  }
-`
+
+
+
 
 const DownloadItem = styled.a`
 display:flex;
@@ -143,6 +95,21 @@ const Header = styled.div`
 display:flex;
 align-items: center;
 position:relative;
+
+div{
+position:absolute;
+right:0;
+@media screen and (max-width:950px) {
+  position:relative;
+  }
+}
+div a button{
+@media screen and (max-width:950px) {
+  font-size:14px;
+  }
+}
+
+
  @media screen and (max-width:950px) {
   flex-direction:column;
   }
@@ -157,8 +124,61 @@ right:0;
  margin-bottom:40px;
   }
 `
+const Year = styled.span`
+font-size:16px;
+border-bottom: 1px solid #1D1D1B;
+padding-bottom: ${props=>props.pBottom};
+display: block;
+    font-weight: 500;
+    line-height: 27px;
+list-style-type: none;
+    margin-bottom:20px;
+    cursor:pointer;
+    
+    i{
+    transform: rotateX(${props=>props.open});
+    color:${props=>props.color};
+margin-left:10px;
+font-size:17px;
+    }
+`
+
+const DownloadContent = styled.div`
+    max-height: ${props=>props.height};
+    transition: max-height 0.15s ease-out;
+    border-bottom: ${props=>props.bBottom};
+    padding-bottom: ${props=>props.pBottom};
+    overflow: hidden;
+    margin-bottom: ${props=>props.pTop};
+    margin-top: ${props=>props.mTop};
+  @media screen and ${device.mobileL}{
+      display:flex;
+      flex-direction:column;
+  }
+  button{
+   @media screen and ${device.mobileL}{
+       align-self: center;
+  }
+  }
+  div{
+  margin-bottom:40px;
+  }
+  div ul {
+  padding:0;
+  margin:0;
+  }
+  div ul li {
+  list-style-type:none;
+  }
+  div ul li::before {
+  content: '— ';
+}
+  
+`
+
 export default function GetEvent({serviceBySlug,menu}) {
      const router = useRouter();
+     const zno = serviceBySlug?.serveicesFields?.showZno === "Открыть"
     const [ShownAccordion, setShownAccordion] = useState({});
      console.log(serviceBySlug)
     const handleClickAccordion = index => {
@@ -179,12 +199,48 @@ export default function GetEvent({serviceBySlug,menu}) {
     }
 
     return (
-        <MainLayout menu={parsedMenu} hideLeftComponent={true} >
+        <MainLayout menu={parsedMenu} showZNORegister={zno && true} hideLeftComponent={zno && true} >
             <Container >
                 <Header>
-                    <TitleForComponent marginBottom='40px' borderBottom='unset' text={serviceBySlug.title}  />
+                    <TitleForComponent  borderBottom='unset' text={serviceBySlug.title}  />
+                    {
+                        zno &&
+                        <div>
+                            <ScrollLink to={"#RegisterZNO"}  hashSpy={true}   offset={-100} spy={true} smooth={true}  duration={500} >
+                                <StyledButton  text="Зареєструватися на курси підготовки до ЗНО"/>
+                            </ScrollLink>
+                        </div>
+                    }
                 </Header>
-           <PostBody content={serviceBySlug.content}/>
+                {
+                    zno && <PostBodyZNO content={serviceBySlug.content}/>
+                }
+                {
+                    serviceBySlug?.serveicesFields?.accardion2?.map((item,index)=>
+                        <>
+                            <Year
+                                pBottom = {ShownAccordion[index] ? 'unset' : '20px' }
+                                open ={ShownAccordion[index] ? '180deg' : '0' }
+                                onClick={() => handleClickAccordion(index)}>
+                                {item.titleAccardion}
+                                <i className="fa fa-caret-down"></i>
+                            </Year>
+
+                            <DownloadContent
+                                bBottom = {ShownAccordion[index] ? '1px solid' : 'unset' }
+                                pBottom = {ShownAccordion[index] ? '20px' : 'unset' }
+                                height ={ShownAccordion[index] ? '500px' : '0' }
+                                pTop = {ShownAccordion[index] ? '20px' : 'unset' }
+                                mTop = {ShownAccordion[index] ? '20px' : 'unset' }
+                            >
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: item.descrAccardion }}
+                                    />
+                                    <StyledButton text='Залишити запит'/>
+                            </DownloadContent>
+                        </>
+                    )
+                }
             </Container>
         </MainLayout>
     );

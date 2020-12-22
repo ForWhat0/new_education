@@ -13,11 +13,12 @@ const {review} = NewsLsi
 
 const GlobalContainer = styled.div`
    display:none;
-   
+ 
  @media screen and ${device.mobileL} {
      width: 96%;
      display:block;
     margin-left: 2%;
+      margin-bottom:40px;
   }
 `
 const ButtonContainer = styled.div`

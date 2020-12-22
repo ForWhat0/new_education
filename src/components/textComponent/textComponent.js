@@ -50,18 +50,20 @@ const ArrowIcon = styled.i`
     border:1px solid #000000;
     border-radius:29px;
 `
-const StyledTextComponent =({bottom,title,excerpt,textForIcon ,date})=>{
+const StyledTextComponent =({paddingBottom,bottom,title,excerpt,textForIcon ,date})=>{
     const border = excerpt ? 'unset' : '2px solid #1D1D1B;'
     const position = bottom ? 'absolute' : 'relative'
     const width = bottom ? '100%' : 'auto'
     return (
         <>
-            <TitleForComponent paddingBottom='30px' text={title} fontSize='30px' />
+            <TitleForComponent paddingBottom={paddingBottom} text={title} fontSize='30px' />
             {
                 excerpt &&
-            <TextContent
-                dangerouslySetInnerHTML={{ __html:excerpt }}
-            />
+            <TextContent>
+                {excerpt.substring(3, 200)}...
+            </TextContent>
+
+
             }
             <Review width={width} position={position} border={border}>
                 <ArrowIcon

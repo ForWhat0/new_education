@@ -49,6 +49,7 @@ export const Global = styled.div`
 
 width:100%;
 display:flex;
+margin:${props=>props.margin};
 flex-direction:row;
  @media screen and ${device.laptop}{
     height: auto;

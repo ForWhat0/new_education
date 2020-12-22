@@ -18,6 +18,7 @@ const ServicesContainer = styled.div`
    grid-gap: 30px;
 `
 const GlobalContainer = styled.div`
+margin-bottom:80px;
  @media screen and ${device.mobileL} {
      width: 96%;
     margin-left: 2%;

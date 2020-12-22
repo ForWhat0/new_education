@@ -18,7 +18,7 @@ const Button = styled.button`
 
 export const StyledButton =({text,func})=>{
     return (
-        <Button  onClick={()=>func()}>
+        <Button  onClick={()=>func && func()}>
             {text}
         </Button>
     )

@@ -12,9 +12,12 @@ import {actionClickBurger} from "../../redux/actions/actions";
 import {ModalRegisterEvent} from "../modal/modalRegistOnEvent";
 import {Bubblee} from "../bubleee";
 import {PageFooter} from "../footer/footer";
+import {StyledRegisterZNO} from "../leftComment/registerOnZNO";
+import Services from "../services/services";
+import {Element} from "react-scroll";
 
 
-export  const Layout = ({menu,hideLeftComponent,children , header}) => {
+export  const Layout = ({menu,hideLeftComponent,children , header,showZNORegister}) => {
     console.log(hideLeftComponent)
    /* useEffect(() => {
         delay()
@@ -102,6 +105,12 @@ export  const Layout = ({menu,hideLeftComponent,children , header}) => {
     return (
            <>
                     <Head>
+                        <link
+                            rel="preload"
+                            href="/fonts/e-Ukraine_font/e-Ukraine-Light.ttf"
+                            as="font"
+                            crossOrigin=""
+                        />
                         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                         <title>Woocommerce React Theme</title>
@@ -115,11 +124,17 @@ export  const Layout = ({menu,hideLeftComponent,children , header}) => {
                     </div>
                     {alert && <Alert/>}
                     {children}
-                     {
-                         hideLeftComponent ?
-                             <PageFooter menu={menu}/> : <StyledLeftComment menu={menu}/>
 
-                     }
+               {
+                   showZNORegister ?
+                       <Element name="#RegisterZNO" className="element">
+                           <StyledRegisterZNO menu={menu}/>
+                       </Element>
+                       :
+                    !hideLeftComponent ?  <StyledLeftComment menu={menu}/> :
+                        <PageFooter menu={menu}/>
+               }
+
                 </>
     );
 };

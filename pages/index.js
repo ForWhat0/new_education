@@ -45,7 +45,7 @@ export default function Home({menu,news,events,data,projects,services}) {
           <Team  posts={teamData}/>
         </Element>
         }
-        {news.nodes.length > 0 &&<LastNews  posts={news.nodes}  pageInfo={news.pageInfo} />}
+        {news.nodes.length > 0 &&<LastNews margin='80px'  posts={news.nodes}  pageInfo={news.pageInfo} />}
       </HomePageLayout>
   )
 }

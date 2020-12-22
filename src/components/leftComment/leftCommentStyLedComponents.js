@@ -67,12 +67,61 @@ background-image: url('/back.svg');
   background-repeat: no-repeat; 
   background-size: contain; 
 `
+export const IconBackgroundZNO = styled.div`
+width:100%;
+height:100%;
+position:absolute;
+background-position: right; 
+opacity:0.5;
+z-index:0;
+background-image: url('/registerZnoIcon.svg');
+  background-repeat: no-repeat; 
+  background-size: contain; 
+ 
+`
 export const InputsFields = styled.div`
    @media screen and ${device.tablet} {
   width:100%;
   }
 width:50%;
 z-index:1;
+`
+export const Select = styled.select`
+margin-top: 5px;
+ background-color: white;
+  border: 1px solid #1D1D1B;
+    box-sizing: border-box;
+    border-radius: 9px;
+    padding: 10px;
+    width:100%;
+  display: inline-block;
+  line-height: 1.5em;
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+   background-image:
+    linear-gradient(45deg, transparent 50%, #1D1D1B 50%),
+    linear-gradient(135deg, #1D1D1B 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+
+`
+export const Label = styled.label`
+font-weight: normal;
+text-align:start;
+font-size: 16px;
+margin-bottom: 5px;
+color: #1D1D1B;
 `
 export const Flex = styled.div`
   @media screen and ${device.laptop} {

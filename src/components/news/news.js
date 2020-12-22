@@ -47,7 +47,7 @@ export default function News(props) {
                 src={props.coverImage?.sourceUrl}
             />
         </PhotoContainer>
-        <StyledTextComponent bottom={true} title={props.title} date={props.date} textForIcon={props.textForIcon}/>
+        <StyledTextComponent paddingBottom='30px' bottom={true} title={props.title} date={props.date} textForIcon={props.textForIcon}/>
     </NewsContainer>
         </Link>
     )

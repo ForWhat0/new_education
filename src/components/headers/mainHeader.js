@@ -1,12 +1,11 @@
 import {RestPagesHeaderWrapper, RestWrapperInner, NavBarMain, LogoImg} from './headerStyledElements'
 import {headerLsi} from '../../Lsi/lsi'
 import {useSelector} from "react-redux"
-
+import Link from "next/link"
 
 const {navButtons,register,logIn,title,subtitle,inputPlaceholder} = headerLsi
 
 export default function MainHeader({whiteTheme,menu}) {
-   console.log(menu)
     const {language} = useSelector(state=>state.app)
    const color = whiteTheme ? '#FFFFFF' : '#000'
     const searchBarColor = whiteTheme ? '#FFFFFF' : 'transition'
@@ -14,11 +13,15 @@ export default function MainHeader({whiteTheme,menu}) {
     return (
         <RestPagesHeaderWrapper>
             <RestWrapperInner borderBottomColor={color} background={background} >
-                <LogoImg
-                    height='70px'
-                    width='70px'
-                    src='/headerLogo.svg'
-                />
+                <Link href={"/"}>
+                    <a>
+                        <LogoImg
+                            height='70px'
+                            width='70px'
+                            src='/headerLogo.svg'
+                        />
+                    </a>
+                </Link>
                 <NavBarMain
                     searchBarColor={searchBarColor}
                     color={color}
