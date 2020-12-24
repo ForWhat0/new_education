@@ -21,7 +21,7 @@ const Icon = styled.i`
   font-size:20px;
 `
 const Input = styled.input.attrs(props => ({
-    type: "text",
+    type: props.type,
     name:props.name,
     onChange:props.func,
     placeholder :props.inputPlaceholder,
@@ -38,11 +38,11 @@ const Input = styled.input.attrs(props => ({
   background: #FFFFFF;
 border-radius: 28px;
 `;
-export const SearchBarStyled = ({maxlength,right,position,width,inputName,inputFunc,inputPlaceholder,border})=>{
+export const SearchBarStyled = ({type,maxlength,right,position,width,inputName,inputFunc,inputPlaceholder,border})=>{
     return(
         <SearchBar right={right} position={position} border={border} width={width}>
             <Icon className="fa fa-search" aria-hidden="true"/>
-            <Input maxLength={maxlength}  name={inputName} func={inputFunc}  inputPlaceholder={inputPlaceholder}/>
+            <Input  type={type} maxLength={maxlength}  name={inputName} func={inputFunc}  inputPlaceholder={inputPlaceholder}/>
         </SearchBar>
     )
 }

@@ -5,7 +5,11 @@ display: flex;
     width: 100%;
     background: inherit;
     align-items: center;
+      margin:30px 0 0 0;
     scroll-behavior: smooth;
+    @media screen and ${device.laptop} {
+     margin:unset;
+  }
 `
 
 export const ButtonWrapper = styled.div`
@@ -73,6 +77,7 @@ height: 88px;
 export const DaysContainer=styled.div`
  display: flex;
     z-index: 1;
+    padding-bottom: 5px;
 `
 
 export const DayLabel= styled.div`

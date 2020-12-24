@@ -17,6 +17,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {actionClickBurger} from "../../src/redux/actions/actions";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
 import DatePicker from "../../src/components/datePicker/datePicker";
+import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
+import {isSameDay} from "date-fns";
+import StyledLoader from "../../src/components/loader/loader";
+import reduxClient from "../../src/apollo/reduxClient";
+import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
 const Container = styled.div`
 width:80%;
 margin-left:10%;
@@ -66,52 +71,131 @@ position: absolute;
 `
 const CalendarWrapper = styled.div`
 display: contents;
-
 `
-
+const Input = styled.div`
+position:absolute;
+right:80px;
+width:350px;
+ @media screen and ${device.laptop} {
+ position:relative;
+ margin-bottom:40px;
+ right:unset;
+width:unset;
+  }
+`
+const LoaderContainer = styled.div`
+  width:100%;
+  display:flex;
+  justify-content:center;
+  position:relative;
+  margin:50px 0 50px 0;
+`
+const Header = styled.div`
+display:flex;
+position: relative;
+    align-items: center;
+    @media screen and ${device.laptop} {
+  flex-direction:column;
+  }
+`
 export default function EventCalendar({loading,event,menu,allDates}) {
 
     const router = useRouter()
 
     const [value, onChange] = useState(new Date(event[0].dateGmt));
     const [calendarOpen, setCalendarOpen] = useState(false);
+    const [searchInput, setSearchInput] = useState('');
+    const [searchLoading, setSearchLoading] = useState(false);
+    const [eventByTitle, setEventByTitle] = useState([]);
+    const Search = async ()=>{
+        setSearchLoading(true)
+        const { data  } = await reduxClient.query( {
+            query: SEARCH_EVENTS_BY_TITLE,
+            variables: {
+                search:searchInput
+            }
+        } )
+        setSearchLoading(false)
+        setEventByTitle({hours:(data.times.nodes)})
+    }
 
+    useEffect(() => {
+        if (searchInput.length > 0) {
+            Search()
+        }
+
+    }, [searchInput]);
 
     const selectedDay = value => {
+        setCalendarOpen(false)
         onChange(value)
         router.push('/calendar/date/[currentDate]', `/calendar/date/${formatDate(value).substring(0,10)}`, { shallow: false })
     };
     const calendar = useRef();
-    const dispatch = useDispatch()
-    const {menuBurgerIsOpen} = useSelector(state=>state.app)
     useOnClickOutside(calendar,  () => calendarOpen  &&  setCalendarOpen(!calendarOpen));
     const parsedMenu = ParcMenu(menu)
     return (
         <MainLayout menu={parsedMenu} >
             <Container >
-                <Title >
-                    <TitleForComponent text='Календар подій' />
-                    <CalendarWrapper ref={calendar}>
-                        <CalendarIcon onClick={()=>setCalendarOpen(!calendarOpen)}/>
-                        <CalendarContainer open={calendarOpen ? 'block' : 'none'}>
-                            <Calendar
-                                className='calendar'
-                                onChange={value => selectedDay(value)}
-                                value={value}
-                                tileDisabled={({date, view}) =>
-                                    (view === 'month') &&
-                                    allDates.every(disabledDate =>
-                                        formatDate(date) !== disabledDate.dateGmt.toString().substring(0,10)
-                                    )}
-                            />
-                        </CalendarContainer>
-                    </CalendarWrapper>
-                </Title>
+                <Header>
+                    <Title >
+                        <TitleForComponent text='Календар подій' />
+                        <CalendarWrapper ref={calendar}>
+                            <CalendarIcon onClick={()=>setCalendarOpen(!calendarOpen)}/>
+                            <CalendarContainer open={calendarOpen ? 'block' : 'none'}>
+                                <Calendar
+                                    className='calendar'
+                                    onChange={value => selectedDay(value)}
+                                    value={value}
+                                    tileDisabled={({date, view}) =>
+                                        (view === 'month') &&
+                                        allDates.every(disabledDate =>
+                                            formatDate(date) !== disabledDate.dateGmt.toString().substring(0,10)
+                                        )}
+                                />
+                            </CalendarContainer>
+                        </CalendarWrapper>
+                    </Title>
+                    <Input>
+                        <SearchBarStyled
+                            maxlength={10}
+                            width='100%'
+                            inputPlaceholder='пошук за назвою події'
+                            border='1px solid'
+                            inputFunc={(e)=>setSearchInput(e.target.value)} />
+                    </Input>
+                </Header>
                 <DatePicker getSelectedDay={selectedDay}
                             tileDisabled={allDates}
                             selectDate={new Date(value)}
                 />
-                {event.length > 0 &&<CalendarEvents loading={loading}  posts={event[0].eventsFields}/>}
+                {
+                    searchInput.length > 0  ?
+
+                        searchLoading ?
+                            <LoaderContainer>
+                                <StyledLoader/>
+                            </LoaderContainer>
+                            :
+
+                            eventByTitle.hours?.length > 0 ?
+                                <>
+                                    <LoaderContainer>
+                                        <h2 style={{margin: "0.67rem 0 0 0"}}>
+                                            Результат пошуку
+                                        </h2>
+                                    </LoaderContainer>
+                                    <CalendarEvents loading={loading}  posts={eventByTitle}/>
+                                </>
+                            :
+                                <LoaderContainer><h2>Такої події не існує</h2></LoaderContainer>
+
+                            :
+                        event.length > 0 &&<CalendarEvents loading={loading}  posts={event[0].eventsFields}/>
+                }
+
+
+
             </Container>
         </MainLayout>
 

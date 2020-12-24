@@ -8,7 +8,7 @@ const GET_HOUR_BY_ID = gql`
     ${Menu}
     time(id: $id, idType: DATABASE_ID) {
     title
-    excerpt
+    content
     hoursEvents {
       hoursEvents
     }

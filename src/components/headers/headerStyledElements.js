@@ -401,9 +401,9 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                                             {
                                                 button.children.map(el=>
                                                     el.path.charAt(0) === '#' ?
-                                                        <ScrollLink to={el.path}  hashSpy={true}   offset={-100} spy={true} smooth={true}  duration={500} >
-                                                            <li><a href="#">{el.title}</a></li>
-                                                        </ScrollLink>
+                                                        <Link href={`/${el.path}`} passHref>
+                                                            <li>{el.title}</li>
+                                                        </Link>
                                                         :
                                                         <Link href={el.path}>
                                                             <li>
@@ -467,15 +467,14 @@ export const NavBarMain =({searchBarColor,color,language,navButtons,register,log
                                             {
                                                 button.children.map(el=>
                                                     el.path.charAt(0) === '#' ?
-                                                        <Link href='/'>
-                                                            <ScrollLink to={el.path}  hashSpy={true}   offset={-100} spy={true} smooth={true}  duration={500} >
-                                                                <li><a href="#">{el.title}</a></li>
-                                                            </ScrollLink>
+                                                        <Link href={`/${el.path}`} passHref>
+                                                            <li>{el.title}</li>
                                                         </Link>
+
                                                         :
                                                         <Link href={el.path}>
                                                             <li>
-                                                                <a href="#">
+                                                                <a>
                                                                     {el.title}
                                                                 </a>
                                                             </li>
@@ -487,7 +486,7 @@ export const NavBarMain =({searchBarColor,color,language,navButtons,register,log
                                     :
                                     <Link href={button.path}>
                                         <li>
-                                            <a href="#">
+                                            <a>
                                                 {button.title}
                                             </a>
                                         </li>

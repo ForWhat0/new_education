@@ -10,6 +10,7 @@ import Events from "../src/components/events/events";
 import EventsMobile from "../src/components/events/eventsMobile";
 import {ParcMenu} from "../src/components/hooks/hooks";
 import GET_EVENTS_DATE from "../src/queries/get_all_events_dete";
+import '../styles/Home.module.css'
 
 export default function Home({menu,news,events,data,projects,services,allDates}) {
   const {mainPageFields} = data
@@ -36,15 +37,15 @@ export default function Home({menu,news,events,data,projects,services,allDates})
         {events.length > 0 &&<Events  posts={events}/>}
         {events.length > 0 &&<EventsMobile allDates={allDates}  posts={events[0]}/>}
         {services?.nodes.length > 0 &&
-        <Element name="#Services" className="element">
+        <div id="Services" name="#Services" className="element">
           <Services  posts={services.nodes}  pageInfo={services.pageInfo} />
-        </Element>
+        </div>
         }
         {popularProjectsData?.projects?.length > 0 &&<ProjectsWrapper  posts={popularProjectsData}/>}
         {teamData?.employees.length > 0 &&
-        <Element name="#Team" className="element">
+        <div id="Team" name="#Team" className="element">
           <Team  posts={teamData}/>
-        </Element>
+        </div>
         }
         {news.nodes.length > 0 &&<LastNews margin='80px'  posts={news.nodes}  pageInfo={news.pageInfo} />}
       </HomePageLayout>

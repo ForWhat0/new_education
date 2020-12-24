@@ -17,7 +17,6 @@ const GET_EVENTS_BY_DATE = gql`
         hours {
           ... on Time {
             databaseId
-            
             title
             hoursEvents {
               hoursEvents

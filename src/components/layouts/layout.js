@@ -1,19 +1,14 @@
 import Head from "next/head";
-import client from "../../apollo/client"
-import { ApolloProvider } from "@apollo/client"
-import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 import {StyledLeftComment} from "../leftComment/leftComment"
 import {useDispatch, useSelector} from "react-redux"
 import {Alert} from "../alert/alert"
 import Menu from "../burgerMenu/menu";
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useRef} from 'react';
 import { useOnClickOutside } from '../hooks/hooks';
 import {actionClickBurger} from "../../redux/actions/actions";
 import {ModalRegisterEvent} from "../modal/modalRegistOnEvent";
-import {Bubblee} from "../bubleee";
 import {PageFooter} from "../footer/footer";
 import {StyledRegisterZNO} from "../leftComment/registerOnZNO";
-import Services from "../services/services";
 import {Element} from "react-scroll";
 
 
@@ -107,7 +102,7 @@ export  const Layout = ({menu,hideLeftComponent,children , header,showZNORegiste
                     <Head>
                         <link
                             rel="stylesheet"
-                            href="/fonts/e-Ukraine_font/e-Ukraine-Light.ttf"
+                            href="/fonts/e-Ukraine_font/e-Ukraine-Regular.ttf"
                         />
                         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>

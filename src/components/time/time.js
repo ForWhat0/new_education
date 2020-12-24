@@ -102,7 +102,7 @@ export default function Time({time,timeFormatted}) {
                    </TimeWitchIcon>
                </Text>
            </Header>
-            <PostBody content={time.excerpt}/>
+            <PostBody content={time.content}/>
         </div>
     )
 }

@@ -22,9 +22,6 @@ function MyApp({ Component, pageProps }) {
       <ApolloProvider client={client}>
           <ApolloHooksProvider client={client}>
       <Provider store={store}>
-          <Head>
-              <link href="/fonts/style.css" rel="stylesheet"/>
-          </Head>
             <Component {...pageProps} />
       </Provider>
           </ApolloHooksProvider>
