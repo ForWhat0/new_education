@@ -62,7 +62,7 @@ const customFetch = async (
 			const headerWithNewToken = await fetchHeaderWithToken();
 			return fetch(uri, {
 				...options,
-				credentials: "include",
+
 				headers: {
 					...options.headers,
 					...headerWithNewToken.headers,
@@ -71,7 +71,7 @@ const customFetch = async (
 		}
 	}
 
-	const initialRequest = fetch(uri, { ...options, credentials: "include" });
+	const initialRequest = fetch(uri, { ...options });
 	return initialRequest
 		.then((response) => response.json())
 		.then(async (json) => {
@@ -134,14 +134,13 @@ const customFetch = async (
 						return fetch(uri, optionsWithRefreshedToken);
 					});
 			}
-			return fetch(uri, { ...options, credentials: "include" });
+			return fetch(uri, { ...options });
 		});
 };
 
 export const httpLink = new HttpLink({
 	fetch: customFetch, // Switches between unfetch & node-fetch for client & server.
 	uri:'https://testkp.flexreality.pro/graphql',
-	credentials: "include",
 });
 
 const tokenGeneration = setContext(async () => {

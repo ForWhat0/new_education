@@ -4,6 +4,7 @@ import StyledLoader from "../loader/loader";
 import styled from "styled-components";
 import {MainLayout} from "../layouts/mainLayout";
 import Link from "next/link";
+import {device} from "../deviceSizes/deviceSizes";
 
 const LoaderContainer = styled.div`
                 width: 100%;
@@ -12,11 +13,15 @@ const LoaderContainer = styled.div`
                 margin-top: 70px;
                 margin-bottom: 70px;
 `
-
+const GlobalContainer = styled.div`
+margin:80px 0 80px 0;
+ @media screen and ${device.mobileL} {
+margin:40px 0 40px 0;
+  }
+`
 export default function CalendarEvents({loading,posts}){
-    console.log(!posts?.hours?.length > 0 ,loading)
     return(
-        <div>
+        <GlobalContainer>
             {
                 !posts?.hours?.length > 0 || loading  ?
                     <LoaderContainer>
@@ -38,6 +43,6 @@ export default function CalendarEvents({loading,posts}){
 
                     )
             }
-        </div>
+        </GlobalContainer>
     )
 }

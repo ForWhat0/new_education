@@ -9,8 +9,9 @@ import Team from "../src/components/team/team";
 import Events from "../src/components/events/events";
 import EventsMobile from "../src/components/events/eventsMobile";
 import {ParcMenu} from "../src/components/hooks/hooks";
+import GET_EVENTS_DATE from "../src/queries/get_all_events_dete";
 
-export default function Home({menu,news,events,data,projects,services}) {
+export default function Home({menu,news,events,data,projects,services,allDates}) {
   const {mainPageFields} = data
 
   const parsedMenu = ParcMenu(menu)
@@ -33,7 +34,7 @@ export default function Home({menu,news,events,data,projects,services}) {
           menu={parsedMenu}
       >
         {events.length > 0 &&<Events  posts={events}/>}
-        {events.length > 0 &&<EventsMobile  posts={events[0].eventsFields}/>}
+        {events.length > 0 &&<EventsMobile allDates={allDates}  posts={events[0]}/>}
         {services?.nodes.length > 0 &&
         <Element name="#Services" className="element">
           <Services  posts={services.nodes}  pageInfo={services.pageInfo} />
@@ -57,13 +58,29 @@ export async function getStaticProps(){
       }
   } )
 
+  const futureDate = await client.query( {
+    query: GET_EVENTS_DATE,
+    variables:{
+      status:"FUTURE"
+    }
+  } )
+  const  publishDate = await client.query( {
+    query: GET_EVENTS_DATE,
+    variables:{
+      status:"PUBLISH"
+    }
+  } )
+
+  const allDates = futureDate?.data?.events?.nodes?.concat(publishDate?.data?.events?.nodes);
+
   return {
     props: {
       menu:data?.menuItems?.nodes ? data.menuItems.nodes : [],
       events: data?.events?.nodes ?   data.events.nodes : [],
       services:data?.services?.nodes ? data.services : [],
       news: data?.news?.nodes ? data.news : [],
-      data: data?.page ? data.page : []
+      data: data?.page ? data.page : [],
+      allDates
     },
     revalidate: 1
   }

@@ -5,6 +5,7 @@
   font-weight: 400;
   font-display: swap;
 }
+
 html,
 body {
   outline: none;
@@ -14,6 +15,7 @@ body {
   margin: 0;
   font-family: e-Ukraine;
 }
+
 input[type="text"], input[type="password"], button, textarea, select {
   outline: none;
 }
@@ -22,6 +24,8 @@ a{
   outline: none;
   color:black;
 }
+
+
 .swiper-container {
   width: 100%;
   padding: 45px 20px!important;

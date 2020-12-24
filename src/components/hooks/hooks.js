@@ -87,3 +87,26 @@ export const  hexToRgbA=(hex)=>{
     }
     throw new Error('Bad Hex');
 }
+export const  formatDate=(date) =>{
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+export const  minDay=(date, days) =>{
+    const result = new Date(date);
+    result.setDate(result.getDate() - days);
+    return result;
+}
+export const  maxDay=(date, days) =>{
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
