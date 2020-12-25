@@ -116,13 +116,14 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
 
 
     useEffect(() => {
-
+                setSelectedDate(selectDate);
                 setTimeout(() => {
                     let view = document.getElementById('selected');
                     if (view) {
                         view.scrollIntoView({behavior: "smooth", inline: "center", block: "nearest"});
                     }
                 }, 20);
+
 
     }, [selectDate]);
 
