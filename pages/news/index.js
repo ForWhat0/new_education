@@ -101,7 +101,7 @@ export default function AllNews({news,menu,currentPageNumber}) {
                             </LoaderContainer>
                             :
 
-                        newsByDate.nodes.length > 0 ?
+                        newsByDate?.nodes?.length > 0 ?
                             <>
                                 <LoaderContainer>
                                     <h2>Результат пошуку</h2>

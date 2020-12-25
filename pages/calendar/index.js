@@ -144,6 +144,7 @@ export default function EventCalendar({loading,event,menu,allDates}) {
                             <CalendarIcon onClick={()=>setCalendarOpen(!calendarOpen)}/>
                             <CalendarContainer open={calendarOpen ? 'block' : 'none'}>
                                 <Calendar
+                                    locale='ua-UA'
                                     className='calendar'
                                     onChange={value => selectedDay(value)}
                                     value={value}

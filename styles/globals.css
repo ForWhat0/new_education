@@ -16,7 +16,7 @@ body {
   font-family: e-Ukraine;
 }
 
-input[type="text"], input[type="date"],input[type="password"], button, textarea, select {
+input,input[type="text"], input[type="date"],input[type="password"], button, textarea, select {
   outline: none;
 }
 a{
@@ -44,6 +44,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media screen and (max-width:450px) {
   .swiper-slide {
     width: 50%!important;
+  }
+  .wp-block-column p{
+    width:100%!important;
   }
 }
 

@@ -122,7 +122,7 @@ const RegisterLink = styled.a`
 `
  const SignIn = styled.div`
 display:flex;
-@media screen and (max-width:1300px){
+@media screen and (max-width:1400px){
       top:${props=>props.top};
     position: absolute;
     right: 0;
@@ -135,7 +135,7 @@ display:flex;
 const SignInMain = styled.div`
 display:flex;
 padding-bottom: 10px;
-@media screen and (max-width:1300px){
+@media screen and (max-width:1400px){
       top:${props=>props.top};
     position: absolute;
     right: 0;
@@ -547,7 +547,7 @@ align-items: center;
 margin-left:20px;
 position:${props=>props.position};
 right:${props=>props.right};
-@media screen and (max-width:1300px){
+@media screen and (max-width:1400px){
       top:${props=>props.top};
   }
    @media screen and ${device.laptop}{

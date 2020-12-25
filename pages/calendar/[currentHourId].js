@@ -139,12 +139,19 @@ export default function EventCalendar({loading,time,menu,allDates}) {
         }
 
     }, [searchInput]);
+    useEffect(() => {
+        setSearchInput('')
+    }, [time]);
 
     const selectedDay = value => {
         setCalendarOpen(false)
         onChange(value)
         router.push('/calendar/date/[currentDate]', `/calendar/date/${formatDate(value).substring(0,10)}`, { shallow: false })
     };
+    const onChangeSearch = e => {
+        const { value } = e.target;
+        setSearchInput(value)
+    }
     return (
         <MainLayout menu={parsedMenu} >
             <Container>
@@ -169,11 +176,13 @@ export default function EventCalendar({loading,time,menu,allDates}) {
                     </Title>
                     <Input>
                         <SearchBarStyled
+                            type="text"
                             maxlength={10}
+                            value={searchInput}
                             width='100%'
                             inputPlaceholder='пошук за назвою події'
                             border='1px solid'
-                            inputFunc={(e)=>setSearchInput(e.target.value)} />
+                            inputFunc={onChangeSearch} />
                     </Input>
                 </Header>
                 {

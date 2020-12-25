@@ -99,7 +99,7 @@ export default function MicrophoneDetail({projectBySlug,menu}) {
             </MainLayout>
         )
     }
-
+   console.log(projectBySlug)
     return (
         <MainLayout menu={parsedMenu}>
             {
@@ -118,16 +118,16 @@ export default function MicrophoneDetail({projectBySlug,menu}) {
                                     {
                                         projectBySlug.projectFields.playLink &&
                                         <IconItem marginR='20px'>
-                                            <a href={projectBySlug.playLink}>
-                                                <Icon src='/googlePlayIcon.svg' width='120px' height='36px'/>
+                                            <a href={projectBySlug.projectFields.playLink}>
+                                                <div style={{width:'130px',height:'40px',background:'url(/googlePlayIcon.svg) no-repeat'}}/>
                                             </a>
                                         </IconItem>
                                     }
                                     {
                                         projectBySlug.projectFields.appLink &&
                                         <IconItem marginR='20px'>
-                                            <a href={projectBySlug.appLink}>
-                                                <Icon src='/appStore.svg' width='120px' height='36px'/>
+                                            <a href={projectBySlug.projectFields.appLink}>
+                                                <div style={{width:'130px',height:'40px',background:'url(/appStore.svg) no-repeat'}}/>
                                             </a>
                                         </IconItem>
                                     }
@@ -135,9 +135,9 @@ export default function MicrophoneDetail({projectBySlug,menu}) {
                                         projectBySlug.projectFields.siteLink &&
                                         <IconItem marginR='60px'>
                                             <a href={projectBySlug.siteLink}>
-                                                <Icon src='/linkIconDark.svg' width='36px' height='36px'/>
+                                                <div style={{width:'40px',height:'40px',background:'url(/linkIconDark.svg) no-repeat'}}/>
                                                 <div>
-                                                    <span>{projectBySlug.siteLink}</span>
+                                                    <span>{projectBySlug.projectFields.siteLink}</span>
                                                 </div>
 
                                             </a>

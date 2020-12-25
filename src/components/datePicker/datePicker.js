@@ -94,7 +94,7 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
             months.push(
                 <MonthContainer  key={month}>
                     <MonthYearLabel>
-                        {format(month, labelFormat || "MMM yyyy",{locale: uk})}
+                        {format(month,  "LLLL yyyy",{locale: uk})}
                     </MonthYearLabel>
                     <DaysContainer>
                         {days}
@@ -117,15 +117,12 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
 
     useEffect(() => {
 
-            if (!isSameDay(selectedDate, selectDate)) {
-                setSelectedDate(selectDate);
                 setTimeout(() => {
                     let view = document.getElementById('selected');
                     if (view) {
                         view.scrollIntoView({behavior: "smooth", inline: "center", block: "nearest"});
                     }
                 }, 20);
-            }
 
     }, [selectDate]);
 
@@ -143,9 +140,9 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
 
     return (
         <Container >
-            <ButtonWrapper onClick={prevWeek} margin='0 22px 0 0' arrow='/leftArrow.svg'/>
+            <ButtonWrapper onClick={prevWeek} margin='22px 22px 0 0' arrow='/leftArrow.svg'/>
             {renderDays()}
-            <ButtonWrapper onClick={nextWeek} margin='0 0 0 22px' arrow='/rightArrow.svg'/>
+            <ButtonWrapper onClick={nextWeek} margin='22px 0 0 22px' arrow='/rightArrow.svg'/>
         </Container>
     )
 }

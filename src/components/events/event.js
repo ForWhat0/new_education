@@ -1,6 +1,9 @@
 import styled, {keyframes} from 'styled-components'
 import Link from "next/link"
 import {device} from "../deviceSizes/deviceSizes";
+import {format,isToday} from "date-fns";
+import {uk} from "date-fns/locale";
+import {MonthYearLabel} from "../datePicker/styledDatePicker";
 
 const opacity = keyframes`
  0%   { opacity: 0; }
@@ -134,12 +137,11 @@ export default function Event({borderLeftColor,hoursOne}) {
 
     const renderDay=()=>{
         const todayDate = new Date()
-        if(inputDate.getDay()+inputDate.getMonth()+inputDate.getFullYear() ===
-            todayDate.getDay()+todayDate.getMonth()+todayDate.getFullYear() ){
+        if(isToday(inputDate)){
             return  'сьогодні'
         }
         else{
-            return inputDate.toLocaleString('default', { weekday: 'long' })
+            return  format(inputDate,  "EEEE",{locale: uk})
         }
     }
 
@@ -157,7 +159,7 @@ export default function Event({borderLeftColor,hoursOne}) {
                            fontSize='16px'
                            fontWeight='500'
                        >
-                           {`${inputDate.toLocaleString('default', { month: 'long' })} ${inputDate.getUTCFullYear()}`}
+                           {format(inputDate, "MMMM yyyy", {locale: uk})}
                        </TextField>
                        <TextField
                            fontSize='16px'
