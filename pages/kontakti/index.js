@@ -1,4 +1,3 @@
-/*
 import client from "../../src/apollo/client"
 import {HomePageLayout} from "../../src/components/layouts/homePageLayout"
 import LAST_EVENTS_AND_LAST_NEWS_QUERY from "../../src/queries/get-all-data-for-home-page"
@@ -9,6 +8,7 @@ import {LinkIcon} from "../../src/components/headers/headerStyledElements";
 import styled from "styled-components";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
 import {MainLayout} from "../../src/components/layouts/mainLayout";
+import GET_CONTACTS from "../../src/queries/get_contacts";
 
 const Global = styled.div`
 width:80%;
@@ -48,15 +48,13 @@ position:relative;
  flex-direction:column;
   }
 `
-export default function Home({menu}) {
+export default function Home({menu,contacts}) {
 
     const parsedMenu = ParcMenu(menu)
 
     return (
         <MainLayout
-            /!* facebook={mainPageFields.facebook}
-             telegram={mainPageFields.telegram}
-             gmail={mainPageFields.gmail}*!/
+            contacts={contacts}
             menu={parsedMenu}
         >
             <Global>
@@ -101,12 +99,12 @@ export default function Home({menu}) {
         </MainLayout>
     )
 }
-export async function getStaticProps(){
+export async function getStaticProps({locale}){
+    const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
+    const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
     const { data } = await client.query( {
-        query: LAST_EVENTS_AND_LAST_NEWS_QUERY,
+        query: GET_CONTACTS,
         variables: {
-            uri,
-            language:locale,
             location,
             contactsUri
         }
@@ -114,9 +112,9 @@ export async function getStaticProps(){
 
     return {
         props: {
+            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
             menu:data?.menuItems?.nodes ? data.menuItems.nodes : [],
         },
         revalidate: 1
     }
 }
-*/
