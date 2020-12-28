@@ -1,3 +1,4 @@
+/*
 import client from "../../src/apollo/client"
 import {HomePageLayout} from "../../src/components/layouts/homePageLayout"
 import LAST_EVENTS_AND_LAST_NEWS_QUERY from "../../src/queries/get-all-data-for-home-page"
@@ -53,9 +54,9 @@ export default function Home({menu}) {
 
     return (
         <MainLayout
-            /* facebook={mainPageFields.facebook}
+            /!* facebook={mainPageFields.facebook}
              telegram={mainPageFields.telegram}
-             gmail={mainPageFields.gmail}*/
+             gmail={mainPageFields.gmail}*!/
             menu={parsedMenu}
         >
             <Global>
@@ -104,7 +105,10 @@ export async function getStaticProps(){
     const { data } = await client.query( {
         query: LAST_EVENTS_AND_LAST_NEWS_QUERY,
         variables: {
-            uri:"/"
+            uri,
+            language:locale,
+            location,
+            contactsUri
         }
     } )
 
@@ -115,3 +119,4 @@ export async function getStaticProps(){
         revalidate: 1
     }
 }
+*/
