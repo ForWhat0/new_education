@@ -2,9 +2,31 @@ import { gql } from "@apollo/client"
 import {Menu} from "./get-menus"
 
 const GET_PROJECT_BY_SLUG = gql`query(
-$slug:ID!
+$slug:ID!,
+$location:MenuLocationEnum,
+$contactsUri:ID!
 ) {
-${Menu}
+ contacts: page(id: $contactsUri, idType: URI) {
+    contactsFields {
+      telegramLink
+      phoneNumber
+      group
+      gmail
+      facebookLink
+      comapnyName
+      authorship
+      adress
+    }
+  }
+    menuItems(where: {location: $location}) {
+    nodes {
+       key: id
+      parentId
+      path
+      title: label
+      url
+    }
+  }
    project(id: $slug, idType: SLUG) {
     slug
     content

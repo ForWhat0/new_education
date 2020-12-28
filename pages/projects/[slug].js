@@ -87,7 +87,7 @@ margin-left:${props=>props.marginR};
     margin-bottom:10px;
   }
 `
-export default function MicrophoneDetail({projectBySlug,menu}) {
+export default function MicrophoneDetail({projectBySlug,menu,contacts}) {
      const router = useRouter();
     const parsedMenu = ParcMenu(menu)
     if (router.isFallback) {
@@ -99,9 +99,9 @@ export default function MicrophoneDetail({projectBySlug,menu}) {
             </MainLayout>
         )
     }
-   console.log(projectBySlug)
+
     return (
-        <MainLayout menu={parsedMenu}>
+        <MainLayout contacts={contacts} menu={parsedMenu}>
             {
                 projectBySlug ?
                     <Container
@@ -160,19 +160,22 @@ export default function MicrophoneDetail({projectBySlug,menu}) {
     );
 }
 
-export const getStaticProps = async (
-    ctx
-) => {
-    const slug = ctx.params.slug
+export const getStaticProps = async ({params,locale}) => {
+    const slug = params.slug
+    const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
+    const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
     const { data } = await client.query( {
         query: GET_PROJECT_BY_SLUG,
         variables:{
-            slug
+            slug,
+            location,
+            contactsUri
         }
     } )
 
     return {
         props: {
+            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
             menu: data?.menuItems?.nodes || [],
             projectBySlug:data.project
         },

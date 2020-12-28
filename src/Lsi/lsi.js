@@ -80,6 +80,16 @@ export const NewsLsi={
         EN:"Search by date",
         RU:"Search by date"
     },
+    result:{
+        UK:"Результат пошуку",
+        EN:"Search result",
+        RU:"Результат поиска"
+    },
+    nowExist:{
+        UK:"Такої новини не існує",
+        EN:"There is no such news",
+        RU:"Такой новости не существует"
+    }
 }
 
 export const pagination={

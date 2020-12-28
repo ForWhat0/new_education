@@ -3,10 +3,34 @@ import {Menu} from "./get-menus";
 const GET_NEWS = gql`
   query GET_PAGINATED_NEWS(
     $size: Int,
-    $offset: Int
+    $offset: Int,
+    $language: LanguageCodeFilterEnum,
+$location:MenuLocationEnum,
+$contactsUri:ID!
   ) {
-    ${Menu}
-    news (where: { offsetPagination: { size:$size, offset:  $offset } }){
+    menuItems(where: {location: $location}) {
+    nodes {
+       key: id
+      parentId
+      path
+      title: label
+      url
+    }
+  }
+  contacts: page(id: $contactsUri, idType: URI) {
+
+    contactsFields {
+      telegramLink
+      phoneNumber
+      group
+      gmail
+      facebookLink
+      comapnyName
+      authorship
+      adress
+    }
+  }
+    news (where: { language: $language,offsetPagination: { size:$size, offset:  $offset } }){
     nodes {
       title
       databaseId

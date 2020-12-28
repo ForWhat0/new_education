@@ -14,6 +14,7 @@ import reduxClient from "../../src/apollo/reduxClient";
 import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
 import GET_NEWS_BY_DATE from "../../src/queries/get_news_by_date";
 import StyledLoader from "../../src/components/loader/loader";
+import {NewsLsi} from "../../src/Lsi/lsi";
 
 const Container = styled.div`
 width:80%;
@@ -43,8 +44,7 @@ const LoaderContainer = styled.div`
   position:relative;
   margin:50px 0 50px 0;
 `
-export default function AllNews({news,menu,currentPageNumber}) {
-
+export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
     const [searchLoading, setSearchLoading] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const {total,hasMore,hasPrevious} = news.pageInfo.offsetPagination
@@ -61,7 +61,8 @@ export default function AllNews({news,menu,currentPageNumber}) {
             variables: {
                 year:date.getFullYear(),
                 month:date.getMonth()+1,
-                day:date.getDate()
+                day:date.getDate(),
+                language:locale
             }
         } )
         setSearchLoading(false)
@@ -74,18 +75,18 @@ export default function AllNews({news,menu,currentPageNumber}) {
         }
 
     }, [searchInput]);
-  console.log(newsByDate)
+
     return (
-        <MainLayout menu={parsedMenu} >
+        <MainLayout contacts={contacts} menu={parsedMenu} >
             <Container>
                 <Title >
-                    <TitleForComponent text='Новини' />
+                    <TitleForComponent text={NewsLsi.news[locale]} />
                     <Input>
                         <SearchBarStyled
                             type='date'
                             maxlength={10}
                             width='100%'
-                            inputPlaceholder='пошук за датою новини'
+                            inputPlaceholder={NewsLsi.search[locale]}
                             border='1px solid'
                             inputFunc={(e)=>setSearchInput(e.target.value)} />
                     </Input>
@@ -104,14 +105,14 @@ export default function AllNews({news,menu,currentPageNumber}) {
                         newsByDate?.nodes?.length > 0 ?
                             <>
                                 <LoaderContainer>
-                                    <h2>Результат пошуку</h2>
+                                    <h2>{NewsLsi.result[locale]}</h2>
                                 </LoaderContainer>
                                 <NewsWrapper posts={news.nodes}/>
                             </>
 
                             :
                             <LoaderContainer>
-                               <h2>Новин у цей період не знайдено</h2>
+                               <h2>{NewsLsi.nowExist[locale]}</h2>
                             </LoaderContainer>
 
 
@@ -119,6 +120,7 @@ export default function AllNews({news,menu,currentPageNumber}) {
                         <>
                             {news.nodes.length > 0 && <NewsWrapper posts={news.nodes}/>}
                             <Pagination
+                                locale={locale}
                                 currentPageNumber={currentPageNumber}
                                 hasMore={hasMore}
                                 hasPrevious={hasPrevious}
@@ -134,11 +136,12 @@ export default function AllNews({news,menu,currentPageNumber}) {
     )
 }
 
-export async function getStaticProps(ctx){
+export async function getStaticProps({params,locale}){
 
-    const currentPage = ctx.params?.currentPage
+    const currentPage = params?.currentPage
     const currentPageNumber = +(currentPage || 0);
-
+    const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
+    const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
     const offset = currentPageNumber === 0 ? 0 : (currentPageNumber-1) * 9;
 
     const { data } = await client.query( {
@@ -146,10 +149,15 @@ export async function getStaticProps(ctx){
         variables: {
             size: 9,
             offset: offset,
+            language:locale,
+            location,
+            contactsUri
         }
     } )
     return {
         props: {
+            locale,
+            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
             currentPageNumber,
             menu: data?.menuItems?.nodes || [],
             news:data?.news?.nodes ? data.news : [],
