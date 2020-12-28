@@ -91,7 +91,7 @@ const ErrorText = styled.span`
   color:red;
 `
 
-export const SendButton = ({done,error,loading,click})=>{
+export const SendButton = ({done,error,loading,click,sendText,sentText,errorText})=>{
     const ButtonContainerAnimation = loading && BtnAnimation
     const IconPaperPlaneAnimation = loading && PaperIconAnimation
     const IconPaperDisplay =  done || error ? 'none' : 'block'
@@ -104,9 +104,9 @@ export const SendButton = ({done,error,loading,click})=>{
             <SuccessIcon display={SuccessTextDisplay} className="fa fa-check" aria-hidden="true"/>
             <ErrorIcon display={ErrorTextDisplay}  className="fa fa-exclamation" aria-hidden="true"/>
             <Button>
-                <SuccessText display={SuccessTextDisplay} >OK</SuccessText>
-                <Text display={TextDisplay}>Send</Text>
-                <ErrorText display={ErrorTextDisplay}>Error</ErrorText>
+                <SuccessText display={SuccessTextDisplay} >{sentText}</SuccessText>
+                <Text display={TextDisplay}>{sendText}</Text>
+                <ErrorText display={ErrorTextDisplay}>{errorText}</ErrorText>
             </Button>
         </ButtonContainer>
     )

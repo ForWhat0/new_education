@@ -26,15 +26,14 @@ margin-bottom:80px;
  width: 80%;
   margin-left: 10%;
 `
-export default function Services({posts}){
-    const {loading} = useSelector(state=>state.app)
-    const {language} = useSelector(state=>state.app)
+export default function Services({posts,titleServices,locale}){
     return(
         <GlobalContainer>
-            <TitleForComponent fontSize='40px' text='Послуги'/>
+            <TitleForComponent fontSize='40px' text={titleServices}/>
             <ServicesContainer>
                 {posts.map(node =>
                         <Service
+                            locale={locale}
                             slug={node.slug}
                             key={node.databaseId}
                             title={node.title}

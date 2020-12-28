@@ -3,10 +3,33 @@ import {Menu} from "./get-menus";
 const GET_PROJECTS = gql`
   query GET_PAGINATED_PROJECTS(
     $size: Int,
-    $offset: Int
+    $offset: Int,
+    $language: LanguageCodeFilterEnum,
+$location:MenuLocationEnum,
+$contactsUri:ID!
   ) {
-    ${Menu}
-    projects(where: { offsetPagination: { size:$size, offset:  $offset } }) {
+     contacts: page(id: $contactsUri, idType: URI) {
+    contactsFields {
+      telegramLink
+      phoneNumber
+      group
+      gmail
+      facebookLink
+      comapnyName
+      authorship
+      adress
+    }
+  }
+    menuItems(where: {location: $location}) {
+    nodes {
+       key: id
+      parentId
+      path
+      title: label
+      url
+    }
+  }
+    projects(where: { language: $language,offsetPagination: { size:$size, offset:  $offset } }) {
     nodes {
     title
       databaseId

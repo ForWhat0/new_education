@@ -5,7 +5,10 @@ import GET_EVENTS_DATE from "../../../src/queries/get_all_events_dete";
 export default Index;
 export { getStaticProps };
 
-export const getStaticPaths = async () => {
+export const getStaticPaths = async ({locales}) => {
+
+    let paths = []
+
     const { data } = await client.query( {
         query: GET_EVENTS_DATE,
         variables:{
@@ -21,9 +24,12 @@ export const getStaticPaths = async () => {
 
     const pathDate = data?.events?.nodes?.concat(publishDate?.data?.events?.nodes);
 
-    const paths = pathDate.map(item => {
-        return { params: {currentDate: item.dateGmt.toString().substring(0,10)}}
-    })
+    for (const locale of locales) {
+        paths = [
+            ...paths,
+            ...pathDate.map(el => ({ params: { currentDate: el.dateGmt.toString().substring(0,10) }, locale })),
+        ]
+    }
 
     return {
         fallback: false,

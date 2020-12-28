@@ -25,6 +25,7 @@ import StyledLoader from "../../src/components/loader/loader";
 import CalendarEvents from "../../src/components/events/CalendarEvents";
 import reduxClient from "../../src/apollo/reduxClient";
 import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
+import {calendarLsi} from "../../src/Lsi/lsi";
 
 const Container = styled.div`
 width:80%;
@@ -109,7 +110,7 @@ const LoaderContainer = styled.div`
   position:relative;
   margin:50px 0 50px 0;
 `
-export default function EventCalendar({loading,time,menu,allDates}) {
+export default function EventCalendar({locale,contacts,loading,time,menu,allDates}) {
     const calendar = useRef();
     const parsedMenu = ParcMenu(menu)
     const timeFormatted = new Date(time.hoursEvents?.hoursEvents)
@@ -126,7 +127,8 @@ export default function EventCalendar({loading,time,menu,allDates}) {
         const { data  } = await reduxClient.query( {
             query: SEARCH_EVENTS_BY_TITLE,
             variables: {
-                search:searchInput
+                search:searchInput,
+                language:locale,
             }
         } )
         setSearchLoading(false)
@@ -153,15 +155,16 @@ export default function EventCalendar({loading,time,menu,allDates}) {
         setSearchInput(value)
     }
     return (
-        <MainLayout menu={parsedMenu} >
+        <MainLayout   contacts={contacts} menu={parsedMenu} >
             <Container>
                 <Header>
                     <Title >
-                        <TitleForComponent text='Календар подій' />
+                        <TitleForComponent text={calendarLsi.calendarEvents[locale]} />
                         <CalendarWrapper ref={calendar}>
                             <CalendarIcon onClick={()=>setCalendarOpen(!calendarOpen)}/>
                             <CalendarContainer open={calendarOpen ? 'block' : 'none'}>
                                 <Calendar
+                                    locale={locale === "EN" ? 'en-EN' : locale === "RU" ? 'ru-RU' : 'ua-UA'}
                                     className='calendar'
                                     onChange={value => selectedDay(value)}
                                     value={value}
@@ -180,7 +183,7 @@ export default function EventCalendar({loading,time,menu,allDates}) {
                             maxlength={10}
                             value={searchInput}
                             width='100%'
-                            inputPlaceholder='пошук за назвою події'
+                            inputPlaceholder={calendarLsi.search[locale]}
                             border='1px solid'
                             inputFunc={onChangeSearch} />
                     </Input>
@@ -198,16 +201,18 @@ export default function EventCalendar({loading,time,menu,allDates}) {
                                 <>
                                     <LoaderContainer>
                                         <h2 style={{margin: "0.67rem 0 0 0"}}>
-                                            Результат пошуку
+                                            {calendarLsi.result[locale]}
                                         </h2>
                                     </LoaderContainer>
                                     <CalendarEvents loading={loading}  posts={eventByTitle}/>
                                 </>
                                 :
-                                <LoaderContainer><h2>Такої події не існує</h2></LoaderContainer>
+                                <LoaderContainer>
+                                    <h2>{calendarLsi.notExist[locale]}</h2>
+                                </LoaderContainer>
 
                         :
-                        time &&  <Time loading={loading} timeFormatted={timeFormatted} time={time}/>
+                        time &&  <Time locale={locale} loading={loading} timeFormatted={timeFormatted} time={time}/>
                 }
 
             </Container>
@@ -216,27 +221,33 @@ export default function EventCalendar({loading,time,menu,allDates}) {
     )
 }
 
-export async function getStaticProps(ctx){
+export async function getStaticProps({params,locale}){
 
-    const currentHourId = ctx.params?.currentHourId
+    const currentHourId = params?.currentHourId
+    const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
+    const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
 
     const { data ,loading } = await client.query( {
         query: GET_HOUR_BY_ID,
         variables: {
-            id:currentHourId
+            id:currentHourId,
+            contactsUri,
+            location,
         }
     } )
 
     const futureDate = await client.query( {
         query: GET_EVENTS_DATE,
         variables:{
-            status:"FUTURE"
+            status:"FUTURE",
+            language:locale
         }
     } )
     const  publishDate = await client.query( {
         query: GET_EVENTS_DATE,
         variables:{
-            status:"PUBLISH"
+            status:"PUBLISH",
+            language:locale
         }
     } )
 
@@ -246,20 +257,27 @@ export async function getStaticProps(ctx){
         props: {
             allDates,
             loading,
+            locale,
             menu: data?.menuItems?.nodes || [],
             time:data?.time ? data.time : [],
+            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
         },
         revalidate: 1
     }
 }
-export const getStaticPaths = async () => {
+export const getStaticPaths = async ({locales}) => {
+    let paths = []
 
     const { data } = await client.query( {
         query: GET_DATABASE_ID_FROM_TIME
     } )
-    const paths = data?.times?.nodes?.map(item => {
-        return { params: {currentHourId: item.databaseId.toString()}}
-    })
+
+    for (const locale of locales) {
+        paths = [
+            ...paths,
+            ...data.times?.nodes.map(el => ({ params: { currentHourId: el.databaseId.toString() }, locale })),
+        ]
+    }
 
     return {
         fallback: false,

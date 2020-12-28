@@ -8,7 +8,7 @@ margin-left: 10%;
 padding: 20px;
 `
 
-export default function Projects({textForIcon,posts,title,databaseId}){
+export default function Projects({textForIcon,posts,title}){
     return(
       <>
           <TitleContainer>
@@ -28,7 +28,7 @@ export default function Projects({textForIcon,posts,title,databaseId}){
                   author={node.author?.node}
                   slug={node.slug}
                   excerpt={node.excerpt}
-                  textForIcon='переглянути'
+                  textForIcon={textForIcon}
                   databaseId={node.databaseId}
               />
           )}

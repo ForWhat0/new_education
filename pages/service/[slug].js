@@ -13,6 +13,7 @@ import {StyledButton} from "../../src/components/button/button";
 import {PostBodyZNO} from "../../src/components/post-body/post-body";
 import Icon from "../../src/components/icon/icon";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
+import {services} from "../../src/Lsi/lsi";
 const { useState } = React;
 
  const Container = styled.div`
@@ -176,11 +177,10 @@ const DownloadContent = styled.div`
   
 `
 
-export default function GetEvent({serviceBySlug,menu}) {
+export default function GetEvent({serviceBySlug,menu,contacts,locale}) {
      const router = useRouter();
      const zno = serviceBySlug?.serveicesFields?.showZno === "Открыть"
     const [ShownAccordion, setShownAccordion] = useState({});
-     console.log(serviceBySlug)
     const handleClickAccordion = index => {
         setShownAccordion(prevShownAccordion => ({
             ...prevShownAccordion,
@@ -199,7 +199,11 @@ export default function GetEvent({serviceBySlug,menu}) {
     }
 
     return (
-        <MainLayout menu={parsedMenu} showZNORegister={zno && true} hideLeftComponent={zno && true} >
+        <MainLayout
+            contacts={contacts}
+            menu={parsedMenu}
+            showZNORegister={zno && true}
+            hideLeftComponent={zno && true} >
             <Container >
                 <Header>
                     <TitleForComponent  borderBottom='unset' text={serviceBySlug.title}  />
@@ -207,7 +211,7 @@ export default function GetEvent({serviceBySlug,menu}) {
                         zno &&
                         <div>
                             <ScrollLink to={"#RegisterZNO"}  hashSpy={true}   offset={-100} spy={true} smooth={true}  duration={500} >
-                                <StyledButton  text="Зареєструватися на курси підготовки до ЗНО"/>
+                                <StyledButton  text={services.registerZNO[locale]}/>
                             </ScrollLink>
                         </div>
                     }
@@ -236,7 +240,7 @@ export default function GetEvent({serviceBySlug,menu}) {
                                 <div
                                     dangerouslySetInnerHTML={{ __html: item.descrAccardion }}
                                     />
-                                    <StyledButton text='Залишити запит'/>
+                                    <StyledButton text={services.register[locale]}/>
                             </DownloadContent>
                         </>
                     )
@@ -246,33 +250,45 @@ export default function GetEvent({serviceBySlug,menu}) {
     );
 }
 
-export const getStaticProps = async (
-    ctx
-) => {
-    const slug = ctx.params.slug
+export const getStaticProps = async ({params,locale}) => {
+
+    const slug = params.slug
+    const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
+    const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
     const { data } = await client.query( {
         query: GET_SERVICE_BY_SLUG,
         variables:{
-            slug
+            slug,
+            contactsUri,
+            location,
         }
     } )
 
     return {
         props: {
+            locale,
             menu: data?.menuItems?.nodes || [],
-            serviceBySlug:data?.service? data.service : []
+            serviceBySlug:data?.service? data.service : [],
+            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
         },
         revalidate: 1
     }
 };
 
-export const getStaticPaths= async () => {
+export const getStaticPaths= async ({locales}) => {
+
+    let paths = []
+
     const { data } = await client.query( {
         query: GET_ALL_SLUG_FROM_SERVICES
     } )
-    const paths = data.services.nodes.map((el) => {
-        return { params: { slug: el.slug } }
-    });
+
+    for (const locale of locales) {
+        paths = [
+            ...paths,
+            ...data.services?.nodes.map(el => ({ params: { slug: el.slug }, locale })),
+        ]
+    }
 
     return {
         fallback: false,

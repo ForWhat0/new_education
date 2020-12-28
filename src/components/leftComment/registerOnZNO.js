@@ -17,8 +17,12 @@ import {
     Title,Label
 } from "./leftCommentStyLedComponents"
 import {PageFooter} from "../footer/footer";
+import {useRouter} from "next/router";
+import {leftCommentZno} from "../../Lsi/lsi";
 
-export const StyledRegisterZNO =({menu,display,src,align})=>{
+export const StyledRegisterZNO =({contacts,menu,display,src,align})=>{
+    const router = useRouter()
+    const locale = router.locale
     const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -73,35 +77,30 @@ export const StyledRegisterZNO =({menu,display,src,align})=>{
     return (
         <Container src={src} display={display} align={align}>
             <Title>
-                Маєш пропозицію?
+                {leftCommentZno.offer[locale]}
             </Title>
             <ContainerWrapper>
                 <Text>
                     <IconBackgroundZNO />
                     <SubTitle>
-                        Напиши нам!
+                        {leftCommentZno.writeUs[locale]}
                     </SubTitle>
                 </Text>
                 <InputsFields>
                     <Flex>
-                        <InputStyled text="Прізвище та ім'я" onChange={e => setName(e.target.value)}   width='47.5%'/>
-                        <InputStyled text="Телефон" onChange={e => setPhone(e.target.value)}  width='47.5%'/>
+                        <InputStyled text= {leftCommentZno.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
+                        <InputStyled text= {leftCommentZno.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled text="Email" onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled text="Коментар" onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled text= {leftCommentZno.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled text= {leftCommentZno.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <Label>
-                        Оберіть предмет(и)
+                        {leftCommentZno.choose[locale]}
                     </Label>
                     <Select>
                         <option hidden disabled selected value> </option>
-                        <option>українська мова</option>
-                        <option>українська література</option>
-                        <option>математика</option>
-                        <option>історія України</option>
-                        <option>англійська мова</option>
-                        <option>біологія</option>
-                        <option>біологія</option>
-                        <option>хімія</option>
+                        {leftCommentZno.lessons.map(less=>
+                        <option key={less[locale]} value={less[locale]}>{less[locale]}</option>
+                        )}
                     </Select>
                     <LoaderContainer>
                         {loading &&  <StyledLoader/>}
@@ -109,7 +108,7 @@ export const StyledRegisterZNO =({menu,display,src,align})=>{
                     </LoaderContainer>
                 </InputsFields>
             </ContainerWrapper>
-            <PageFooter menu={menu}/>
+            <PageFooter contacts={contacts} menu={menu}/>
         </Container>
     )
 }

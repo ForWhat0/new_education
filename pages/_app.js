@@ -12,12 +12,15 @@ import {ApolloProvider} from "@apollo/client";
 import client from "../src/apollo/client";
 import {ApolloProvider as ApolloHooksProvider} from "react-apollo-hooks/lib/ApolloContext";
 import Head from "next/head";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
 function MyApp({ Component, pageProps }) {
+    const router = useRouter()
   return (
       <ApolloProvider client={client}>
           <ApolloHooksProvider client={client}>

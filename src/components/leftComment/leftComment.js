@@ -6,6 +6,8 @@ import {SendButton} from "../sendButton/sendButton"
 import SEND_COMMENT from "../../mutations/sendComment"
 import {ShowAlert} from "../../redux/actions/actions"
 import StyledLoader from '../loader/loader'
+import { useRouter } from 'next/router'
+
 import {
     Container,
     ContainerWrapper,
@@ -17,8 +19,13 @@ import {
     Title
 } from "./leftCommentStyLedComponents"
 import {PageFooter} from "../footer/footer";
+import {leftComment} from "../../Lsi/lsi";
 
 export const StyledLeftComment =({menu,display,src,align})=>{
+
+    const router = useRouter()
+    const locale = router.locale
+
     const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -36,62 +43,65 @@ export const StyledLeftComment =({menu,display,src,align})=>{
         },
         onCompleted: () => {
             if ( !error ) {
-                dispatch(ShowAlert('ok','success'))
+                dispatch(ShowAlert(leftComment.sent[locale],'success'))
             }
         },
         onError: ( error ) => {
             if ( error ) {
-                dispatch(ShowAlert(error.graphQLErrors[ 0 ].message,'error'))
+                dispatch(ShowAlert(leftComment.duplicate[locale],'error'))
             }
         }
     } )
 
     const handleSendClick = () => {
-        if (name && phone && email && comment){
-           if ( phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)){
-               if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)){
-                   if (comment.length > 6 ){
-                       send()
-                   }
-                   else{
-                       dispatch(ShowAlert('comment too short','error'))
-                   }
-               }
-               else {
-                   dispatch(ShowAlert('wrong email','error'))
-               }
-           }
-           else {
-               dispatch(ShowAlert('wrong phone','error'))
-           }
+        if (name && phone && email && comment) {
+            if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+                if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)) {
+                    if (comment.length > 6) {
+                        send()
+                    } else {
+                        dispatch(ShowAlert(leftComment.errors.commentShort[locale], 'error'))
+                    }
+                } else {
+                    dispatch(ShowAlert(leftComment.errors.wrongEmail[locale], 'error'))
+                }
+            } else {
+                dispatch(ShowAlert(leftComment.errors.wrongPhoneNumber[locale], 'error'))
+            }
+        } else {
+            dispatch(ShowAlert(leftComment.errors.emptyFields[locale], 'error'))
         }
-        else{
-            dispatch(ShowAlert('zapowni','error'))
-        }
-
     }
+
     return (
         <Container src={src} display={display} align={align}>
             <Title>
-               Маєш пропозицію?
+                {leftComment.offer[locale]}
             </Title>
             <ContainerWrapper>
                 <Text>
                    <IconBackground/>
                     <SubTitle>
-                       Напиши нам!
+                        {leftComment.writeUs[locale]}
                    </SubTitle>
                 </Text>
                 <InputsFields>
                     <Flex>
-                        <InputStyled text="Ім'я" onChange={e => setName(e.target.value)}   width='47.5%'/>
-                        <InputStyled text="Телефон" onChange={e => setPhone(e.target.value)}  width='47.5%'/>
+                        <InputStyled text={leftComment.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
+                        <InputStyled text={leftComment.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled text="Email" onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled text="Коментар" onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled text={leftComment.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled text={leftComment.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <LoaderContainer>
                         {loading &&  <StyledLoader/>}
-                        <SendButton error={error} done={data} loading={loading} click={handleSendClick}/>
+                        <SendButton
+                            sentText={leftComment.sent[locale]}
+                            sendText={leftComment.send[locale]}
+                            errorText={leftComment.error[locale]}
+                            error={error}
+                            done={data}
+                            loading={loading}
+                            click={handleSendClick}/>
                     </LoaderContainer>
                 </InputsFields>
             </ContainerWrapper>

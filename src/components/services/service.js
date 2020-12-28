@@ -4,6 +4,7 @@ import StyledTextComponent from "../textComponent/textComponent"
 import Link from "next/link"
 import {StyledButton} from "../button/button";
 import {device} from "../deviceSizes/deviceSizes";
+import {services} from "../../Lsi/lsi";
 
 const ServiceContainer = styled.div`
  @media screen and ${device.mobileL} {
@@ -63,20 +64,20 @@ const ButtonContainer = styled.div`
    display:none;
   }
 `
-export default function Service(props) {
+export default function Service({locale,slug,coverImage,title}) {
     return (
-        <Link href={`/service/[slug]`} as={`/service/${props.slug}`}>
+        <Link href={`/service/[slug]`} as={`/service/${slug}`}>
             <Global>
                 <ServiceContainer>
                     <ContainerWrapper>
                         <StyledPhoto
-                            src={props.coverImage}
+                            src={coverImage}
                         />
-                        <StyledText>{props.title}</StyledText>
+                        <StyledText>{title}</StyledText>
                     </ContainerWrapper>
                 </ServiceContainer>
                 <ButtonContainer>
-                    <StyledButton text='Дізнатися більше'/>
+                    <StyledButton text={services.learnMore[locale]}/>
                 </ButtonContainer>
             </Global>
         </Link>

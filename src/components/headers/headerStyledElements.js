@@ -16,7 +16,7 @@ export const HeaderWrapper = styled.header`
     width: 100%;
     justify-content: center;
     flex: 1;
-  height:468px;
+  height:480px;
   background: url(https://epo.org.ua/wp-content/uploads/2020/11/diia_gradient_03.png);
   background-size: cover;
   background-position: center;
@@ -27,15 +27,14 @@ export const HeaderWrapper = styled.header`
 padding: 30px;
 }
 @media screen and ${device.mobileL}{
-      height:105px;
-      padding: unset;
+      padding: 30px 0 30px 10px;
+    height: auto;
   }
   
 `
  const Nav = styled.nav`
- width:100%;
-  position:relative;
   display:flex;
+  position:relative;
      justify-content: space-between;
     margin: 0px;
     padding: 24px 0px 5px 30px;
@@ -52,16 +51,11 @@ const NavMain = styled.nav`
 `
 export const WrapperInner = styled.div`
   width:80%;
-  position: absolute;
   @media screen and ${device.laptop}{
     width:100%;
-    position: unset;
+    
   }
-  @media screen and ${device.mobileL}{
-     display: flex;
-    align-items: center;
-    padding-left: 12px;
-  }
+ 
 `
 export const RestWrapperInner = styled.div`
   width:80%;
@@ -182,6 +176,17 @@ const Logos = styled.div`
     @media screen and ${device.laptop}{
     display:none;
   }
+  a{
+  width: 30px;
+    height: 30px;
+    margin-right: 30px;
+    background-color: white;
+    border-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  }
 `
 export const LogoImg = styled.img`
   max-height:${props => props.height};
@@ -220,7 +225,7 @@ align-items:center;
     font-size: 30px;
   }
   @media screen and ${device.tablet}{
-    font-size: 20px;
+    font-size: 18px;
   }
     @media screen and ${device.mobileL}{
     display:none;
@@ -238,60 +243,6 @@ const Dropdown = styled.div`
   overflow: hidden;
   `
 
-const DropdownButton = styled.button`
-    font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-`
-const DropdopwContent = styled.div`
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  ${Dropdown}:hover & {
-    display: block;
-  }
-  a{
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-  &:hover{
-   background-color: #ddd;
-  }
-  } 
-`
-const DropLink = styled.a`
- font-size: 16px;
-  line-height: 15px;
-      margin-right: 40px;
-    list-style: none;
-    text-decoration: none;
-    display: inline;
-`
-const Drop = styled.div`
-
-`
-const DropContent = styled.div`
-display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  ${Drop}:hover & {
-    display: block;
-  }
-`
 export const Navmanu = styled.nav`
 a {
   text-decoration: none;
@@ -311,8 +262,7 @@ li {
   position: relative;
   text-decoration: none;
   transition-duration: 0.5s;
-  padding:0 40px 10px 5px;
-  margin-right:1px;
+  padding:0 20px 10px 5px;
   @media screen and ${device.laptop}{
     float: unset;
   }
@@ -433,10 +383,10 @@ export const NavBar =({language,navButtons,register,logIn})=>{
             <SignInMain top='45px'>
                 <Link href='/register'>
                     <RegisterLink>
-                        {register[language]}
+                        {register}
                     </RegisterLink>
                 </Link>
-                <StyledButton func={null} text={logIn[language]} />
+                <StyledButton func={null} text={logIn} />
             </SignInMain>
             <BurgerAndSearchIconsMain>
                 <AnimationSearchBarStyled color='transparent'/>
@@ -453,7 +403,7 @@ const ArrowIcon = styled.i`
      display:${props=>props.displayUserIcon};
   }
 `
-export const NavBarMain =({searchBarColor,color,language,navButtons,register,logIn,changeLanguageIcon,glassIcon})=>{
+export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,language,navButtons,register,logIn,changeLanguageIcon,glassIcon})=>{
     return (
         <NavMain>
             <Links>
@@ -496,10 +446,11 @@ export const NavBarMain =({searchBarColor,color,language,navButtons,register,log
                     </ul>
                 </Navmanu>
             </Links>
-            <ChangeLanguageContainer top='10px' position='absolute' right='100px'>
-                <Icon src={changeLanguageIcon}  width={'30px'} height='60px'/>
-                    <ChangeLanguageSelector  color={color}/>
-                <Icon  src={glassIcon}  width={'30px'} height='60px'/>
+            <ChangeLanguageContainer top='25px' position='absolute' right='100px'>
+                    <ChangeLanguageSelector globeDarkIcon={globeDarkIcon} />
+                    <Glass>
+                        <Icon  src={glassIcon}  width={'30px'} height='30px'/>
+                    </Glass>
             </ChangeLanguageContainer>
             <SignIn right='68px' top='25px'>
                 <AnimationSearchBarStyled color={searchBarColor}/>
@@ -543,9 +494,10 @@ margin-top:40px;
 
 const ChangeLanguageContainer = styled.div`
 display:flex;
+min-width:220px;
 align-items: center;
 margin-left:20px;
-position:${props=>props.position};
+position: ${props=>props.position};
 right:${props=>props.right};
 @media screen and (max-width:1400px){
       top:${props=>props.top};
@@ -554,21 +506,22 @@ right:${props=>props.right};
      top:unset;
       display:none;
   }
+ 
+`
+const Glass = styled.div`
+  
+  right: 0;
+    position: absolute;
+  
 `
 export const LinkIcon = styled.i`
-background-color: white;
-    border-radius: 30px;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    padding: 5px;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: #0072BC;
-    margin-right:30px;
+    font-size: 16px;
+    color: #0072BC; 
 `
-export const Footer =({inputName,inputFunc,inputPlaceholder,telegram,facebook,gmail})=>{
+export const Footer =({inputName,inputFunc,inputPlaceholder,contacts})=>{
+    const telegram = contacts.telegramLink && contacts.telegramLink
+    const facebook = contacts.facebookLink && contacts.facebookLink
+    const gmail = contacts.gmail && contacts.gmail
     return (
         <FooterContainer>
             <Logos>
@@ -583,12 +536,13 @@ export const Footer =({inputName,inputFunc,inputPlaceholder,telegram,facebook,gm
                 </a>
             </Logos>
 
-            <SearchBarStyled border='none' width='60%' inputFunc={inputFunc} name={inputName} inputPlaceholder={inputPlaceholder}/>
+            <SearchBarStyled border='none' width='100%' inputFunc={inputFunc} name={inputName} inputPlaceholder={inputPlaceholder}/>
 
-            <ChangeLanguageContainer>
-                    <Icon  src='/changeLanguageIcon.svg'  width={'30px'} height='60px'/>
-                    <ChangeLanguageSelector />
-                <Icon src='/glassIcon.svg'  width={'30px'} height='60px'/>
+            <ChangeLanguageContainer position='relative'>
+                    <ChangeLanguageSelector  theme='white' />
+                    <Glass>
+                        <Icon  src='/glassIcon.svg'  width='30px' height='30px'/>
+                    </Glass>
             </ChangeLanguageContainer>
         </FooterContainer>
     )

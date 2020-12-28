@@ -180,13 +180,19 @@ export const getStaticProps = async (
     }
 };
 
-export const getStaticPaths= async () => {
+export const getStaticPaths= async ({locales }) => {
+    let paths = []
+
     const { data } = await client.query( {
         query: GET_ALL_SLUG_FROM_PROJECTS
     } )
-    const paths = data.projects.nodes.map((el) => {
-        return { params: { slug: el.slug } }
-    });
+
+    for (const locale of locales) {
+        paths = [
+            ...paths,
+            ...data.projects.nodes.map((el) => ({ params: { slug: el.slug }, locale })),
+        ]
+    }
 
     return {
         fallback: false,

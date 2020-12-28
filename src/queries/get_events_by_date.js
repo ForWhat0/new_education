@@ -6,10 +6,33 @@ const GET_EVENTS_BY_DATE = gql`
     $status: PostStatusEnum,
     $year:Int,
     $month:Int,
-    $day:Int
+    $day:Int,
+    $location:MenuLocationEnum,
+    $contactsUri:ID!,
+    $language: LanguageCodeFilterEnum
   ) {
-    ${Menu}
-    events(where: {orderby: {field: DATE, order: ASC},status: $status, dateQuery: {year: $year, month: $month, day: $day}}, first: 1) {
+      menuItems(where: {location: $location}) {
+    nodes {
+       key: id
+      parentId
+      path
+      title: label
+      url
+    }
+  }
+  contacts: page(id: $contactsUri, idType: URI) {
+    contactsFields {
+      telegramLink
+      phoneNumber
+      group
+      gmail
+      facebookLink
+      comapnyName
+      authorship
+      adress
+    }
+  }
+    events(where: {language: $language,orderby: {field: DATE, order: ASC},status: $status, dateQuery: {year: $year, month: $month, day: $day}}, first: 1) {
     nodes {
       databaseId
       dateGmt

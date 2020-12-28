@@ -2,10 +2,12 @@ import React from "react"
 import {HeaderWrapper, WrapperInner, Main, NavBar, Footer, LogoImgMain} from './headerStyledElements'
 import {headerLsi} from '../../Lsi/lsi'
 import { useSelector} from "react-redux"
+import {useRouter} from "next/router";
 const {navButtons,register,logIn,title,subtitle,inputPlaceholder} = headerLsi
 
-export default function LargeHeader({menu,gmail,telegram,facebook}) {
-    const {language} = useSelector(state=>state.app)
+export default function LargeHeader({menu,contacts,title}) {
+    const router = useRouter()
+    const locale = router.locale
     return (
         <HeaderWrapper>
             <WrapperInner>
@@ -15,24 +17,21 @@ export default function LargeHeader({menu,gmail,telegram,facebook}) {
                     src='/headerLogo.svg'
                 />
                 <NavBar
-                    language={language}
                     navButtons={menu}
-                    register={register}
-                    logIn={logIn}
+                    register={register[locale]}
+                    logIn={logIn[locale]}
                 />
                 <Main
                     logo1='/headerLogo.svg'
                     logo2='/headerSecondLogo.svg'
-                    title={title[language]}
-                    subtitle={subtitle[language]}
+                    title={title}
+                    subtitle={subtitle[locale]}
                 />
                 <Footer
-                    gmail={gmail}
-                    telegram={telegram}
-                    facebook={facebook}
+                    contacts={contacts}
                     inputName='search'
                     inputFunc={()=>{return null}}
-                    inputPlaceholder={inputPlaceholder[language]}
+                    inputPlaceholder={inputPlaceholder[locale]}
                 />
             </WrapperInner>
         </HeaderWrapper>

@@ -12,8 +12,8 @@ import {StyledRegisterZNO} from "../leftComment/registerOnZNO";
 import {Element} from "react-scroll";
 
 
-export  const Layout = ({menu,hideLeftComponent,children , header,showZNORegister}) => {
-    console.log(hideLeftComponent)
+export  const Layout = ({contacts,menu,hideLeftComponent,children , header,showZNORegister}) => {
+
    /* useEffect(() => {
         delay()
     }, [])
@@ -121,11 +121,11 @@ export  const Layout = ({menu,hideLeftComponent,children , header,showZNORegiste
                {
                    showZNORegister ?
                        <Element name="#RegisterZNO" className="element">
-                           <StyledRegisterZNO menu={menu}/>
+                           <StyledRegisterZNO contacts={contacts} menu={menu}/>
                        </Element>
                        :
                     !hideLeftComponent ?  <StyledLeftComment menu={menu}/> :
-                        <PageFooter menu={menu}/>
+                        <PageFooter contacts={contacts} menu={menu}/>
                }
 
                 </>

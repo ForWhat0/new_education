@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {NewsLsi} from "../../Lsi/lsi"
+import {events, NewsLsi} from "../../Lsi/lsi"
 import styled from 'styled-components'
 import StyledLoader from "../loader/loader";
 import React, {useCallback, useEffect, useState} from "react";
@@ -44,7 +44,7 @@ const LoaderContainer = styled.div`
   margin:50px 0 50px 0;
 `
 
-export default function EventsMobile({posts,allDates}){
+export default function EventsMobile({locale,titleEvent,posts,allDates}){
     const [open, setOpen] = useState(false);
     const [currentDate, setCurrentDate] = useState(posts);
     const [loading, setLoading] = useState(false);
@@ -83,7 +83,7 @@ export default function EventsMobile({posts,allDates}){
 
     return(
         <GlobalContainer>
-            <TitleForComponent text='Послуги'/>
+            <TitleForComponent text={titleEvent}/>
             <DatePicker getSelectedDay={selectedDay}
                         tileDisabled={allDates}
                         selectDate={new Date(currentDate.dateGmt)}
@@ -99,6 +99,7 @@ export default function EventsMobile({posts,allDates}){
                         <Link href={`/calendar/[currentHourId]`} as={`/calendar/${currentDate.eventsFields.hoursOne.databaseId}`}>
                             <a>
                                 <Event
+                                    locale={locale}
                                     hoursOne={currentDate.eventsFields.hoursOne}
                                 />
                             </a>
@@ -113,6 +114,7 @@ export default function EventsMobile({posts,allDates}){
                              <Link href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
                                  <a>
                                      <Event
+                                         locale={locale}
                                          hoursOne={el}
                                      />
                                  </a>
@@ -126,14 +128,14 @@ export default function EventsMobile({posts,allDates}){
             {
                 !loading &&
                 <ButtonContainer>
-                    <StyledButton text={!open ? 'Розгорнути' : 'Згорнути'} func={()=>setOpen(!open)}/>
+                    <StyledButton text={!open ? events.open[locale] : events.close[locale]} func={()=>setOpen(!open)}/>
                 </ButtonContainer>
             }
 
             <ButtonContainer>
                 <Link href={`/calendar`}>
                     <a>
-                        <StyledButton  text="Календар Подій"/>
+                        <StyledButton  text={events.calendarEvents[locale]} />
                     </a>
                 </Link>
             </ButtonContainer>

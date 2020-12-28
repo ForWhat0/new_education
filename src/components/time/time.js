@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import PostBody from "../post-body/post-body";
 import {device} from "../deviceSizes/deviceSizes";
-import Icon from "../icon/icon";
+import { format } from "date-fns";
+import {enGB, ru, uk} from "date-fns/locale";
+import React from "react";
 
 const Header = styled.div`
 display:flex;
@@ -71,9 +73,9 @@ align-items:center;
   }
   
 `
-export default function Time({time,timeFormatted}) {
+export default function Time({locale,time,timeFormatted}) {
 
-    const weekDay = timeFormatted.toLocaleString('default', { weekday: 'long' })
+    const weekDay =  format(timeFormatted,  "EEEE",{locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk})
     const numberDay = timeFormatted.getDate()
 
     return (
@@ -97,7 +99,7 @@ export default function Time({time,timeFormatted}) {
                            aria-hidden="true"
                        />
 
-                              {`${timeFormatted.getHours()}:${timeFormatted.getMinutes()<10?'0':''}${timeFormatted.getMinutes()}`}
+                       {`${format(timeFormatted, "HH")}:${format(timeFormatted, "mm")}`}
 
                    </TimeWitchIcon>
                </Text>

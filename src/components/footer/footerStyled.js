@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import {LinkIcon} from "../headers/headerStyledElements"
 import Icon from "../icon/icon";
+import {footer} from "../../Lsi/lsi";
 
 export const FooterWrapper = styled.footer`
  background: #1D1D1B;
@@ -8,13 +9,26 @@ export const FooterWrapper = styled.footer`
 const LogosContainer = styled.div`
   display:flex;
   cursor:pointer;
+  a{
+  width: 30px;
+    height: 30px;
+    margin-right: 30px;
+    background-color: white;
+    border-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 `
 const Wrapper = styled.div`
  width:80%;
  margin-left:10%;
  margin-top:30px;
 `
-export const Logos = (telegram,facebook,gmail)=>{
+export const Logos = ({contacts})=>{
+    const telegram = contacts?.telegramLink && contacts.telegramLink
+    const facebook = contacts?.facebookLink && contacts.facebookLink
+    const gmail = contacts?.gmail && contacts.gmail
     return (
         <Wrapper>
             <LogosContainer>
@@ -55,28 +69,34 @@ const ListElement = styled.li`
     list-style-type: none;
 `
 const Link =styled.a`
-color:blue;
+color:-webkit-link;
 `
-export const Text =()=>{
+export const Text =({
+    locale,
+    adress,
+    gmail,
+    phoneNumber,
+    group
+})=>{
     return(
         <TextContainer>
             <List position='relative' right='unset'>
                 <ListElement>
-                    Адреса: вулиця Кудряшова, 12/14, місто Київ, 03035, Україна
+                    {footer.adress[locale]} {adress}
                 </ListElement>
                 <ListElement>
-                    Телефон: +38 (044) 520-17-00
+                    {footer.phoneNumber[locale]} {phoneNumber}
                 </ListElement>
                 <ListElement>
-                    Електронная пошта: <Link href='monitoring.kyiv@gmail.com'>monitoring.kyiv@gmail.com</Link>
+                    {footer.email[locale]} {gmail}
                 </ListElement>
             </List>
             <List position='absolute' right='0'>
                 <ListElement>
-                    Реєстрація на курси: <Link href='monitoring.kyiv@gmail.com'>monitoring.kyiv@gmail.com</Link>
+                    {footer.courses[locale]} <Link href={gmail}>{gmail}</Link>
                 </ListElement>
                 <ListElement>
-                    Фейсбук: КНП "Освітня Агенція Міста Києва"
+                    {footer.group[locale]} {group}
                 </ListElement>
             </List>
         </TextContainer>
@@ -99,16 +119,16 @@ margin-right:10px;
 text-align: center;
 margin-bottom: ${props=>props.marginBottom};
 `
-export const Company =()=>{
+export const Company =({authorship,locale})=>{
 return(
     <CompanyContainer>
         <Develop >
             <DevelopText marginBottom='unset' color='white'>
-                Копанія розробник
+                {footer.developBy[locale]}
             </DevelopText>
             <Icon src='/flexReality.svg' width='100px' height='50px' alt='Flex Reality' />
         </Develop>
-        <DevelopText marginBottom='40px' color='#4F4F4F'>© КНП «ОСВІТНЯ АГЕНЦІЯ МІСТА КИЄВА» 2007-2020</DevelopText>
+        <DevelopText marginBottom='40px' color='#4F4F4F'>{authorship}</DevelopText>
     </CompanyContainer>
 )
 }

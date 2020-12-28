@@ -22,6 +22,8 @@ import {isSameDay} from "date-fns";
 import StyledLoader from "../../src/components/loader/loader";
 import reduxClient from "../../src/apollo/reduxClient";
 import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
+import {calendarLsi} from "../../src/Lsi/lsi";
+import {enGB, ru, uk} from "date-fns/locale";
 const Container = styled.div`
 width:80%;
 margin-left:10%;
@@ -98,11 +100,11 @@ position: relative;
   flex-direction:column;
   }
 `
-export default function EventCalendar({loading,event,menu,allDates}) {
+export default function EventCalendar({locale,loading,event,menu,allDates,contacts}) {
 
     const router = useRouter()
 
-    const [value, onChange] = useState(new Date(event[0].dateGmt));
+    const [value, onChange] = useState(event.length > 0 ? new Date(event[0].dateGmt ): null);
     const [calendarOpen, setCalendarOpen] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const [searchLoading, setSearchLoading] = useState(false);
@@ -112,7 +114,8 @@ export default function EventCalendar({loading,event,menu,allDates}) {
         const { data  } = await reduxClient.query( {
             query: SEARCH_EVENTS_BY_TITLE,
             variables: {
-                search:searchInput
+                search:searchInput,
+                language:locale,
             }
         } )
         setSearchLoading(false)
@@ -135,16 +138,19 @@ export default function EventCalendar({loading,event,menu,allDates}) {
     useOnClickOutside(calendar,  () => calendarOpen  &&  setCalendarOpen(!calendarOpen));
     const parsedMenu = ParcMenu(menu)
     return (
-        <MainLayout menu={parsedMenu} >
+        <MainLayout
+            menu={parsedMenu}
+            contacts={contacts}
+        >
             <Container >
                 <Header>
                     <Title >
-                        <TitleForComponent text='Календар подій' />
+                        <TitleForComponent text={calendarLsi.calendarEvents[locale]} />
                         <CalendarWrapper ref={calendar}>
                             <CalendarIcon onClick={()=>setCalendarOpen(!calendarOpen)}/>
                             <CalendarContainer open={calendarOpen ? 'block' : 'none'}>
                                 <Calendar
-                                    locale='ua-UA'
+                                    locale={locale === "EN" ? 'en-EN' : locale === "RU" ? 'ru-RU' : 'ua-UA'}
                                     className='calendar'
                                     onChange={value => selectedDay(value)}
                                     value={value}
@@ -161,15 +167,18 @@ export default function EventCalendar({loading,event,menu,allDates}) {
                         <SearchBarStyled
                             maxlength={10}
                             width='100%'
-                            inputPlaceholder='пошук за назвою події'
+                            inputPlaceholder={calendarLsi.search[locale]}
                             border='1px solid'
                             inputFunc={(e)=>setSearchInput(e.target.value)} />
                     </Input>
                 </Header>
-                <DatePicker getSelectedDay={selectedDay}
-                            tileDisabled={allDates}
-                            selectDate={new Date(value)}
-                />
+                {
+                    event.length > 0 &&
+                    <DatePicker getSelectedDay={selectedDay}
+                                tileDisabled={allDates}
+                                selectDate={new Date(value)}
+                    />
+                }
                 {
                     searchInput.length > 0  ?
 
@@ -183,13 +192,15 @@ export default function EventCalendar({loading,event,menu,allDates}) {
                                 <>
                                     <LoaderContainer>
                                         <h2 style={{margin: "0.67rem 0 0 0"}}>
-                                            Результат пошуку
+                                            {calendarLsi.result[locale]}
                                         </h2>
                                     </LoaderContainer>
                                     <CalendarEvents loading={loading}  posts={eventByTitle}/>
                                 </>
                             :
-                                <LoaderContainer><h2>Такої події не існує</h2></LoaderContainer>
+                                <LoaderContainer>
+                                    <h2>{calendarLsi.notExist[locale]}</h2>
+                                </LoaderContainer>
 
                             :
                         event.length > 0 &&<CalendarEvents loading={loading}  posts={event[0].eventsFields}/>
@@ -203,10 +214,12 @@ export default function EventCalendar({loading,event,menu,allDates}) {
     )
 }
 
-export async function getStaticProps(ctx){
+export async function getStaticProps({locale,params}){
 
-    const currentDate = ctx.params?.currentDate
+    const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
+    const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
 
+    const currentDate = params?.currentDate
     const today = new Date()
     const currentDateFormatDate =  currentDate && new Date(`${currentDate}T23:59:00`)
     const statusFromCurrentDate = currentDate && currentDateFormatDate > today ? "FUTURE" : "PUBLISH"
@@ -222,20 +235,25 @@ export async function getStaticProps(ctx){
             status,
             year,
             month,
-            day
+            day,
+            contactsUri,
+            location,
+            language:locale
         }
     } )
 
     const futureDate = await client.query( {
         query: GET_EVENTS_DATE,
         variables:{
-            status:"FUTURE"
+            status:"FUTURE",
+            language:locale
         }
     } )
     const  publishDate = await client.query( {
         query: GET_EVENTS_DATE,
         variables:{
-            status:"PUBLISH"
+            status:"PUBLISH",
+            language:locale
         }
     } )
 
@@ -243,10 +261,12 @@ export async function getStaticProps(ctx){
 
     return {
         props: {
+            locale,
             loading,
             allDates,
             menu: data?.menuItems?.nodes || [],
             event:data?.events?.nodes ? data.events.nodes : [],
+            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
         },
         revalidate: 1
     }

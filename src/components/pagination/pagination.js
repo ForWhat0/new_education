@@ -7,6 +7,7 @@ const {prevPage,nextPage} = pagination
 
 export const Pagination=(
     {
+        locale,
         currentPageNumber,
         endPage,
         startPage,
@@ -28,7 +29,7 @@ export const Pagination=(
             >
                 <Icon width='40px' height='30px' alt='prev' src='/leftArrow.svg'/>
                 <span>
-                    {prevPage["ukr"]}
+                    {prevPage[locale]}
                 </span>
             </Arrows>
         )
@@ -42,7 +43,7 @@ export const Pagination=(
                 left='unset'
             >
                 <span>
-                    {nextPage["ukr"]}
+                    {nextPage[locale]}
                 </span>
                 <Icon width='40px' height='30px' alt='prev' src='/rightArrow.svg'/>
             </Arrows>

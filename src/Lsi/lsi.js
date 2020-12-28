@@ -1,132 +1,386 @@
 export const app={
-    languages:[
-        {
-            languageName:"Українська",
-            languageType:"ukr"
-        },
-        {
-            languageName:"Русский",
-            languageType:"rus"
-        },
-        {
-            languageName:"English",
-            languageType:"eng"
-        }
-    ]
+    languages:{
+        UK:"Українська",
+        EN:"English",
+        RU:"Русский"
+    }
 }
 export const headerLsi={
-    navButtons:[
-        {
-            ukr:"Про агенцію",
-            eng:"About",
-            href:'/'
-        },
-        {
-            ukr:"Діяльність",
-            eng:"Activity",
-            href:'/Activity'
-        },
-        {
-            ukr:"Новини",
-            eng:"News",
-            href:'/News'
-        },
-        {
-            ukr:"Контакти",
-            eng:"Contacts",
-            href:'/Contacts'
-        },
-        {
-            ukr:"Звернення",
-            eng:"Appeal",
-            href:'/Appeal'
-        },
-    ],
      register:{
-         ukr:"Зареєструватися",
-         eng:"Register"
+         UK:"Зареєструватися",
+         EN:"Register",
+         RU:"Зарегистрироваться"
      },
     logIn:{
-        ukr:"Увійти до кабінету",
-        eng:"Enter"
-    },
-    title:{
-        ukr:"ОСВІТНЯ АГЕНЦІЯ МІСТА КИЄВА",
-        eng:"KYIV CITY EDUCATIONAL AGENCY"
+        UK:"Увійти до кабінету",
+        EN:"Enter",
+        RU:"Войти в кабинет"
     },
     subtitle:{
-        ukr:"Державні сайти України",
-        eng:"State sites of Ukraine"
+        UK:"Державні сайти України",
+        EN:"State sites of UKaine",
+        RU:"Государственные сайты Украины"
     },
     inputPlaceholder:{
-        ukr:"Назва послуги",
-        eng:"Name of service"
+        UK:"Назва послуги",
+        EN:"Name of service",
+        RU:"Название услуги"
     }
 }
 export const ProjectsLsi={
     popularProjectsTitle:{
-        ukr:"Популярні проекти",
-        eng:"Popular projects",
-        rus:"Популярные проекты"
+        UK:"Популярні проекти",
+        EN:"Popular projects",
+        RU:"Популярные проекты"
     },
     review:{
-        ukr:"Переглянути",
-        eng:"Review",
-        rus:"Посмотреть"
+        UK:"Переглянути",
+        EN:"Review",
+        RU:"Посмотреть"
     },
-    button:{
-        ukr:"Всі проекти",
-        eng:"All projects",
-        rus:"Все проекты"
+    allProjects:{
+        UK:"Всі проекти",
+        EN:"All projects",
+        RU:"Все проекты"
     },
     projects:{
-        ukr:"Проекти",
-        eng:"Projects",
-        rus:"Проекты"
+        UK:"Проекти",
+        EN:"Projects",
+        RU:"Проекты"
     },
 }
 export const NewsLsi={
     lastNews:{
-        ukr:"Останні новини",
-        eng:"Latest news",
-        rus:"Последние новости"
+        UK:"Останні новини",
+        EN:"Latest news",
+        RU:"Последние новости"
     },
     otherNews:{
-        ukr:"Інші новини",
-        eng:"Other news",
-        rus:"Другие новости"
+        UK:"Інші новини",
+        EN:"Other news",
+        RU:"Другие новости"
     },
     news:{
-        ukr:"Новини",
-        eng:"News",
-        rus:"Новости"
+        UK:"Новини",
+        EN:"News",
+        RU:"Новости"
     },
     review:{
-        ukr:"Переглянути",
-        eng:"Review",
-        rus:"Посмотреть"
+        UK:"Переглянути",
+        EN:"Review",
+        RU:"Посмотреть"
     },
-    button:{
-        ukr:"Більше новин",
-        eng:"More news",
-        rus:"Другие новости"
+    moreNews:{
+        UK:"Більше новин",
+        EN:"More news",
+        RU:"Другие новости"
     },
     search:{
-        ukr:"Пошук за датою ",
-        eng:"Search by date",
-        rus:"Search by date"
+        UK:"Пошук за датою ",
+        EN:"Search by date",
+        RU:"Search by date"
     },
 }
 
 export const pagination={
     prevPage:{
-        ukr:"Попередня сторінка",
-        eng:"Previous page",
-        rus:"Предыдущая страница"
+        UK:"Попередня сторінка",
+        EN:"Previous page",
+        RU:"Предыдущая страница"
     },
     nextPage:{
-        ukr:"Наступна сторінка",
-        eng:"Next page",
-        rus:"Следующая страница"
+        UK:"Наступна сторінка",
+        EN:"Next page",
+        RU:"Следующая страница"
+    }
+}
+
+export const footer={
+    adress:{
+        UK:"Адреса:",
+        EN:"Address:",
+        RU:"Адрес:"
+    },
+    phoneNumber:{
+        UK:"Телефон:",
+        EN:"Phone:",
+        RU:"Телефон:"
+    },
+    email:{
+        UK:"Електронная пошта:",
+        EN:"Email:",
+        RU:"Электронная почта:"
+    },
+    courses:{
+        UK:"Реєстрація на курси:",
+        EN:"Registration for courses:",
+        RU:"Регистрация на курсы:"
+    },
+    group:{
+        UK:"Фейсбук:",
+        EN:"Facebook:",
+        RU:"Фейсбук:"
+    },
+    developBy:{
+        UK:"Копанія розробник:",
+        EN:"Developer company:",
+        RU:"Компания разработчик:"
+    }
+}
+export const events={
+    calendarEvents:{
+        UK:"Календар Подій",
+        EN:"Calendar of Events",
+        RU:"Календарь"
+    },
+    today:{
+        UK:"сьогодні",
+        EN:"today",
+        RU:"сегодня"
+    },
+    review:{
+        UK:"Переглянути",
+        EN:"Review",
+        RU:"Посмотреть"
+    },
+    open:{
+        UK:"Розгорнути",
+        EN:"Expand",
+        RU:"Развернуть"
+    },
+    close:{
+        UK:"Згорнути",
+        EN:"Collapse",
+        RU:"Свернуть"
+    }
+}
+export const services={
+    learnMore:{
+        UK:"Дізнатися більше",
+        EN:"Learn more",
+        RU:"Узнать больше"
+    },
+    registerZNO:{
+        UK:"Зареєструватися на курси підготовки до ЗНО",
+        EN:"Register for EIT  preparation courses",
+        RU:"Зарегистрируйтесь на курсах подготовки к ВНО"
+    },
+    register:{
+        UK:"Залишити запит",
+        EN:"Leave a request",
+        RU:"Оставить заявку"
+    }
+}
+export const leftComment={
+    offer:{
+        UK:"Маєш пропозицію?",
+        EN:"Do you have an offer?",
+        RU:"Имеешь предложение?"
+    },
+    writeUs:{
+        UK:"Напиши нам!",
+        EN:"Write to us!",
+        RU:"Напиши нам!"
+    },
+    name:{
+        UK:"Ім'я",
+        EN:"Name",
+        RU:"Имя"
+    },
+    phoneNumber:{
+        UK:"Телефон",
+        EN:"Phone number",
+        RU:"Телефон"
+    },
+    email:{
+        UK:"Email",
+        EN:"Email",
+        RU:"Email"
+    },
+    comment:{
+        UK:"Коментар",
+        EN:"Comment",
+        RU:"Комментарий"
+    },
+    sent:{
+        UK:"відправлено",
+        EN:"sent",
+        RU:"отправлено"
+    },
+    send:{
+        UK:"відправити",
+        EN:"send",
+        RU:"отправить"
+    },
+    error:{
+        UK:"помилка",
+        EN:"error",
+        RU:"ошибка"
+    },
+    duplicate:{
+        UK:"Виявлено дублікат коментаря. Здається, ви вже сказали це!",
+        EN:"Duplicate comment found. You seem to have said that already!",
+        RU:"Обнаружен дубликат комментария. Кажется, вы уже сказали это!"
+    },
+    errors:{
+        commentShort:{
+            UK:"Коментар закороткий",
+            EN:"The comment is short",
+            RU:"Комментарий короткий"
+        },
+        wrongEmail:{
+            UK:"введіть коректний email",
+            EN:"enter the correct email",
+            RU:"введите корректный email"
+        },
+        wrongPhoneNumber:{
+            UK:"введіть коректний телефон",
+            EN:"enter the correct phone number",
+            RU:"введите корректный телефон"
+        },
+        emptyFields:{
+            UK:"Будь ласка,заповніть всі поля",
+            EN:"Please fill in all fields",
+            RU:"Пожалуйста, заполните все поля"
+        },
+    }
+}
+
+export const calendarLsi = {
+    calendarEvents:{
+        UK:"Календар Подій",
+        EN:"Calendar of Events",
+        RU:"Календарь"
+    },
+    search:{
+        UK:"пошук за назвою події",
+        EN:"search by event name",
+        RU:"поиск по названию события"
+    },
+    result:{
+        UK:"Результат пошуку",
+        EN:"Search result",
+        RU:"Результат поиска"
+    },
+    notExist:{
+        UK:"Такої події не існує",
+        EN:"There is no such event",
+        RU:"Такого события не существует"
+    }
+}
+export const leftCommentZno={
+    offer:{
+        UK:"Маєш пропозицію?",
+        EN:"Do you have an offer?",
+        RU:"Имеешь предложение?"
+    },
+    writeUs:{
+        UK:"Напиши нам!",
+        EN:"Write to us!",
+        RU:"Напиши нам!"
+    },
+    name:{
+        UK:"Прізвище та sм'я",
+        EN:"Name and surname",
+        RU:"Фамилия и Имя"
+    },
+    phoneNumber:{
+        UK:"Телефон",
+        EN:"Phone number",
+        RU:"Телефон"
+    },
+    email:{
+        UK:"Email",
+        EN:"Email",
+        RU:"Email"
+    },
+    comment:{
+        UK:"Коментар",
+        EN:"Comment",
+        RU:"Комментарий"
+    },
+    choose:{
+        UK:"Оберіть предмет(и)",
+        EN:"Choose item (s)",
+        RU:"Выберите предмет (ы)"
+    },
+    lessons:[
+        {
+            UK:"українська мова",
+            EN:"ukrainian language",
+            RU:"украинский язык"
+        },
+        {
+            UK:"українська література",
+            EN:"ukrainian literature",
+            RU:"украинская литература"
+        },
+        {
+            UK:"математика",
+            EN:"math",
+            RU:"математика"
+        },
+        {
+            UK:"історія України",
+            EN:"history of Ukraine",
+            RU:"история Украины"
+        },
+        {
+            UK:"англійська мова",
+            EN:"english",
+            RU:"английский язык"
+        },
+        {
+            UK:"біологія",
+            EN:"biology",
+            RU:"биология"
+        },
+        {
+            UK:"хімія",
+            EN:"chemistry",
+            RU:"химия"
+        }
+    ],
+    sent:{
+        UK:"відправлено",
+        EN:"sent",
+        RU:"отправлено"
+    },
+    send:{
+        UK:"відправити",
+        EN:"send",
+        RU:"отправить"
+    },
+    error:{
+        UK:"помилка",
+        EN:"error",
+        RU:"ошибка"
+    },
+    duplicate:{
+        UK:"Виявлено дублікат коментаря. Здається, ви вже сказали це!",
+        EN:"Duplicate comment found. You seem to have said that already!",
+        RU:"Обнаружен дубликат комментария. Кажется, вы уже сказали это!"
+    },
+    errors:{
+        commentShort:{
+            UK:"Коментар закороткий",
+            EN:"The comment is short",
+            RU:"Комментарий короткий"
+        },
+        wrongEmail:{
+            UK:"введіть коректний email",
+            EN:"enter the correct email",
+            RU:"введите корректный email"
+        },
+        wrongPhoneNumber:{
+            UK:"введіть коректний телефон",
+            EN:"enter the correct phone number",
+            RU:"введите корректный телефон"
+        },
+        emptyFields:{
+            UK:"Будь ласка,заповніть всі поля",
+            EN:"Please fill in all fields",
+            RU:"Пожалуйста, заполните все поля"
+        },
     }
 }

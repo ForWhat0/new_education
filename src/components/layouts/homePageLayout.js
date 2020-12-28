@@ -1,10 +1,11 @@
 import {Layout} from "./layout"
 import LargeHeader from "../headers/largeHeader";
 
-export function HomePageLayout({ menu, children ,facebook , telegram ,gmail}) {
+export function HomePageLayout({ menu, children ,contacts,title}) {
     return <Layout
         menu={menu}
-        header={<LargeHeader menu={menu} facebook={facebook} telegram={telegram} gmail={gmail}/>}
+        contacts={contacts}
+        header={<LargeHeader menu={menu} contacts={contacts} title={title}/>}
         children={children}
     />
 }

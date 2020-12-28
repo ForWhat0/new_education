@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {NewsLsi} from "../../Lsi/lsi"
+import {events} from "../../Lsi/lsi"
 import styled from 'styled-components'
 import StyledLoader from "../loader/loader";
 import React from "react";
@@ -8,10 +8,10 @@ import {TitleForComponent} from "../titleForComponent/title";
 import {device} from "../deviceSizes/deviceSizes";
 import Event from "./event";
 import Link from "next/link";
-const {review} = NewsLsi
+
 
 const ServicesContainer = styled.div`
- @media screen and ${device.laptop} {
+ @media screen and (max-width:1250px) {
       grid-template-columns: 1fr;
   }
  display: grid;
@@ -34,20 +34,17 @@ margin-bottom:80px;
  width: 80%;
   margin-left: 10%;
 `
-export default function Events({posts}){
-    const {loading} = useSelector(state=>state.app)
-    const {language} = useSelector(state=>state.app)
-    const func = ()=>{
-        return null
-    }
+export default function Events({locale,posts,titleEvent}){
+
     return(
         <GlobalContainer>
-            <TitleForComponent text='Найближчі події'/>
+            <TitleForComponent text={titleEvent}/>
             <ServicesContainer>
                 {posts.map((node,i) =>
                     <Link href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt.substring(0,10)}`}>
                         <a>
                             <Event
+                                locale={locale}
                                 borderLeftColor={i === 0 ? '#0072BC' : i === 1 ? ' #FFDE00' : '#00AEEF'}
                                 hoursOne={node.eventsFields.hoursOne}
                             />
@@ -58,7 +55,7 @@ export default function Events({posts}){
             <ButtonContainer>
                 <Link href={`/calendar`}>
                     <a>
-                        <StyledButton func={func} text="Календар Подій"/>
+                        <StyledButton  text={events.calendarEvents[locale]}/>
                     </a>
                 </Link>
             </ButtonContainer>

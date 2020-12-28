@@ -7,7 +7,7 @@ import {
     lastDayOfMonth,
     startOfMonth
 } from "date-fns";
-import { uk } from 'date-fns/locale'
+import {enGB, ru, uk} from 'date-fns/locale'
 import {
     DateDayItem,
     DateLabel, DateListScrollable,
@@ -17,9 +17,13 @@ import {
     MonthYearLabel,
     Container, ButtonWrapper
 } from "./styledDatePicker";
-import {maxDay, minDay} from "../hooks/hooks";
+import {maxDay, minDay} from "../hooks/hooks"
+import {useRouter} from "next/router"
 
 export default function DatePicker({ selectDate, getSelectedDay, labelFormat,tileDisabled}) {
+
+    const router = useRouter()
+    const locale = router.locale
 
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -83,7 +87,7 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
 
                     >
                         <DayLabel>
-                            {format(addDays(month, j), dayFormat, {locale: uk})}
+                            {format(addDays(month, j), dayFormat, {locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk})}
                         </DayLabel>
                         <DateLabel >
                             {format(addDays(month, j), dateFormat)}
@@ -94,7 +98,7 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
             months.push(
                 <MonthContainer  key={month}>
                     <MonthYearLabel>
-                        {format(month,  "LLLL yyyy",{locale: uk})}
+                        {format(month,  "LLLL yyyy",{locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk})}
                     </MonthYearLabel>
                     <DaysContainer>
                         {days}

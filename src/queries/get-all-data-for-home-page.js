@@ -1,7 +1,12 @@
 import { gql } from "@apollo/client";
 
-const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
-    events(first: 3, where: {status: FUTURE, orderby: {field: DATE, order: ASC}}) {
+const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query(
+$uri: ID!,
+$language: LanguageCodeFilterEnum,
+$location:MenuLocationEnum,
+$contactsUri:ID!
+) {
+    events(first: 3, where: { language: $language,status: FUTURE, orderby: {field: DATE, order: ASC}}) {
     nodes {
       dateGmt
       eventsFields {
@@ -26,7 +31,7 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
       }
     }
   }
- news (where: {orderby: {field: DATE, order: DESC}  offsetPagination: { size:3, offset: 0 } }){
+ news (where: { language: $language,orderby: {field: DATE, order: DESC}  offsetPagination: { size:3, offset: 0 } }){
     nodes {
       title
       databaseId
@@ -47,7 +52,7 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
             }
         }
   }
-   menuItems {
+   menuItems(where: {location: $location}) {
     nodes {
        key: id
       parentId
@@ -56,7 +61,7 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
       url
     }
   }
-  services {
+  services (where: {language: $language}){
     nodes {
       title
       slug
@@ -67,16 +72,29 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query($uri: ID!) {
       }
     }
   }
+  contacts: page(id: $contactsUri, idType: URI) {
+
+    contactsFields {
+      telegramLink
+      phoneNumber
+      group
+      gmail
+      facebookLink
+      comapnyName
+      authorship
+      adress
+    }
+  }
    page(id: $uri, idType: URI) {
     mainPageFields {
-     text
-      titleBanner
-      titleCommand
-      titleEvent
-      titleOffers
+     titleServices
       titleProject
-      titleServices
+      titleOffers
       titleNews
+      titleEvent
+      titleCommand
+      titleBanner
+      text
      projectPopular {
         ... on Project {
           title

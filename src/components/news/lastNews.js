@@ -101,7 +101,7 @@ const ScrollBarStyledInner = styled.div`
  cursor:pointer;
  flex-direction: row;
 `
-export default function LastNews({margin,title,language,posts,pageInfo,background,buttonHide,fetchMoreNews}){
+export default function LastNews({locale,titleNews,margin,title,language,posts,pageInfo,background,buttonHide,fetchMoreNews}){
 
     const buttonDisplay = buttonHide ? 'none' : 'flex';
     const {loading} = useSelector(state=>state.app)
@@ -153,7 +153,7 @@ export default function LastNews({margin,title,language,posts,pageInfo,backgroun
             <Back margin={margin} background={background}>
                 <Container>
                     <Header>
-                        <TitleForComponent text='Останні новини' fontSize='40px' />
+                        <TitleForComponent text={titleNews} fontSize='40px' />
                         <Arrows>
                             <ArrowIcon
                                 className="fa fa-long-arrow-left"
@@ -197,9 +197,7 @@ export default function LastNews({margin,title,language,posts,pageInfo,backgroun
                         <Link href={'/news'}>
                             <a>
                                 <StyledButton
-                                    func={()=> {
-                                        return null }}
-                                    text='Більше новин'/>
+                                    text={NewsLsi.moreNews[locale]}/>
                             </a>
                         </Link>
                     </ButtonContainer>
