@@ -394,3 +394,25 @@ export const leftCommentZno={
         },
     }
 }
+export const finance={
+    report:{
+        UK:"звіт за",
+        EN:"report for",
+        RU:"отчет по"
+    },
+    date:{
+        UK:"Дата розміщення",
+        EN:"Date of placement",
+        RU:"Дата размещения"
+    },
+    search:{
+        UK:"пошук по даті",
+        EN:"search by date",
+        RU:"поиск по дате"
+    },
+    download:{
+        UK:"Завантажити",
+        EN:"Date of placement",
+        RU:"Cкачать"
+    }
+}

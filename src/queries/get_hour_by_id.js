@@ -23,7 +23,7 @@ const GET_HOUR_BY_ID = gql`
       group
       gmail
       facebookLink
-      comapnyName
+      
       authorship
       adress
     }

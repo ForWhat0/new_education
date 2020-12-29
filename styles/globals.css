@@ -5,7 +5,9 @@
   font-weight: 400;
   font-display: swap;
 }
-
+html,body:focus{
+  outline: none;
+}
 html,
 body {
   outline: none;
@@ -71,6 +73,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 @media screen and (max-width:1024px) {
+  .wp-block-gallery .blocks-gallery-grid{
+    flex-direction: column;
+  }
   .wp-block-columns {
     flex-direction: column-reverse;
   }
@@ -85,9 +90,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 @media screen and (max-width:450px) {
+  .wp-block-image .alignleft {
+    float: unset!important;;
+    margin-right: unset!important;;
+  }
+  .wp-block-image .alignright {
+    float: unset!important;;
+    margin-left: unset!important;;
+  }
   .wp-block-columns {
     flex-direction: column-reverse;
   }
+
   .wp-block-video{
   margin:0;
   }
@@ -180,6 +194,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 figure img {
   margin-bottom: 40px!important;
   width: 100%!important;
+  height: auto!important;
 }
 .wp-block-button a,
 .wp-block-file a.wp-block-file__button {
@@ -209,4 +224,18 @@ figure img {
 
 .wp-block-media-text {
   @apply grid grid-cols-2 gap-4;
+}
+.wp-block-gallery{
+  margin:0;
+  padding:0;
+}
+.wp-block-gallery .blocks-gallery-grid{
+  display: flex;
+  margin: 0;
+  align-items: center;
+  padding: 0;
+}
+.blocks-gallery-item figure{
+  margin:0;
+  padding:20px;
 }

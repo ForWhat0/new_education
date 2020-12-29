@@ -25,20 +25,17 @@ const Wrapper = styled.div`
  margin-left:10%;
  margin-top:30px;
 `
-export const Logos = ({contacts})=>{
-    const telegram = contacts?.telegramLink && contacts.telegramLink
-    const facebook = contacts?.facebookLink && contacts.facebookLink
-    const gmail = contacts?.gmail && contacts.gmail
+export const Logos = ({telegram,facebook,gmail})=>{
     return (
         <Wrapper>
             <LogosContainer>
-                <a href={telegram}  target="_blank">
+                <a href={`https://telegram.im/${telegram}`}  target="_blank">
                     <LinkIcon  className="fa fa-paper-plane" aria-hidden="true"/>
                 </a>
                 <a href={facebook} target="_blank">
                     <LinkIcon  className="fa fa-facebook" aria-hidden="true"/>
                 </a>
-                <a href={gmail} target="_blank">
+                <a href={`mailto:?subject=${gmail}`} target="_blank">
                     <LinkIcon  className="fa fa-envelope" aria-hidden="true"/>
                 </a>
             </LogosContainer>
@@ -56,6 +53,7 @@ const TextContainer = styled.div`
   }
 `
 const List = styled.ul`
+text-align:${props=>props.align};
 position:${props=>props.position};
 right:${props=>props.right};
 padding-left: unset;
@@ -91,7 +89,7 @@ export const Text =({
                     {footer.email[locale]} {gmail}
                 </ListElement>
             </List>
-            <List position='absolute' right='0'>
+            <List align='end' position='absolute' right='0'>
                 <ListElement>
                     {footer.courses[locale]} <Link href={gmail}>{gmail}</Link>
                 </ListElement>

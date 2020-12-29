@@ -16,12 +16,13 @@ import Icon from "../src/components/icon/icon";
 import {InputStyled} from "../src/components/input/input";
 import {SearchBarStyled} from "../src/components/searchBar/searchBar";
 import GET_NEWS_BY_SLUG_AND_FIRST_THREE_NEWS from "../src/queries/get-news-by-slug";
+import {finance} from "../src/Lsi/lsi";
 const { useState, Fragment } = React;
 
 const Container = styled.div`
 width:80%;
 margin-left:10%;
-margin-bottom:80px;
+margin-bottom:100px;
 background: 80% / 20% auto no-repeat fixed url(${props=>props.bgImg});   
 @media screen and (max-width:700px) {
  background:unset;
@@ -126,8 +127,7 @@ right:0;
   }
 `
 
-const Pages = ({ menu,pages }) => {
-    const page = pages[0]
+const Pages = ({ menu,page ,contacts,locale}) => {
     const router = useRouter()
     const parsedMenu = ParcMenu(menu)
     const [shownComments, setShownComments] = useState({});
@@ -142,22 +142,22 @@ const Pages = ({ menu,pages }) => {
         return <div>Loading...</div>
     }
     return (
-        <MainLayout menu={parsedMenu} hideLeftComponent={true} >
-            <Container bgImg={page.financeField.bgImg.sourceUrl}>
+        <MainLayout contacts={contacts} menu={parsedMenu} hideLeftComponent={true} >
+            <Container bgImg={page?.financeField?.bgImg?.sourceUrl}>
                 <Header>
                     <TitleForComponent marginBottom='40px' borderBottom='unset' text={page.title}  />
                    <Input>
                        <SearchBarStyled
                            maxlength={10}
                            width='100%'
-                           inputPlaceholder='пошук по даті'
+                           inputPlaceholder={finance.search[locale]}
                            border='1px solid'
                            inputFunc={(e)=>setSearchInput(e.target.value)} />
                    </Input>
                 </Header>
 
                 {searchInput.length > 0 ?
-                    page.financeField.year.map(el=>
+                    page?.financeField?.year?.map(el=>
                     el.filePdf?.filter(file=>
                     file.dateFile && file.dateFile.includes(searchInput)).map(filteredFiles=>
                         <DownloadItem href={filteredFiles.downloadPdf.mediaItemUrl} download target='_blank'>
@@ -169,10 +169,10 @@ const Pages = ({ menu,pages }) => {
                                     mTop='15px'
                                     mBottom='unset'
                                 >
-                                    {`Звіт за 
+                                    {`${finance.report[locale]}
                                                     ${filteredFiles.dateFile? filteredFiles.dateFile : null}
                                                    
-                                ( Дата розміщення ${getDateIn_DD_MM_YYYY_Format(filteredFiles.downloadPdf.dateGmt)} )`}
+                                ( ${finance.date[locale]} ${getDateIn_DD_MM_YYYY_Format(filteredFiles.downloadPdf.dateGmt)} )`}
                                 </DownloadFileText>
                                 <DownloadFileTextAndArrow
                                     top='unset'
@@ -181,7 +181,7 @@ const Pages = ({ menu,pages }) => {
                                     mBottom='15px'
                                 >
                                     <Icon src='/arrow-right-in-circle.svg' width='20px' height='20px'/>
-                                    <span>Завантажити ({formatBytes(filteredFiles.downloadPdf.fileSize)})</span>
+                                    <span>{finance.download[locale]} ({formatBytes(filteredFiles.downloadPdf.fileSize)})</span>
                                 </DownloadFileTextAndArrow>
                             </DownloadFile>
                         </DownloadItem>
@@ -191,7 +191,7 @@ const Pages = ({ menu,pages }) => {
 
                 :
 
-                    page.financeField.year.map((el,index)=>
+                    page?.financeField?.year?.map((el,index)=>
 
                         <>
                             <Year
@@ -216,10 +216,10 @@ const Pages = ({ menu,pages }) => {
                                                     mTop='15px'
                                                     mBottom='unset'
                                                 >
-                                                    {`Звіт за 
+                                                    {`${finance.report[locale]} ( 
                                                     ${file.dateFile? file.dateFile : null}
                                                    
-                                ( Дата розміщення ${getDateIn_DD_MM_YYYY_Format(file.downloadPdf.dateGmt)} )`}
+                                (${finance.date[locale]} ( ${getDateIn_DD_MM_YYYY_Format(file.downloadPdf.dateGmt)} )`}
                                                 </DownloadFileText>
                                                 <DownloadFileTextAndArrow
                                                     top='unset'
@@ -228,7 +228,7 @@ const Pages = ({ menu,pages }) => {
                                                     mBottom='15px'
                                                 >
                                                     <Icon src='/arrow-right-in-circle.svg' width='20px' height='20px'/>
-                                                     <span>Завантажити ({formatBytes(file.downloadPdf.fileSize)})</span>
+                                                     <span>{finance.download[locale]} ( ({formatBytes(file.downloadPdf.fileSize)})</span>
                                                 </DownloadFileTextAndArrow>
                                             </DownloadFile>
                                         </DownloadItem>
@@ -245,38 +245,48 @@ const Pages = ({ menu,pages }) => {
 
 export default Pages;
 
-export const getStaticProps = async (
-    ctx
-) => {
-    const name = ctx.params.slug
+export const getStaticProps = async ({params,locale}) => {
+
+    const uri =locale === "EN" ? `en${params.slug}` : locale === "RU" ? `ru${params.slug}` : params.slug
+    const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
+    const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
+
     const { data } = await client.query( {
         query: GET_PAGE,
         variables:{
-            name
+            uri,
+            location,
+            contactsUri
         }
     } )
 
     return {
         props: {
+            locale,
+            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
             menu: data?.menuItems?.nodes || [],
-            pages: data?.pages?.nodes
+            page: data?.page? data.page : []
         },
         revalidate: 1
     }
 };
 
-export async function getStaticPaths() {
+export async function getStaticPaths({locales}) {
+    let paths=[]
+
     const { data } = await client.query({
         query: GET_PAGES_URI
     });
-    const paths = data?.pages?.nodes?.map(item => {
-        return { params: {slug: item.slug.substring(1)}}
-    })
 
+
+    for (const locale of locales) {
+        paths = [
+            ...paths,
+            ...data.pages?.nodes.map(el => ({ params: { slug: `${el.slug}` }, locale })),
+        ]
+    }
     return {
-        paths: [
-            { params: { slug: 'finansovaya-otchetnost' } }
-        ],
+        paths,
         fallback: false
     };
 }

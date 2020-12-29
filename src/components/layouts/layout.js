@@ -124,10 +124,9 @@ export  const Layout = ({contacts,menu,hideLeftComponent,children , header,showZ
                            <StyledRegisterZNO contacts={contacts} menu={menu}/>
                        </Element>
                        :
-                    !hideLeftComponent ?  <StyledLeftComment menu={menu}/> :
+                    !hideLeftComponent ?  <StyledLeftComment contacts={contacts} menu={menu}/> :
                         <PageFooter contacts={contacts} menu={menu}/>
                }
-
                 </>
     );
 };

@@ -27,7 +27,7 @@ const GET_EVENTS_BY_DATE = gql`
       group
       gmail
       facebookLink
-      comapnyName
+      
       authorship
       adress
     }

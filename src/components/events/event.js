@@ -134,7 +134,7 @@ const IconText = styled.div`
 
 export default function Event({locale,borderLeftColor,hoursOne}) {
 
-    const inputDate = new Date(hoursOne?.hoursEvents?.hoursEvents)
+    const inputDate = new Date(hoursOne?.hoursEvents?.hoursEvents ? hoursOne.hoursEvents.hoursEvents :new  Date())
 
     const renderDay=()=>{
         if(isToday(inputDate)){

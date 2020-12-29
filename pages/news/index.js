@@ -91,7 +91,7 @@ export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
                             inputFunc={(e)=>setSearchInput(e.target.value)} />
                     </Input>
                 </Title>
- 
+
                 {
                     searchInput.length > 0 ?
 

@@ -23,7 +23,7 @@ const LoaderContainer = styled.div`
                 margin-top: 70px;
                 margin-bottom: 70px;
 `
-export default function MicrophoneDetail({newBySlug,news,menu}) {
+export default function MicrophoneDetail({locale,newBySlug,news,menu,contacts}) {
     const router = useRouter();
     const parsedMenu = ParcMenu(menu)
     if (router.isFallback) {
@@ -37,7 +37,7 @@ export default function MicrophoneDetail({newBySlug,news,menu}) {
     }
 
     return (
-        <MainLayout menu={parsedMenu}>
+        <MainLayout contacts={contacts} menu={parsedMenu}>
             {
                 newBySlug || news ?
                     <>
@@ -48,11 +48,10 @@ export default function MicrophoneDetail({newBySlug,news,menu}) {
                             <PostBody content={newBySlug.content} />
                         </Container>
                         <LastNews background='rgba(157, 157, 157, 0.08);'
-                                  title='інші новини'
                                   posts={news.nodes}
                                   pageInfo={news.pageInfo}
-                                  language='ukr'
                                   buttonHide={true}
+                                  locale={locale}
                         />
                     </>
                     :
@@ -65,19 +64,24 @@ export default function MicrophoneDetail({newBySlug,news,menu}) {
     );
 }
 
-export const getStaticProps = async (
-    ctx
-) => {
-    const slug = ctx.params.slug
+export const getStaticProps = async ({params,locale}) => {
+    const slug = params.slug
+    const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
+    const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
     const { data } = await client.query( {
         query: GET_NEWS_BY_SLUG_AND_FIRST_THREE_NEWS,
         variables:{
-            slug
+            slug,
+            location,
+            contactsUri,
+            language:locale
         }
     } )
 
     return {
         props: {
+            locale,
+            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
             newBySlug:data.new,
             news: data.news,
             menu: data?.menuItems?.nodes || [],
@@ -86,13 +90,18 @@ export const getStaticProps = async (
     }
 };
 
-export const getStaticPaths= async () => {
+export const getStaticPaths= async ({locales}) => {
+    let paths=[]
     const { data } = await client.query( {
         query: GET_ALL_SLUG_FROM_NEWS
     } )
-    const paths = data.news.nodes.map((el) => {
-        return { params: { slug: el.slug } }
-    });
+
+    for (const locale of locales) {
+        paths = [
+            ...paths,
+            ...data.news.nodes.map((el) => ({ params: { slug: el.slug }, locale })),
+        ]
+    }
 
     return {
         fallback: false,

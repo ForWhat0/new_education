@@ -5,7 +5,7 @@ const GET_EVENTS_DATE = gql`
     $status: PostStatusEnum,
      $language: LanguageCodeFilterEnum
   ) {
-    events(where: {status: $status,language: $language}) {
+    events(first:500,where: {status: $status,language: $language}) {
     nodes {
       dateGmt
     }

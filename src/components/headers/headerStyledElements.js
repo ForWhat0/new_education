@@ -37,7 +37,7 @@ padding: 30px;
   position:relative;
      justify-content: space-between;
     margin: 0px;
-    padding: 24px 0px 5px 30px;
+    padding: 24px 0px 5px 0;
   align-items: center;
 `
 const NavMain = styled.nav`
@@ -355,10 +355,15 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                                                             <li>{el.title}</li>
                                                         </Link>
                                                         :
-                                                        <Link href={el.path}>
+                                                        <Link href={
+                                                            el.path.substring(0,4) === '/en/' ||
+                                                            el.path.substring(0,4) === '/ru/'?
+                                                              el.path.substring(3):
+                                                                el.path
+                                                        }>
                                                             <li>
-                                                                <a href="#">
-                                                                    {el.title}
+                                                                <a>
+                                                                    { el.title}
                                                                 </a>
                                                             </li>
                                                         </Link>
@@ -369,7 +374,7 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                                     :
                                     <Link href={button.path}>
                                         <li>
-                                            <a href="#">
+                                            <a>
                                                 {button.title}
                                             </a>
                                         </li>
@@ -422,10 +427,15 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                                                         </Link>
 
                                                         :
-                                                        <Link href={el.path}>
+                                                        <Link href={
+                                                            el.path.substring(0,4) === '/en/' ||
+                                                            el.path.substring(0,4) === '/ru/'?
+                                                                el.path.substring(3):
+                                                                el.path
+                                                        }>
                                                             <li>
                                                                 <a>
-                                                                    {el.title}
+                                                                    { el.title}
                                                                 </a>
                                                             </li>
                                                         </Link>
@@ -525,13 +535,13 @@ export const Footer =({inputName,inputFunc,inputPlaceholder,contacts})=>{
     return (
         <FooterContainer>
             <Logos>
-                <a href={telegram}  target="_blank">
+                <a href={`https://telegram.im/${telegram}`}  target="_blank">
                     <LinkIcon  className="fa fa-paper-plane" aria-hidden="true"/>
                 </a>
                 <a href={facebook} target="_blank">
                     <LinkIcon  className="fa fa-facebook" aria-hidden="true"/>
                 </a>
-                <a href={gmail} target="_blank">
+                <a href={`mailto:?subject=${gmail}`} target="_blank">
                     <LinkIcon  className="fa fa-envelope" aria-hidden="true"/>
                 </a>
             </Logos>

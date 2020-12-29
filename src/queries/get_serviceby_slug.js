@@ -22,7 +22,7 @@ $slug:ID!
       group
       gmail
       facebookLink
-      comapnyName
+      
       authorship
       adress
     }

@@ -10,7 +10,7 @@ import {
 import GET_MOORE_NEWS from "../../queries/get_moore_news";
 import reduxClient from "../../apollo/reduxClient";
 
-export function actionGetNews(offset) {
+export function actionGetNews(offset,locale) {
     return async dispatch=>{
         try{
             dispatch(ShowLoader())
@@ -18,7 +18,8 @@ export function actionGetNews(offset) {
                 query: GET_MOORE_NEWS,
                 variables: {
                     size:3,
-                    offset
+                    offset,
+                    language:locale
                 }
             } )
             dispatch({type:getNews,payload:{news,offset}})
@@ -29,7 +30,7 @@ export function actionGetNews(offset) {
         }
     }
 }
-export function actionGetNextNewsForMobile(offset,data) {
+export function actionGetNextNewsForMobile(offset,data,locale) {
     return async dispatch=>{
         try{
             dispatch(ShowLoader())
@@ -37,7 +38,8 @@ export function actionGetNextNewsForMobile(offset,data) {
                 query: GET_MOORE_NEWS,
                 variables: {
                     size:3,
-                    offset
+                    offset,
+                    language:locale
                 }
             } )
             dispatch({type:getNewsForMobile,payload:{news,offset,data}})

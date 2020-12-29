@@ -14,7 +14,7 @@ export default function MainHeader({whiteTheme,menu,footer}) {
     return (
         <RestPagesHeaderWrapper>
             <RestWrapperInner borderBottomColor={color} background={background} >
-                <Link href={"/"}>
+                <Link  href={"/"}>
                     <a>
                         <LogoImg
                             height='70px'

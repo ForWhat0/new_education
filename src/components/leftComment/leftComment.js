@@ -21,7 +21,7 @@ import {
 import {PageFooter} from "../footer/footer";
 import {leftComment} from "../../Lsi/lsi";
 
-export const StyledLeftComment =({menu,display,src,align})=>{
+export const StyledLeftComment =({contacts,menu,display,src,align})=>{
 
     const router = useRouter()
     const locale = router.locale
@@ -105,7 +105,7 @@ export const StyledLeftComment =({menu,display,src,align})=>{
                     </LoaderContainer>
                 </InputsFields>
             </ContainerWrapper>
-            <PageFooter menu={menu}/>
+            <PageFooter contacts={contacts} menu={menu}/>
         </Container>
     )
 }

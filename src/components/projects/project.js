@@ -44,6 +44,7 @@ display: flex;
 `
 const Image = styled.img`
 max-height: 288px;
+object-fit: contain;
 width:100%;
 border-radius: 30px;
 filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.2));

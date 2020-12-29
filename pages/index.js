@@ -15,7 +15,6 @@ import {NewsLsi} from "../src/Lsi/lsi";
 
 export default function Home({contacts,locale,menu,news,events,data,projects,services,allDates}) {
   const {mainPageFields} = data
-
   const parsedMenu = ParcMenu(menu)
 
     const teamData =  {
@@ -52,7 +51,7 @@ export default function Home({contacts,locale,menu,news,events,data,projects,ser
 }
 export async function getStaticProps({locale} ){
 
-  const uri = locale === "EN" ? "/en/glavnaya-english/" : locale === "RU" ? "/ru/glavnaya-russkij/"  : "/"
+  const uri = locale === "EN" ? "/en/glavnaya-english/" : locale === "RU" ? "/ru/glavnaya-2/"  : "/"
   const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
   const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
 

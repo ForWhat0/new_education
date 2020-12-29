@@ -4,9 +4,10 @@ const GET_MOORE_NEWS = gql`
    query GET_PAGINATED_NEWS(
     $size: Int,
     $offset: Int
+    $language: LanguageCodeFilterEnum
   ) {
  
-news (where: {orderby: {field: DATE, order: DESC}  offsetPagination: { size:$size, offset:  $offset } }){
+news (where: { language: $language,orderby: {field: DATE, order: DESC}  offsetPagination: { size:$size, offset:  $offset } }){
     nodes {
       title
       databaseId

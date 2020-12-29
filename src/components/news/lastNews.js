@@ -124,19 +124,19 @@ export default function LastNews({locale,titleNews,margin,title,language,posts,p
         if (loading || !hasNextPage){
             return null
         }
-        dispatch(actionGetNews(!newsReducer ? offset :  offset+3))
+        dispatch(actionGetNews(!newsReducer ? offset :  offset+3,locale))
     }
     const nextNewsForMobile=()=>{
         if (loading || !hasNextPageForMobile){
             return null
         }
-        dispatch(actionGetNextNewsForMobile(!newsForMobileSliderReducer ? offsetMobile :  offsetMobile+3 ,!newsForMobileSliderReducer ? newsForMobile :  null))
+        dispatch(actionGetNextNewsForMobile(!newsForMobileSliderReducer ? offsetMobile :  offsetMobile+3 ,!newsForMobileSliderReducer ? newsForMobile :  null,locale))
     }
     const prevNews=()=>{
         if (loading || !hasPreviousPage){
             return null
         }
-        dispatch(actionGetNews(offset-3))
+        dispatch(actionGetNews(offset-3,locale))
     }
 
     const checkScroll = e => {
@@ -153,7 +153,7 @@ export default function LastNews({locale,titleNews,margin,title,language,posts,p
             <Back margin={margin} background={background}>
                 <Container>
                     <Header>
-                        <TitleForComponent text={titleNews} fontSize='40px' />
+                        <TitleForComponent text={NewsLsi.otherNews[locale]} fontSize='40px' />
                         <Arrows>
                             <ArrowIcon
                                 className="fa fa-long-arrow-left"
