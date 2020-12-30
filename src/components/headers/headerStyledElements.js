@@ -275,10 +275,10 @@ li a {
   }
 }
 
-li:hover,
+li a:hover,
 li:focus-within {
   cursor: pointer;
- border-left:1px solid;
+ color:rgb(0,114,188);
 }
 
 li:focus-within a {
@@ -352,7 +352,7 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                                                 button.children.map(el=>
                                                     el.path.charAt(0) === '#' ?
                                                         <Link href={`/${el.path}`} passHref>
-                                                            <li>{el.title}</li>
+                                                            <li><a>{el.title}</a></li>
                                                         </Link>
                                                         :
                                                         <Link href={
@@ -423,7 +423,7 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                                                 button.children.map(el=>
                                                     el.path.charAt(0) === '#' ?
                                                         <Link href={`/${el.path}`} passHref>
-                                                            <li>{el.title}</li>
+                                                            <li><a>{el.title}</a></li>
                                                         </Link>
 
                                                         :

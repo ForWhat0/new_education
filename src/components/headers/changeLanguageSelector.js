@@ -6,23 +6,6 @@ import {ChangeLanguage} from "../../redux/actions/actions"
 import {useRouter} from "next/router";
 import Link from "next/link";
 
-const SelectWrapper = styled.div`
-position: relative;
- width: min-content;
- margin-left:10px;
- margin-right:10px;
- display: flex;
-align-items: center;
-:after{
-font-family: FontAwesome;
-  font-size: 28px;
-  position: absolute;
-  right:-1px;
-  color: ${props=>props.color};
-  pointer-events: none;
-}
-}
-`
 const Select = styled.div`
 font-size: 16px;
 width: 163px;
@@ -30,9 +13,6 @@ color: ${props=>props.color};
 background-color: transparent;
 cursor:pointer;
 position:relative;
-`
-const Option = styled.option`
-color: ${props=>props.color};
 `
 
 const Content=styled.ul`
@@ -65,11 +45,11 @@ font-size: 24px;
 const DropDownContent=styled.ul`
 z-index: 5;
 background-color:white;
-border-radius: 0 0 28px 28px;
+border-radius: 20px;
 display:flex;
 position:absolute;
 width: 100%;
-margin:0;
+margin:5px 0 0 0;
 padding:0;
 flex-direction:column;
 list-style-type:none;

@@ -24,7 +24,7 @@ export const Container = styled.div`
 position:relative;
 width:80%;
 margin-left:10%;      
- @media screen and ${device.mobileL} {
+ @media screen and (max-width:650px) {
    width:auto;
 margin-left:unset;  
   }
@@ -41,9 +41,10 @@ opacity:${props => props.opacity};
 const Arrows = styled.div`
 position:absolute;
 display:flex;
+align-items:center;
 flex-direction:row;
 right:0;    
- @media screen and ${device.mobileL}{
+ @media screen and (max-width:650px){
     display:none;
   }
 `
@@ -53,11 +54,12 @@ margin-top:40px;
 display:${props => props.display};
 justify-content:center;
 `
- const ArrowIcon = styled.i`
+ const ArrowIcon = styled.div`
+  background:url(${props=>props.arrow}) no-repeat;
     display: flex;
-    padding: 20px;
-    font-size: 50px;
-    color: #000000;
+   width:50px;
+   height:30px;
+   margin-left:40px;
     opacity:${props => props.opacity};
     cursor:pointer;
 `
@@ -76,7 +78,7 @@ const StyledContainer = styled.div`
     &:hover  {
     transform: scale(1.01);
   }
-@media screen and ${device.mobileL}{
+@media screen and (max-width:650px){
         min-width: 240px;
      flex: unset;
       padding: 10px;
@@ -84,7 +86,7 @@ const StyledContainer = styled.div`
 `
 const ScrollBarStyled = styled.div`
 display:none;
- @media screen and ${device.mobileL} {
+ @media screen and (max-width:650px) {
    display:block;
    overflow-x: scroll;
     overflow-y: unset;
@@ -92,7 +94,7 @@ display:none;
 `
 const NewsForDesctop = styled.div`
 display:block;
- @media screen and ${device.mobileL} {
+ @media screen and (max-width:650px) {
  display:none;
   }
 `
@@ -156,13 +158,13 @@ export default function LastNews({locale,titleNews,margin,title,language,posts,p
                         <TitleForComponent text={NewsLsi.otherNews[locale]} fontSize='40px' />
                         <Arrows>
                             <ArrowIcon
-                                className="fa fa-long-arrow-left"
+                                arrow='/leftArrow.svg'
                                 aria-hidden="true"
                                 opacity={loading || !hasPreviousPage ? '0.5' : 'unset'}
                                 onClick={()=>prevNews()}
                             />
                             <ArrowIcon
-                                className="fa fa-long-arrow-right"
+                                arrow='/rightArrow.svg'
                                 aria-hidden="true"
                                 opacity={loading || !hasNextPage ? '0.5' : 'unset'}
                                 onClick={()=>nextNews()}

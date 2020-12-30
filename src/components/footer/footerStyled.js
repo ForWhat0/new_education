@@ -48,7 +48,7 @@ const TextContainer = styled.div`
     display: flex;
     margin-left: 10%;
     width: 80%;
-    @media screen and (max-width:1150px){
+    @media screen and (max-width:1200px){
       flex-direction:column;
   }
 `
@@ -57,8 +57,11 @@ text-align:${props=>props.align};
 position:${props=>props.position};
 right:${props=>props.right};
 padding-left: unset;
- @media screen and (max-width:1150px){
+@media screen and (max-width:1300px){
      position:unset;
+  }
+ @media screen and (max-width:1200px){
+     text-align:unset;
   }
 `
 const ListElement = styled.li`
@@ -67,7 +70,7 @@ const ListElement = styled.li`
     list-style-type: none;
 `
 const Link =styled.a`
-color:-webkit-link;
+color:rgb(0,114,188);
 `
 export const Text =({
     locale,
@@ -110,6 +113,12 @@ flex-direction:column;
 const Develop = styled.div`
 display:flex;
 align-items:center;
+a{
+opacity: 0.5;
+&:hover{
+opacity:1;
+}
+}
 `
 const DevelopText = styled.span`
 color:${props=>props.color};
@@ -124,7 +133,9 @@ return(
             <DevelopText marginBottom='unset' color='white'>
                 {footer.developBy[locale]}
             </DevelopText>
-            <Icon src='/flexReality.svg' width='100px' height='50px' alt='Flex Reality' />
+            <a href='https://flexreality.pro/' target='_blank'>
+                <Icon src='/flexReality.svg' width='100px' height='50px' alt='Flex Reality' />
+            </a>
         </Develop>
         <DevelopText marginBottom='40px' color='#4F4F4F'>{authorship}</DevelopText>
     </CompanyContainer>

@@ -5,6 +5,9 @@ import {format,isToday} from "date-fns";
 import {uk,enGB, ru} from "date-fns/locale";
 import {MonthYearLabel} from "../datePicker/styledDatePicker";
 import {events} from "../../Lsi/lsi"
+import React from "react";
+import {ArrowContainer} from "../textComponent/textComponent";
+import {ArrowIcon} from "../textComponent/textComponent";
 
 const opacity = keyframes`
  0%   { opacity: 0; }
@@ -110,7 +113,7 @@ const Text = styled.p`
      @media screen and (max-width:1200px) {
       margin: 30px 20px 0px;
     @media screen and ${device.mobileL} {
-     border-left: 1px solid;
+     border-left: ${props=>props.border};
      margin:0 0 20px 19px;
      padding: 0 20px 20px 12px;
   }
@@ -126,13 +129,13 @@ display:none;
   }
 `
 const IconText = styled.div`
-   
+   margin-left: 10px;
    font-weight:bold;
    line-height:15px;  
 `
 
 
-export default function Event({locale,borderLeftColor,hoursOne}) {
+export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
 
     const inputDate = new Date(hoursOne?.hoursEvents?.hoursEvents ? hoursOne.hoursEvents.hoursEvents :new  Date())
 
@@ -176,19 +179,15 @@ export default function Event({locale,borderLeftColor,hoursOne}) {
                            {`${format(inputDate, "HH")}:${format(inputDate, "mm")}`}
                        </Time>
                </TimeContainer>
-                <Text>
+                <Text border={offBorder ? 'unset' : '1px solid'}>
 
                     {hoursOne?.title}
 
                 </Text>
                 <Review >
-                    <Icon
-                        border='1px solid black'
-                        radius='29px'
-                        padding='5px'
-                        className="fa fa-long-arrow-right"
-                        aria-hidden="true"
-                    />
+                    <ArrowContainer>
+                        <ArrowIcon/>
+                    </ArrowContainer>
                     <IconText>
                         {events.review[locale]}
                     </IconText>

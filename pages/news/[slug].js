@@ -43,7 +43,7 @@ export default function MicrophoneDetail({locale,newBySlug,news,menu,contacts}) 
                     <>
                         <Container>
 
-                            <TitleForComponent marginBottom='40px' text={newBySlug.title} fontSize='40px'/>
+                            <TitleForComponent displayYellowDiv={false} marginBottom='40px' text={newBySlug.title} fontSize='40px'/>
                             <Date date={newBySlug.date}/>
                             <PostBody content={newBySlug.content} />
                         </Container>

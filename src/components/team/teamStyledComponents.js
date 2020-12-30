@@ -52,7 +52,7 @@ width:100%;
 display:flex;
 margin:${props=>props.margin};
 flex-direction:row;
- @media screen and ${device.laptop}{
+ @media screen and (max-width: 1150px){
     height: auto;
     flex-direction:column;
   }
@@ -61,7 +61,7 @@ export const Text = styled.div`
 background-color:rgba(157, 157, 157, 0.08);
 width: 44%;
 height:453px;
- @media screen and ${device.laptop}{
+ @media screen and (max-width: 1150px){
   width: 100%;
   margin-bottom:20px;
   height:auto;
@@ -80,7 +80,7 @@ margin-left: 150px;
 max-width: 300px;
 margin-left: 50px;
   }
-  @media screen and ${device.laptop}{
+  @media screen and (max-width: 1150px){
   max-width: 50%;
   position: relative;
   margin-right: unset;
@@ -101,10 +101,9 @@ export const SwiperContainer = styled.div`
     margin-right: 10%;
     overflow: hidden;
    @media screen and (max-width: 1290px){
-margin-right: 50px;
  width: 60%;
   }
-  @media screen and ${device.laptop}{
+  @media screen and (max-width: 1150px){
   width: 80%;
   position: relative;
   margin-right: unset;
@@ -122,13 +121,14 @@ margin-right: 50px;
 export const CommandText = styled.p`
         letter-spacing: 1px;
     font-size: 20px;
-    @media screen and ${device.laptop}{
+    @media screen and (max-width: 1150px){
 font-size: 12px;
   }
 `
 export const Arrows = styled.div`
 display:flex;
-@media screen and ${device.laptop}{
+margin-top:50px;
+@media screen and (max-width: 1150px){
   display:none;
   }
 `
@@ -137,25 +137,29 @@ display:flex;
 height:50px;
 align-items:center;
  display:none;
-@media screen and ${device.laptop}{
+@media screen and (max-width: 1150px){
   display:block;
   }
 `
-export const ArrowIcon = styled.i`
+export const ArrowIcon = styled.div`
+    background:url(${props=>props.arrow}) no-repeat;
     display: flex;
-    padding-right:20px;
-    font-size: 50px;
-    color: #000000;
+   width:50px;
+   height:50px;
+     background-position: center;
+    background-size: contain;
+   margin-right:40px;
     opacity:${props => props.opacity};
     cursor:pointer;
 `
-export const ArrowIconMobile = styled.i`
+export const ArrowIconMobile = styled.div`
    position: absolute;
-   font-size: 40px;
-    color: #000000;
+   background-position: center;
+    background-size: contain;
+ background:url(${props=>props.arrow}) no-repeat;
+  width:50px;
+   height:50px;
     cursor: pointer;
     left: ${props => props.left};
     right: ${props => props.right};
-    padding-left: ${props => props.paddingLeft};
-    padding-right: ${props => props.paddingRight};
 `

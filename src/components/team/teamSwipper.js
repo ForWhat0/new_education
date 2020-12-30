@@ -1,6 +1,7 @@
 import React  from 'react'
 import { Swiper ,SwiperSlide} from 'swiper/react';
 import {
+    ArrowIcon,
     ArrowIconMobile,
     ArrowsMobile,
     EmployerContainer,
@@ -58,17 +59,13 @@ export const TeamSwiper = ({employees})=>{
             })}
             <ArrowsMobile>
                 <ArrowIconMobile
-                    left='0'
-                    paddingLeft='15%'
-                    className="fa fa-long-arrow-left"
-                    aria-hidden="true"
+                    left='10%'
+                    arrow='/leftArrow.svg'
                     onClick={()=>previous()}
                 />
                 <ArrowIconMobile
-                    right='0'
-                    paddingRight='15%'
-                    className="fa fa-long-arrow-right"
-                    aria-hidden="true"
+                    right='10%'
+                    arrow='/rightArrow.svg'
                     onClick={()=>next()}
                 />
             </ArrowsMobile>

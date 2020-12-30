@@ -12,7 +12,7 @@ export default function Projects({textForIcon,posts,title}){
     return(
       <>
           <TitleContainer>
-              <TitleForComponent text={title} fontSize='40px' />
+              <TitleForComponent  text={title} fontSize='40px' />
           </TitleContainer>
           {posts.map((node,i) =>
               <Project

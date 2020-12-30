@@ -14,6 +14,7 @@ const ServiceContainer = styled.div`
           justify-content: center;
   }
    display:flex ;
+   justify-content: center;
        position: relative;
     border-bottom: 1px solid;
     padding-bottom: 20px;
@@ -24,6 +25,10 @@ const ContainerWrapper = styled.div`
  @media screen and ${device.mobileL} {
     flex-direction: column;
   }
+  width: 70%;
+  
+    position: relative;
+
    display:flex ;
    align-items:center;
 `
@@ -35,7 +40,7 @@ const StyledPhoto = styled.img`
  @media screen and ${device.mobileL} {
      margin-left:unset;
   }
-margin-left:30px;
+
    border-radius: 30px;
      position: relative;
     width:100px;
@@ -45,7 +50,7 @@ margin-left:30px;
 `
 const StyledText = styled.span`
 @media screen and ${device.mobileL} {
-     margin-left: unset;
+     left:unset;
     position: relative;
     margin-top:15px;
         font-size: 16px;
@@ -55,7 +60,7 @@ const StyledText = styled.span`
     font-size: 24px;
     width: 150px;
     line-height: 30px;
-    margin-left: 110px;
+    left:80px;
     z-index: 2;
     position: absolute;
 `

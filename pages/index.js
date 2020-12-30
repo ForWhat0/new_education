@@ -32,6 +32,7 @@ export default function Home({contacts,locale,menu,news,events,data,projects,ser
      menu={parsedMenu}
      title = {mainPageFields.titleBanner}
       >
+
         {events.length > 0 &&<Events locale={locale} titleEvent={mainPageFields?.titleEvent}  posts={events}/>}
         {events.length > 0 &&<EventsMobile locale={locale} titleEvent={mainPageFields?.titleEvent} allDates={allDates}  posts={events[0]}/>}
         {services?.nodes.length > 0 &&

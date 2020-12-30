@@ -76,7 +76,7 @@ display: contents;
 `
 const Input = styled.div`
 position:absolute;
-right:80px;
+right: 100px;
 width:350px;
  @media screen and ${device.laptop} {
  position:relative;

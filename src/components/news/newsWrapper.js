@@ -7,9 +7,9 @@ const {review} = NewsLsi
 
 const NewsContainer = styled.div`
 margin-top:40px;
-display: flex;
-flex-wrap: wrap;
-        
+ display: inline-flex;
+    flex-wrap: wrap;
+    gap: 30px;
 `
 const StyledContainer = styled.div`
  display:flex;
@@ -18,7 +18,6 @@ const StyledContainer = styled.div`
  flex-direction: column;
  overflow: hidden;
  margin: 0 0 40px;
- padding: 0 20px 40px;
  min-height: 250px;
  background-size: cover;
   transition: transform .2s linear;

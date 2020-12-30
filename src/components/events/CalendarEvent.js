@@ -1,6 +1,5 @@
 import styled, {keyframes} from 'styled-components'
-import Link from "next/link"
-import {device} from "../deviceSizes/deviceSizes";
+import {format} from "date-fns";
 
 const opacity = keyframes`
  0%   { opacity: 0; }
@@ -19,9 +18,7 @@ margin-bottom: 20px;
 padding-right:20px;
 position: relative;
 `
-const MonthAndDay = styled.div`
-display:none;
-`
+
 const Time = styled.div`
 display:flex;
 margin-left: -10px;
@@ -39,88 +36,38 @@ const Icon = styled.i`
     border-radius: ${props=>props.radius};
     padding:${props=>props.padding};
 `
-const TextField = styled.span`
-display:none;
-`
+
 const Text = styled.p`
-border-left: 1px solid;
+border-left: ${props=>props.border};
     line-height: 27px;
     font-weight:500;
      padding: 0 20px 20px 12px;
 `
-const Review = styled.div`
-display:none;
-`
-const IconText = styled.div`
-  
-   font-weight:bold;
-   line-height:15px;  
-`
 
 
-export default function CalendarEvent({borderLeftColor,hoursOne}) {
+
+export default function CalendarEvent({offBorder,hoursOne}) {
 
     const inputDate = new Date(hoursOne?.hoursEvents?.hoursEvents)
 
-    const renderDay=()=>{
-        const todayDate = new Date()
-        if(inputDate.getDay()+inputDate.getMonth()+inputDate.getFullYear() ===
-            todayDate.getDay()+todayDate.getMonth()+todayDate.getFullYear() ){
-            return  'сьогодні'
-        }
-        else{
-            return inputDate.toLocaleString('default', { weekday: 'long' })
-        }
-    }
+
 
     return (
             <EventContainer >
-                <TimeContainer borderLeftColor={borderLeftColor}>
-                    <TextField
-                        fontSize='40px'
-                        fontWeight='bold'
-                    >
-                        {inputDate.getDate()}
-                    </TextField>
-                    <MonthAndDay>
-                        <TextField
-                            fontSize='16px'
-                            fontWeight='500'
-                        >
-                            {`${inputDate.toLocaleString('default', { month: 'long' })} ${inputDate.getUTCFullYear()}`}
-                        </TextField>
-                        <TextField
-                            fontSize='16px'
-                            fontWeight='100'
-                        >
-                            {renderDay()}
-                        </TextField>
-                    </MonthAndDay>
+                <TimeContainer>
                     <Time>
                         <Icon
                             className="fa fa-clock-o"
                             aria-hidden="true"
                         />
-                        {`${inputDate.getHours()}:${inputDate.getMinutes()<10?'0':''}${inputDate.getMinutes()}`}
+                        {`${format(inputDate, "HH")}:${format(inputDate, "mm")}`}
                     </Time>
                 </TimeContainer>
-                <Text>
+                <Text border={offBorder ? 'unset' : '1px solid'}>
 
                     {hoursOne?.title}
 
                 </Text>
-                <Review >
-                    <Icon
-                        border='1px solid black'
-                        radius='29px'
-                        padding='5px'
-                        className="fa fa-long-arrow-right"
-                        aria-hidden="true"
-                    />
-                    <IconText>
-                        Переглянути
-                    </IconText>
-                </Review>
             </EventContainer>
     )
 }

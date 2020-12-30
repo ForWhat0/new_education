@@ -14,6 +14,7 @@ import client from "../../apollo/client";
 import GET_EVENTS_BY_DATE from "../../queries/get_events_by_date";
 import {isSameDay} from "date-fns";
 import GET_EVENT_BY_DATE from "../../queries/get_event_by_date";
+import CalendarEvent from "./CalendarEvent";
 const {review} = NewsLsi
 
 
@@ -80,7 +81,6 @@ export default function EventsMobile({locale,titleEvent,posts,allDates}){
         },
         [],
     );
-
     return(
         <GlobalContainer>
             <TitleForComponent text={titleEvent}/>
@@ -101,6 +101,7 @@ export default function EventsMobile({locale,titleEvent,posts,allDates}){
                                 <Event
                                     locale={locale}
                                     hoursOne={currentDate.eventsFields.hoursOne}
+                                    offBorder={true}
                                 />
                             </a>
                         </Link>
@@ -110,12 +111,13 @@ export default function EventsMobile({locale,titleEvent,posts,allDates}){
                      {
                          currentDate.eventsFields.hours.slice().sort(function(a,b){
                              return new Date(a.hoursEvents.hoursEvents) - new Date(b.hoursEvents.hoursEvents)
-                         }).map(el=>
+                         }).map((el,i)=>
                              <Link href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
                                  <a>
                                      <Event
                                          locale={locale}
                                          hoursOne={el}
+                                         offBorder={currentDate.eventsFields.hours.length === i + 1}
                                      />
                                  </a>
                              </Link>

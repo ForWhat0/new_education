@@ -50,7 +50,7 @@ export const MonthYearLabel = styled.div`
     top: 0;
     left: 0;
     width: max-content;
-    margin: 0 14px 10px 0;
+    margin: 0 14px 20px 0;
 `
 
 export const DateDayItem = styled.div`

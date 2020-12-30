@@ -10,7 +10,7 @@ import {device} from "../deviceSizes/deviceSizes";
 const {review} = NewsLsi
 
 const ServicesContainer = styled.div`
- @media screen and ${device.laptop} {
+ @media screen and (max-width:1250px) {
       grid-template-columns: 1fr;
   }
  display: grid;

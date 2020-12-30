@@ -12,13 +12,11 @@ export const TextTeam = ({title,text})=>{
                 </CommandText>
                 <Arrows>
                     <ArrowIcon
-                        className="fa fa-long-arrow-left"
-                        aria-hidden="true"
+                        arrow='/leftArrow.svg'
                         onClick={()=>previous()}
                     />
                     <ArrowIcon
-                        className="fa fa-long-arrow-right"
-                        aria-hidden="true"
+                        arrow='/rightArrow.svg'
                         onClick={()=>next()}
                     />
                 </Arrows>

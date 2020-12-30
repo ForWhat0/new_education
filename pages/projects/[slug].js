@@ -113,7 +113,7 @@ export default function MicrophoneDetail({projectBySlug,menu,contacts}) {
 
                         <ContainerWrapper>
                             <Header>
-                                <TitleForComponent text={projectBySlug.title} fontSize='40px'/>
+                                <TitleForComponent displayYellowDiv={false} text={projectBySlug.title} fontSize='40px'/>
                                 <Icons>
                                     {
                                         projectBySlug.projectFields.playLink &&

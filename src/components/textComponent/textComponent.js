@@ -42,21 +42,29 @@ const StyledDate = styled.div`
     right:unset;
   }
 `
-const ArrowIcon = styled.i`
-    display: flex;
-    padding: 5px;
-    font-size: 20px;
-    color: #000000;
-    border:1px solid #000000;
-    border-radius:29px;
+export const ArrowIcon = styled.div`
+    background:url(/rightArrow.svg)no-repeat;
+     width: 60%;
+    background-size: contain;
+    height: 80%;
+    background-position: center;
 `
-const StyledTextComponent =({paddingBottom,bottom,title,excerpt,textForIcon ,date})=>{
+export const ArrowContainer = styled.div`
+    height: 30px;
+    width: 30px;
+    border: 1px solid;
+    display: flex;
+    border-radius: 30px;
+    align-items: center;
+    justify-content: center;
+`
+const StyledTextComponent =({fontSize,paddingBottom,bottom,title,excerpt,textForIcon ,date})=>{
     const border = excerpt ? 'unset' : '2px solid #1D1D1B;'
     const position = bottom ? 'absolute' : 'relative'
     const width = bottom ? '100%' : 'auto'
     return (
         <>
-            <TitleForComponent paddingBottom={paddingBottom} text={title} fontSize='30px' />
+            <TitleForComponent displayYellowDiv={false} paddingBottom={paddingBottom} text={title} fontSize={fontSize || '30px'} />
             {
                 excerpt &&
             <TextContent>
@@ -66,10 +74,9 @@ const StyledTextComponent =({paddingBottom,bottom,title,excerpt,textForIcon ,dat
 
             }
             <Review width={width} position={position} border={border}>
-                <ArrowIcon
-                    className="fa fa-long-arrow-right"
-                    aria-hidden="true"
-                />
+                <ArrowContainer>
+                    <ArrowIcon/>
+                </ArrowContainer>
                 <IconText>
                     {textForIcon}
                 </IconText>
