@@ -29,10 +29,15 @@ $slug:ID!
   }
    service(id: $slug, idType: SLUG) {
     slug
+    databaseId
     content
     title
      serveicesFields{
         showZno
+        titleZno
+        learn {
+          nameLearn
+        }
         accardion2{
           titleAccardion
           descrAccardion

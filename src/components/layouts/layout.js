@@ -12,7 +12,7 @@ import {StyledRegisterZNO} from "../leftComment/registerOnZNO";
 import {Element} from "react-scroll";
 
 
-export  const Layout = ({contacts,menu,hideLeftComponent,children , header,showZNORegister}) => {
+export  const Layout = ({databaseId,contacts,menu,hideLeftComponent,children , header,showZNORegister}) => {
 
    /* useEffect(() => {
         delay()
@@ -121,10 +121,10 @@ export  const Layout = ({contacts,menu,hideLeftComponent,children , header,showZ
                {
                    showZNORegister ?
                        <Element name="#RegisterZNO" className="element">
-                           <StyledRegisterZNO contacts={contacts} menu={menu}/>
+                           <StyledRegisterZNO databaseId={databaseId} showZNORegister={showZNORegister} contacts={contacts} menu={menu}/>
                        </Element>
                        :
-                    !hideLeftComponent ?  <StyledLeftComment contacts={contacts} menu={menu}/> :
+                    !hideLeftComponent ?  <StyledLeftComment databaseId={databaseId} contacts={contacts} menu={menu}/> :
                         <PageFooter contacts={contacts} menu={menu}/>
                }
                 </>

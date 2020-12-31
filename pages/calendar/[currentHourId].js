@@ -155,7 +155,7 @@ export default function EventCalendar({locale,contacts,loading,time,menu,allDate
         setSearchInput(value)
     }
     return (
-        <MainLayout   contacts={contacts} menu={parsedMenu} >
+        <MainLayout databaseId={time.databaseId}   contacts={contacts} menu={parsedMenu} >
             <Container>
                 <Header>
                     <Title >

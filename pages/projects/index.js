@@ -20,7 +20,7 @@ export default function AllProjects({projects,menu,currentPageNumber,contacts,lo
     const parsedMenu = ParcMenu(menu)
 
     return (
-        <MainLayout contacts={contacts} menu={parsedMenu} >
+        <MainLayout databaseId={1} contacts={contacts} menu={parsedMenu} >
 
             <>
                 {projects?.nodes?.length > 0 &&<Projects title={ProjectsLsi.projects[locale]} textForIcon={ProjectsLsi.review[locale]}  posts={projects.nodes}/>}

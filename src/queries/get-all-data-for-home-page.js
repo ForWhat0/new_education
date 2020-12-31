@@ -85,6 +85,7 @@ $contactsUri:ID!
     }
   }
    page(id: $uri, idType: URI) {
+   databaseId
     mainPageFields {
      titleServices
       titleProject

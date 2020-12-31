@@ -3,9 +3,9 @@ import {MainLayout} from "../../src/components/layouts/mainLayout"
 import GET_NEWS from "../../src/queries/getNews"
 import NewsWrapper from "../../src/components/news/newsWrapper"
 import styled from 'styled-components'
-import {formatDate, ParcMenu, startEndPagination} from "../../src/components/hooks/hooks";
+import {formatDate, ParcMenu, startEndPagination, useOnClickOutside} from "../../src/components/hooks/hooks";
 import {Pagination} from "../../src/components/pagination/pagination";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import Calendar from "react-calendar";
 import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
@@ -15,22 +15,13 @@ import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
 import GET_NEWS_BY_DATE from "../../src/queries/get_news_by_date";
 import StyledLoader from "../../src/components/loader/loader";
 import {NewsLsi} from "../../src/Lsi/lsi";
+import {CalendarContainer, CalendarIcon, CalendarWrapper} from "../calendar";
 
 const Container = styled.div`
 width:80%;
 margin-left:10%;
 `
-const Input = styled.div`
-position:absolute;
-right:80px;
-width:350px;
- @media screen and ${device.laptop} {
- position:relative;
- margin-bottom:40px;
- right:unset;
-width:unset;
-  }
-`
+
 const Title = styled.div`
 width:100%;
 position:relative;
@@ -44,18 +35,34 @@ const LoaderContainer = styled.div`
   position:relative;
   margin:50px 0 50px 0;
 `
+const  ShowAll = styled.span`
+    color: rgb(0,114,188);
+    cursor: pointer;
+    position:absolute;
+    right:80px;
+      @media screen and ${device.tablet} {
+height: 30px;
+    right:40px;
+  }
+`
 export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
     const [searchLoading, setSearchLoading] = useState(false);
-    const [searchInput, setSearchInput] = useState('');
     const {total,hasMore,hasPrevious} = news.pageInfo.offsetPagination
     const totalPages = Math.ceil(total / 9.0)
     const [newsByDate, setNewsByTitle] = useState([]);
     const {startPage,endPage} = startEndPagination(currentPageNumber,totalPages )
     const parsedMenu = ParcMenu(menu)
-
+    const [value, onChange] = useState(null);
+    const [calendarOpen, setCalendarOpen] = useState(false);
+    const calendar = useRef();
+    useOnClickOutside(calendar,  () => calendarOpen  &&  setCalendarOpen(!calendarOpen));
+    const selectedDay = value => {
+        setCalendarOpen(false)
+        onChange(value)
+    };
     const Search = async ()=>{
         setSearchLoading(true)
-        const date = new Date(searchInput)
+        const date = new Date(value)
         const { data  } = await reduxClient.query( {
             query: GET_NEWS_BY_DATE,
             variables: {
@@ -70,30 +77,33 @@ export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
     }
 
     useEffect(() => {
-        if (searchInput.length > 0) {
+        if (value) {
             Search()
         }
 
-    }, [searchInput]);
+    }, [value]);
 
     return (
-        <MainLayout contacts={contacts} menu={parsedMenu} >
+        <MainLayout databaseId={1} contacts={contacts} menu={parsedMenu} >
             <Container>
                 <Title >
                     <TitleForComponent text={NewsLsi.news[locale]} />
-                    <Input>
-                        <SearchBarStyled
-                            type='date'
-                            maxlength={10}
-                            width='100%'
-                            inputPlaceholder={NewsLsi.search[locale]}
-                            border='1px solid'
-                            inputFunc={(e)=>setSearchInput(e.target.value)} />
-                    </Input>
+                    <ShowAll onClick={()=>onChange(null)}>{NewsLsi.showAll[locale]}</ShowAll>
+                    <CalendarWrapper ref={calendar}>
+                        <CalendarIcon onClick={()=>setCalendarOpen(!calendarOpen)}/>
+                        <CalendarContainer open={calendarOpen ? 'block' : 'none'}>
+                            <Calendar
+                                locale={locale === "EN" ? 'en-EN' : locale === "RU" ? 'ru-RU' : 'ua-UA'}
+                                className='calendar'
+                                onChange={value => selectedDay(value)}
+                                value={ value || new Date}
+                            />
+                        </CalendarContainer>
+                    </CalendarWrapper>
                 </Title>
 
                 {
-                    searchInput.length > 0 ?
+                    value ?
 
 
                         searchLoading ?

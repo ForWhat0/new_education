@@ -29,6 +29,7 @@ const GET_HOUR_BY_ID = gql`
     }
   }
     time(id: $id, idType: DATABASE_ID) {
+    databaseId
     title
     content
     hoursEvents {

@@ -27,7 +27,7 @@ $contactsUri:ID!) {
   }
 	 page(idType: URI, id: $uri) {
  
-	id
+	databaseId
 	    title
 	    content
 	    slug

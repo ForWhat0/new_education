@@ -180,6 +180,10 @@ const DownloadContent = styled.div`
 export default function GetEvent({serviceBySlug,menu,contacts,locale}) {
      const router = useRouter();
      const zno = serviceBySlug?.serveicesFields?.showZno === "Открыть"
+     const znoFields = zno && {
+         title:serviceBySlug?.serveicesFields?.titleZno,
+         learn:serviceBySlug?.serveicesFields?.learn
+     }
     const [ShownAccordion, setShownAccordion] = useState({});
     const handleClickAccordion = index => {
         setShownAccordion(prevShownAccordion => ({
@@ -200,9 +204,10 @@ export default function GetEvent({serviceBySlug,menu,contacts,locale}) {
 
     return (
         <MainLayout
+            databaseId={serviceBySlug?.databaseId}
             contacts={contacts}
             menu={parsedMenu}
-            showZNORegister={zno && true}
+            showZNORegister={zno && znoFields}
             hideLeftComponent={zno && true} >
             <Container >
                 <Header>

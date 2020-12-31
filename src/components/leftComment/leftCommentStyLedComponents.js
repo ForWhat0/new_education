@@ -49,6 +49,18 @@ position:relative;
 width:40%;
 margin-right:10%;
 `
+export const TextZno = styled.div`
+ @media screen and ${device.tablet} {
+   width:100%;
+   margin-top:unset;
+   margin-right:unset;
+       height: 100px;
+  }
+position:relative;
+margin-top:50px;
+width:40%;
+margin-right:10%;
+`
 export const SubTitle = styled.span`
 font-size: 24px;
 line-height: 15px;
@@ -77,7 +89,6 @@ z-index:0;
 background-image: url('/registerZnoIcon.svg');
   background-repeat: no-repeat; 
   background-size: contain; 
- 
 `
 export const InputsFields = styled.div`
    @media screen and ${device.tablet} {

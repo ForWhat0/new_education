@@ -28,6 +28,7 @@ export default function Home({contacts,locale,menu,news,events,data,projects,ser
     }
   return (
       <HomePageLayout
+          databaseId={data.databaseId}
      contacts={contacts}
      menu={parsedMenu}
      title = {mainPageFields.titleBanner}

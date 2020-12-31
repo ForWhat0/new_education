@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
 
-const GET_CONTACTS = gql`query(
+const GET_MENU_AND_CONTACTS = gql`query(
 $location:MenuLocationEnum,
 $contactsUri:ID!
 ) {
-
+  
    menuItems(where: {location: $location}) {
     nodes {
        key: id
@@ -16,22 +16,19 @@ $contactsUri:ID!
   }
 
   contacts: page(id: $contactsUri, idType: URI) {
-databaseId
-     contactsFields {
-      adress
-      facebookLink
-      gmail
+
+    contactsFields {
       telegramLink
       phoneNumber
-      mapsLink
-      mapsImg {
-        sourceUrl
-      }
+      group
+      gmail
+      facebookLink
+      authorship
+      adress
     }
-  
   }
  
   }
 `
 
-export default GET_CONTACTS;
+export default GET_MENU_AND_CONTACTS;

@@ -38,7 +38,7 @@ position:relative;
     display: flex;
     align-items: center;
 `
-const CalendarIcon = styled.div`
+export const CalendarIcon = styled.div`
 background-image: url('/calendarIcon.svg');
   background-repeat: no-repeat; 
   background-size: contain; 
@@ -52,7 +52,7 @@ height: 30px;
     width: 30px;
   }
 `
-const CalendarContainer = styled.div`
+export const CalendarContainer = styled.div`
 display:${props=>props.open};
     width: 320px;
 position: absolute;
@@ -71,7 +71,7 @@ position: absolute;
   }
 
 `
-const CalendarWrapper = styled.div`
+export const CalendarWrapper = styled.div`
 display: contents;
 `
 const Input = styled.div`
@@ -139,6 +139,7 @@ export default function EventCalendar({locale,loading,event,menu,allDates,contac
     const parsedMenu = ParcMenu(menu)
     return (
         <MainLayout
+            databaseId={event?.databaseId}
             menu={parsedMenu}
             contacts={contacts}
         >

@@ -65,7 +65,7 @@ export const SignIn = styled.div`
 `
 export const CircleBackground = styled.div`
     height: 100%;
-    z-index: 4;
+    z-index: -1;
     background: rgba(0, 174, 239, 0.08);
     width: 150%;
     top: 10%;

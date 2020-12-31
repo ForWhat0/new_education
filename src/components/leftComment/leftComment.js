@@ -21,7 +21,7 @@ import {
 import {PageFooter} from "../footer/footer";
 import {leftComment} from "../../Lsi/lsi";
 
-export const StyledLeftComment =({contacts,menu,display,src,align})=>{
+export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>{
 
     const router = useRouter()
     const locale = router.locale
@@ -31,14 +31,22 @@ export const StyledLeftComment =({contacts,menu,display,src,align})=>{
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [comment, setComment] = useState('')
-
+    const content =
+        `
+        <ul>
+        <li>${name}</li>
+          <li>${email}</li>
+        <li>${phone}</li>
+          <li>${comment}</li>
+        <uk/>
+        `
     let [ send, {  data, error, loading }] = useMutation( SEND_COMMENT, {
         variables: {
             input:{
-                commentOn: 1,
+                commentOn: databaseId,
                 author: name,
                 authorEmail:email,
-                content:phone+comment
+                content:content
             }
         },
         onCompleted: () => {
@@ -90,8 +98,8 @@ export const StyledLeftComment =({contacts,menu,display,src,align})=>{
                         <InputStyled text={leftComment.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
                         <InputStyled text={leftComment.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled text={leftComment.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled text={leftComment.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled maxlength='40' text={leftComment.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled maxlength='100' text={leftComment.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <LoaderContainer>
                         {loading &&  <StyledLoader/>}
                         <SendButton

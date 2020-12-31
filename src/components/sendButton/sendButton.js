@@ -3,10 +3,10 @@ import {device} from "../deviceSizes/deviceSizes"
 import React from "react";
 
 const width = keyframes`
- 0%   { width: 40%;  }
- 50%{width: 10%;  }
-  100% { width: 40%;  }
-`;
+ 0%   { width: 212px;  }
+ 50%{width: 30px;  }
+  100% { width: 212px%;  }
+`
 
 const icon = keyframes`
  0%   { opacity:1;top:12px;left:20px; }
@@ -15,26 +15,24 @@ const icon = keyframes`
    100%{
   opacity:0;
    }
-`;
+`
 
 const BtnAnimation = props =>
     css`
-    ${width} 1s linear;
+    ${width} 0.5s linear ;
   `
 const PaperIconAnimation = props =>
     css`
-    ${icon} 1s linear 0.5s ;
+    ${icon} 0.5s linear 0.1s ;
   `
 const ButtonContainer = styled.div`
- @media screen and ${device.tablet} {
-    left:30%;
-  }
+
  position: relative;
  height:43px;
  border-radius:28px;
     display: flex;
-    width:40%;
-    left:60%;
+    width:212px;
+   
     animation:${props => props.animation};
 `
 const PaperIcon = styled.i`
@@ -90,7 +88,15 @@ const ErrorText = styled.span`
   display:${props => props.display};
   color:red;
 `
-
+const Global = styled.div`
+width:100%;
+    display: flex;
+    position: relative;
+justify-content:flex-end;
+ @media screen and (max-width:500px) {
+  justify-content:center;
+  }
+`
 export const SendButton = ({done,error,loading,click,sendText,sentText,errorText})=>{
     const ButtonContainerAnimation = loading && BtnAnimation
     const IconPaperPlaneAnimation = loading && PaperIconAnimation
@@ -99,15 +105,17 @@ export const SendButton = ({done,error,loading,click,sendText,sentText,errorText
     const ErrorTextDisplay = error ? 'block' : 'none'
     const SuccessTextDisplay = done ? 'block' : 'none'
     return(
-        <ButtonContainer animation={ButtonContainerAnimation} onClick={click}  >
-            <PaperIcon   display={IconPaperDisplay} animation={IconPaperPlaneAnimation} className="fa fa-paper-plane" aria-hidden="true"/>
-            <SuccessIcon display={SuccessTextDisplay} className="fa fa-check" aria-hidden="true"/>
-            <ErrorIcon display={ErrorTextDisplay}  className="fa fa-exclamation" aria-hidden="true"/>
-            <Button>
-                <SuccessText display={SuccessTextDisplay} >{sentText}</SuccessText>
-                <Text display={TextDisplay}>{sendText}</Text>
-                <ErrorText display={ErrorTextDisplay}>{errorText}</ErrorText>
-            </Button>
-        </ButtonContainer>
+        <Global>
+            <ButtonContainer animation={ButtonContainerAnimation} onClick={click}  >
+                <PaperIcon   display={IconPaperDisplay} animation={IconPaperPlaneAnimation} className="fa fa-paper-plane" aria-hidden="true"/>
+                <SuccessIcon display={SuccessTextDisplay} className="fa fa-check" aria-hidden="true"/>
+                <ErrorIcon display={ErrorTextDisplay}  className="fa fa-exclamation" aria-hidden="true"/>
+                <Button>
+                    <SuccessText display={SuccessTextDisplay} >{sentText}</SuccessText>
+                    <Text display={TextDisplay}>{sendText}</Text>
+                    <ErrorText display={ErrorTextDisplay}>{errorText}</ErrorText>
+                </Button>
+            </ButtonContainer>
+        </Global>
     )
 }

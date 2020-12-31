@@ -110,3 +110,31 @@ export const  maxDay=(date, days) =>{
     result.setDate(result.getDate() + days);
     return result;
 }
+export const cutUri=(uri)=>{
+    if (uri){
+        if (
+            uri.substring(0,4) === '/en/' ||
+            uri.substring(0,4) === '/ru/'
+        ){
+            return uri.substring(3)
+        }
+        else {
+            return  uri
+        }
+    }
+}
+export const ParcUri=(uri)=>{
+    if (  cutUri(uri) === '/financial-statements/' ||
+        cutUri(uri) === '/finansovaya-otchetnost-2/' ||
+        cutUri(uri) === '/finansovaya-otchetnost/'){
+        return  '/financialStatements'
+    }
+    else if(cutUri(uri) === '/kontakty/' ||
+        cutUri(uri) === '/contacts/' ||
+        cutUri(uri) === '/kontakti/'){
+        return '/contacts'
+    }
+    else {
+        return  cutUri(uri)
+    }
+}

@@ -9,6 +9,7 @@ $contactsUri:ID!
 ) {
    new(id: $slug, idType: SLUG) {
     slug
+    databaseId
     content
     date
     title

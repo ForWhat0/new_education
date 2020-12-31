@@ -50,6 +50,11 @@ export const ProjectsLsi={
     },
 }
 export const NewsLsi={
+    showAll:{
+        UK:"Всі новини",
+        EN:"All news",
+        RU:"Все новости"
+    },
     lastNews:{
         UK:"Останні новини",
         EN:"Latest news",
@@ -285,12 +290,12 @@ export const leftCommentZno={
         RU:"Имеешь предложение?"
     },
     writeUs:{
-        UK:"Напиши нам!",
-        EN:"Write to us!",
-        RU:"Напиши нам!"
+        UK:"Щоб зареєструватися, заповніть форму",
+        EN:"To register, fill out the form",
+        RU:"Чтобы зарегистрироваться, заполните форму"
     },
     name:{
-        UK:"Прізвище та sм'я",
+        UK:"Прізвище та ім'я",
         EN:"Name and surname",
         RU:"Фамилия и Имя"
     },
@@ -314,43 +319,6 @@ export const leftCommentZno={
         EN:"Choose item (s)",
         RU:"Выберите предмет (ы)"
     },
-    lessons:[
-        {
-            UK:"українська мова",
-            EN:"ukrainian language",
-            RU:"украинский язык"
-        },
-        {
-            UK:"українська література",
-            EN:"ukrainian literature",
-            RU:"украинская литература"
-        },
-        {
-            UK:"математика",
-            EN:"math",
-            RU:"математика"
-        },
-        {
-            UK:"історія України",
-            EN:"history of Ukraine",
-            RU:"история Украины"
-        },
-        {
-            UK:"англійська мова",
-            EN:"english",
-            RU:"английский язык"
-        },
-        {
-            UK:"біологія",
-            EN:"biology",
-            RU:"биология"
-        },
-        {
-            UK:"хімія",
-            EN:"chemistry",
-            RU:"химия"
-        }
-    ],
     sent:{
         UK:"відправлено",
         EN:"sent",
@@ -414,5 +382,79 @@ export const finance={
         UK:"Завантажити",
         EN:"Date of placement",
         RU:"Cкачать"
+    }
+}
+export const contactsLsi = {
+    contacts:{
+        UK:"Контакти",
+        EN:"Contacts",
+        RU:"Контакты"
+    },
+    adress:{
+        UK:"Адреса:",
+        EN:"Address:",
+        RU:"Адрес:"
+    },
+    phoneNumber:{
+        UK:"Телефон/факс:",
+        EN:"Phone/fax:",
+        RU:"Телефон/факс:"
+    },
+    email:{
+        UK:"Електронная пошта:",
+        EN:"Email:",
+        RU:"Электронная почта:"
+    },
+    map:{
+        UK:"Перейти до Google Maps",
+        EN:"Go to Google Maps",
+        RU:"Перейти на Google Maps"
+    }
+}
+export const appeal= {
+    appeal: {
+        UK: "Звернення",
+        EN: "Appeal",
+        RU: "Обращение"
+    },
+    writeUs: {
+        UK: "Напиши нам!",
+        EN: "Write to us!",
+        RU: "Напиши нам!"
+    },
+    questions: {
+        UK: "Маєш питання, пропозиції або побажання?",
+        EN: "Do you have questions, suggestions or wishes?",
+        RU: "Есть вопросы, предложения или пожелания?"
+    },
+    name: {
+        UK: "Ім'я",
+        EN: "First name",
+        RU: "Имя"
+    },
+    lastName: {
+        UK: "Прізвище",
+        EN: "Last name",
+        RU: "Фамилия"
+    },
+    reason: {
+        UK: "Причина звернення",
+        EN: "The reason for the appeal",
+        RU: "Причина обращения"
+    },
+    sent: {
+        UK: "відправлено",
+        EN: "sent",
+        RU: "отправлено"
+    },
+    send: {
+        UK: "відправити",
+        EN: "send",
+        RU: "отправить"
+    },
+    error: {
+        UK: "помилка",
+        EN: "error",
+        RU: "ошибка"
     }
 }

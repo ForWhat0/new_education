@@ -8,6 +8,7 @@ import Icon from "../icon/icon";
 import {AnimationSearchBarStyled} from "../searchBar/animationSearchBar";
 import {device} from "../deviceSizes/deviceSizes";
 import Burger from "../burgerMenu/burgerMenu";
+import {cutUri, ParcUri} from "../hooks/hooks";
 
 export const HeaderWrapper = styled.header`
     justify-content: flex-start;
@@ -355,12 +356,7 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                                                             <li><a>{el.title}</a></li>
                                                         </Link>
                                                         :
-                                                        <Link href={
-                                                            el.path.substring(0,4) === '/en/' ||
-                                                            el.path.substring(0,4) === '/ru/'?
-                                                              el.path.substring(3):
-                                                                el.path
-                                                        }>
+                                                        <Link href={ParcUri(el.path)}>
                                                             <li>
                                                                 <a>
                                                                     { el.title}
@@ -372,7 +368,7 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                                         </ul>
                                     </li>
                                     :
-                                    <Link href={button.path}>
+                                    <Link href={ParcUri(button.path)}>
                                         <li>
                                             <a>
                                                 {button.title}
@@ -427,12 +423,7 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                                                         </Link>
 
                                                         :
-                                                        <Link href={
-                                                            el.path.substring(0,4) === '/en/' ||
-                                                            el.path.substring(0,4) === '/ru/'?
-                                                                el.path.substring(3):
-                                                                el.path
-                                                        }>
+                                                        <Link href={ParcUri(el.path)}>
                                                             <li>
                                                                 <a>
                                                                     { el.title}
@@ -444,7 +435,7 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                                         </ul>
                                     </li>
                                     :
-                                    <Link href={button.path}>
+                                    <Link href={ParcUri(button.path)}>
                                         <li>
                                             <a>
                                                 {button.title}

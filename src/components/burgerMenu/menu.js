@@ -10,6 +10,7 @@ import {LogoImg, Navmanu} from "../headers/headerStyledElements";
 import {Link as ScrollLink} from "react-scroll";
 import {actionClickBurger} from "../../redux/actions/actions";
 import {useRouter} from "next/router";
+import {cutUri, ParcUri} from "../hooks/hooks";
 const {navButtons,register,logIn} = headerLsi
 const Menu = ({menu}) => {
     const router = useRouter()
@@ -25,18 +26,7 @@ const Menu = ({menu}) => {
        text:'text',
        transparent:'transparent'
     }
-    const cutUri=(uri)=>{
-        if (
-            uri.substring(0,4) === '/en/' ||
-            uri.substring(0,4) === '/ru/'
-           ){
-            return uri.substring(3)
-        }
-        else {
-            return  uri
-        }
-    }
-    console.log(router)
+
     return (
         <StyledMenu open={menuBurgerIsOpen}>
             <CircleBackground/>
@@ -72,18 +62,18 @@ const Menu = ({menu}) => {
                                                         </Li>
                                                     </Link>
                                                     :
-                                                    <Link href={ cutUri(el.path) }>
+                                                    <Link href={ ParcUri(el.path) }>
                                                         <Li onClick={()=>handlerCloseMenu()}>
-                                                            <ALink activeLink={router.pathname == cutUri(el.path) && activeLink}>
+                                                            <ALink activeLink={router.pathname == ParcUri(el.path) && activeLink}>
                                                                 {el.title}
                                                             </ALink>
                                                         </Li>
                                                     </Link>
                                             )
                                 :
-                                <Link href={ cutUri(button.path) }>
+                                <Link href={ParcUri(button.path)}>
                                     <Li onClick={()=>handlerCloseMenu()}>
-                                        <ALink activeLink={router.pathname == cutUri(button.path) && activeLink}>
+                                        <ALink activeLink={router.pathname == ParcUri(button.path) && activeLink}>
                                             {button.title}
                                         </ALink>
                                     </Li>

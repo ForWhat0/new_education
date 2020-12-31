@@ -1,9 +1,10 @@
 import {Layout} from "./layout"
 import MainHeader from "../headers/mainHeader"
 
-export function MainLayout({contacts,showZNORegister, hideLeftComponent , menu, children}) {
+export function MainLayout({databaseId,contacts,showZNORegister, hideLeftComponent , menu, children}) {
 
     return <Layout
+        databaseId={databaseId}
         menu={menu}
         contacts={contacts}
         showZNORegister={showZNORegister}

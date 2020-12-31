@@ -101,7 +101,7 @@ export default function MicrophoneDetail({projectBySlug,menu,contacts}) {
     }
 
     return (
-        <MainLayout contacts={contacts} menu={parsedMenu}>
+        <MainLayout databaseId={projectBySlug.databaseId} contacts={contacts} menu={parsedMenu}>
             {
                 projectBySlug ?
                     <Container

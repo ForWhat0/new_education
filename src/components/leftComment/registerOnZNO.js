@@ -10,17 +10,18 @@ import {
     Container,
     ContainerWrapper,
     Flex,
-     IconBackgroundZNO,
+    IconBackgroundZNO,
     InputsFields, LoaderContainer, Select,
     SubTitle,
     Text,
-    Title,Label
+    Title, Label, TextZno
 } from "./leftCommentStyLedComponents"
 import {PageFooter} from "../footer/footer";
 import {useRouter} from "next/router";
-import {leftCommentZno} from "../../Lsi/lsi";
+import {leftComment, leftCommentZno} from "../../Lsi/lsi";
 
-export const StyledRegisterZNO =({contacts,menu,display,src,align})=>{
+export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,display,src,align})=>{
+    console.log(showZNORegister)
     const router = useRouter()
     const locale = router.locale
     const dispatch = useDispatch()
@@ -28,14 +29,24 @@ export const StyledRegisterZNO =({contacts,menu,display,src,align})=>{
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [comment, setComment] = useState('')
-
+    const [learn, setLearn] = useState('')
+    const content =
+        `
+        <ul>
+         <li>${name}</li>
+          <li>${email}</li>
+        <li>${phone}</li>
+         <li>${learn}</li>
+          <li>${comment}</li>
+        <uk/>
+        `
     let [ send, {  data, error, loading }] = useMutation( SEND_COMMENT, {
         variables: {
             input:{
-                commentOn: 1,
+                commentOn: databaseId,
                 author: name,
                 authorEmail:email,
-                content:phone+comment
+                content:content
             }
         },
         onCompleted: () => {
@@ -51,60 +62,67 @@ export const StyledRegisterZNO =({contacts,menu,display,src,align})=>{
     } )
 
     const handleSendClick = () => {
-        if (name && phone && email && comment){
+        if (name && phone && email && comment && learn){
             if ( phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)){
                 if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)){
                     if (comment.length > 6 ){
                         send()
                     }
                     else{
-                        dispatch(ShowAlert('comment too short','error'))
+                        dispatch(ShowAlert(leftCommentZno.errors.commentShort[locale], 'error'))
                     }
                 }
                 else {
-                    dispatch(ShowAlert('wrong email','error'))
+                    dispatch(ShowAlert(leftCommentZno.errors.wrongEmail[locale], 'error'))
                 }
             }
             else {
-                dispatch(ShowAlert('wrong phone','error'))
+                dispatch(ShowAlert(leftCommentZno.errors.wrongPhoneNumber[locale], 'error'))
             }
         }
         else{
-            dispatch(ShowAlert('zapowni','error'))
+            dispatch(ShowAlert(leftCommentZno.errors.emptyFields[locale], 'error'))
         }
 
     }
     return (
         <Container src={src} display={display} align={align}>
             <Title>
-                {leftCommentZno.offer[locale]}
+                {showZNORegister.title}
             </Title>
             <ContainerWrapper>
-                <Text>
+                <TextZno>
                     <IconBackgroundZNO />
                     <SubTitle>
                         {leftCommentZno.writeUs[locale]}
                     </SubTitle>
-                </Text>
+                </TextZno>
                 <InputsFields>
                     <Flex>
                         <InputStyled text= {leftCommentZno.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
                         <InputStyled text= {leftCommentZno.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled text= {leftCommentZno.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled text= {leftCommentZno.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled maxlength='40' text= {leftCommentZno.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled maxlength='100' text= {leftCommentZno.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <Label>
                         {leftCommentZno.choose[locale]}
                     </Label>
-                    <Select>
+                    <Select onChange={e => setLearn(e.target.value)}>
                         <option hidden disabled selected value> </option>
-                        {leftCommentZno.lessons.map(less=>
-                        <option key={less[locale]} value={less[locale]}>{less[locale]}</option>
+                        {showZNORegister.learn?.map(less=>
+                        <option key={less.nameLearn} value={less.nameLearn}>{less.nameLearn}</option>
                         )}
                     </Select>
                     <LoaderContainer>
                         {loading &&  <StyledLoader/>}
-                        <SendButton error={error} done={data} loading={loading} click={handleSendClick}/>
+                        <SendButton
+                            error={error}
+                            done={data}
+                            sentText={leftCommentZno.sent[locale]}
+                            sendText={leftCommentZno.send[locale]}
+                            errorText={leftCommentZno.error[locale]}
+                            loading={loading}
+                            click={handleSendClick}/>
                     </LoaderContainer>
                 </InputsFields>
             </ContainerWrapper>

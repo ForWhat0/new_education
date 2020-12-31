@@ -37,7 +37,7 @@ export default function MicrophoneDetail({locale,newBySlug,news,menu,contacts}) 
     }
 
     return (
-        <MainLayout contacts={contacts} menu={parsedMenu}>
+        <MainLayout databaseId={newBySlug.databaseId} contacts={contacts} menu={parsedMenu}>
             {
                 newBySlug || news ?
                     <>

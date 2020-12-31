@@ -29,6 +29,7 @@ $contactsUri:ID!
   }
    project(id: $slug, idType: SLUG) {
     slug
+    databaseId
     content
     title
      projectFields {

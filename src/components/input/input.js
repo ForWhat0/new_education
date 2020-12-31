@@ -12,7 +12,8 @@ flex-direction: column;
 `
 const Input = styled.input.attrs(props => ({
     type: "text",
-    onChange:props.onChange
+    onChange:props.onChange,
+    maxlength:props.maxlength
 }))`
 border: 1px solid #1D1D1B;
 box-sizing: border-box;
@@ -26,13 +27,13 @@ font-size: 16px;
 margin-bottom: 5px;
 color: #1D1D1B;
 `
-export const InputStyled = ({text,width,onChange})=>{
+export const InputStyled = ({maxlength,text,width,onChange})=>{
     return(
         <InputField width={width}>
             <Text>
                 {text}
             </Text>
-            <Input onChange={onChange}/>
+            <Input maxLength={maxlength || 20} onChange={onChange}/>
         </InputField>
     )
 }
