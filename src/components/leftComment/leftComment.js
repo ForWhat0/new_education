@@ -1,6 +1,6 @@
 import {useMutation} from "@apollo/client"
 import React, {useState} from "react"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {InputStyled} from "../input/input"
 import {SendButton} from "../sendButton/sendButton"
 import SEND_COMMENT from "../../mutations/sendComment"
@@ -25,7 +25,7 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
 
     const router = useRouter()
     const locale = router.locale
-
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -82,7 +82,7 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
     }
 
     return (
-        <Container src={src} display={display} align={align}>
+        <Container background={!visuallyImpairedModeWhiteTheme ? '#1D1D1B' : '#F2F9FD'} src={src} display={display} align={align}>
             <Title>
                 {leftComment.offer[locale]}
             </Title>

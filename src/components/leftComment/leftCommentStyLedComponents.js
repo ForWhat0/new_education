@@ -21,7 +21,7 @@ export const Container = styled.div`
   width:100%;
   position:absolute;
   z-index:0;
-  background-color: #F2F9FD;
+  background-color: ${props=>props.background};
   display:${props => props.display};
 `
 export const ContainerWrapper = styled.div`
@@ -132,7 +132,6 @@ font-weight: normal;
 text-align:start;
 font-size: 16px;
 margin-bottom: 5px;
-color: #1D1D1B;
 `
 export const Flex = styled.div`
   @media screen and ${device.laptop} {

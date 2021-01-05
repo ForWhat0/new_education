@@ -18,11 +18,12 @@ margin: 0;
 `
 
 export const NumberOfPage = styled.li`
+color:${props=>props.color};
 list-style-type:none;
 margin:0 15px 0 15px;
 border-radius:28px;
 padding: ${props=>props.current ? '5px 12px' : '5px 0'};
-border:${props=>props.current && '1px solid #000'};
+border:${props=>props.current && '1px solid'};
 `
 
 export const Arrows = styled.div`
@@ -39,6 +40,7 @@ left: ${props => props.left};
 
 span{
  margin: 0 20px 0 20px;
+ color:${props=>props.color};
 }
 
 @media screen and ${device.laptop}{

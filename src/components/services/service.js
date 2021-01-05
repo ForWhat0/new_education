@@ -5,6 +5,7 @@ import Link from "next/link"
 import {StyledButton} from "../button/button";
 import {device} from "../deviceSizes/deviceSizes";
 import {services} from "../../Lsi/lsi";
+import {useSelector} from "react-redux";
 
 const ServiceContainer = styled.div`
  @media screen and ${device.mobileL} {
@@ -16,7 +17,9 @@ const ServiceContainer = styled.div`
    display:flex ;
    justify-content: center;
        position: relative;
-    border-bottom: 1px solid;
+    border-bottom: ${props=>props.borderB};
+    border-left: ${props=>props.borderL};
+    border-right: ${props=>props.borderL};
     padding-bottom: 20px;
     cursor:pointer;
     margin-bottom: 50px;
@@ -25,7 +28,7 @@ const ContainerWrapper = styled.div`
  @media screen and ${device.mobileL} {
     flex-direction: column;
   }
-  width: 70%;
+
   
     position: relative;
 
@@ -33,14 +36,14 @@ const ContainerWrapper = styled.div`
    align-items:center;
 `
 const Global = styled.div`
-       display: block;
+   
        text-align:center;
 `
 const StyledPhoto = styled.img`
  @media screen and ${device.mobileL} {
      margin-left:unset;
   }
-
+   display:${props=>props.display};
    border-radius: 30px;
      position: relative;
     width:100px;
@@ -58,24 +61,29 @@ const StyledText = styled.span`
   }
       text-align: initial;
     font-size: 24px;
-    width: 150px;
+  
     line-height: 30px;
-    left:80px;
+   
     z-index: 2;
-    position: absolute;
+    
 `
 const ButtonContainer = styled.div`
 @media screen and ${device.mobileL} {
    display:none;
   }
 `
-export default function Service({locale,slug,coverImage,title}) {
+export default function Service({locale,slug,coverImage,title,index}) {
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
+    const {images} = useSelector(state=>state.app)
+    const borderB = visuallyImpairedMode  || !visuallyImpairedMode && !images ? 'unset' : '1px solid'
+    const borderL = visuallyImpairedMode && index === 1 && !images ? '1px solid' : 'unset'
     return (
         <Link href={`/service/[slug]`} as={`/service/${slug}`}>
             <Global>
-                <ServiceContainer>
+                <ServiceContainer borderL={borderL} borderB={borderB}>
                     <ContainerWrapper>
                         <StyledPhoto
+                            display={ !images ? 'none' : 'block' }
                             src={coverImage}
                         />
                         <StyledText>{title}</StyledText>

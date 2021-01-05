@@ -9,6 +9,14 @@ import {AnimationSearchBarStyled} from "../searchBar/animationSearchBar";
 import {device} from "../deviceSizes/deviceSizes";
 import Burger from "../burgerMenu/burgerMenu";
 import {cutUri, ParcUri} from "../hooks/hooks";
+import {
+    actionClickModal, ClickOnChangeFontSizeNormal,
+    ClickOnOffImages, ClickOnOffWhiteTheme,
+    ClickVisuallyImpairedMode,
+    ClickVisuallyImpairedModeOff, ClickVisuallyImpairedModeOn
+} from "../../redux/actions/actions";
+import {useDispatch, useSelector} from "react-redux";
+import {headerLsi} from "../../Lsi/lsi";
 
 export const HeaderWrapper = styled.header`
     justify-content: flex-start;
@@ -17,11 +25,10 @@ export const HeaderWrapper = styled.header`
     width: 100%;
     justify-content: center;
     flex: 1;
-  height:480px;
-  background: url(https://epo.org.ua/wp-content/uploads/2020/11/diia_gradient_03.png);
+  
+  background: ${props=>props.background};
   background-size: cover;
   background-position: center;
-  overflow: hidden;
     @media screen and ${device.laptop}{
     height: 150px;
     width:unset;
@@ -58,8 +65,13 @@ export const WrapperInner = styled.div`
   }
  
 `
+export const RestWrapper = styled.div`
+   width:80%;
+    @media screen and ${device.laptop}{
+  width:100%;
+  }
+`
 export const RestWrapperInner = styled.div`
-  width:80%;
   margin-top: 20px;
   display:flex;
   align-items:center;
@@ -105,7 +117,7 @@ const LargeLinks = styled.a`
   }
 `
 const RegisterLink = styled.a`
-  color: #1D1D1B;
+  color:${props=>props.color};  
   font-size: 16px;
   line-height: 15px;
       margin-right: 40px;
@@ -171,24 +183,7 @@ const MainContent = styled.div`
     margin-top: unset;
   }
 `
-const Logos = styled.div`
-  display:flex;
-  cursor:pointer;
-    @media screen and ${device.laptop}{
-    display:none;
-  }
-  a{
-  width: 30px;
-    height: 30px;
-    margin-right: 30px;
-    background-color: white;
-    border-radius: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  }
-`
+
 export const LogoImg = styled.img`
   max-height:${props => props.height};
   margin-right:${props => props.right};
@@ -199,17 +194,7 @@ export const LogoImg = styled.img`
   border-radius: ${props => props.radius};
   padding: ${props => props.padding};
 `
-export const LogoImgMain = styled.img`
-  display:none;
-  position: absolute;
-  max-height:${props => props.height};
-  max-width:${props => props.width};
-  padding: ${props => props.padding};
-     @media screen and ${device.laptop}{
-    display:block;
-    top:8%;
-  }
-`
+
 const Title = styled.h1`
 height: 42px;
 margin-top:45px;
@@ -218,7 +203,6 @@ font-style: normal;
 font-weight: normal;
 font-size: 40px;
 line-height: 15px;
-color: #1D1D1B;
 display:flex;
 align-items:center;
 @media screen and ${device.laptop}{
@@ -337,12 +321,138 @@ font-size:17px;
 }
 `
 
-export const NavBar =({language,navButtons,register,logIn})=>{
-    return (
 
+ const SliderRound = styled.span`
+ border: 1px solid white;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    
+    &:before{
+    border-radius: 50%;
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+ `
+const Switch = styled.label`
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+    `
+const InputCheckbox = styled.input`
+display:none;
+&:checked{
+& ~ ${SliderRound}{
+      background-color: #1D1D1B;  
+&::before {   
+   
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+    }
+&::focus{
+box-shadow: 0 0 1px #2196F3;
+}  
+}          
+    }
+`
+
+const NavVisually = styled.nav`
+display:${props=>props.display};
+position:relative;
+border-bottom: 1px solid ${props=>props.border};
+padding: 25px 0 25px 0;
+color:${props=>props.color};
+ @media screen and ${device.laptop}{
+    display:none;
+  }
+`
+const Choose = styled.div`
+display: flex;
+
+margin-right:30px;
+`
+const Handle = styled.div`
+margin-left:10px;
+strong{
+margin-right:10px;
+}
+`
+const NormalVersion = styled.div`
+position:absolute;
+right:0;
+display:flex;
+cursor:pointer;
+`
+const ColorStrong = styled.strong`
+    border: 1px solid;
+    cursor:pointer;
+    border-radius: 28px;
+    padding: 1px 5px 3px 5px;
+    background: ${props=>props.background};
+    color: ${props=>props.color};
+`
+export const NavBarVisuallyImpaired=({locale,display,footer})=>{
+    const dispatch = useDispatch()
+    const {images} = useSelector(state=>state.app)
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
+   return(
+       <NavVisually border={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'} color={!visuallyImpairedModeWhiteTheme ? 'white' : footer ? 'white' : 'black'} display={display}>
+           <Choose>
+               <span>{headerLsi.fontSize[locale]}</span>
+               <Handle>
+                   <strong onClick={()=>dispatch(ClickOnChangeFontSizeNormal('normal'))} style={{fontSize:'15px'}}>A</strong>
+                   <strong onClick={()=>dispatch(ClickOnChangeFontSizeNormal('medium'))} style={{fontSize:'20px'}}>A</strong>
+                   <strong onClick={()=>dispatch(ClickOnChangeFontSizeNormal('large'))} style={{fontSize:'25px'}}>A</strong>
+               </Handle>
+           </Choose>
+           <Choose>
+               <span>{headerLsi.image[locale]}</span>
+               <Handle>
+                   <Switch>
+                       <InputCheckbox checked={images} onClick={()=>dispatch(ClickOnOffImages())} type="checkbox" />
+                       <SliderRound/>
+                   </Switch>
+               </Handle>
+           </Choose>
+           <Choose>
+               <span>{headerLsi.colorSite[locale]}</span>
+               <Handle>
+                   <ColorStrong background='white' color='black' onClick={()=>dispatch(ClickOnOffWhiteTheme(true))}>A</ColorStrong>
+                   <ColorStrong background='black' color='white'  onClick={()=>dispatch(ClickOnOffWhiteTheme(false))}>A</ColorStrong>
+               </Handle>
+           </Choose>
+           <NormalVersion onClick={()=>dispatch(ClickVisuallyImpairedModeOff())}>
+               <span>{headerLsi.normalVersion[locale]}</span>
+               <Handle>
+                       <Icon  src='/glassIcon.svg'  width='30px' height='30px'/>
+               </Handle>
+           </NormalVersion>
+       </NavVisually>
+   )
+}
+export const NavBar =({language,navButtons,register,logIn})=>{
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
+    const color=!visuallyImpairedModeWhiteTheme ? 'white' : 'black'
+    return (
         <Nav>
             <LargeLinks>
-                <Navmanu role="navigation">
+                <Navmanu  color={color} role="navigation">
                     <ul>
                         {
                             navButtons.map(button=>
@@ -381,9 +491,9 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                 </Navmanu>
             </LargeLinks>
 
-            <SignInMain top='45px'>
+            <SignInMain  top='45px'>
                 <Link href='/register'>
-                    <RegisterLink>
+                    <RegisterLink color={color} >
                         {register}
                     </RegisterLink>
                 </Link>
@@ -405,10 +515,13 @@ const ArrowIcon = styled.i`
   }
 `
 export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,language,navButtons,register,logIn,changeLanguageIcon,glassIcon})=>{
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
+    const dispatch = useDispatch()
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     return (
         <NavMain>
             <Links>
-                <Navmanu color={color} role="navigation">
+                <Navmanu color={!visuallyImpairedModeWhiteTheme ? 'white' : color} role="navigation">
                     <ul>
                         {
                             navButtons.map(button=>
@@ -447,23 +560,23 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                     </ul>
                 </Navmanu>
             </Links>
-            <ChangeLanguageContainer top='25px' position='absolute' right='100px'>
+            <ChangeLanguageContainer minWidth={visuallyImpairedMode ? 'none' : '220px'} top='25px' position='absolute' right='100px'>
                     <ChangeLanguageSelector globeDarkIcon={globeDarkIcon} />
-                    <Glass>
+                    <Glass display={visuallyImpairedMode ? 'none' : 'block'} onClick={()=>dispatch(ClickVisuallyImpairedModeOn())}>
                         <Icon  src={glassIcon}  width={'30px'} height='30px'/>
                     </Glass>
             </ChangeLanguageContainer>
-            <SignIn right='68px' top='25px'>
-                <AnimationSearchBarStyled color={searchBarColor}/>
+            <SignIn  right='68px' top='25px'>
+                <AnimationSearchBarStyled color={!visuallyImpairedModeWhiteTheme ? 'white' : searchBarColor}/>
                 <ArrowIcon
-                    color={color}
+                    color={!visuallyImpairedModeWhiteTheme ? 'white' : color}
                     displayUserIcon='none'
                     className="fa fa-user-circle"
                     aria-hidden="true"
                     onClick={()=>console.log('click')}
                 />
             </SignIn>
-            <Burger color={color}/>
+            <Burger color={!visuallyImpairedModeWhiteTheme ? 'white' : color}/>
         </NavMain>
     )
 }
@@ -486,6 +599,7 @@ export const Main =({logo1,logo2,title,subtitle})=>{
 }
 const FooterContainer = styled.div`
 display:flex;
+margin-bottom:40px;
 align-items: center;
 margin-top:40px;
 @media screen and ${device.mobileL}{
@@ -495,9 +609,9 @@ margin-top:40px;
 
 const ChangeLanguageContainer = styled.div`
 display:flex;
-min-width:220px;
+min-width:${props=>props.minWidth};
 align-items: center;
-margin-left:20px;
+margin-left:30px;
 position: ${props=>props.position};
 right:${props=>props.right};
 @media screen and (max-width:1400px){
@@ -510,38 +624,62 @@ right:${props=>props.right};
  
 `
 const Glass = styled.div`
-  
+display:${props=>props.display};
+  cursor:pointer;
   right: 0;
     position: absolute;
-  
 `
 export const LinkIcon = styled.i`
     font-size: 16px;
-    color: #0072BC; 
+    color:${props=>props.color};
 `
-export const Footer =({inputName,inputFunc,inputPlaceholder,contacts})=>{
+const Logos = styled.div`
+  display:flex;
+  cursor:pointer;
+
+    @media screen and ${device.laptop}{
+    display:none;
+  }
+  a{
+  border:${props=>props.border};
+  width: 30px;
+    height: 30px;
+    margin-right: 30px;
+    background-color: white;
+    border-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  }
+`
+export const Footer =({inputName,inputFunc,inputPlaceholder,contacts,display,minWidth})=>{
+    const dispatch = useDispatch()
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
     const telegram = contacts.telegramLink && contacts.telegramLink
     const facebook = contacts.facebookLink && contacts.facebookLink
     const gmail = contacts.gmail && contacts.gmail
+    const color = visuallyImpairedMode ? '#1D1D1B' : '#0072BC'
+    const border = visuallyImpairedMode ? '1px solid' : 'unset'
     return (
         <FooterContainer>
-            <Logos>
+            <Logos  border={border}>
                 <a href={`https://telegram.im/${telegram}`}  target="_blank">
-                    <LinkIcon  className="fa fa-paper-plane" aria-hidden="true"/>
+                    <LinkIcon color={color}  className="fa fa-paper-plane" aria-hidden="true"/>
                 </a>
                 <a href={facebook} target="_blank">
-                    <LinkIcon  className="fa fa-facebook" aria-hidden="true"/>
+                    <LinkIcon  color={color} className="fa fa-facebook" aria-hidden="true"/>
                 </a>
                 <a href={`mailto:?subject=${gmail}`} target="_blank">
-                    <LinkIcon  className="fa fa-envelope" aria-hidden="true"/>
+                    <LinkIcon color={color} className="fa fa-envelope" aria-hidden="true"/>
                 </a>
             </Logos>
 
-            <SearchBarStyled border='none' width='100%' inputFunc={inputFunc} name={inputName} inputPlaceholder={inputPlaceholder}/>
+            <SearchBarStyled border={border} width='100%' inputFunc={inputFunc} name={inputName} inputPlaceholder={inputPlaceholder}/>
 
-            <ChangeLanguageContainer position='relative'>
+            <ChangeLanguageContainer minWidth={minWidth} position='relative'>
                     <ChangeLanguageSelector  theme='white' />
-                    <Glass>
+                    <Glass  display={display} onClick={()=>dispatch(ClickVisuallyImpairedModeOn())}>
                         <Icon  src='/glassIcon.svg'  width='30px' height='30px'/>
                     </Glass>
             </ChangeLanguageContainer>

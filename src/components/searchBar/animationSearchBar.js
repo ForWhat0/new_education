@@ -14,6 +14,7 @@ const SearchBar = styled.span`
 const Icon = styled.i`
    position: absolute; 
   right: 7px; 
+  color:black;
   z-index: 3; 
   font-size:20px;
   @media screen and ${device.laptop}{

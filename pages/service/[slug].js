@@ -19,7 +19,7 @@ const { useState } = React;
  const Container = styled.div`
  width:80%;
  margin-left:10%;
- margin-bottom:40px;
+ padding-bottom:40px;
 background: url(${props=>props.bgImg}) no-repeat center center fixed;   
 @media screen and (max-width:700px) {
  background:unset;

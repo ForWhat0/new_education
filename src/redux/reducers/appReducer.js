@@ -8,6 +8,11 @@ import {
     hideExtraLoader,
     clickBurger,
     clickModal,
+    clickVisuallyImpairedMode,
+    clickOnOffImages,
+    clickVisuallyImpairedModeOn,
+    clickVisuallyImpairedModeOff,
+    clickOnOffVisuallyImpairedModeWhiteTheme, changeFontSizeNormal
 } from '../types/types'
 
 const initialState = {
@@ -18,7 +23,12 @@ const initialState = {
     type:'success',
     language:'ukr',
     menuBurgerIsOpen:false,
-    modal:false
+    modal:false,
+    visuallyImpairedMode:false,
+    fontSize:'normal',
+    images:true,
+    visuallyImpairedModeWhiteTheme:true,
+
 }
 
 export const appReducer = ( state = initialState,action ) =>{
@@ -27,6 +37,40 @@ export const appReducer = ( state = initialState,action ) =>{
             return {
                 ...state,
                 modal: !state.modal
+            }
+        }
+        case changeFontSizeNormal:{
+            return {
+                ...state,
+                fontSize: action.payload
+            }
+        }
+        case clickOnOffVisuallyImpairedModeWhiteTheme:{
+            return {
+                ...state,
+                visuallyImpairedModeWhiteTheme: action.payload
+            }
+        }
+        case clickVisuallyImpairedModeOn:{
+            return {
+                ...state,
+                visuallyImpairedMode: true,
+                images: false
+            }
+        }
+        case clickVisuallyImpairedModeOff:{
+            return {
+                ...state,
+                visuallyImpairedMode: false,
+                images: true,
+                visuallyImpairedModeWhiteTheme:true,
+                fontSize: 'normal'
+            }
+        }
+        case clickOnOffImages:{
+            return {
+                ...state,
+                images: !state.images
             }
         }
         case changeLanguage:{

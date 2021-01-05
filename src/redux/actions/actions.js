@@ -5,7 +5,17 @@ import {
     hideAlert,
     changeLanguage,
     getNews,
-    showExtraLoader, hideExtraLoader, getProjectById, getNewsForMobile, clickBurger, clickModal
+    showExtraLoader,
+    hideExtraLoader,
+    getProjectById,
+    getNewsForMobile,
+    clickBurger,
+    clickModal,
+    clickVisuallyImpairedMode,
+    clickOnOffImages,
+    clickVisuallyImpairedModeOn,
+    clickVisuallyImpairedModeOff,
+    clickOnOffVisuallyImpairedModeWhiteTheme, changeFontSizeNormal
 } from '../types/types'
 import GET_MOORE_NEWS from "../../queries/get_moore_news";
 import reduxClient from "../../apollo/reduxClient";
@@ -116,3 +126,29 @@ export function HideExtraLoader(){
         type:hideExtraLoader
     }
 }
+export function ClickVisuallyImpairedModeOn(){
+    return{
+        type:clickVisuallyImpairedModeOn
+    }
+}
+export function ClickVisuallyImpairedModeOff(){
+    return{
+        type:clickVisuallyImpairedModeOff
+    }
+}
+export function ClickOnOffImages(){
+    return{
+        type:clickOnOffImages
+    }
+}
+export function ClickOnOffWhiteTheme(string){
+    return  dispatch=>{
+        dispatch({type:clickOnOffVisuallyImpairedModeWhiteTheme,payload:string})
+    }
+}
+export function ClickOnChangeFontSizeNormal(string){
+    return  dispatch=>{
+            dispatch({type:changeFontSizeNormal,payload:string})
+    }
+}
+

@@ -12,10 +12,12 @@ import {ParcMenu} from "../src/components/hooks/hooks";
 import GET_EVENTS_DATE from "../src/queries/get_all_events_dete";
 import '../styles/Home.module.css'
 import {NewsLsi} from "../src/Lsi/lsi";
+import {useSelector} from "react-redux";
 
 export default function Home({contacts,locale,menu,news,events,data,projects,services,allDates}) {
   const {mainPageFields} = data
   const parsedMenu = ParcMenu(menu)
+  const {visuallyImpairedMode} = useSelector(state=>state.app)
 
     const teamData =  {
       text:mainPageFields.text,
@@ -42,7 +44,10 @@ export default function Home({contacts,locale,menu,news,events,data,projects,ser
         </div>
         }
         {popularProjectsData?.projects?.length > 0 &&<ProjectsWrapper locale={locale}  posts={popularProjectsData}/>}
-        {teamData?.employees?.length > 0 &&
+        {
+          !visuallyImpairedMode &&
+
+          teamData?.employees?.length > 0 &&
         <div id="Team" name="#Team" className="element">
           <Team  posts={teamData}/>
         </div>

@@ -4,11 +4,14 @@ import React from "react";
 import styled from "styled-components";
 import Date from "../date/date"
 import {device} from "../deviceSizes/deviceSizes";
+import {StyledButton} from "../button/button";
+import {ProjectsLsi} from "../../Lsi/lsi";
+import {useRouter} from "next/router";
 
 
 const TextContent = styled.div`
     margin-top:20px;
-    border-top:2px solid #1D1D1B;
+    border-top:${props => props.border};
     padding-top: 20px;
     @media screen and ${device.tablet} {
    flex-direction:column;
@@ -23,7 +26,7 @@ const Review = styled.div`
     display:flex;
    align-items: center;
    position:${props=>props.position};
-   padding-top: 20px;
+   padding-top: ${props=>props.pTop};
     @media screen and ${device.mobileL}{
    display:none;
   }
@@ -50,6 +53,7 @@ export const ArrowIcon = styled.div`
     background-position: center;
 `
 export const ArrowContainer = styled.div`
+background-color: white;
     height: 30px;
     width: 30px;
     border: 1px solid;
@@ -58,35 +62,44 @@ export const ArrowContainer = styled.div`
     align-items: center;
     justify-content: center;
 `
-const StyledTextComponent =({fontSize,paddingBottom,bottom,title,excerpt,textForIcon ,date})=>{
-    const border = excerpt ? 'unset' : '2px solid #1D1D1B;'
+const StyledTextComponent =({offBorder,fontSize,paddingBottom,bottom,title,excerpt,textForIcon ,date})=>{
+    const border = excerpt  ? 'unset' : '2px solid;'
     const position = bottom ? 'absolute' : 'relative'
     const width = bottom ? '100%' : 'auto'
+    const router = useRouter()
+    const locale = router.locale
     return (
         <>
             <TitleForComponent displayYellowDiv={false} paddingBottom={paddingBottom} text={title} fontSize={fontSize || '30px'} />
             {
                 excerpt &&
-            <TextContent>
+            <TextContent border={offBorder ? 'unset' : '2px solid;'}>
                 {excerpt.substring(3, 200)}...
             </TextContent>
 
 
             }
-            <Review width={width} position={position} border={border}>
-                <ArrowContainer>
-                    <ArrowIcon/>
-                </ArrowContainer>
-                <IconText>
-                    {textForIcon}
-                </IconText>
-                {
-                    date &&
-                <StyledDate>
-                    <Date date={date}/>
-                </StyledDate>
-                }
-            </Review>
+                    <Review pTop={offBorder ? '40px' : '20px'} width={width} position={position} border={border}>
+                        {
+                            offBorder ?
+                                <StyledButton text={ProjectsLsi.review[locale]}/>
+                                :
+                                <>
+                                    <ArrowContainer>
+                                        <ArrowIcon/>
+                                    </ArrowContainer>
+                                    <IconText>
+                                        {ProjectsLsi.review[locale]}
+                                    </IconText>
+                                    {
+                                        date &&
+                                        <StyledDate>
+                                            <Date date={date}/>
+                                        </StyledDate>
+                                    }
+                                </>
+                        }
+                    </Review>
             </>
     )
 }

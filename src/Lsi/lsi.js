@@ -25,6 +25,26 @@ export const headerLsi={
         UK:"Назва послуги",
         EN:"Name of service",
         RU:"Название услуги"
+    },
+    fontSize:{
+        UK:"Розмір шрифту:",
+        EN:"Font size:",
+        RU:"Размер шрифта:"
+    },
+    image:{
+        UK:"Зображення:",
+        EN:"Image:",
+        RU:"Изображение"
+    },
+    colorSite:{
+        UK:"Колір сайту:",
+        EN:"Site color:",
+        RU:"Колір сайту:"
+    },
+    normalVersion:{
+        UK:"Звичайна версія",
+        EN:"Normal version",
+        RU:"Обычная версия"
     }
 }
 export const ProjectsLsi={

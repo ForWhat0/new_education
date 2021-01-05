@@ -31,8 +31,9 @@ export default function Services({posts,titleServices,locale}){
         <GlobalContainer>
             <TitleForComponent fontSize='40px' text={titleServices}/>
             <ServicesContainer>
-                {posts.map(node =>
+                {posts.map((node,index) =>
                         <Service
+                            index={index}
                             locale={locale}
                             slug={node.slug}
                             key={node.databaseId}

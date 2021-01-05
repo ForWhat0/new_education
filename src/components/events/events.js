@@ -15,7 +15,8 @@ const ServicesContainer = styled.div`
       grid-template-columns: 1fr;
   }
  display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+ margin:${props=>props.margin};
+    grid-template-columns: ${props=>props.grid};
    grid-gap: 30px;
 `
 const ButtonContainer = styled.div`
@@ -35,11 +36,11 @@ margin-bottom:80px;
   margin-left: 10%;
 `
 export default function Events({locale,posts,titleEvent}){
-
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
     return(
-        <GlobalContainer>
+        <GlobalContainer  >
             <TitleForComponent text={titleEvent}/>
-            <ServicesContainer>
+            <ServicesContainer margin={visuallyImpairedMode ? '100px 0 80px 0' : '60px 0 0 0'} grid={visuallyImpairedMode ? '1fr' : '1fr 1fr 1fr'}>
                 {posts.map((node,i) =>
                     <Link href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt.substring(0,10)}`}>
                         <a>

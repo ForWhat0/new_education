@@ -8,19 +8,24 @@ import {events} from "../../Lsi/lsi"
 import React from "react";
 import {ArrowContainer} from "../textComponent/textComponent";
 import {ArrowIcon} from "../textComponent/textComponent";
+import {useSelector} from "react-redux";
+import {StyledButton} from "../button/button";
 
 const opacity = keyframes`
  0%   { opacity: 0; }
   100% { opacity: 1; }
 `;
 const EventContainer = styled.div`
-min-width:30%; 
-min-height:280px;
-padding-top:50px;
-padding-bottom:50px;
+min-width:${props=>props.visuallyImpairedMode ? 'unset' : '30%'}; 
+min-height:${props=>props.visuallyImpairedMode ? 'unset' : '280px'};
+padding-top:${props=>props.visuallyImpairedMode ? '20px' : '50px'};
+padding-bottom:${props=>props.visuallyImpairedMode ? '20px' : '50px'};
+display:${props=>props.visuallyImpairedMode ? 'flex' : 'block'};
+align-items:center;
+border-bottom:${props=>props.visuallyImpairedMode ? '1px solid' : 'unset'};
 background: #FFFFFF;
-box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
-border-radius: 28px;
+box-shadow: ${props=>props.visuallyImpairedMode ? 'unset' : '0px 0px 20px rgba(29, 29, 27, 0.2)'};
+border-radius: ${props=>props.visuallyImpairedMode ? 'unset' : '28px'};
 position:relative;
 cursor:pointer;
  @media screen and ${device.mobileL} {
@@ -38,8 +43,8 @@ const TimeContainer = styled.div`
 border-left: 5px solid ${props=>props.borderLeftColor};
 display:flex;
 align-items: center;
-padding-left:20px;
-padding-right:20px;
+padding-left:${props=>props.visuallyImpairedMode ? '40px' : '20px'};
+padding-right:${props=>props.visuallyImpairedMode ? '40px' : '20px'};
 position: relative;
 @media screen and (max-width:1200px) {
 padding-left:15px;
@@ -54,7 +59,7 @@ margin-bottom: 20px;
 const MonthAndDay = styled.div`
 display:flex;
 flex-direction:column;
-margin-left:30px;
+margin-left:${props=>props.visuallyImpairedMode ? '40px' : '30px'};
 @media screen and (max-width:1200px) {
 margin-left:10px;
   }
@@ -71,7 +76,7 @@ display:flex;
 flex-direction:row;
 margin-left:40px;
 align-items:center;
-position: absolute;
+position: ${props=>props.visuallyImpairedMode ? 'initial' : 'absolute'};;
     right: 20px;
     @media screen and (max-width:1200px) {
   right: 15px;
@@ -99,6 +104,7 @@ const Icon = styled.i`
 `
 const TextField = styled.span`
 padding:0;
+width:${props=>props.visuallyImpairedMode ? 'max-content' : 'auto'};
 margin:0;
 font-size:${props=>props.fontSize};
 font-weight:${props=>props.fontWeight};
@@ -109,7 +115,9 @@ display:none;
 const Text = styled.p`
     line-height: 27px;
     font-weight:500;
-    margin: 80px 20px 0px;
+    width:${props=>props.visuallyImpairedMode ? '70%' : 'auto'};
+    margin:${props=>props.visuallyImpairedMode ? 'unset' : '80px 20px 0'};
+    padding-right:${props=>props.visuallyImpairedMode ? '30px' : 'unset'};
      @media screen and (max-width:1200px) {
       margin: 30px 20px 0px;
     @media screen and ${device.mobileL} {
@@ -136,9 +144,9 @@ const IconText = styled.div`
 
 
 export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
-
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
     const inputDate = new Date(hoursOne?.hoursEvents?.hoursEvents ? hoursOne.hoursEvents.hoursEvents :new  Date())
-
+    const borderLeft = visuallyImpairedMode ? '#1D1D1B' : borderLeftColor
     const renderDay=()=>{
         if(isToday(inputDate)){
             return events.today[locale]
@@ -149,16 +157,17 @@ export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
     }
 
     return (
-            <EventContainer >
-               <TimeContainer borderLeftColor={borderLeftColor}>
+            <EventContainer visuallyImpairedMode={visuallyImpairedMode}>
+               <TimeContainer visuallyImpairedMode={visuallyImpairedMode} borderLeftColor={borderLeft}>
                    <TextField
                        fontSize='40px'
                        fontWeight='bold'
                    >
                        {inputDate.getDate()}
                    </TextField>
-                   <MonthAndDay>
+                   <MonthAndDay visuallyImpairedMode={visuallyImpairedMode}>
                        <TextField
+                           visuallyImpairedMode={visuallyImpairedMode}
                            fontSize='16px'
                            fontWeight='500'
                        >
@@ -171,7 +180,7 @@ export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
                          {renderDay()}
                        </TextField>
                    </MonthAndDay>
-                       <Time>
+                       <Time visuallyImpairedMode={visuallyImpairedMode}>
                            <Icon
                                className="fa fa-clock-o"
                                aria-hidden="true"
@@ -179,19 +188,24 @@ export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
                            {`${format(inputDate, "HH")}:${format(inputDate, "mm")}`}
                        </Time>
                </TimeContainer>
-                <Text border={offBorder ? 'unset' : '1px solid'}>
+                <Text visuallyImpairedMode={visuallyImpairedMode} border={offBorder ? 'unset' : '1px solid'}>
 
                     {hoursOne?.title}
 
                 </Text>
-                <Review >
-                    <ArrowContainer>
-                        <ArrowIcon/>
-                    </ArrowContainer>
-                    <IconText>
-                        {events.review[locale]}
-                    </IconText>
-                </Review>
+                {
+                    visuallyImpairedMode ?
+                        <StyledButton  text={events.review[locale]}/>
+                        :
+                        <Review >
+                            <ArrowContainer>
+                                <ArrowIcon/>
+                            </ArrowContainer>
+                            <IconText>
+                                {events.review[locale]}
+                            </IconText>
+                        </Review>
+                }
             </EventContainer>
     )
 }

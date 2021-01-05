@@ -72,12 +72,15 @@ display: block;
 export const ChangeLanguageSelector=({theme,navMain,globeDarkIcon})=>{
     const router = useRouter()
     let locale =  router.locale
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const {languages} = app
-    const border = navMain ? '1px solid black' : 'unset'
     const globeIcon = globeDarkIcon  ? "/changeLanguageIconDark.svg" : "changeLanguageIcon.svg"
     const color = theme ? "#3F3F3F" : globeDarkIcon ? "#3F3F3F" : "white"
+    const visuallyModeIcon =   theme ? "/changeLanguageVisyalMode.svg" : globeDarkIcon ? "/changeLanguageVisyalMode.svg" : "/changeLanguageVisyalModeWhite.svg"
     const [localeState, setLocaleState] = useState(languages[router.locale])
     const [open, setOpen] = useState(false)
+    const border = navMain || visuallyModeIcon ? '1px solid black' : 'unset'
 
     useEffect(
         ()=>setLocaleState(languages[locale]),
@@ -85,8 +88,8 @@ export const ChangeLanguageSelector=({theme,navMain,globeDarkIcon})=>{
     )
 
     return(
-            <Select>
-                <Content color={color} onClick={()=>setOpen(!open)} url={globeIcon} open ={open ? '180deg' : '0' }>
+            <Select visuallyImpairedMode={visuallyImpairedMode}>
+                <Content color={!visuallyImpairedModeWhiteTheme ? 'white' :color} onClick={()=>setOpen(!open)} url={!visuallyImpairedModeWhiteTheme ? '/changeLanguageVisyalModeWhite.svg' : visuallyImpairedMode ? visuallyModeIcon :  globeIcon} open ={open ? '180deg' : '0' }>
                     <div />
                     <li>{localeState}</li>
                     <i className="fa fa-caret-down"></i>

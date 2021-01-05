@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import {useSelector} from "react-redux";
 
 const StyledBlock = styled.div`
    display:flow-root;
   margin-top:40px;
-  margin-bottom:50px;
-  border-bottom:1px solid #1D1D1B;
+  margin-bottom:${props=>props.margin};
+  border-bottom:1px solid ${props=>props.color};
   padding-bottom:30px;
   position:relative;
   && h2 {
@@ -18,12 +19,18 @@ const StyledBlock = styled.div`
   && div ul li {
   list-style-type:none;
   }
+  
+  figure{
+  display:${props=>props.display}!important;
+  }
 `;
 
 
 export default function PostBody({ content  }) {
+    const {images} = useSelector(state=>state.app)
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     return (
-        <StyledBlock>
+        <StyledBlock margin={!visuallyImpairedModeWhiteTheme ? 'unset' : '50px'}  color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'} display={!images ? 'none' : 'block'}>
             <div
                 dangerouslySetInnerHTML={{ __html: content }}
             />
@@ -34,9 +41,8 @@ export default function PostBody({ content  }) {
 
 const StyledBlockZNO = styled.div`
    display:flow-root;
-  margin-bottom:50px;
-
-
+    margin-bottom:${props=>props.margin};
+  border-bottom:1px solid ${props=>props.color};
   position:relative;
   line-height: 27px;
   && h2 {
@@ -69,8 +75,11 @@ const StyledBlockZNO = styled.div`
 
 
 export const  PostBodyZNO=({ content  }) =>{
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     return (
-        <StyledBlockZNO>
+        <StyledBlockZNO
+            margin={!visuallyImpairedModeWhiteTheme ? 'unset' : '50px'}  color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
+        >
             <div
                 dangerouslySetInnerHTML={{ __html: content }}
             />

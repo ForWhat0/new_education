@@ -13,12 +13,13 @@ import {SendButton} from "../../src/components/sendButton/sendButton";
 import {ShowAlert} from "../../src/redux/actions/actions";
 import {useMutation} from "@apollo/client";
 import SEND_COMMENT from "../../src/mutations/sendComment";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const Global = styled.div`
 
 `
 const Content = styled.div`
+color:black;
 position: relative;
    display:flex;
    justify-content:center;
@@ -147,7 +148,7 @@ width:320px;
   }
 `
 export default function  Appeal({locale,contacts,menu}){
-
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const parsedMenu = ParcMenu(menu)
     const [name, setName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -193,7 +194,7 @@ export default function  Appeal({locale,contacts,menu}){
 
     return(
         <MainLayout databaseId={1} contacts={contacts} menu={parsedMenu}>
-            <Global>
+            <Global >
                 <Title>
                     <TitleForComponent text={appeal.appeal[locale]}/>
                 </Title>
@@ -207,7 +208,7 @@ export default function  Appeal({locale,contacts,menu}){
                         </Text>
                     </GrayBackground>
                     <Form>
-                        <InputStyled text={appeal.name[locale]} onChange={e => setName(e.target.value)}  width='100%'/>
+                        <InputStyled  text={appeal.name[locale]} onChange={e => setName(e.target.value)}  width='100%'/>
                         <InputStyled text={appeal.lastName[locale]} onChange={e => setLastName(e.target.value)}  width='100%'/>
                         <InputStyled maxlength='100' text={appeal.reason[locale]} onChange={e => setReason(e.target.value)}  width='100%'/>
                         <SendButton

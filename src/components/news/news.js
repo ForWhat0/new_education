@@ -2,6 +2,7 @@ import styled, {keyframes} from 'styled-components'
 import React from "react"
 import StyledTextComponent from "../textComponent/textComponent"
 import Link from 'next/link';
+import {useSelector} from "react-redux";
 
 const opacity = keyframes`
  0%   { opacity: 0; }
@@ -18,7 +19,7 @@ const NewsContainer = styled.div`
 
 const PhotoContainer = styled.div`
    position: relative;
-    display: block;
+    display: ${props=>props.display};
     overflow: hidden;
     border-radius: 3px;
     margin-bottom:20px;
@@ -39,10 +40,11 @@ const StyledPhoto = styled.img`
 `
 
 export default function News(props) {
+    const {images} = useSelector(state=>state.app)
     return (
         <Link href={`/news/[slug]`} as={`/news/${props.slug}`}>
     <NewsContainer>
-        <PhotoContainer >
+        <PhotoContainer display={images ? 'block' : 'none'} >
             <StyledPhoto
                 src={props.coverImage?.sourceUrl}
             />

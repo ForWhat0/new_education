@@ -25,7 +25,6 @@ font-weight: normal;
 text-align:start;
 font-size: 16px;
 margin-bottom: 5px;
-color: #1D1D1B;
 `
 export const InputStyled = ({maxlength,text,width,onChange})=>{
     return(

@@ -17,7 +17,7 @@ const {button} = NewsLsi
 export const Back = styled.div`
 width:100%;
 background-color:${props => props.background};
-margin-bottom:${props => props.margin};
+padding-bottom:${props => props.margin};
 `
 
 export const Container = styled.div`

@@ -9,6 +9,7 @@ import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import Icon from "../../src/components/icon/icon";
 import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
 import {finance} from "../../src/Lsi/lsi";
+import {useSelector} from "react-redux";
 const { useState, Fragment } = React;
 
 const Container = styled.div`
@@ -41,6 +42,7 @@ font-size:17px;
     }
 `
 const DownloadFile = styled.ul`
+color:${props=>props.color};
 position: relative;
  width: 100%;
  margin: 0;
@@ -118,9 +120,15 @@ right:0;
  margin-bottom:40px;
   }
 `
-
+const Circle = styled.div`
+border-radius:28px;
+background:white;
+    height: 20px;
+    width: 20px;
+`
 const FinancialStatements = ({ menu,page ,contacts,locale}) => {
     const router = useRouter()
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const parsedMenu = ParcMenu(menu)
     const [shownComments, setShownComments] = useState({});
     const [searchInput, setSearchInput] = useState('');
@@ -133,13 +141,15 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
     if (router.isFallback) {
         return <div>Loading...</div>
     }
+
     return (
         <MainLayout contacts={contacts} menu={parsedMenu} hideLeftComponent={true} >
-            <Container bgImg={page?.financeField?.bgImg?.sourceUrl}>
+            <Container bgImg={!visuallyImpairedModeWhiteTheme ? 'unset' : page?.financeField?.bgImg?.sourceUrl}>
                 <Header>
                     <TitleForComponent marginBottom='40px' borderBottom='unset' text={page.title}  />
                     <Input>
                         <SearchBarStyled
+                            value={setSearchInput}
                             maxlength={10}
                             width='100%'
                             inputPlaceholder={finance.search[locale]}
@@ -154,7 +164,9 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                             file.dateFile && file.dateFile.includes(searchInput)).map(filteredFiles=>
                             <DownloadItem href={filteredFiles.downloadPdf.mediaItemUrl} download target='_blank'>
                                 <Icon src='/pdf.svg' width='50px' height='100px' alt='PDF File'/>
-                                <DownloadFile>
+                                <DownloadFile
+                                color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
+                                >
                                     <DownloadFileText
                                         top='0'
                                         bottom='unset'
@@ -172,7 +184,9 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                                         mTop='unset'
                                         mBottom='15px'
                                     >
-                                        <Icon src='/arrow-right-in-circle.svg' width='20px' height='20px'/>
+                                        <Circle>
+                                            <Icon src='/arrow-right-in-circle.svg' width='20px' height='20px'/>
+                                        </Circle>
                                         <span>{finance.download[locale]} ({formatBytes(filteredFiles.downloadPdf.fileSize)})</span>
                                     </DownloadFileTextAndArrow>
                                 </DownloadFile>
@@ -201,7 +215,9 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                                 {el.filePdf?.map(file =>
                                     <DownloadItem href={file.downloadPdf.mediaItemUrl} download target='_blank'>
                                         <Icon src='/pdf.svg' width='50px' height='100px' alt='PDF File'/>
-                                        <DownloadFile>
+                                        <DownloadFile
+                                            color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
+                                        >
                                             <DownloadFileText
                                                 top='0'
                                                 bottom='unset'
@@ -211,7 +227,7 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                                                 {`${finance.report[locale]} ( 
                                                     ${file.dateFile? file.dateFile : null}
                                                    
-                                (${finance.date[locale]} ( ${getDateIn_DD_MM_YYYY_Format(file.downloadPdf.dateGmt)} )`}
+                                (${finance.date[locale]}  ${getDateIn_DD_MM_YYYY_Format(file.downloadPdf.dateGmt)} )`}
                                             </DownloadFileText>
                                             <DownloadFileTextAndArrow
                                                 top='unset'
@@ -219,8 +235,10 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                                                 mTop='unset'
                                                 mBottom='15px'
                                             >
-                                                <Icon src='/arrow-right-in-circle.svg' width='20px' height='20px'/>
-                                                <span>{finance.download[locale]} ( ({formatBytes(file.downloadPdf.fileSize)})</span>
+                                                <Circle>
+                                                    <Icon  src='/arrow-right-in-circle.svg' width='20px' height='20px'/>
+                                                </Circle>
+                                                <span>{finance.download[locale]}  ({formatBytes(file.downloadPdf.fileSize)})</span>
                                             </DownloadFileTextAndArrow>
                                         </DownloadFile>
                                     </DownloadItem>

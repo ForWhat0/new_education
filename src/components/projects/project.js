@@ -7,9 +7,10 @@ import StyledTextComponent from "../textComponent/textComponent";
 import {StyledDivWithIconBackGround} from "./backgroundWithIcon";
 import {device} from "../deviceSizes/deviceSizes";
 import {hexToRgbA} from "../hooks/hooks";
+import {useSelector} from "react-redux";
 
 const Container = styled.div`
-min-height:350px;
+min-height:${props=>props.minHeight};
 background-color:${props => props.background};
 width:100%;
 display: flex;
@@ -22,7 +23,9 @@ const ContainerWrapper = styled.div`
 z-index:1;
 width:80%;
 display:flex;
-
+margin-bottom:${props=>props.pBottom};
+padding-bottom:${props=>props.pBottom};
+border-bottom:${props=>props.bBottom};
 flex-direction:${props => props.flexDirection};
 @media screen and ${device.tablet} {
 padding-top: 20px;
@@ -36,7 +39,7 @@ const ImageContainer = styled.div`
 width: 45%;
 margin-right: ${props=>props.rightImage};
 justify-content: ${props=>props.justifyImage};
-display: flex;
+display: ${props=>props.display};
 @media screen and ${device.tablet} {
    margin-right: unset;
    justify-content:unset;
@@ -55,7 +58,8 @@ filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.2));
   }
 `
 const Text = styled.div`
-width:50%;
+color:${props=>props.color};
+width:${props=>props.width};
 margin-right: ${props=>props.rightText};
 h1{
 margin:0;
@@ -74,25 +78,28 @@ margin:0;
 `
 
 export default function Project(props) {
-
+    const {images} = useSelector(state=>state.app)
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const background = hexToRgbA(props.background)
     const rightText = props.flexDirection === 'row' ? 'unset' : '5%'
     const rightImage = props.flexDirection === 'row' ? '5%' : 'unset'
     const justifyImage = props.flexDirection === 'row' ? 'unset' : 'flex-end'
+    const bBottom = !images ? !visuallyImpairedModeWhiteTheme ? '1px solid white' : '1px solid #000000' : 'unset'
+    const pBottom = !images ? '20px' : 'unset'
     return (
-        <Link href={`/projects/[slug]`} as={`/projects/${props.slug}`}>
-            <a>
-                <Container background={background}>
+                <Container minHeight={!images ? 'unset' : '350px'} background={visuallyImpairedMode ? 'none' : background}>
                     <StyledDivWithIconBackGround
                         align={props.backgroundIconAlign}
-                        display={props.backgroundIconDisplay}
+                        display={visuallyImpairedMode ? 'none' : props.backgroundIconDisplay}
                         src={props.backgroundIcon}/>
-                        <ContainerWrapper flexDirection={props.flexDirection}>
-                            <ImageContainer  justifyImage={justifyImage} rightImage={rightImage}>
+                        <ContainerWrapper bBottom={bBottom} pBottom={pBottom}  flexDirection={props.flexDirection}>
+                            <ImageContainer display={images ? 'flex' : 'none'}  justifyImage={justifyImage} rightImage={rightImage}>
                                 <Image  src={props.coverImage?.sourceUrl}/>
                             </ImageContainer>
-                            <Text rightText={rightText}>
+                            <Text color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'} width={!images ? '100%' : '50%'} rightText={rightText}>
                                 <StyledTextComponent
+                                    offBorder={!images}
                                     title={props.title}
                                     excerpt={props.excerpt}
                                     textForIcon={props.textForIcon}
@@ -100,7 +107,6 @@ export default function Project(props) {
                             </Text>
                         </ContainerWrapper>
                 </Container>
-            </a>
-        </Link>
+
     )
 }

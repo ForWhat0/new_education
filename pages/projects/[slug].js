@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import client from "../../src/apollo/client"
+import reduxClient from "../../src/apollo/reduxClient"
 import StyledLoader from "../../src/components/loader/loader";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import PostBody from "../../src/components/post-body/post-body";
@@ -11,6 +11,10 @@ import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
 import React from "react";
 import Icon from "../../src/components/icon/icon";
 import {ParcMenu} from "../../src/components/hooks/hooks";
+import GET_DATABASE_ID_FROM_TIME from "../../src/queries/get_all_databaseId_from_time";
+import GET_HOUR_BY_ID from "../../src/queries/get_hour_by_id";
+import GET_EVENTS_DATE from "../../src/queries/get_all_events_dete";
+import {useSelector} from "react-redux";
 
  const Container = styled.div`
  width:100%;
@@ -87,18 +91,10 @@ margin-left:${props=>props.marginR};
     margin-bottom:10px;
   }
 `
-export default function MicrophoneDetail({projectBySlug,menu,contacts}) {
+export default function ProjectDetails({projectBySlug,menu,contacts}) {
      const router = useRouter();
     const parsedMenu = ParcMenu(menu)
-    if (router.isFallback) {
-        return (
-            <MainLayout>
-                <LoaderContainer>
-                    <StyledLoader/>
-                </LoaderContainer>
-            </MainLayout>
-        )
-    }
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
 
     return (
         <MainLayout databaseId={projectBySlug.databaseId} contacts={contacts} menu={parsedMenu}>
@@ -106,6 +102,7 @@ export default function MicrophoneDetail({projectBySlug,menu,contacts}) {
                 projectBySlug ?
                     <Container
                         bgImg={
+                            !visuallyImpairedMode &&
                             projectBySlug.projectFields?.bgImg?.sourceUrl
                             && projectBySlug.projectFields.bgImg.sourceUrl
                         }
@@ -160,45 +157,47 @@ export default function MicrophoneDetail({projectBySlug,menu,contacts}) {
     );
 }
 
-export const getStaticProps = async ({params,locale}) => {
-    const slug = params.slug
+
+
+export async function getStaticProps({params,locale}){
+
+    const slug = params?.slug
     const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
     const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
-    const { data } = await client.query( {
+
+    const { data ,loading } = await reduxClient.query( {
         query: GET_PROJECT_BY_SLUG,
-        variables:{
+        variables: {
             slug,
             location,
             contactsUri
         }
     } )
-
     return {
         props: {
-            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
+            projectBySlug:data?.project ? data.project : [],
             menu: data?.menuItems?.nodes || [],
-            projectBySlug:data.project
+            contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
         },
         revalidate: 1
     }
-};
-
-export const getStaticPaths= async ({locales }) => {
+}
+export const getStaticPaths = async ({locales}) => {
     let paths = []
 
-    const { data } = await client.query( {
+    const { data } = await reduxClient.query( {
         query: GET_ALL_SLUG_FROM_PROJECTS
     } )
 
     for (const locale of locales) {
         paths = [
             ...paths,
-            ...data.projects.nodes.map((el) => ({ params: { slug: el.slug }, locale })),
+            ...data.projects?.nodes.map(el => ({ params: { slug: el.slug }, locale })),
         ]
     }
 
     return {
-        fallback: false,
-        paths,
+        fallback: true,
+        paths
     };
 };

@@ -1,6 +1,6 @@
 import {useMutation} from "@apollo/client"
 import React, {useState} from "react"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {InputStyled} from "../input/input"
 import {SendButton} from "../sendButton/sendButton"
 import SEND_COMMENT from "../../mutations/sendComment"
@@ -21,7 +21,7 @@ import {useRouter} from "next/router";
 import {leftComment, leftCommentZno} from "../../Lsi/lsi";
 
 export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,display,src,align})=>{
-    console.log(showZNORegister)
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const router = useRouter()
     const locale = router.locale
     const dispatch = useDispatch()
@@ -86,7 +86,7 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
 
     }
     return (
-        <Container src={src} display={display} align={align}>
+        <Container background={!visuallyImpairedModeWhiteTheme ? '#1D1D1B' : '#F2F9FD'} src={src} display={display} align={align}>
             <Title>
                 {showZNORegister.title}
             </Title>

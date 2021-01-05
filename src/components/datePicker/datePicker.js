@@ -19,12 +19,13 @@ import {
 } from "./styledDatePicker";
 import {maxDay, minDay} from "../hooks/hooks"
 import {useRouter} from "next/router"
+import {useSelector} from "react-redux";
 
 export default function DatePicker({ selectDate, getSelectedDay, labelFormat,tileDisabled}) {
 
     const router = useRouter()
     const locale = router.locale
-
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
     const [selectedDate, setSelectedDate] = useState(new Date());
 
 
@@ -32,9 +33,10 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
     const lastDate = maxDay(selectDate,30)
 
     const selectedStyle = {
-        background:' rgba(0, 114, 188, 0.2)',
+        background: visuallyImpairedMode  ? '#1D1D1B' : ' rgba(0, 114, 188, 0.2)',
         opacity: 1,
-        borderRadius:' 20px'
+        borderRadius:' 20px',
+        color:visuallyImpairedMode &&  ' rgba(255,255,255,1)'
     }
 
     const eventDayStyle = {

@@ -2,6 +2,7 @@ import Link from "next/link"
 import { pagination } from "../../Lsi/lsi"
 import Icon from "../icon/icon"
 import { NumberOfPage ,Container ,Arrows } from "./paginationStyled"
+import {useSelector} from "react-redux";
 
 const {prevPage,nextPage} = pagination
 
@@ -19,10 +20,11 @@ export const Pagination=(
     )=>{
 
     const nextArrowClick = currentPageNumber === 0 ? currentPageNumber + 2 : currentPageNumber + 1
-
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const LeftArrow=()=>{
         return (
             <Arrows
+                color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
                 opacity={loading || !hasPrevious ? '0.5' : 'unset'}
                 right='unset'
                 left='0'
@@ -38,6 +40,7 @@ export const Pagination=(
     const RightArrow=()=>{
         return(
             <Arrows
+                color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
                 opacity={loading  || !hasMore ? '0.5' : 'unset'}
                 right='0'
                 left='unset'
@@ -90,6 +93,7 @@ export const Pagination=(
                         <Link href={`/${href}/page/[currentPage]`} as={`/${href}/page/${startPage+i}`}>
                             <a>
                                 <NumberOfPage
+                                    color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
                                     current= {
                                     startPage + i === currentPageNumber ||
                                     currentPageNumber === 0 && currentPageNumber === i

@@ -12,10 +12,11 @@ import GET_CONTACTS from "../../src/queries/get_contacts";
 import {contactsLsi} from "../../src/Lsi/lsi";
 import {IconBackgroundSvg} from "../../src/components/icon/icon";
 import { StyledMenu} from "../../src/components/burgerMenu/menuStyled";
+import {useSelector} from "react-redux";
 
 const Global = styled.div`
     width: 80%;
-    margin-bottom: 60px;
+    padding-bottom: 60px;
     margin-left: 10%;
     background: url(/contactsBackground.svg) no-repeat;
      background-size: contain;
@@ -75,8 +76,8 @@ text-align:center;
 margin-top:20px;
 }
 span{
-color:black;
-border-bottom:1px solid black;
+color:${props=>props.color};
+border-bottom:1px solid ${props=>props.color};
 }
 `
 const Map = styled.div`
@@ -122,7 +123,7 @@ width: 100%;
 export default function Home({menu,contacts,locale}) {
 
     const parsedMenu = ParcMenu(menu)
-
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     return (
         <MainLayout
             databaseId={contacts.databaseId}
@@ -180,8 +181,9 @@ export default function Home({menu,contacts,locale}) {
                         </Field>
                     </Info>
                     <MapCenter>
-                    <MapContainer>
-
+                    <MapContainer
+                    color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
+                    >
                             <Map/>
                             <a  href={contacts?.mapsLink? contacts.mapsLink : null} target="_blank">
                            <span>

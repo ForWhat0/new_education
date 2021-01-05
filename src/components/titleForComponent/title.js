@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {device} from "../deviceSizes/deviceSizes";
+import {useSelector} from "react-redux";
 
 const Title = styled.h1`
 font-size:${props => props.fontSize};
@@ -31,8 +32,9 @@ font-size: 20px;
 `
 
 export const TitleForComponent=({displayYellowDiv,borderBottom,paddingBottom,text,fontSize,marginBottom})=>{
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
     return(
-        <Title display={displayYellowDiv === false && 'none'} borderBottom={borderBottom} paddingBottom={paddingBottom} marginBottom={marginBottom} fontSize={fontSize}>
+        <Title display={visuallyImpairedMode || displayYellowDiv === false ? 'none' : 'block'} borderBottom={borderBottom} paddingBottom={paddingBottom} marginBottom={marginBottom} fontSize={fontSize}>
            <div/>
             {text}
         </Title>
