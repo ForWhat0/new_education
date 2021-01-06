@@ -21,6 +21,11 @@ databaseId
       adress
       facebookLink
       gmail
+       iconSite {
+        sourceUrl
+      }
+      titleSite
+      descrSite
       telegramLink
       phoneNumber
       mapsLink

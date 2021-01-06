@@ -40,6 +40,7 @@ const Global = styled.div`
        text-align:center;
 `
 const StyledPhoto = styled.img`
+margin-right:5px;
  @media screen and ${device.mobileL} {
      margin-left:unset;
   }
@@ -52,6 +53,7 @@ const StyledPhoto = styled.img`
     opacity: 0.9;
 `
 const StyledText = styled.span`
+width:min-content;
 @media screen and ${device.mobileL} {
      left:unset;
     position: relative;

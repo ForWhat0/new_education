@@ -29,7 +29,7 @@ export const Pagination=(
                 right='unset'
                 left='0'
             >
-                <Icon width='40px' height='30px' alt='prev' src='/leftArrow.svg'/>
+                <Icon width='40px' height='30px' alt='prev' src={!visuallyImpairedModeWhiteTheme ? '/WhiteLeftArrow.svg' : '/leftArrow.svg'}/>
                 <span>
                     {prevPage[locale]}
                 </span>
@@ -48,7 +48,7 @@ export const Pagination=(
                 <span>
                     {nextPage[locale]}
                 </span>
-                <Icon width='40px' height='30px' alt='prev' src='/rightArrow.svg'/>
+                <Icon width='40px' height='30px' alt='prev' src={!visuallyImpairedModeWhiteTheme ? '/WhiteRightArrow.svg' : '/rightArrow.svg'}/>
             </Arrows>
         )
     }

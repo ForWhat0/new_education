@@ -18,7 +18,7 @@ import {
 } from "./leftCommentStyLedComponents"
 import {PageFooter} from "../footer/footer";
 import {useRouter} from "next/router";
-import {leftComment, leftCommentZno} from "../../Lsi/lsi";
+import {leftCommentZno} from "../../Lsi/lsi";
 
 export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,display,src,align})=>{
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
@@ -92,7 +92,7 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
             </Title>
             <ContainerWrapper>
                 <TextZno>
-                    <IconBackgroundZNO />
+                    <IconBackgroundZNO background={!visuallyImpairedModeWhiteTheme ? 'leftCommentZnoWhiteicon.svg' : 'registerZnoIcon.svg'} />
                     <SubTitle>
                         {leftCommentZno.writeUs[locale]}
                     </SubTitle>

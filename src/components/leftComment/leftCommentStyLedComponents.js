@@ -74,7 +74,7 @@ height:100%;
 position:absolute;
 opacity:0.5;
 z-index:0;
-background-image: url('/back.svg');
+background-image: url('/${props=>props.background}');
   background-position: unset; 
   background-repeat: no-repeat; 
   background-size: contain; 
@@ -86,7 +86,7 @@ position:absolute;
 background-position: right; 
 opacity:0.5;
 z-index:0;
-background-image: url('/registerZnoIcon.svg');
+background-image: url('/${props=>props.background}');
   background-repeat: no-repeat; 
   background-size: contain; 
 `

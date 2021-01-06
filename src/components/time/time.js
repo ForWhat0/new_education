@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import PostBody from "../post-body/post-body";
-import {device} from "../deviceSizes/deviceSizes";
-import { format } from "date-fns";
-import {enGB, ru, uk} from "date-fns/locale";
-import React from "react";
+import PostBody from "../post-body/post-body"
+import {device} from "../deviceSizes/deviceSizes"
+import { format } from "date-fns"
+import {enGB, ru, uk} from "date-fns/locale"
+
 
 const Header = styled.div`
 display:flex;
@@ -14,6 +14,7 @@ align-items: center;
 `
 const Date = styled.div`
 display:flex;
+color:black;
 justify-content:center;
 align-items:center;
     flex-direction: column;
@@ -59,7 +60,6 @@ align-items:center;
  
    display: flex;
     font-size: 20px;
-    color: #000000;
     cursor:pointer;
     margin-right:5px;
     border: ${props=>props.border};
@@ -74,13 +74,12 @@ align-items:center;
   
 `
 export default function Time({locale,time,timeFormatted}) {
-
     const weekDay =  format(timeFormatted,  "EEEE",{locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk})
     const numberDay = timeFormatted.getDate()
 
     return (
         <div>
-           <Header>
+           <Header >
               <Date>
                   <span>
                       {weekDay}

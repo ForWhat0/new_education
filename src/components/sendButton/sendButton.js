@@ -68,6 +68,7 @@ const ErrorIcon = styled.i`
 const Button = styled.button`
   background: #1D1D1B;
   border: none;
+  border:1px solid white;
   border-radius: 28px;
   text-align:center;
   width: 100%;

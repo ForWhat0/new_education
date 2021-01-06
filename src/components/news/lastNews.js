@@ -113,7 +113,7 @@ export default function LastNews({locale,titleNews,margin,title,language,posts,p
     const {newsForMobileSliderReducer} = useSelector(state=>state.news)
     const {newsForMobileSliderReducerPageInfo} = useSelector(state=>state.news)
     const dispatch = useDispatch()
-
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const news = newsReducer?.data?.news?.nodes ? newsReducer.data.news.nodes : posts
     const newsForMobile = newsForMobileSliderReducer ? newsForMobileSliderReducer : posts
 
@@ -158,13 +158,13 @@ export default function LastNews({locale,titleNews,margin,title,language,posts,p
                         <TitleForComponent text={NewsLsi.otherNews[locale]} fontSize='40px' />
                         <Arrows>
                             <ArrowIcon
-                                arrow='/leftArrow.svg'
+                                arrow={!visuallyImpairedModeWhiteTheme ? '/WhiteLeftArrow.svg' : '/leftArrow.svg'}
                                 aria-hidden="true"
                                 opacity={loading || !hasPreviousPage ? '0.5' : 'unset'}
                                 onClick={()=>prevNews()}
                             />
                             <ArrowIcon
-                                arrow='/rightArrow.svg'
+                                arrow={!visuallyImpairedModeWhiteTheme ? '/WhiteRightArrow.svg' : '/rightArrow.svg'}
                                 aria-hidden="true"
                                 opacity={loading || !hasNextPage ? '0.5' : 'unset'}
                                 onClick={()=>nextNews()}

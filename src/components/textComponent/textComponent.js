@@ -70,7 +70,7 @@ const StyledTextComponent =({offBorder,fontSize,paddingBottom,bottom,title,excer
     const locale = router.locale
     return (
         <>
-            <TitleForComponent displayYellowDiv={false} paddingBottom={paddingBottom} text={title} fontSize={fontSize || '30px'} />
+            <TitleForComponent displayYellowDiv={false} paddingBottom={paddingBottom} text={title} fontSize={fontSize || '30px!important'} />
             {
                 excerpt &&
             <TextContent border={offBorder ? 'unset' : '2px solid;'}>

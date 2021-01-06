@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const Button = styled.button`
   background: #1D1D1B;
+  border:1px solid white;
   border-radius: 28px;
   text-align:center;
   color: #FFFFFF;

@@ -13,6 +13,9 @@ const SearchBar = styled.span`
  @media screen and (max-width:1200px){
    width:${props => props.width === '60%' && '50%'};
   }
+  @media screen and ${device.laptop}{
+    display:${props=>props.display ? props.display : 'flex'};
+  }
 `
 const Icon = styled.i`
    position: absolute; 
@@ -39,9 +42,9 @@ const Input = styled.input.attrs(props => ({
   background: #FFFFFF;
 border-radius: 28px;
 `;
-export const SearchBarStyled = ({ref,value,type,maxlength,right,position,width,inputName,inputFunc,inputPlaceholder,border})=>{
+export const SearchBarStyled = ({display,ref,value,type,maxlength,right,position,width,inputName,inputFunc,inputPlaceholder,border})=>{
     return(
-        <SearchBar right={right} position={position} border={border} width={width}>
+        <SearchBar display={display} right={right} position={position} border={border} width={width}>
             <Icon className="fa fa-search" aria-hidden="true"/>
             <Input ref={ref} type={type} velue={value} maxLength={maxlength}  name={inputName} func={inputFunc}  inputPlaceholder={inputPlaceholder}/>
         </SearchBar>

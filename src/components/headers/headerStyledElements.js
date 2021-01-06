@@ -377,6 +377,7 @@ display:${props=>props.display};
 position:relative;
 border-bottom: 1px solid ${props=>props.border};
 padding: 25px 0 25px 0;
+align-items: center;
 color:${props=>props.color};
  @media screen and ${device.laptop}{
     display:none;
@@ -384,41 +385,111 @@ color:${props=>props.color};
 `
 const Choose = styled.div`
 display: flex;
-
 margin-right:30px;
+span{
+display: flex;
+align-items: center;
+}
 `
 const Handle = styled.div`
 margin-left:10px;
-strong{
-margin-right:10px;
-}
+display:flex;
 `
 const NormalVersion = styled.div`
 position:absolute;
 right:0;
 display:flex;
 cursor:pointer;
+@media screen and (max-width:1300px){
+     top:50px;
+  }
+  span{
+  display: flex;
+    align-items: center;
+  }
 `
 const ColorStrong = styled.strong`
     border: 1px solid;
+    margin-right:5px;
     cursor:pointer;
-    border-radius: 28px;
-    padding: 1px 5px 3px 5px;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    padding: 8px;
+     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: ${props=>props.background};
     color: ${props=>props.color};
+    font-size:16px;
+`
+const Font = styled.strong`
+margin-right:5px;
+color:${props=>props.color};
+background:${props=>props.background};
+font-size:${props=>props.font};
+border:1px solid white;
+  border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    padding: 8px;
+     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
 `
 export const NavBarVisuallyImpaired=({locale,display,footer})=>{
     const dispatch = useDispatch()
     const {images} = useSelector(state=>state.app)
+    const {fontSize} = useSelector(state=>state.app)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
+    const background = (string)=>{
+        if (!visuallyImpairedModeWhiteTheme && fontSize===string){
+            return 'white'
+        }
+        else if (fontSize===string){
+            return 'black'
+        }
+    }
+    const color = (string)=>{
+        if (!visuallyImpairedModeWhiteTheme && fontSize===string){
+            return 'black'
+        }
+        else if (fontSize===string){
+            return 'white'
+        }
+    }
    return(
        <NavVisually border={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'} color={!visuallyImpairedModeWhiteTheme ? 'white' : footer ? 'white' : 'black'} display={display}>
            <Choose>
                <span>{headerLsi.fontSize[locale]}</span>
                <Handle>
-                   <strong onClick={()=>dispatch(ClickOnChangeFontSizeNormal('normal'))} style={{fontSize:'15px'}}>A</strong>
-                   <strong onClick={()=>dispatch(ClickOnChangeFontSizeNormal('medium'))} style={{fontSize:'20px'}}>A</strong>
-                   <strong onClick={()=>dispatch(ClickOnChangeFontSizeNormal('large'))} style={{fontSize:'25px'}}>A</strong>
+                   <Font
+                       onClick={()=>dispatch(ClickOnChangeFontSizeNormal('normal'))}
+                       color={color('normal')}
+                       background={background('normal')}
+                       font='12px'
+                   >
+                       A
+                   </Font>
+                   <Font
+                       onClick={()=>dispatch(ClickOnChangeFontSizeNormal('medium'))}
+                       color={color('medium')}
+                       background={background('medium')}
+                       font='14px'
+                   >
+                       A
+                   </Font>
+                   <Font
+                       onClick={()=>dispatch(ClickOnChangeFontSizeNormal('large'))}
+                       color={color('large')}
+                       background={background('large')}
+                       font='16px'
+                   >
+                       A
+                   </Font>
                </Handle>
            </Choose>
            <Choose>
@@ -653,6 +724,7 @@ const Logos = styled.div`
 }
   }
 `
+
 export const Footer =({inputName,inputFunc,inputPlaceholder,contacts,display,minWidth})=>{
     const dispatch = useDispatch()
     const {visuallyImpairedMode} = useSelector(state=>state.app)
@@ -675,7 +747,10 @@ export const Footer =({inputName,inputFunc,inputPlaceholder,contacts,display,min
                 </a>
             </Logos>
 
-            <SearchBarStyled border={border} width='100%' inputFunc={inputFunc} name={inputName} inputPlaceholder={inputPlaceholder}/>
+
+                <SearchBarStyled
+                    display = 'none'
+                    border={border} width='100%' inputFunc={inputFunc} name={inputName} inputPlaceholder={inputPlaceholder}/>
 
             <ChangeLanguageContainer minWidth={minWidth} position='relative'>
                     <ChangeLanguageSelector  theme='white' />

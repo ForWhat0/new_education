@@ -2,7 +2,8 @@ import { gql } from "@apollo/client";
 
 const GET_MENU_AND_CONTACTS = gql`query(
 $location:MenuLocationEnum,
-$contactsUri:ID!
+$contactsUri:ID!,
+$uri:ID!
 ) {
   
    menuItems(where: {location: $location}) {
@@ -14,13 +15,24 @@ $contactsUri:ID!
       url
     }
   }
-
+appeals:page(idType: URI, id: $uri) {
+    mainPageFields {
+      appeals {
+        appealsText
+      }
+    }
+  }
   contacts: page(id: $contactsUri, idType: URI) {
 
     contactsFields {
       telegramLink
       phoneNumber
       group
+       iconSite {
+        sourceUrl
+      }
+      titleSite
+      descrSite
       gmail
       facebookLink
       authorship

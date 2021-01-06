@@ -160,7 +160,7 @@ export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
             <EventContainer visuallyImpairedMode={visuallyImpairedMode}>
                <TimeContainer visuallyImpairedMode={visuallyImpairedMode} borderLeftColor={borderLeft}>
                    <TextField
-                       fontSize='40px'
+                       fontSize='40px !important'
                        fontWeight='bold'
                    >
                        {inputDate.getDate()}

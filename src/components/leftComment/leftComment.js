@@ -88,7 +88,7 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
             </Title>
             <ContainerWrapper>
                 <Text>
-                   <IconBackground/>
+                   <IconBackground  background={!visuallyImpairedModeWhiteTheme ? 'leftCommentWhiteIcon.svg' : 'back.svg'}/>
                     <SubTitle>
                         {leftComment.writeUs[locale]}
                    </SubTitle>

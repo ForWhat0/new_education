@@ -24,6 +24,11 @@ const GET_EVENTS_BY_DATE = gql`
     contactsFields {
       telegramLink
       phoneNumber
+       iconSite {
+        sourceUrl
+      }
+      titleSite
+      descrSite
       group
       gmail
       facebookLink

@@ -21,6 +21,11 @@ const GET_HOUR_BY_ID = gql`
       telegramLink
       phoneNumber
       group
+       iconSite {
+        sourceUrl
+      }
+      titleSite
+      descrSite
       gmail
       facebookLink
       

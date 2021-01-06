@@ -7,8 +7,8 @@ import {MainLayout} from "../../src/components/layouts/mainLayout";
 import React, {useState} from "react";
 import {ParcMenu} from "../../src/components/hooks/hooks";
 import {InputStyled} from "../../src/components/input/input";
-import {appeal, leftComment} from "../../src/Lsi/lsi";
-import {InputsFields} from "../../src/components/leftComment/leftCommentStyLedComponents";
+import {appeal, leftComment, leftCommentZno} from "../../src/Lsi/lsi";
+import {InputsFields, Label, Select} from "../../src/components/leftComment/leftCommentStyLedComponents";
 import {SendButton} from "../../src/components/sendButton/sendButton";
 import {ShowAlert} from "../../src/redux/actions/actions";
 import {useMutation} from "@apollo/client";
@@ -147,7 +147,7 @@ width:320px;
     margin-top: 40px;
   }
 `
-export default function  Appeal({locale,contacts,menu}){
+export default function  Appeal({locale,contacts,menu,appeals}){
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const parsedMenu = ParcMenu(menu)
     const [name, setName] = useState('')
@@ -210,7 +210,16 @@ export default function  Appeal({locale,contacts,menu}){
                     <Form>
                         <InputStyled  text={appeal.name[locale]} onChange={e => setName(e.target.value)}  width='100%'/>
                         <InputStyled text={appeal.lastName[locale]} onChange={e => setLastName(e.target.value)}  width='100%'/>
-                        <InputStyled maxlength='100' text={appeal.reason[locale]} onChange={e => setReason(e.target.value)}  width='100%'/>
+                        <InputStyled maxlength='100'    width='100%'/>
+                        <Label>
+                            {appeal.reason[locale]}
+                        </Label>
+                        <Select style={{marginBottom:'20px'}} onChange={e => setReason(e.target.value)}>
+                            <option hidden disabled selected value> </option>
+                            {appeals?.map(less=>
+                                <option key={less.appealsText} value={less.appealsText}>{less.appealsText}</option>
+                            )}
+                        </Select>
                         <SendButton
                             sentText={leftComment.sent[locale]}
                             sendText={leftComment.send[locale]}
@@ -230,6 +239,7 @@ export default function  Appeal({locale,contacts,menu}){
 
 export async function getStaticProps({locale}) {
 
+    const uri = locale === "EN" ? "/en/glavnaya-english/" : locale === "RU" ? "/ru/glavnaya-2/"  : "/"
     const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/" : "/kontakti/"
     const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU" : "HEADER_MENU"
 
@@ -237,12 +247,14 @@ export async function getStaticProps({locale}) {
         query: GET_MENU_AND_CONTACTS,
         variables: {
             location,
-            contactsUri
+            contactsUri,
+            uri
         }
     })
     return {
         props: {
             locale,
+            appeals:data?.appeals?.mainPageFields?.appeals ? data.appeals.mainPageFields.appeals : [],
             contacts: data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
             menu: data?.menuItems?.nodes || [],
         },

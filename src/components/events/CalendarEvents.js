@@ -14,9 +14,10 @@ const LoaderContainer = styled.div`
                 margin-bottom: 70px;
 `
 const GlobalContainer = styled.div`
-margin:80px 0 80px 0;
+
+padding:80px 0 80px 0;
  @media screen and ${device.mobileL} {
-margin:40px 0 40px 0;
+padding:40px 0 40px 0;
   }
 `
 export default function CalendarEvents({loading,posts}){

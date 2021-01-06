@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import {useEffect, useLayoutEffect, useState} from 'react';
+import {useDispatch} from "react-redux";
+import {ClickVisuallyImpairedModeOff} from "../../redux/actions/actions";
 
 export const useOnClickOutside = (ref, handler) => {
 
@@ -138,3 +140,24 @@ export const ParcUri=(uri)=>{
         return  cutUri(uri)
     }
 }
+ const  useWindowSize=()=>{
+    const [size, setSize] = useState([0, 0]);
+    useLayoutEffect(() => {
+        function updateSize() {
+            setSize([window.innerWidth, window.innerHeight]);
+        }
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
+    return size;
+}
+
+export const  WindowDimensionsOffVisuallyImpaired=() =>{
+    const dispatch = useDispatch()
+    const [width] = useWindowSize()
+    useEffect(()=>
+        width !== 0 && width < 1024 && dispatch(ClickVisuallyImpairedModeOff())
+        ,[width])
+}
+

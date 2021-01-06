@@ -19,6 +19,11 @@ $contactsUri:ID!
       telegramLink
       phoneNumber
       group
+       iconSite {
+        sourceUrl
+      }
+      titleSite
+      descrSite
       gmail
       facebookLink
       

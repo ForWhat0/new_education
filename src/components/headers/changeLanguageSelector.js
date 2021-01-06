@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Select = styled.div`
 font-size: 16px;
-width: 163px;
+width:${props=>props.width};
 color: ${props=>props.color};
 background-color: transparent;
 cursor:pointer;
@@ -74,6 +74,7 @@ export const ChangeLanguageSelector=({theme,navMain,globeDarkIcon})=>{
     let locale =  router.locale
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
+    const {fontSize} = useSelector(state=>state.app)
     const {languages} = app
     const globeIcon = globeDarkIcon  ? "/changeLanguageIconDark.svg" : "changeLanguageIcon.svg"
     const color = theme ? "#3F3F3F" : globeDarkIcon ? "#3F3F3F" : "white"
@@ -88,7 +89,7 @@ export const ChangeLanguageSelector=({theme,navMain,globeDarkIcon})=>{
     )
 
     return(
-            <Select visuallyImpairedMode={visuallyImpairedMode}>
+            <Select width={fontSize === 'normal' ? '163px' : '200px'} visuallyImpairedMode={visuallyImpairedMode}>
                 <Content color={!visuallyImpairedModeWhiteTheme ? 'white' :color} onClick={()=>setOpen(!open)} url={!visuallyImpairedModeWhiteTheme ? '/changeLanguageVisyalModeWhite.svg' : visuallyImpairedMode ? visuallyModeIcon :  globeIcon} open ={open ? '180deg' : '0' }>
                     <div />
                     <li>{localeState}</li>

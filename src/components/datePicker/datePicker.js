@@ -26,6 +26,7 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
     const router = useRouter()
     const locale = router.locale
     const {visuallyImpairedMode} = useSelector(state=>state.app)
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const [selectedDate, setSelectedDate] = useState(new Date());
 
 
@@ -33,14 +34,15 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
     const lastDate = maxDay(selectDate,30)
 
     const selectedStyle = {
-        background: visuallyImpairedMode  ? '#1D1D1B' : ' rgba(0, 114, 188, 0.2)',
+        background:!visuallyImpairedModeWhiteTheme ? '#FFFFFF' : visuallyImpairedMode  ? '#1D1D1B' :  ' rgba(0, 114, 188, 0.2)',
         opacity: 1,
         borderRadius:' 20px',
-        color:visuallyImpairedMode &&  ' rgba(255,255,255,1)'
+        color:!visuallyImpairedModeWhiteTheme ? '#000' : visuallyImpairedMode ?  ' rgba(255,255,255,1)' : '#000'
     }
 
     const eventDayStyle = {
-        background: '#FFFFFF',
+        background: !visuallyImpairedModeWhiteTheme ? '#1D1D1B' : '#FFFFFF',
+        border:!visuallyImpairedModeWhiteTheme ? '1px solid white' : 'unset',
         opacity: 1,
         borderRadius:' 20px'
     }
@@ -147,9 +149,9 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
 
     return (
         <Container >
-            <ButtonWrapper onClick={prevWeek} margin='22px 22px 0 0' arrow='/leftArrow.svg'/>
+            <ButtonWrapper onClick={prevWeek} margin='22px 22px 0 0' arrow={!visuallyImpairedModeWhiteTheme ? '/WhiteLeftArrow.svg' : '/leftArrow.svg'}/>
             {renderDays()}
-            <ButtonWrapper onClick={nextWeek} margin='22px 0 0 22px' arrow='/rightArrow.svg'/>
+            <ButtonWrapper onClick={nextWeek} margin='22px 0 0 22px' arrow={!visuallyImpairedModeWhiteTheme ? '/WhiteRightArrow.svg' : '/rightArrow.svg'}/>
         </Container>
     )
 }
