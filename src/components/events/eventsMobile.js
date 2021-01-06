@@ -96,7 +96,7 @@ export default function EventsMobile({locale,titleEvent,posts,allDates}){
                 :
                 !open ?
                     <EventContainer>
-                        <Link href={`/calendar/[currentHourId]`} as={`/calendar/${currentDate.eventsFields.hoursOne.databaseId}`}>
+                        <Link href={`/calendar/[currentHourId]`} as={`/calendar/${currentDate?.eventsFields?.hoursOne?.databaseId}`}>
                             <a>
                                 <Event
                                     locale={locale}
