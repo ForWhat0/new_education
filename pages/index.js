@@ -87,7 +87,7 @@ export async function getStaticProps({locale} ){
     }
   } )
 
-  
+
   const allDates = futureDate?.data?.events?.nodes?.concat(publishDate?.data?.events?.nodes);
 
   return {
