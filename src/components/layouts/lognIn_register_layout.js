@@ -121,7 +121,11 @@ const StyledHeader = ()=>{
                     </Logo>
                 </a>
             </Link>
-            <span  onClick={() => router.back()}>X</span>
+            <Link href='/'>
+                <a>
+                    <span>X</span>
+                </a>
+            </Link>
         </Header>
     )
 }

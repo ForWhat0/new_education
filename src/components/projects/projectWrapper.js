@@ -15,7 +15,7 @@ justify-content:center;
 `
 export default function ProjectsWrapper({posts,locale}){
     return(
-        <section>
+        <section style={{margin:'40px 0 40px 0'}}>
             <Projects title={posts.title} textForIcon={review[locale]} posts={posts.projects}/>
             <Link href={'/projects'}>
                 <a>

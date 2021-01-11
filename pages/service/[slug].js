@@ -170,6 +170,7 @@ const DownloadContent = styled.div`
   }
   div ul li {
   list-style-type:none;
+  padding-bottom: 20px;
   }
   div ul li::before {
   content: '— ';
@@ -239,8 +240,8 @@ export default function GetEvent({serviceBySlug,menu,contacts,locale}) {
                                 bBottom = {ShownAccordion[index] ? '1px solid' : 'unset' }
                                 pBottom = {ShownAccordion[index] ? '20px' : 'unset' }
                                 height ={ShownAccordion[index] ? '500px' : '0' }
-                                pTop = {ShownAccordion[index] ? '20px' : 'unset' }
-                                mTop = {ShownAccordion[index] ? '20px' : 'unset' }
+                                pTop = {ShownAccordion[index] ? '30px' : 'unset' }
+                                mTop = {ShownAccordion[index] ? '30px' : 'unset' }
                             >
                                 <div
                                     dangerouslySetInnerHTML={{ __html: item.descrAccardion }}

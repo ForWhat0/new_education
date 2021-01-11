@@ -74,8 +74,8 @@ export const RestWrapper = styled.div`
 export const RestWrapperInner = styled.div`
   margin-top: 20px;
   display:flex;
+  padding-bottom: 10px;
   align-items:center;
-  padding-bottom:30px;
   border-bottom:1px solid ${props=>props.borderBottomColor};
    @media screen and ${device.laptop}{
      background: ${props=>props.background};
@@ -376,7 +376,7 @@ const NavVisually = styled.nav`
 display:${props=>props.display};
 position:relative;
 border-bottom: 1px solid ${props=>props.border};
-padding: 25px 0 25px 0;
+padding: 30px 0 30px 0;
 align-items: center;
 color:${props=>props.color};
  @media screen and ${device.laptop}{
@@ -568,7 +568,11 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                         {register}
                     </RegisterLink>
                 </Link>
-                <StyledButton func={null} text={logIn} />
+                <Link href='/logIn'>
+                    <a>
+                        <StyledButton  text={logIn} />
+                    </a>
+                </Link>
             </SignInMain>
             <BurgerAndSearchIconsMain>
                 <AnimationSearchBarStyled color='transparent'/>

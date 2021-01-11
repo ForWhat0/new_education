@@ -1,14 +1,6 @@
-import {useEffect, useRef} from "react";
-import React from 'react';
 import $ from 'jquery';
 
-import Head from "next/head";
-export const LOLbutton = ()=>{
-    const buttonBubble = useRef()
-    const circleTop = useRef()
-    const circleBottom = useRef()
-    const ButtonEffect = useRef()
-    useEffect(()=>{
+export default function animationButton(){
         $('.button--bubble').each(function() {
             var $circlesTopLeft = $(this).parent().find('.circle.top-left');
             var $circlesBottomRight = $(this).parent().find('.circle.bottom-right');
@@ -55,46 +47,4 @@ export const LOLbutton = ()=>{
                 btTl.restart();
             });
         });
-    },[])
-
-    return(
-        <>
-            <Head>
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
-            </Head>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" className="goo">
-                    <defs>
-                        <filter id="goo">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
-                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                                           result="goo"/>
-                            <feComposite in="SourceGraphic" in2="goo"/>
-                        </filter>
-                    </defs>
-                </svg>
-
-                <span className="button--bubble__container">
-  <a href="#campaign" className="button button--bubble">
-    Hover me
-  </a>
-  <span className="button--bubble__effect-container">
-    <span className="circle top-left"></span>
-    <span className="circle top-left"></span>
-    <span className="circle top-left"></span>
-
-    <span className="button effect-button"></span>
-
-    <span className="circle bottom-right"></span>
-    <span className="circle bottom-right"></span>
-    <span className="circle bottom-right"></span>
-  </span>
-</span>
-            </div>
-            </>
-    )
 }

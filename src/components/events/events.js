@@ -25,7 +25,7 @@ justify-content:center;
 margin-top:40px;
 `
 const GlobalContainer = styled.div`
-margin-bottom:80px;
+
  @media screen and ${device.mobileL} {
  display:none;
      width: 96%;
@@ -33,14 +33,14 @@ margin-bottom:80px;
   }
    display:block;
  width: 80%;
-  margin-left: 10%;
+  margin:40px 0 40px 10%;
 `
 export default function Events({locale,posts,titleEvent}){
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     return(
         <GlobalContainer  >
             <TitleForComponent text={titleEvent}/>
-            <ServicesContainer margin={visuallyImpairedMode ? '100px 0 80px 0' : '60px 0 0 0'} grid={visuallyImpairedMode ? '1fr' : '1fr 1fr 1fr'}>
+            <ServicesContainer margin={visuallyImpairedMode ? '100px 0 80px 0' : '50px 0 0 0'} grid={visuallyImpairedMode ? '1fr' : '1fr 1fr 1fr'}>
                 {posts.map((node,i) =>
                     <Link href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt.substring(0,10)}`}>
                         <a>

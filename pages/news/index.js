@@ -16,6 +16,7 @@ import GET_NEWS_BY_DATE from "../../src/queries/get_news_by_date";
 import StyledLoader from "../../src/components/loader/loader";
 import {NewsLsi} from "../../src/Lsi/lsi";
 import {CalendarContainer, CalendarIcon, CalendarWrapper} from "../calendar";
+import {useSelector} from "react-redux";
 
 export const Container = styled.div`
 width:80%;
@@ -47,6 +48,7 @@ height: 30px;
 `
 export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
     const [searchLoading, setSearchLoading] = useState(false);
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const {total,hasMore,hasPrevious} = news.pageInfo.offsetPagination
     const totalPages = Math.ceil(total / 9.0)
     const [newsByDate, setNewsByTitle] = useState([]);
@@ -94,7 +96,7 @@ export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
                         <CalendarContainer open={calendarOpen ? 'block' : 'none'}>
                             <Calendar
                                 locale={locale === "EN" ? 'en-EN' : locale === "RU" ? 'ru-RU' : 'ua-UA'}
-                                className='calendar'
+                                className={!visuallyImpairedModeWhiteTheme ? 'calendarVisuallyMode' : 'calendar'}
                                 onChange={value => selectedDay(value)}
                                 value={ value || new Date}
                             />

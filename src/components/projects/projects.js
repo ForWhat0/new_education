@@ -7,7 +7,6 @@ import Link from "next/link";
 
 const TitleContainer = styled.div`
 margin-left: 10%;
-padding: 20px;
 margin-bottom:60px;
 `
 

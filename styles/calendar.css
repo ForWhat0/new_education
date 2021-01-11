@@ -1,3 +1,4 @@
+
 .react-calendar {
     box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
     border-radius: 28px;
@@ -117,4 +118,11 @@
 .calendar ,.calendar span , .calendar  abbr {
     text-decoration:unset!important;
     font-family: e-Ukraine;
+}
+.calendarVisuallyMode ,.calendarVisuallyMode span , .calendarVisuallyMode  abbr{
+    text-decoration:unset!important;
+    font-family: e-Ukraine;
+}
+.calendarVisuallyMode  .react-calendar__tile--active {
+    background: #1D1D1B!important;
 }

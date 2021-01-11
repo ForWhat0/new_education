@@ -89,12 +89,12 @@ export const Text =({
                     {footer.phoneNumber[locale]} {phoneNumber}
                 </ListElement>
                 <ListElement>
-                    {footer.email[locale]} {gmail}
+                    {footer.email[locale]} <Link href={`mailto:?subject=${gmail}`} target="_blank" >{gmail}</Link>
                 </ListElement>
             </List>
             <List align='end' position='absolute' right='0'>
                 <ListElement>
-                    {footer.courses[locale]} <Link href={gmail}>{gmail}</Link>
+                    {footer.courses[locale]} <Link href={`mailto:?subject=${gmail}`} target="_blank">{gmail}</Link>
                 </ListElement>
                 <ListElement>
                     {footer.group[locale]} {group}

@@ -103,7 +103,7 @@ position: relative;
 export default function EventCalendar({locale,loading,event,menu,allDates,contacts}) {
 
     const router = useRouter()
-
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const [value, onChange] = useState(event.length > 0 ? new Date(event[0].dateGmt ): null);
     const [calendarOpen, setCalendarOpen] = useState(false);
     const [searchInput, setSearchInput] = useState('');
@@ -152,7 +152,7 @@ export default function EventCalendar({locale,loading,event,menu,allDates,contac
                             <CalendarContainer open={calendarOpen ? 'block' : 'none'}>
                                 <Calendar
                                     locale={locale === "EN" ? 'en-EN' : locale === "RU" ? 'ru-RU' : 'ua-UA'}
-                                    className='calendar'
+                                    className={!visuallyImpairedModeWhiteTheme ? 'calendarVisuallyMode' : 'calendar'}
                                     onChange={value => selectedDay(value)}
                                     value={value}
                                     tileDisabled={({date, view}) =>

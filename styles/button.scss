@@ -1,24 +1,27 @@
-$dark-blue: #222;
-$green: #90feb5;
-$action-color: $green;
+$dark-blue: #1D1D1B;
+$green: #1D1D1B;
+$action-color: #1D1D1B;
 
-
+.btn{
+  background: #1D1D1B;
+  border: 1px solid white;
+  border-radius: 28px;
+  text-align:center;
+  color: #FFFFFF;
+  font-size: 16px;
+  padding: 8px 22px;
+  cursor: pointer;
+}
 
 .button {
-  -webkit-font-smoothing: antialiased;
-  background-color: $dark-blue;
-  border: none;
-  color: #fff;
-  display: inline-block;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 100;
-  text-decoration: none;
-  user-select: none;
-  letter-spacing: 1px;
-  color: white;
-  padding: 20px 40px;
-  text-transform: uppercase;
+  background: #1D1D1B;
+  border:unset;
+  border-radius: 28px;
+  text-align:center;
+  color: #FFFFFF;
+  font-size: 16px;
+  padding: 8px 22px;
+  cursor: pointer;
   transition: all 0.1s ease-out;
 
   &:hover {
@@ -34,7 +37,10 @@ $action-color: $green;
     position: relative;
     z-index: 2;
     color: white;
+
+    width: 100%;
     background: none;
+    height: 100%;
 
     &:hover {
       background: none;
@@ -55,11 +61,13 @@ $action-color: $green;
     &__container {
       position: relative;
       display: inline-block;
+      z-index: 1;
 
       .effect-button {
         position: absolute;
         width: 50%;
         height: 25%;
+        padding:0;
         top: 50%;
         left: 25%;
         z-index: 1;
@@ -77,6 +85,7 @@ $action-color: $green;
   width: 200%;
   height: 400%;
   top: -150%;
+  padding: 0;
   left: -50%;
   -webkit-filter: url("#goo");
   filter: url("#goo");
@@ -112,10 +121,7 @@ $action-color: $green;
 
 
 
-.button--bubble__container {
-  top: 50%;
-  margin-top: -25px;
-}
+
 
 @keyframes hue-rotate {
   from {

@@ -152,16 +152,21 @@ export default function  Appeal({locale,contacts,menu,appeals}){
     const parsedMenu = ParcMenu(menu)
     const [name, setName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [phone, setPhone] = useState('')
     const [reason, setReason] = useState('')
     const dispatch = useDispatch()
 
 
     const registerOnEvent = async (event) => {
         event.preventDefault()
-        if ( name && lastName && reason ){
-
-            sendWordpress()
-            await sendAppeal( name,lastName,reason )
+        if ( name && lastName  && phone && reason ){
+            if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+                sendWordpress()
+                await sendAppeal( name,lastName,reason,phone )
+            }
+          else {
+                dispatch(ShowAlert(leftComment.errors.wrongPhoneNumber[locale], 'error'))
+            }
 
         }
         else {
@@ -174,6 +179,7 @@ export default function  Appeal({locale,contacts,menu,appeals}){
         <ul>
         <li>ім'я: ${name}</li>
         <li>прізвище: ${lastName}</li>
+          <li>телефон: ${phone}</li>
         <li>причина звернення: ${reason}</li>
         <li>id: ${Math.random() + Math.random()}</li>
         <ul/>
@@ -220,6 +226,7 @@ export default function  Appeal({locale,contacts,menu,appeals}){
                     <Form>
                         <InputStyled value={name}   text={appeal.name[locale]} onChange={e => setName(e.target.value)}  width='100%'/>
                         <InputStyled  value={lastName}  text={appeal.lastName[locale]} onChange={e => setLastName(e.target.value)}  width='100%'/>
+                        <InputStyled  value={lastName}  text={appeal.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='100%'/>
                         <Label>
                             {appeal.reason[locale]}
                         </Label>

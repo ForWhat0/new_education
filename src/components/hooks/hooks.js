@@ -87,7 +87,7 @@ export const  hexToRgbA=(hex)=>{
             c= [c[0], c[0], c[1], c[1], c[2], c[2]];
         }
         c= '0x'+c.join('');
-        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',0.3)';
+        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',0.05)';
     }
     throw new Error('Bad Hex');
 }
@@ -193,11 +193,12 @@ export const registerOnEventHook = async (eventName,time, fName, lName) => {
         return error
     }
 }
-export const sendAppeal = async ( fName, lName,reason) => {
+export const sendAppeal = async ( fName, lName,reason,phone) => {
     const data = {
         fName,
         lName,
-        reason
+        reason,
+        phone
     }
 
     try {

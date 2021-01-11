@@ -13,6 +13,7 @@ const ServicesContainer = styled.div`
  @media screen and (max-width:1250px) {
       grid-template-columns: 1fr;
   }
+  margin-top:60px;
  display: grid;
     grid-template-columns: 1fr 1fr 1fr;
    grid-gap: 30px;

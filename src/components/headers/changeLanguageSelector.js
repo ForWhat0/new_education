@@ -50,7 +50,7 @@ display:flex;
 position:absolute;
 width: 100%;
 margin:5px 0 0 0;
-padding:0;
+padding:5px 0 5px 0;
 flex-direction:column;
 list-style-type:none;
 border:${props=>props.border};

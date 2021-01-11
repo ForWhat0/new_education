@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import {device} from "../deviceSizes/deviceSizes"
 
 export const Container = styled.div`
-margin-top:30px;
+margin:40px 0 40px 0;
 position:relative;
 width:100%;
 display:flex;
