@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import {device} from "../deviceSizes/deviceSizes";
 
-export const Modal = styled.nav`
+export const Modal = styled.div`
     position: fixed;
     top:0;
     left: 0;
@@ -14,19 +15,27 @@ export const Modal = styled.nav`
     display: ${({ open }) => open ? 'flex' : 'none'};
     
     form{
+    position:relative;
+    border:1px solid white;
     border-radius: 28px;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
-      position: relative;
+      
+          min-width: 320px;
   z-index: 1;
-  background: #FFFFFF;
+  background: ${({ background }) => background };
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+   
+  @media screen and ${device.mobileL}{
+     max-width: unset;
+  margin:0;
+  }
     }
     
     h1,h3{

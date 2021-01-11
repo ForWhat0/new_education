@@ -17,7 +17,7 @@ import StyledLoader from "../../src/components/loader/loader";
 import {NewsLsi} from "../../src/Lsi/lsi";
 import {CalendarContainer, CalendarIcon, CalendarWrapper} from "../calendar";
 
-const Container = styled.div`
+export const Container = styled.div`
 width:80%;
 margin-left:10%;
 `
@@ -122,7 +122,7 @@ export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
 
                             :
                             <LoaderContainer>
-                               <h2>{NewsLsi.nowExist[locale]}</h2>
+                               <h2>{NewsLsi.notExist[locale]}</h2>
                             </LoaderContainer>
 
 

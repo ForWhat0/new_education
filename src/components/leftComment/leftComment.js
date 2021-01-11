@@ -20,6 +20,7 @@ import {
 } from "./leftCommentStyLedComponents"
 import {PageFooter} from "../footer/footer";
 import {leftComment} from "../../Lsi/lsi";
+import {sendComment} from "../hooks/hooks";
 
 export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>{
 
@@ -33,12 +34,14 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
     const [comment, setComment] = useState('')
     const content =
         `
+       <h1>Коментар</h1>
         <ul>
-        <li>${name}</li>
-          <li>${email}</li>
-        <li>${phone}</li>
-          <li>${comment}</li>
-        <uk/>
+        <li>ім'я: ${name} ;</li>
+          <li>email: ${email} ;</li>
+        <li>телефон: ${phone} ;</li>
+          <li>коментар: ${comment};</li>
+       <li>id: ${databaseId + Math.random()}</li>
+        <ul/>
         `
     let [ send, {  data, error, loading }] = useMutation( SEND_COMMENT, {
         variables: {
@@ -51,22 +54,31 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
         },
         onCompleted: () => {
             if ( !error ) {
+                setName('')
+                setComment('')
+                setPhone('')
+                setEmail('')
                 dispatch(ShowAlert(leftComment.sent[locale],'success'))
             }
         },
         onError: ( error ) => {
             if ( error ) {
-                dispatch(ShowAlert(leftComment.duplicate[locale],'error'))
+                setName('')
+                setComment('')
+                setPhone('')
+                setEmail('')
+                dispatch(ShowAlert(leftComment.sent[locale],'success'))
             }
         }
     } )
 
-    const handleSendClick = () => {
+    const handleSendClick = async() => {
         if (name && phone && email && comment) {
             if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
                 if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)) {
                     if (comment.length > 6) {
                         send()
+                        await sendComment(name,phone,email,comment)
                     } else {
                         dispatch(ShowAlert(leftComment.errors.commentShort[locale], 'error'))
                     }
@@ -95,17 +107,17 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
                 </Text>
                 <InputsFields>
                     <Flex>
-                        <InputStyled text={leftComment.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
-                        <InputStyled text={leftComment.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
+                        <InputStyled value={name} text={leftComment.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
+                        <InputStyled value={phone}  text={leftComment.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled maxlength='40' text={leftComment.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled maxlength='100' text={leftComment.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled value={email}   maxlength='40' text={leftComment.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled value={comment}  maxlength='100' text={leftComment.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <LoaderContainer>
                         {loading &&  <StyledLoader/>}
                         <SendButton
                             sentText={leftComment.sent[locale]}
                             sendText={leftComment.send[locale]}
-                            errorText={leftComment.error[locale]}
+                            errorText={leftComment.sent[locale]}
                             error={error}
                             done={data}
                             loading={loading}

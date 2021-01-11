@@ -15,10 +15,11 @@ import {
     clickOnOffImages,
     clickVisuallyImpairedModeOn,
     clickVisuallyImpairedModeOff,
-    clickOnOffVisuallyImpairedModeWhiteTheme, changeFontSizeNormal
+    clickOnOffVisuallyImpairedModeWhiteTheme, changeFontSizeNormal, searchNewsByTitle, inputNewsByTitle, getNewsByTitle
 } from '../types/types'
 import GET_MOORE_NEWS from "../../queries/get_moore_news";
 import reduxClient from "../../apollo/reduxClient";
+import GET_NEWS_BY_TITLE from "../../queries/get-news-by-title";
 
 export function actionGetNews(offset,locale) {
     return async dispatch=>{
@@ -75,10 +76,11 @@ export function actionClickBurger(){
         })
     }
 }
-export function actionClickModal(){
+export function actionClickModal(time){
     return dispatch=>{
         dispatch({
-            type:clickModal
+            type:clickModal,
+            payload:time
         })
     }
 }
@@ -151,4 +153,36 @@ export function ClickOnChangeFontSizeNormal(string){
             dispatch({type:changeFontSizeNormal,payload:string})
     }
 }
+const ChangeInput=(string)=>{
+    return  dispatch=>{
+        dispatch({type:inputNewsByTitle,payload:string})
+    }
+}
 
+export function OnchangeInputSearchNews(string,locale) {
+    if ( string.length ){
+        return async dispatch=>{
+            try{
+                dispatch(ChangeInput(string))
+                dispatch(ShowLoader())
+                const news = await reduxClient.query( {
+                    query: GET_NEWS_BY_TITLE,
+                    variables: {
+                        string,
+                        language:locale
+                    }
+                } )
+                dispatch({type:getNewsByTitle,payload:news})
+                dispatch(HideLoader())
+            }
+            catch (e){
+                console.log(e.message)
+            }
+        }
+    }
+    else {
+        return  dispatch=>{
+            dispatch(ChangeInput(string))
+        }
+    }
+}

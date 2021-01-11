@@ -22,9 +22,9 @@ export const headerLsi={
         RU:"Государственные сайты Украины"
     },
     inputPlaceholder:{
-        UK:"Назва послуги",
-        EN:"Name of service",
-        RU:"Название услуги"
+        UK:"Назва новини",
+        EN:"Name of news",
+        RU:"Название новости"
     },
     fontSize:{
         UK:"Розмір шрифту:",
@@ -110,10 +110,15 @@ export const NewsLsi={
         EN:"Search result",
         RU:"Результат поиска"
     },
-    nowExist:{
+    notExist:{
         UK:"Такої новини не існує",
         EN:"There is no such news",
         RU:"Такой новости не существует"
+    },
+    cleanInput:{
+        UK:"Очистити поле пошуку",
+        EN:"Clear search field",
+        RU:"Очистить поле поиска"
     }
 }
 
@@ -476,5 +481,163 @@ export const appeal= {
         UK: "помилка",
         EN: "error",
         RU: "ошибка"
+    }
+}
+export const errorsLsi = {
+    pageNotExist:{
+        UK: "Вибачте, сторінку не знайдено",
+        EN: "Sorry, the page was not found",
+        RU: "Извините, страница не найдена"
+    },
+    internetError:{
+        UK: "Вибачте, немає зв’язку з інтернетом",
+        EN: "Sorry, no internet connection",
+        RU: "Извините, нет связи с интернетом"
+    },
+    refresh:{
+        UK: "Обновіть сторінку або поверніться та натисніть повторно",
+        EN: "Please refresh the page or go back and click again",
+        RU: "Обновите страницу или вернитесь и нажмите повторно"
+    }
+}
+export const LogInLsi = {
+    welcome: {
+        UK: "Вас вітає",
+        EN: "Welcome",
+        RU: "Вас приветствует"
+    },
+    login:{
+        UK: "Логін",
+        EN: "login",
+        RU: "Логин"
+    },
+    password:{
+        UK: "Пароль",
+        EN: "Password",
+        RU: "Пароль"
+    },
+    register:{
+        UK: "Зареєструватися",
+        EN: "Register",
+        RU: "Зарегистрироваться"
+    },
+    logIn:{
+        UK: "Увійти до кабінету",
+        EN: "Enter ",
+        RU: "Войти в кабинет"
+    },
+    name: {
+        UK: "Ім'я",
+        EN: "First name",
+        RU: "Имя"
+    },
+    lastName: {
+        UK: "Прізвище",
+        EN: "Last name",
+        RU: "Фамилия"
+    },
+}
+export const registerOnEventModalLsi = {
+    title: {
+        UK: "Реєстрація на захід",
+        EN: "Registration for the event",
+        RU: "Регистрация на мероприятие"
+    },
+    subTitle: {
+        UK: "Для реєстрації введіть Ваші дані",
+        EN: "To register, enter your details",
+        RU: "Для регистрации введите Ваши данныемя"
+    },
+    name: {
+        UK: "Ім'я",
+        EN: "First name",
+        RU: "Имя"
+    },
+    lastName: {
+        UK: "Прізвище",
+        EN: "Last name",
+        RU: "Фамилия"
+    },
+    thanks: {
+        UK: "Дякуємо!",
+        EN: "Thank you!",
+        RU: "Спасибо!"
+    },
+    sent:{
+        UK:"Ваш запит прийнято.",
+        EN:"Your request has been accepted.",
+        RU:"Ваш запрос принят."
+    },
+    send:{
+        UK:"відправити",
+        EN:"send",
+        RU:"отправить"
+    },
+    close:{
+        UK:"Закрити",
+        EN:"Close",
+        RU:"Закрыть"
+    },
+    emptyFields:{
+        UK:"Будь ласка, заповніть усі поля",
+        EN:"Please fill out all fields",
+        RU:"Пожалуйста, заполните все поля"
+    },
+    wrongName:{
+        UK:"Введіть коректні дані",
+        EN:"Enter the correct data",
+        RU:"Введите корректные данные"
+    },
+    error:{
+        UK:"помилка",
+        EN:"error",
+        RU:"ошибка"
+    },
+}
+export const linkTitleLsi = {
+    home: {
+        UK: "Головна",
+        EN: "Home",
+        RU: "Главная"
+    },
+    404:{
+        UK: "Помилка",
+        EN: "Error",
+        RU: "Ошибка"
+    },
+    service:{
+        UK: "Послуги",
+        EN: "Services",
+        RU: "Услуги"
+    },
+    projects:{
+        UK: "Проекти",
+        EN: "Projects",
+        RU: "Проекты"
+    },
+    news:{
+        UK: "Новини",
+        EN: "News",
+        RU: "Новости"
+    },
+    financialStatements:{
+        UK: "Фінансова звітність",
+        EN: "Financial Statements",
+        RU: "Финансовая отчетность"
+    },
+    contacts:{
+        UK: "Контакти",
+        EN: "Contacts",
+        RU: "Контакты"
+    },
+    calendar:{
+        UK: "Календар подій",
+        EN: "Calendar of events",
+        RU: "Календарь событий"
+    },
+    appeal:{
+        UK: "Звернення",
+        EN: "Appeal",
+        RU: "Обращение"
     }
 }

@@ -103,18 +103,15 @@ export const SendButton = ({done,error,loading,click,sendText,sentText,errorText
     const IconPaperPlaneAnimation = loading && PaperIconAnimation
     const IconPaperDisplay =  done || error ? 'none' : 'block'
     const TextDisplay = !loading && !done && !error ? 'block' : 'none'
-    const ErrorTextDisplay = error ? 'block' : 'none'
-    const SuccessTextDisplay = done ? 'block' : 'none'
+    const SuccessTextDisplay = error || done ? 'block' : 'none'
     return(
         <Global>
             <ButtonContainer animation={ButtonContainerAnimation} onClick={click}  >
                 <PaperIcon   display={IconPaperDisplay} animation={IconPaperPlaneAnimation} className="fa fa-paper-plane" aria-hidden="true"/>
                 <SuccessIcon display={SuccessTextDisplay} className="fa fa-check" aria-hidden="true"/>
-                <ErrorIcon display={ErrorTextDisplay}  className="fa fa-exclamation" aria-hidden="true"/>
-                <Button>
+                <Button disabled={loading}>
                     <SuccessText display={SuccessTextDisplay} >{sentText}</SuccessText>
                     <Text display={TextDisplay}>{sendText}</Text>
-                    <ErrorText display={ErrorTextDisplay}>{errorText}</ErrorText>
                 </Button>
             </ButtonContainer>
         </Global>

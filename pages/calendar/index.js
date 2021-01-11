@@ -85,7 +85,7 @@ width:350px;
 width:unset;
   }
 `
-const LoaderContainer = styled.div`
+export const LoaderContainer = styled.div`
   width:100%;
   display:flex;
   justify-content:center;

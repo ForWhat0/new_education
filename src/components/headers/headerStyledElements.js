@@ -13,11 +13,11 @@ import {
     actionClickModal, ClickOnChangeFontSizeNormal,
     ClickOnOffImages, ClickOnOffWhiteTheme,
     ClickVisuallyImpairedMode,
-    ClickVisuallyImpairedModeOff, ClickVisuallyImpairedModeOn
+    ClickVisuallyImpairedModeOff, ClickVisuallyImpairedModeOn, OnchangeInputSearchNews
 } from "../../redux/actions/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {headerLsi} from "../../Lsi/lsi";
-
+import {useRouter} from "next/router";
 export const HeaderWrapper = styled.header`
     justify-content: flex-start;
     display: flex;
@@ -588,7 +588,11 @@ const ArrowIcon = styled.i`
 export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,language,navButtons,register,logIn,changeLanguageIcon,glassIcon})=>{
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const dispatch = useDispatch()
+    const router = useRouter()
+    const locale = router.locale
+    const {inputNewsByTitle} = useSelector(state=>state.news)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
+
     return (
         <NavMain>
             <Links>
@@ -638,7 +642,12 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                     </Glass>
             </ChangeLanguageContainer>
             <SignIn  right='68px' top='25px'>
-                <AnimationSearchBarStyled color={!visuallyImpairedModeWhiteTheme ? 'white' : searchBarColor}/>
+                <AnimationSearchBarStyled
+                    color={!visuallyImpairedModeWhiteTheme ? 'white' : searchBarColor}
+                    inputFunc={(e)=>dispatch(OnchangeInputSearchNews(e.target.value,locale))}
+                    value={inputNewsByTitle}
+                    inputPlaceholder={headerLsi.inputPlaceholder[locale]}
+                />
                 <ArrowIcon
                     color={!visuallyImpairedModeWhiteTheme ? 'white' : color}
                     displayUserIcon='none'
@@ -727,7 +736,10 @@ const Logos = styled.div`
 
 export const Footer =({inputName,inputFunc,inputPlaceholder,contacts,display,minWidth})=>{
     const dispatch = useDispatch()
+    const router = useRouter()
+    const locale = router.locale
     const {visuallyImpairedMode} = useSelector(state=>state.app)
+    const {inputNewsByTitle} = useSelector(state=>state.news)
     const telegram = contacts.telegramLink && contacts.telegramLink
     const facebook = contacts.facebookLink && contacts.facebookLink
     const gmail = contacts.gmail && contacts.gmail
@@ -750,7 +762,12 @@ export const Footer =({inputName,inputFunc,inputPlaceholder,contacts,display,min
 
                 <SearchBarStyled
                     display = 'none'
-                    border={border} width='100%' inputFunc={inputFunc} name={inputName} inputPlaceholder={inputPlaceholder}/>
+                    value={inputNewsByTitle}
+                    border={border}
+                    width='100%'
+                    inputFunc={(e)=>dispatch(OnchangeInputSearchNews(e.target.value,locale))}
+                    name={inputName}
+                    inputPlaceholder={headerLsi.inputPlaceholder[locale]}/>
 
             <ChangeLanguageContainer minWidth={minWidth} position='relative'>
                     <ChangeLanguageSelector  theme='white' />

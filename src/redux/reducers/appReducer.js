@@ -8,7 +8,6 @@ import {
     hideExtraLoader,
     clickBurger,
     clickModal,
-    clickVisuallyImpairedMode,
     clickOnOffImages,
     clickVisuallyImpairedModeOn,
     clickVisuallyImpairedModeOff,
@@ -36,7 +35,7 @@ export const appReducer = ( state = initialState,action ) =>{
         case clickModal:{
             return {
                 ...state,
-                modal: !state.modal
+                modal: action.payload
             }
         }
         case changeFontSizeNormal:{

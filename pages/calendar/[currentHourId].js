@@ -26,6 +26,9 @@ import CalendarEvents from "../../src/components/events/CalendarEvents";
 import reduxClient from "../../src/apollo/reduxClient";
 import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
 import {calendarLsi} from "../../src/Lsi/lsi";
+import {StyledButton} from "../../src/components/button/button";
+import {actionClickModal} from "../../src/redux/actions/actions";
+import {useDispatch} from "react-redux";
 
 const Container = styled.div`
 width:80%;
@@ -154,6 +157,11 @@ export default function EventCalendar({locale,contacts,loading,time,menu,allDate
         const { value } = e.target;
         setSearchInput(value)
     }
+    const dispatch = useDispatch()
+
+    function mapDispatchToProps() {
+        return dispatch(actionClickModal(time))
+    }
     return (
         <MainLayout databaseId={time.databaseId}   contacts={contacts} menu={parsedMenu} >
             <Container>
@@ -212,7 +220,13 @@ export default function EventCalendar({locale,contacts,loading,time,menu,allDate
                                 </LoaderContainer>
 
                         :
-                        time &&  <Time locale={locale} loading={loading} timeFormatted={timeFormatted} time={time}/>
+                        time &&
+                        <>
+                            <Time locale={locale} loading={loading} timeFormatted={timeFormatted} time={time}/>
+                            <div style={{textAlign:'center',marginBottom:'60px'}}>
+                                <StyledButton func={mapDispatchToProps} text={'реєстрація на захід'}/>
+                            </div>
+                        </>
                 }
 
             </Container>

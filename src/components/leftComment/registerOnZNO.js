@@ -18,7 +18,8 @@ import {
 } from "./leftCommentStyLedComponents"
 import {PageFooter} from "../footer/footer";
 import {useRouter} from "next/router";
-import {leftCommentZno} from "../../Lsi/lsi";
+import {leftComment, leftCommentZno} from "../../Lsi/lsi";
+import {registerZnoHook} from "../hooks/hooks";
 
 export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,display,src,align})=>{
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
@@ -32,13 +33,15 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
     const [learn, setLearn] = useState('')
     const content =
         `
+        <h1>реєстрація на курси підготовки до ЗНО</h1>
         <ul>
-         <li>${name}</li>
-          <li>${email}</li>
-        <li>${phone}</li>
-         <li>${learn}</li>
-          <li>${comment}</li>
-        <uk/>
+        <li>ім'я: ${name} ;</li>
+          <li>email: ${email} ;</li>
+        <li>телефон: ${phone} ;</li>
+          <li>коментар: ${comment};</li>
+          <li>предмет: ${learn};</li>
+       <li>id: ${databaseId + Math.random()}</li>
+        <ul/>
         `
     let [ send, {  data, error, loading }] = useMutation( SEND_COMMENT, {
         variables: {
@@ -51,22 +54,33 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
         },
         onCompleted: () => {
             if ( !error ) {
-                dispatch(ShowAlert('ok','success'))
+                setName('')
+                setComment('')
+                setPhone('')
+                setEmail('')
+                setLearn('')
+                dispatch(ShowAlert(leftComment.sent[locale],'success'))
             }
         },
         onError: ( error ) => {
             if ( error ) {
-                dispatch(ShowAlert(error.graphQLErrors[ 0 ].message,'error'))
+                setName('')
+                setComment('')
+                setPhone('')
+                setEmail('')
+                setLearn('')
+                dispatch(ShowAlert(leftComment.sent[locale],'success'))
             }
         }
     } )
 
-    const handleSendClick = () => {
+    const handleSendClick = async () => {
         if (name && phone && email && comment && learn){
             if ( phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)){
                 if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)){
                     if (comment.length > 6 ){
                         send()
+                        await registerZnoHook(name,phone,email,comment,learn)
                     }
                     else{
                         dispatch(ShowAlert(leftCommentZno.errors.commentShort[locale], 'error'))
@@ -99,11 +113,11 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
                 </TextZno>
                 <InputsFields>
                     <Flex>
-                        <InputStyled text= {leftCommentZno.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
-                        <InputStyled text= {leftCommentZno.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
+                        <InputStyled value={name} text= {leftCommentZno.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
+                        <InputStyled value={phone}  text= {leftCommentZno.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled maxlength='40' text= {leftCommentZno.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled maxlength='100' text= {leftCommentZno.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled value={email}  maxlength='40' text= {leftCommentZno.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled value={comment}  maxlength='100' text= {leftCommentZno.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <Label>
                         {leftCommentZno.choose[locale]}
                     </Label>
@@ -118,9 +132,9 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
                         <SendButton
                             error={error}
                             done={data}
-                            sentText={leftCommentZno.sent[locale]}
-                            sendText={leftCommentZno.send[locale]}
-                            errorText={leftCommentZno.error[locale]}
+                            sentText={leftComment.sent[locale]}
+                            sendText={leftComment.send[locale]}
+                            errorText={leftComment.sent[locale]}
                             loading={loading}
                             click={handleSendClick}/>
                     </LoaderContainer>

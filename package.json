@@ -14,8 +14,10 @@
     "bubbly-bg": "^1.0.0",
     "date-fns": "^2.16.1",
     "graphql": "^15.4.0",
+    "gsap": "^3.5.1",
     "next": "10.0.3",
     "next-redux-wrapper": "^6.0.2",
+    "nodemailer": "^6.4.17",
     "nprogress": "^0.2.0",
     "particles-bg": "^2.5.0",
     "pathseg": "^1.2.0",
@@ -35,11 +37,14 @@
     "swiper": "^6.4.1"
   },
   "devDependencies": {
+    "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.12.0",
     "cross-fetch": "^3.0.6",
     "graphql-tag": "^2.11.0",
+    "jquery": "^3.5.1",
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "^6.7.0",
+    "react-autosize-textarea": "^7.1.0",
     "react-particles-js": "^3.4.1",
     "react-redux": "^7.2.2",
     "tailwindcss": "^1.4.6"

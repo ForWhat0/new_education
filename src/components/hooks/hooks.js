@@ -1,6 +1,8 @@
 import {useEffect, useLayoutEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {ClickVisuallyImpairedModeOff} from "../../redux/actions/actions";
+import axios from "axios";
+import {format} from "date-fns";
 
 export const useOnClickOutside = (ref, handler) => {
 
@@ -159,5 +161,108 @@ export const  WindowDimensionsOffVisuallyImpaired=() =>{
     useEffect(()=>
         width !== 0 && width < 1024 && dispatch(ClickVisuallyImpairedModeOff())
         ,[width])
+}
+
+export const registerOnEventHook = async (eventName,time, fName, lName) => {
+    const eventTime = `${format(time, "HH")}:${format(time, "mm")}`
+    const eventDate = format(
+        time,
+        'dd/MM/yyyy'
+    )
+    const data = {
+        eventName,
+        eventDate,
+        eventTime,
+        fName,
+        lName
+    }
+
+    try {
+        const res = await axios({
+            method: "post",
+            url: "/api/mail",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json, text/plain, */*",
+            },
+            data
+        })
+        return res
+
+    } catch (error) {
+        return error
+    }
+}
+export const sendAppeal = async ( fName, lName,reason) => {
+    const data = {
+        fName,
+        lName,
+        reason
+    }
+
+    try {
+        const res = await axios({
+            method: "post",
+            url: "/api/appeal",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json, text/plain, */*",
+            },
+            data
+        })
+        return res
+
+    } catch (error) {
+        return error
+    }
+}
+export const sendComment = async ( name,phone,email,comment ) => {
+    const data = {
+        name,
+        phone,
+        email,
+        comment
+    }
+
+    try {
+        const res = await axios({
+            method: "post",
+            url: "/api/leftComment",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json, text/plain, */*",
+            },
+            data
+        })
+        return res
+
+    } catch (error) {
+        return error
+    }
+}
+export const registerZnoHook = async ( name,phone,email,comment,learn ) => {
+    const data = {
+        name,
+        phone,
+        email,
+        comment,
+        learn
+    }
+
+    try {
+        const res = await axios({
+            method: "post",
+            url: "/api/registerZno",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json, text/plain, */*",
+            },
+            data
+        })
+        return res
+
+    } catch (error) {
+        return error
+    }
 }
 

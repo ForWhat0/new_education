@@ -23,6 +23,11 @@ $contactsUri:ID!) {
       facebookLink
       authorship
       adress
+       iconSite {
+        sourceUrl
+      }
+      titleSite
+      descrSite
     }
   }
 	 page(idType: URI, id: $uri) {

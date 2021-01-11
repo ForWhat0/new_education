@@ -22,9 +22,9 @@ const Icon = styled.i`
   }
 `
 const Input = styled.input.attrs(props => ({
-    type: "text",
     name:props.name,
     onChange:props.func,
+    value:props.value,
     placeholder :props.inputPlaceholder,
 }))`
   ::placeholder,
@@ -50,15 +50,21 @@ border-radius: 28px;
     padding: 9px 18px;
   }
     ${SearchBar}:hover & {
-    width: 100px;
+    width: 150px;
     background-color: white;
   }
 `;
-export const AnimationSearchBarStyled = ({color,inputName,inputFunc,inputPlaceholder})=>{
+export const AnimationSearchBarStyled = ({value,color,inputName,inputFunc,inputPlaceholder})=>{
     return(
         <SearchBar>
             <Icon className="fa fa-search" aria-hidden="true"/>
-            <Input color={color} name={inputName} func={inputFunc}  inputPlaceholder={inputPlaceholder}/>
+            <Input color={color}
+                   autocomplete="off"
+                   maxLength='20'
+                   value={value}
+                   name={inputName}
+                   func={inputFunc}
+                   inputPlaceholder={inputPlaceholder}/>
         </SearchBar>
     )
 }

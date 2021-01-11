@@ -4,6 +4,7 @@ import {createWrapper} from 'next-redux-wrapper'
 import store from "../src/redux/store/store"
 import '../styles/globals.css'
 import '../styles/calendar.css'
+import '../styles/button.scss'
 import 'swiper/swiper.scss'
 import Router from 'next/router'
 import NProgress from 'nprogress'

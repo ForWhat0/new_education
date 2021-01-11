@@ -46,7 +46,7 @@ export const SearchBarStyled = ({display,ref,value,type,maxlength,right,position
     return(
         <SearchBar display={display} right={right} position={position} border={border} width={width}>
             <Icon className="fa fa-search" aria-hidden="true"/>
-            <Input ref={ref} type={type} velue={value} maxLength={maxlength}  name={inputName} func={inputFunc}  inputPlaceholder={inputPlaceholder}/>
+            <Input autocomplete="off" ref={ref} type={type} value={value} maxLength={maxlength}  name={inputName} func={inputFunc}  inputPlaceholder={inputPlaceholder}/>
         </SearchBar>
     )
 }
