@@ -77,7 +77,7 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
             if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
                 if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)) {
                     if (comment.length > 6) {
-                        send()
+                        await send()
                         await sendComment(name,phone,email,comment)
                     } else {
                         dispatch(ShowAlert(leftComment.errors.commentShort[locale], 'error'))

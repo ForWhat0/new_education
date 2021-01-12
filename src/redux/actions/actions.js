@@ -76,11 +76,11 @@ export function actionClickBurger(){
         })
     }
 }
-export function actionClickModal(time){
+export function actionClickModal(obj){
     return dispatch=>{
         dispatch({
             type:clickModal,
-            payload:time
+            payload:obj
         })
     }
 }

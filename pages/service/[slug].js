@@ -14,6 +14,8 @@ import {PostBodyZNO} from "../../src/components/post-body/post-body";
 import Icon from "../../src/components/icon/icon";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
 import {services} from "../../src/Lsi/lsi";
+import {useDispatch} from "react-redux";
+import {actionClickModal} from "../../src/redux/actions/actions";
 const { useState } = React;
 
  const Container = styled.div`
@@ -202,7 +204,14 @@ export default function GetEvent({serviceBySlug,menu,contacts,locale}) {
             </MainLayout>
         )
     }
+    const dispatch = useDispatch()
 
+    function mapDispatchToProps(item) {
+        item.type='service'
+        item.title=item.titleAccardion
+        item.databaseId=serviceBySlug.databaseId
+        return dispatch(actionClickModal(item))
+    }
     return (
         <MainLayout
             databaseId={serviceBySlug?.databaseId}
@@ -246,7 +255,7 @@ export default function GetEvent({serviceBySlug,menu,contacts,locale}) {
                                 <div
                                     dangerouslySetInnerHTML={{ __html: item.descrAccardion }}
                                     />
-                                    <StyledButton text={services.register[locale]}/>
+                                    <StyledButton func={()=>mapDispatchToProps(item)} text={services.register[locale]}/>
                             </DownloadContent>
                         </>
                     )

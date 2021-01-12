@@ -79,7 +79,7 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
             if ( phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)){
                 if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)){
                     if (comment.length > 6 ){
-                        send()
+                        await send()
                         await registerZnoHook(name,phone,email,comment,learn)
                     }
                     else{

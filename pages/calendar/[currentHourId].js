@@ -160,6 +160,7 @@ export default function EventCalendar({locale,contacts,loading,time,menu,allDate
     const dispatch = useDispatch()
 
     function mapDispatchToProps() {
+        time.type='event'
         return dispatch(actionClickModal(time))
     }
     return (

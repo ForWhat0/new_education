@@ -13,7 +13,7 @@ export default (req, res) => {
 
     const mailOption = {
         from: `rzozyla@gmail.com`,
-        to: `rzozyla@gmail.com`,
+        to: `mishutkat@gmail.com`,
         subject: `Коментар`,
         text: `
     ім'я: ${name} ;

@@ -41,7 +41,7 @@ const Input = styled.input.attrs(props => ({
   font-size: 16px;
   border: 1px solid #000000;
    transition: width 0.25s;    
-    width: 0;
+    width: ${props=>props.value ? '150px' : '0'};
   position:absolute;
   right:0;
   z-index:2;
@@ -50,7 +50,7 @@ border-radius: 28px;
     padding: 9px 18px;
   }
     ${SearchBar}:hover & {
-    width: 150px;
+    width: 150px!important;
     background-color: white;
   }
 `;

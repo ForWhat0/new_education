@@ -22,10 +22,11 @@ padding-top:${props=>props.visuallyImpairedMode ? '20px' : '50px'};
 padding-bottom:${props=>props.visuallyImpairedMode ? '20px' : '50px'};
 display:${props=>props.visuallyImpairedMode ? 'flex' : 'block'};
 align-items:center;
-border-bottom:${props=>props.visuallyImpairedMode ? '1px solid' : 'unset'};
-background: #FFFFFF;
+border-bottom:${props=>!props.visuallyImpairedModeWhiteTheme ? '1px solid white' : props=>props.visuallyImpairedMode ? '1px solid'  : 'unset'};
+background: ${props=>props.visuallyImpairedModeWhiteTheme ? '#FFFFFF' : 'transparent'};
 box-shadow: ${props=>props.visuallyImpairedMode ? 'unset' : '0px 0px 20px rgba(29, 29, 27, 0.2)'};
 border-radius: ${props=>props.visuallyImpairedMode ? 'unset' : '28px'};
+color:${props=>!props.visuallyImpairedModeWhiteTheme ? 'white' : 'black'};
 position:relative;
 cursor:pointer;
  @media screen and ${device.mobileL} {
@@ -90,7 +91,7 @@ position: ${props=>props.visuallyImpairedMode ? 'initial' : 'absolute'};;
 const Icon = styled.i`
     display: flex;
     font-size: 20px;
-    color: #000000;
+    color: ${props=>props.color};
     cursor:pointer;
     margin-right:5px;
     border: ${props=>props.border};
@@ -145,6 +146,7 @@ const IconText = styled.div`
 
 export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
     const {visuallyImpairedMode} = useSelector(state=>state.app)
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const inputDate = new Date(hoursOne?.hoursEvents?.hoursEvents ? hoursOne.hoursEvents.hoursEvents :new  Date())
     const borderLeft = visuallyImpairedMode ? '#1D1D1B' : borderLeftColor
     const renderDay=()=>{
@@ -157,7 +159,7 @@ export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
     }
 
     return (
-            <EventContainer visuallyImpairedMode={visuallyImpairedMode}>
+            <EventContainer visuallyImpairedModeWhiteTheme={visuallyImpairedModeWhiteTheme} visuallyImpairedMode={visuallyImpairedMode}>
                <TimeContainer visuallyImpairedMode={visuallyImpairedMode} borderLeftColor={borderLeft}>
                    <TextField
                        fontSize='40px !important'
@@ -182,6 +184,7 @@ export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
                    </MonthAndDay>
                        <Time visuallyImpairedMode={visuallyImpairedMode}>
                            <Icon
+                               color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
                                className="fa fa-clock-o"
                                aria-hidden="true"
                            />

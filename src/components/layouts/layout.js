@@ -13,7 +13,7 @@ import {
     WindowDimensionsOffVisuallyImpaired
 } from '../hooks/hooks';
 import {actionClickBurger, OnchangeInputSearchNews} from "../../redux/actions/actions";
-import {ModalRegisterEvent} from "../modal/modalRegistOnEvent";
+
 import {PageFooter} from "../footer/footer";
 import {StyledRegisterZNO} from "../leftComment/registerOnZNO";
 import {Element} from "react-scroll";
@@ -26,6 +26,7 @@ import {calendarLsi, NewsLsi} from "../../Lsi/lsi";
 import {useRouter} from "next/router";
 import {Container} from "../../../pages/news";
 import {RouterLink} from "../routerLink/routerLink";
+import { Modal } from "../modal/modal";
 
 
 export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,children , header,showZNORegister}) => {
@@ -59,7 +60,7 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
             </Head>
 
             {alert && <Alert/>}
-            <ModalRegisterEvent/>
+            <Modal/>
 
                 <div  ref={node}>
                     {header}
