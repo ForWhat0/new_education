@@ -117,9 +117,7 @@ margin-top: 5px;
     linear-gradient(45deg, transparent 50%, #1D1D1B 50%),
     linear-gradient(135deg, #1D1D1B 50%, transparent 50%);
   background-position:
-    calc(100% - 20px) calc(1em + 2px),
-    calc(100% - 15px) calc(1em + 2px),
-    calc(100% - 2.5em) 0.5em;
+    calc(100% - 20px) calc(2em - 10px), calc(100% - 15px) calc(2em - 10px), calc(100% - 2.5em) 0.5em;
   background-size:
     5px 5px,
     5px 5px,

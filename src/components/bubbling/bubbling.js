@@ -1,9 +1,7 @@
 import {useEffect} from "react";
 import {useSelector} from "react-redux";
 
-export  const bubbling=(visuallyImpairedMode)=>{
-
-    useEffect(() => {
+export  const bubbling=()=>{
         const canvas =  document.createElement("canvas");
         let width = canvas.width;
         let height = canvas.height;
@@ -95,6 +93,4 @@ export  const bubbling=(visuallyImpairedMode)=>{
 
 
         animate();
-    }, [visuallyImpairedMode])
-
 }

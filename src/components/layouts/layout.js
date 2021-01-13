@@ -17,7 +17,7 @@ import {actionClickBurger, OnchangeInputSearchNews} from "../../redux/actions/ac
 import {PageFooter} from "../footer/footer";
 import {StyledRegisterZNO} from "../leftComment/registerOnZNO";
 import {Element} from "react-scroll";
-import {bubbling} from '../bubbling/bubbling'
+
 import styled from 'styled-components'
 import NewsWrapper from "../news/newsWrapper";
 import StyledLoader from "../loader/loader";
@@ -29,8 +29,9 @@ import {RouterLink} from "../routerLink/routerLink";
 import { Modal } from "../modal/modal";
 
 
-export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,children , header,showZNORegister}) => {
 
+export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,children , header,showZNORegister}) => {
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
     const router = useRouter()
     const locale = router.locale
     const pathname = router.pathname
@@ -40,7 +41,7 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
     const {inputNewsByTitle} = useSelector(state=>state.news)
     const {newsByTitle} = useSelector(state=>state.news)
     const {fontSize} = useSelector(state=>state.app)
-    /*  bubbling(visuallyImpairedMode)*/
+
     const node = useRef();
     const {menuBurgerIsOpen} = useSelector(state=>state.app)
     useOnClickOutside(node,  () => menuBurgerIsOpen === true  &&  dispatch(actionClickBurger()));
@@ -54,6 +55,7 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
     return (
         <>
             <Head>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <link rel="shortcut icon" href={contacts?.iconSite?.sourceUrl} />
                 <meta name="description" content={contacts?.descrSite} />
                 <title>{contacts?.titleSite}</title>
@@ -69,6 +71,7 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
             {
                 showLinks && <RouterLink/>
             }
+
                 {
                     inputNewsByTitle.length ?
 

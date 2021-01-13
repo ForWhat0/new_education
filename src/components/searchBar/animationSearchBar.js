@@ -42,7 +42,6 @@ const Input = styled.input.attrs(props => ({
   border: 1px solid #000000;
    transition: width 0.25s;    
     width: ${props=>props.value ? '150px' : '0'};
-  position:absolute;
   right:0;
   z-index:2;
 border-radius: 28px;

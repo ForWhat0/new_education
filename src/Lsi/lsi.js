@@ -463,9 +463,9 @@ export const appeal= {
         RU: "Фамилия"
     },
     phoneNumber:{
-        UK:"Телефон:",
-        EN:"Phone:",
-        RU:"Телефон:"
+        UK:"Телефон",
+        EN:"Phone",
+        RU:"Телефон"
     },
     reason: {
         UK: "Причина звернення",

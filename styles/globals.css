@@ -40,7 +40,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media screen and (max-width:768px) {
   .swiper-container {
     width: 100%;
-    padding: unset!important;
+    padding: unset !important;
   }
 }
 @media screen and (max-width:450px) {
@@ -65,11 +65,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Stop purging. */
 
 /* Your own custom utilities */
-@media screen and (min-width:1024px) {
-  .wp-block-column figure , .wp-block-image{
-    width: 100%!important;
-    margin-left: unset!important;
-    margin-right: unset!important;
+
+@media screen and (min-width:800px) {
+    .wp-block-embed__wrapper, .wp-block-columns .wp-block-image img{
+    width: 500px!important;
+    height: 300px!important;
+    max-width: 500px!important;
+    text-align:center;
   }
 }
 @media screen and (max-width:1024px) {
@@ -79,14 +81,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .wp-block-columns {
     flex-direction: column-reverse;
   }
-  .wp-block-column figure , .wp-block-image{
-    width: 75%!important;
-    margin-left: 15%!important;
-    margin-right: 15%!important;
-  }
+
   .wp-block-column figure iframe ,.wp-block-column figure image{
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 }
 @media screen and (max-width:450px) {
@@ -235,6 +233,7 @@ figure img {
   align-items: center;
   padding: 0;
 }
+
 .blocks-gallery-item figure{
   margin:0;
   padding:20px;

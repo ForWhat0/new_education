@@ -141,6 +141,7 @@ margin-left:10%;
 const Form = styled.div`
 position:relative;
 width:320px;
+z-index: 2;
 @media screen and (max-width:950px) {
       width: 96%;
     margin-left: 2%;
@@ -195,6 +196,7 @@ export default function  Appeal({locale,contacts,menu,appeals}){
             if ( !error ) {
                 setName('')
                 setLastName('')
+                setPhone('')
                 dispatch(ShowAlert(leftComment.sent[locale],'success'))
             }
         },
@@ -202,6 +204,7 @@ export default function  Appeal({locale,contacts,menu,appeals}){
             if ( error ) {
                 setName('')
                 setLastName('')
+                setPhone('')
                 dispatch(ShowAlert(leftComment.sent[locale],'success'))
             }
         }
@@ -226,11 +229,11 @@ export default function  Appeal({locale,contacts,menu,appeals}){
                     <Form>
                         <InputStyled value={name}   text={appeal.name[locale]} onChange={e => setName(e.target.value)}  width='100%'/>
                         <InputStyled  value={lastName}  text={appeal.lastName[locale]} onChange={e => setLastName(e.target.value)}  width='100%'/>
-                        <InputStyled  value={lastName}  text={appeal.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='100%'/>
+                        <InputStyled  value={phone}  text={appeal.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='100%'/>
                         <Label>
                             {appeal.reason[locale]}
                         </Label>
-                        <Select  style={{marginBottom:'20px'}} onChange={e => setReason(e.target.value)}>
+                        <Select  style={{marginTop:'5px',marginBottom:'20px'}} onChange={e => setReason(e.target.value)}>
                             <option hidden disabled selected value> </option>
                             {appeals?.map(less=>
                                 <option key={less.appealsText} value={less.appealsText}>{less.appealsText}</option>

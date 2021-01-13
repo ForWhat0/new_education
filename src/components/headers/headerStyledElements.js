@@ -129,11 +129,8 @@ const RegisterLink = styled.a`
 `
  const SignIn = styled.div`
 display:flex;
-@media screen and (max-width:1400px){
-      top:${props=>props.top};
-    position: absolute;
-    right: 0;
-  }
+margin-left: 60px;
+
    @media screen and ${device.laptop}{
      top:unset!important;
      right: ${props=>props.right};
@@ -142,11 +139,7 @@ display:flex;
 const SignInMain = styled.div`
 display:flex;
 padding-bottom: 10px;
-@media screen and (max-width:1400px){
-      top:${props=>props.top};
-    position: absolute;
-    right: 0;
-  }
+
    @media screen and ${device.laptop}{
      display:none;
   }
@@ -511,7 +504,7 @@ export const NavBarVisuallyImpaired=({locale,display,footer})=>{
            <NormalVersion onClick={()=>dispatch(ClickVisuallyImpairedModeOff())}>
                <span>{headerLsi.normalVersion[locale]}</span>
                <Handle>
-                       <Icon  src='/glassIcon.svg'  width='30px' height='30px'/>
+                       <Icon  src='/glassIconDark.svg'  width='30px' height='30px'/>
                </Handle>
            </NormalVersion>
        </NavVisually>
@@ -639,13 +632,13 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                     </ul>
                 </Navmanu>
             </Links>
-            <ChangeLanguageContainer minWidth={visuallyImpairedMode ? 'none' : '220px'} top='25px' position='absolute' right='100px'>
+            <ChangeLanguageContainer minWidth={visuallyImpairedMode ? 'none' : '220px'} >
                     <ChangeLanguageSelector globeDarkIcon={globeDarkIcon} />
                     <Glass display={visuallyImpairedMode ? 'none' : 'block'} onClick={()=>dispatch(ClickVisuallyImpairedModeOn())}>
                         <Icon  src={glassIcon}  width={'30px'} height='30px'/>
                     </Glass>
             </ChangeLanguageContainer>
-            <SignIn  right='68px' top='25px'>
+            <SignIn>
                 <AnimationSearchBarStyled
                     color={!visuallyImpairedModeWhiteTheme ? 'white' : searchBarColor}
                     inputFunc={(e)=>dispatch(OnchangeInputSearchNews(e.target.value,locale))}
@@ -709,9 +702,8 @@ right:${props=>props.right};
 `
 const Glass = styled.div`
 display:${props=>props.display};
+margin-left:20px;
   cursor:pointer;
-  right: 0;
-    position: absolute;
 `
 export const LinkIcon = styled.i`
     font-size: 16px;

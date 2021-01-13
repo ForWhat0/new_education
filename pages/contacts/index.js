@@ -91,7 +91,7 @@ background:url(/map.svg) no-repeat;
   }  
 `
  const CircleBackground = styled.div`
-   height: 300px;
+   height: 400px;
     z-index: -1;
     background: rgba(0,174,239,0.08);
     width: 400px;
