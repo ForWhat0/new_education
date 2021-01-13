@@ -55,7 +55,6 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
     return (
         <>
             <Head>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <link rel="shortcut icon" href={contacts?.iconSite?.sourceUrl} />
                 <meta name="description" content={contacts?.descrSite} />
                 <title>{contacts?.titleSite}</title>
