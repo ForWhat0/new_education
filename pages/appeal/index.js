@@ -227,7 +227,7 @@ export default function  Appeal({locale,contacts,menu,appeals}){
         <MainLayout databaseId={16688} contacts={contacts} menu={parsedMenu}>
             <Global >
                 <Title>
-                    <TitleForComponent text={appeal.appeal[locale]}/>
+                    <TitleForComponent marginBottom='unset' text={appeal.appeal[locale]}/>
                 </Title>
                 <Content>
                     <PaperPlane/>

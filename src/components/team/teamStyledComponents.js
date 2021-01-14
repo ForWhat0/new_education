@@ -52,7 +52,7 @@ width:100%;
 display:flex;
 margin: 40px 0 40px 0;
 flex-direction:row;
- @media screen and (max-width: 1150px){
+ @media screen and (max-width: 1290px){
     height: auto;
     flex-direction:column;
   }
@@ -61,7 +61,7 @@ export const Text = styled.div`
 background-color:rgba(157, 157, 157, 0.08);
 width: 44%;
 height:453px;
- @media screen and (max-width: 1150px){
+ @media screen and (max-width: 1290px){
   width: 100%;
   margin-bottom:20px;
   height:auto;
@@ -69,18 +69,16 @@ height:453px;
 
 `
 export const TextInner = styled.div`
-max-width: 360px;
+max-width: 25%;
 display:flex;
 flex-direction:column;
-margin-left: 150px;
+    margin-left: 10%;
+    position:absolute;
     display: flex;
         margin-top: 50px;
         
-    @media screen and (max-width: 1290px){
-max-width: 300px;
-margin-left: 50px;
-  }
-  @media screen and (max-width: 1150px){
+  
+  @media screen and (max-width: 1290px){
   max-width: 50%;
   position: relative;
   margin-right: unset;
@@ -100,10 +98,8 @@ export const SwiperContainer = styled.div`
     position: absolute;
     margin-right: 10%;
     overflow: hidden;
-   @media screen and (max-width: 1290px){
- width: 60%;
-  }
-  @media screen and (max-width: 1150px){
+ 
+  @media screen and (max-width: 1290px){
   width: 80%;
   position: relative;
   margin-right: unset;
@@ -121,14 +117,14 @@ export const SwiperContainer = styled.div`
 export const CommandText = styled.p`
         letter-spacing: 1px;
     font-size: 20px;
-    @media screen and (max-width: 1150px){
+    @media screen and (max-width: 1290px){
 font-size: 12px;
   }
 `
 export const Arrows = styled.div`
 display:flex;
 margin-top:50px;
-@media screen and (max-width: 1150px){
+@media screen and (max-width: 1290px){
   display:none;
   }
 `
@@ -137,7 +133,7 @@ display:flex;
 height:50px;
 align-items:center;
  display:none;
-@media screen and (max-width: 1150px){
+@media screen and (max-width: 1290px){
   display:block;
   }
 `

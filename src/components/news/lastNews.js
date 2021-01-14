@@ -154,7 +154,7 @@ export default function LastNews({locale,titleNews,padding,title,language,posts,
             <Back padding={padding} background={background}>
                 <Container>
                     <Header>
-                        <TitleForComponent text={NewsLsi.otherNews[locale]} fontSize='40px' />
+                        <TitleForComponent marginTop='unset' text={NewsLsi.otherNews[locale]} fontSize='40px' />
                         <Arrows>
                             <ArrowIcon
                                 arrow={!visuallyImpairedModeWhiteTheme ? '/WhiteLeftArrow.svg' : '/leftArrow.svg'}

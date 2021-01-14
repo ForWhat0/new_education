@@ -1,6 +1,6 @@
-import Head from "next/head";
+import Head from 'next/head'
 import {StyledLeftComment} from "../leftComment/leftComment"
-import {useDispatch, useSelector} from "react-redux"
+import {Provider, useDispatch, useSelector} from "react-redux"
 import {Alert} from "../alert/alert"
 import Menu from "../burgerMenu/menu";
 import React, {useEffect, useRef} from 'react';
@@ -55,8 +55,18 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
     return (
         <>
             <Head>
+                <link
+                    rel="stylesheet"
+                    href="/fonts/e-Ukraine_font/e-Ukraine-Regular.ttf"
+                />
                 <link rel="shortcut icon" href={contacts?.iconSite?.sourceUrl} />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <meta name="description" content={contacts?.descrSite} />
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                 <title>{contacts?.titleSite}</title>
             </Head>
 

@@ -3,19 +3,22 @@ import {NewsLsi} from "../../Lsi/lsi"
 import styled from 'styled-components'
 import News from "./news"
 import StyledLoader from "../loader/loader";
+import {device} from "../deviceSizes/deviceSizes";
 const {review} = NewsLsi
 
 const NewsContainer = styled.div`
+@media screen and ${device.laptop}{
+  grid-template-columns: 1fr 1fr;
+  }
 margin-top:40px;
- display: inline-flex;
-    flex-wrap: wrap;
-    gap: 30px;
+gap: 30px;
+grid-gap: 30px;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
 `
 const StyledContainer = styled.div`
  display:flex;
- max-width: 49%;
  cursor:pointer;
- flex: 1 1 300px;
  flex-direction: column;
  overflow: hidden;
  margin: 0 0 40px;

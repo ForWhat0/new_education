@@ -11,7 +11,7 @@ export const StyledButton =({text,func})=>{
         <>
             {
                 !visuallyImpairedMode ?
-                    <>
+                    <div >
                         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" className="goo">
                             <defs>
                                 <filter id="goo">
@@ -40,7 +40,7 @@ export const StyledButton =({text,func})=>{
     <span className="circle bottom-right"></span>
   </span>
 </span>
-                    </>
+                    </div>
                     :
                     <button onClick={()=>func && func()}  className="btn">
                         {text}
