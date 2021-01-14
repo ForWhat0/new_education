@@ -48,7 +48,7 @@ span{
 margin-left:10px;
 margin-right:10px;
 color:blue;
-border-bottom:1px solid blue;
+border-bottom:1px solid rgb(0,114,188);
 } 
 
 `
@@ -65,7 +65,7 @@ align-items:center;
 padding-bottom:40px;
 margin-bottom:40px;
 align-items:center;
-border-bottom:1px solid #1D1D1B;
+border-bottom:1px solid ${props=>props.borderColor};
 @media screen and (max-width:1200px) {
     flex-direction: column;
   }
@@ -95,7 +95,7 @@ export default function ProjectDetails({projectBySlug,menu,contacts}) {
      const router = useRouter();
     const parsedMenu = ParcMenu(menu)
     const {visuallyImpairedMode} = useSelector(state=>state.app)
-
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     return (
         <MainLayout databaseId={projectBySlug.databaseId} contacts={contacts} menu={parsedMenu}>
             {
@@ -109,13 +109,13 @@ export default function ProjectDetails({projectBySlug,menu,contacts}) {
                     >
 
                         <ContainerWrapper>
-                            <Header>
+                            <Header borderColor={visuallyImpairedModeWhiteTheme ? '#1D1D1B' : 'white'}>
                                 <TitleForComponent displayYellowDiv={false} text={projectBySlug.title} fontSize='40px'/>
                                 <Icons>
                                     {
                                         projectBySlug.projectFields.playLink &&
                                         <IconItem marginR='20px'>
-                                            <a href={projectBySlug.projectFields.playLink}>
+                                            <a target='_blank' href={projectBySlug.projectFields.playLink}>
                                                 <div style={{width:'130px',height:'40px',background:'url(/googlePlayIcon.svg) no-repeat'}}/>
                                             </a>
                                         </IconItem>
@@ -123,7 +123,7 @@ export default function ProjectDetails({projectBySlug,menu,contacts}) {
                                     {
                                         projectBySlug.projectFields.appLink &&
                                         <IconItem marginR='20px'>
-                                            <a href={projectBySlug.projectFields.appLink}>
+                                            <a target='_blank' href={projectBySlug.projectFields.appLink}>
                                                 <div style={{width:'130px',height:'40px',background:'url(/appStore.svg) no-repeat'}}/>
                                             </a>
                                         </IconItem>
@@ -131,10 +131,11 @@ export default function ProjectDetails({projectBySlug,menu,contacts}) {
                                     {
                                         projectBySlug.projectFields.siteLink &&
                                         <IconItem marginR='60px'>
-                                            <a href={projectBySlug.siteLink}>
+                                            <a target='_blank' href={projectBySlug.projectFields.siteLink}>
                                                 <div style={{width:'40px',height:'40px',background:'url(/linkIconDark.svg) no-repeat'}}/>
                                                 <div>
-                                                    <span>{projectBySlug.projectFields.siteLink}</span>
+                                                    <span style={{color:'rgb(0,114,188)'}}
+                                                    >{projectBySlug.projectFields.siteLink}</span>
                                                 </div>
 
                                             </a>

@@ -3,6 +3,7 @@ import PostBody from "../post-body/post-body"
 import {device} from "../deviceSizes/deviceSizes"
 import { format } from "date-fns"
 import {enGB, ru, uk} from "date-fns/locale"
+import {firstChartToUpperCase} from "../hooks/hooks";
 
 
 const Header = styled.div`
@@ -82,7 +83,7 @@ export default function Time({locale,time,timeFormatted}) {
            <Header >
               <Date>
                   <span>
-                      {weekDay}
+                      {firstChartToUpperCase(weekDay)}
                   </span>
                   <h1>
                       {numberDay}

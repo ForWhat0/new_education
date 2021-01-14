@@ -33,7 +33,7 @@ const GlobalContainer = styled.div`
   }
    display:block;
  width: 80%;
-  margin:40px 0 40px 10%;
+ margin: 40px 0 40px 10%;
 `
 export default function Events({locale,posts,titleEvent}){
     const {visuallyImpairedMode} = useSelector(state=>state.app)

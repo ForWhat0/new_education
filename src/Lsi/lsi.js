@@ -293,9 +293,9 @@ export const calendarLsi = {
         RU:"Календарь"
     },
     search:{
-        UK:"пошук за назвою події",
-        EN:"search by event name",
-        RU:"поиск по названию события"
+        UK:"Пошук за назвою події",
+        EN:"Search by event name",
+        RU:"Поиск по названию события"
     },
     result:{
         UK:"Результат пошуку",
@@ -389,9 +389,9 @@ export const leftCommentZno={
 }
 export const finance={
     report:{
-        UK:"звіт за",
-        EN:"report for",
-        RU:"отчет по"
+        UK:"Звіт за",
+        EN:"Report for",
+        RU:"Отчет по"
     },
     date:{
         UK:"Дата розміщення",

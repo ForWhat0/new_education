@@ -11,7 +11,7 @@ import {
     ContainerWrapper,
     Flex,
     IconBackgroundZNO,
-    InputsFields, LoaderContainer, Select,
+    InputsFields, LoaderContainer,
     SubTitle,
     Text,
     Title, Label, TextZno
@@ -20,6 +20,8 @@ import {PageFooter} from "../footer/footer";
 import {useRouter} from "next/router";
 import {leftComment, leftCommentZno} from "../../Lsi/lsi";
 import {registerZnoHook} from "../hooks/hooks";
+import {SelectStyled} from "../select/select";
+
 
 export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,display,src,align})=>{
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
@@ -75,30 +77,36 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
     } )
 
     const handleSendClick = async () => {
-        if (name && phone && email && comment && learn){
-            if ( phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)){
-                if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)){
-                    if (comment.length > 6 ){
+        if (name && phone && email && comment && learn) {
+            if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+                if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)) {
+                    if (comment.length > 6) {
                         await send()
-                        await registerZnoHook(name,phone,email,comment,learn)
-                    }
-                    else{
+                        await registerZnoHook(name, phone, email, comment, learn)
+                    } else {
                         dispatch(ShowAlert(leftCommentZno.errors.commentShort[locale], 'error'))
                     }
-                }
-                else {
+                } else {
                     dispatch(ShowAlert(leftCommentZno.errors.wrongEmail[locale], 'error'))
                 }
-            }
-            else {
+            } else {
                 dispatch(ShowAlert(leftCommentZno.errors.wrongPhoneNumber[locale], 'error'))
             }
-        }
-        else{
+        } else {
             dispatch(ShowAlert(leftCommentZno.errors.emptyFields[locale], 'error'))
         }
-
     }
+
+    const handleChange = selectedOption => {
+        setLearn(selectedOption)
+    }
+    const options = [];
+    showZNORegister.learn?.map(less=>
+        options.push({
+            value: less.nameLearn,
+            label: less.nameLearn
+        })
+    )
     return (
         <Container background={!visuallyImpairedModeWhiteTheme ? '#1D1D1B' : '#F2F9FD'} src={src} display={display} align={align}>
             <Title>
@@ -113,20 +121,20 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
                 </TextZno>
                 <InputsFields>
                     <Flex>
-                        <InputStyled value={name} text= {leftCommentZno.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
-                        <InputStyled value={phone}  text= {leftCommentZno.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
+                        <InputStyled  value={name} text= {leftCommentZno.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
+                        <InputStyled  value={phone}  text= {leftCommentZno.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled value={email}  maxlength='40' text= {leftCommentZno.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled value={comment}  maxlength='100' text= {leftCommentZno.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled  value={email}  maxlength='40' text= {leftCommentZno.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled  value={comment}  maxlength='100' text= {leftCommentZno.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <Label>
                         {leftCommentZno.choose[locale]}
                     </Label>
-                    <Select onChange={e => setLearn(e.target.value)}>
-                        <option hidden disabled selected value> </option>
-                        {showZNORegister.learn?.map(less=>
-                        <option key={less.nameLearn} value={less.nameLearn}>{less.nameLearn}</option>
-                        )}
-                    </Select>
+                    <SelectStyled
+                        
+                        value={learn}
+                        onChange={handleChange}
+                        options={options}
+                    />
                     <LoaderContainer>
                         {loading &&  <StyledLoader/>}
                         <SendButton

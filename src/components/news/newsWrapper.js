@@ -13,6 +13,7 @@ margin-top:40px;
 `
 const StyledContainer = styled.div`
  display:flex;
+ max-width: 49%;
  cursor:pointer;
  flex: 1 1 300px;
  flex-direction: column;
@@ -23,6 +24,9 @@ const StyledContainer = styled.div`
   transition: transform .2s linear;
     &:hover  {
     transform: scale(1.01);
+  }
+  @media (max-width: 1010px) {
+     max-width: 100%;
   }
  @media (max-width: 768px) {
     flex-direction: column;

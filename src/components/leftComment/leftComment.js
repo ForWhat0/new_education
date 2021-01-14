@@ -107,11 +107,11 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
                 </Text>
                 <InputsFields>
                     <Flex>
-                        <InputStyled value={name} text={leftComment.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
-                        <InputStyled value={phone}  text={leftComment.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
+                        <InputStyled  value={name} text={leftComment.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
+                        <InputStyled  value={phone}  text={leftComment.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled value={email}   maxlength='40' text={leftComment.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled value={comment}  maxlength='100' text={leftComment.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled  value={email}   maxlength='40' text={leftComment.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled  value={comment}  maxlength='100' text={leftComment.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <LoaderContainer>
                         {loading &&  <StyledLoader/>}
                         <SendButton

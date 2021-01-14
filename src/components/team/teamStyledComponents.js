@@ -50,7 +50,7 @@ export const Global = styled.div`
 
 width:100%;
 display:flex;
-margin:${props=>props.margin};
+margin: 40px 0 40px 0;
 flex-direction:row;
  @media screen and (max-width: 1150px){
     height: auto;

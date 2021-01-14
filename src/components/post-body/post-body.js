@@ -22,6 +22,7 @@ const StyledBlock = styled.div`
   
   figure{
   display:${props=>props.display}!important;
+  justify-content: center;
   }
 `;
 
@@ -30,7 +31,7 @@ export default function PostBody({ content  }) {
     const {images} = useSelector(state=>state.app)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     return (
-        <StyledBlock margin={!visuallyImpairedModeWhiteTheme ? 'unset' : '50px'}  color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'} display={!images ? 'none' : 'block'}>
+        <StyledBlock margin={!visuallyImpairedModeWhiteTheme ? 'unset' : '50px'}  color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'} display={!images ? 'none' : 'flex'}>
             <div
                 dangerouslySetInnerHTML={{ __html: content }}
             />

@@ -9,11 +9,13 @@ align-items:center;
 `
 export  const Title = styled.h1`
  @media screen and ${device.tablet} {
+ width:100%;
      margin-left:3%;
      font-size:20px;
   }
+  width:40%;
 font-size:40px;
-margin-bottom:10px;
+margin-bottom:20px;
 margin-left: 10%;
 `
 

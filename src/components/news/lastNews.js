@@ -17,7 +17,7 @@ const {button} = NewsLsi
 export const Back = styled.div`
 width:100%;
 background-color:${props => props.background};
-padding-bottom:${props => props.margin};
+padding:${props => props.padding};
 `
 
 export const Container = styled.div`
@@ -103,7 +103,7 @@ const ScrollBarStyledInner = styled.div`
  cursor:pointer;
  flex-direction: row;
 `
-export default function LastNews({locale,titleNews,margin,title,language,posts,pageInfo,background,buttonHide,fetchMoreNews}){
+export default function LastNews({locale,titleNews,padding,title,language,posts,pageInfo,background,buttonHide,fetchMoreNews}){
 
     const buttonDisplay = buttonHide ? 'none' : 'flex';
     const {loading} = useSelector(state=>state.app)
@@ -149,10 +149,9 @@ export default function LastNews({locale,titleNews,margin,title,language,posts,p
             nextNewsForMobile()
         }
     };
-
     return(
         <section>
-            <Back margin={margin} background={background}>
+            <Back padding={padding} background={background}>
                 <Container>
                     <Header>
                         <TitleForComponent text={NewsLsi.otherNews[locale]} fontSize='40px' />

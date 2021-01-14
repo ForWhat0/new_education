@@ -10,13 +10,11 @@ import {device} from "../../src/components/deviceSizes/deviceSizes";
 
 export const LogInRegisterFooter = styled.div`
 align-items:center;
+margin-top:30px;
 display:flex;
 flex-wrap: wrap;
-justify-content: space-between;
+justify-content: center;
 position:relative;
-@media screen and ${device.mobileL}{
-     justify-content: center;
-  }
 `
 
 export default function LogIn ({locale,siteInfo,title}){
@@ -27,13 +25,13 @@ export default function LogIn ({locale,siteInfo,title}){
                     <LogInRegisterFooter>
 
                         <Link href='/register'>
-                            <a style={{marginBottom: '10px'}}>
+                            <a style={{margin: '10px'}}>
                                 <span>{LogInLsi.register[locale]}</span>
                             </a>
                         </Link>
 
-                        <div style={{marginBottom:'10px'}}>
-                            <StyledButton  style={{marginBottom: '10px'}}  text={LogInLsi.logIn[locale]} />
+                        <div style={{margin:'10px'}}>
+                            <StyledButton  text={LogInLsi.logIn[locale]} />
                         </div>
 
                     </LogInRegisterFooter>

@@ -13,9 +13,12 @@ margin-top:40px;
 display:flex;
 justify-content:center;
 `
+const Section = styled.section`
+padding: 40px 0 40px 0;
+`
 export default function ProjectsWrapper({posts,locale}){
     return(
-        <section style={{margin:'40px 0 40px 0'}}>
+        <Section >
             <Projects title={posts.title} textForIcon={review[locale]} posts={posts.projects}/>
             <Link href={'/projects'}>
                 <a>
@@ -26,6 +29,6 @@ export default function ProjectsWrapper({posts,locale}){
                     </ButtonContainer>
                 </a>
             </Link>
-        </section>
+        </Section>
     )
 }

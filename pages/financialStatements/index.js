@@ -173,10 +173,16 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                                         mTop='15px'
                                         mBottom='unset'
                                     >
-                                        {`${finance.report[locale]}
-                                                    ${filteredFiles.dateFile? filteredFiles.dateFile : null}
-                                                   
-                                ( ${finance.date[locale]} ${getDateIn_DD_MM_YYYY_Format(filteredFiles.downloadPdf.dateGmt)} )`}
+                                        {
+                                            `
+                                                ${finance.report[locale]}
+                                                ${file.dateFile? file.dateFile : null}
+                                                (
+                                                ${finance.date[locale]} 
+                                                ${getDateIn_DD_MM_YYYY_Format(file.downloadPdf.dateGmt)}
+                                                )
+                                                `
+                                        }
                                     </DownloadFileText>
                                     <DownloadFileTextAndArrow
                                         top='unset'
@@ -224,10 +230,16 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                                                 mTop='15px'
                                                 mBottom='unset'
                                             >
-                                                {`${finance.report[locale]} ( 
-                                                    ${file.dateFile? file.dateFile : null}
-                                                   
-                                (${finance.date[locale]}  ${getDateIn_DD_MM_YYYY_Format(file.downloadPdf.dateGmt)} )`}
+                                                {
+                                                    `
+                                                ${finance.report[locale]}
+                                                ${file.dateFile? file.dateFile : null}
+                                                (
+                                                ${finance.date[locale]} 
+                                                ${getDateIn_DD_MM_YYYY_Format(file.downloadPdf.dateGmt)}
+                                                )
+                                                `
+                                                }
                                             </DownloadFileText>
                                             <DownloadFileTextAndArrow
                                                 top='unset'

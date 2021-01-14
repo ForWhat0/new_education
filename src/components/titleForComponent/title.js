@@ -6,7 +6,7 @@ const Title = styled.h1`
 font-size:${props => props.fontSize};
 font-weight:400;
 width:100%;
-line-height: 50px;
+line-height: ${props=>props.lineHeight};
 margin-bottom:${props => props.marginBottom};
 padding-bottom:${props => props.paddingBottom};
 border-bottom:${props => props.borderBottom};
@@ -32,10 +32,17 @@ font-size: 20px;
   }
 `
 
-export const TitleForComponent=({displayYellowDiv,borderBottom,paddingBottom,text,fontSize,marginBottom})=>{
+export const TitleForComponent=({lineHeight,displayYellowDiv,borderBottom,paddingBottom,text,fontSize,marginBottom})=>{
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     return(
-        <Title display={visuallyImpairedMode || displayYellowDiv === false ? 'none' : 'block'} borderBottom={borderBottom} paddingBottom={paddingBottom} marginBottom={marginBottom} fontSize={fontSize}>
+        <Title
+            display={visuallyImpairedMode || displayYellowDiv === false ? 'none' : 'block'}
+            borderBottom={borderBottom}
+            paddingBottom={paddingBottom}
+            marginBottom={marginBottom}
+            fontSize={fontSize}
+            lineHeight={lineHeight ? lineHeight : '50px'}
+        >
            <div/>
             {text}
         </Title>

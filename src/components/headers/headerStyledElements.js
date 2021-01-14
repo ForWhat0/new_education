@@ -645,13 +645,17 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                     value={inputNewsByTitle}
                     inputPlaceholder={headerLsi.inputPlaceholder[locale]}
                 />
-                <ArrowIcon
-                    color={!visuallyImpairedModeWhiteTheme ? 'white' : color}
-                    displayUserIcon='none'
-                    className="fa fa-user-circle"
-                    aria-hidden="true"
-                    onClick={()=>console.log('click')}
-                />
+                <Link href='/logIn'>
+                    <a>
+                        <ArrowIcon
+                            color={!visuallyImpairedModeWhiteTheme ? 'white' : color}
+                            displayUserIcon='none'
+                            className="fa fa-user-circle"
+                            aria-hidden="true"
+                            onClick={()=>console.log('click')}
+                        />
+                    </a>
+                </Link>
             </SignIn>
             <Burger color={!visuallyImpairedModeWhiteTheme ? 'white' : color}/>
         </NavMain>

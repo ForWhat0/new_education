@@ -52,7 +52,7 @@ export default function Home({contacts,locale,menu,news,events,data,projects,ser
           <Team  posts={teamData}/>
         </div>
         }
-        {news.nodes.length > 0 &&<LastNews locale={locale} titleNews={mainPageFields?.titleNews} margin='80px'  posts={news.nodes}  pageInfo={news.pageInfo} />}
+        {news.nodes.length > 0 &&<LastNews locale={locale} titleNews={mainPageFields?.titleNews} padding='40px 0 80px 0'  posts={news.nodes}  pageInfo={news.pageInfo} />}
       </HomePageLayout>
   )
 }

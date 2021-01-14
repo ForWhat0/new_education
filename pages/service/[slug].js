@@ -98,6 +98,7 @@ const Header = styled.div`
 display:flex;
 align-items: center;
 position:relative;
+margin-bottom: 30px;
 
 div{
 position:absolute;

@@ -19,11 +19,11 @@ export default function LogIn ({locale,siteInfo,title}){
 
             <LogInRegisterFooter>
                 <Link href='/logIn'>
-                    <a style={{marginBottom:'10px'}}>
+                    <a style={{margin:'10px'}}>
                         <span>{LogInLsi.logIn[locale]}</span>
                     </a>
                 </Link>
-                <div style={{marginBottom:'10px'}}>
+                <div style={{margin:'10px'}}>
                     <StyledButton text={LogInLsi.register[locale]} />
                 </div>
             </LogInRegisterFooter>

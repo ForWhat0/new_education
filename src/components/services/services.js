@@ -19,13 +19,12 @@ const ServicesContainer = styled.div`
    grid-gap: 30px;
 `
 const GlobalContainer = styled.div`
-margin-bottom:80px;
  @media screen and ${device.mobileL} {
      width: 96%;
     margin-left: 2%;
   }
+      padding: 40px 0 40px 10%;
  width: 80%;
-  margin-left: 10%;
 `
 export default function Services({posts,titleServices,locale}){
     return(

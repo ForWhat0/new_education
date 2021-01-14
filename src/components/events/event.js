@@ -10,6 +10,7 @@ import {ArrowContainer} from "../textComponent/textComponent";
 import {ArrowIcon} from "../textComponent/textComponent";
 import {useSelector} from "react-redux";
 import {StyledButton} from "../button/button";
+import {firstChartToUpperCase} from "../hooks/hooks";
 
 const opacity = keyframes`
  0%   { opacity: 0; }
@@ -154,7 +155,11 @@ export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
             return events.today[locale]
         }
         else{
-            return  format(inputDate,  "EEEE",{locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk})
+            return  firstChartToUpperCase(
+                format(
+                    inputDate,  "EEEE",{locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk}
+                )
+            )
         }
     }
 
@@ -173,7 +178,12 @@ export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
                            fontSize='16px'
                            fontWeight='500'
                        >
-                           {format(inputDate, "MMMM yyyy", {locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk})}
+                           {
+                               firstChartToUpperCase(
+                                   format(inputDate, "MMMM yyyy", {locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk})
+                               )
+
+                           }
                        </TextField>
                        <TextField
                            fontSize='16px'

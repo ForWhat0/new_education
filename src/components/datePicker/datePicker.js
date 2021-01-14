@@ -17,7 +17,7 @@ import {
     MonthYearLabel,
     Container, ButtonWrapper
 } from "./styledDatePicker";
-import {maxDay, minDay} from "../hooks/hooks"
+import {firstChartToUpperCase, maxDay, minDay} from "../hooks/hooks"
 import {useRouter} from "next/router"
 import {useSelector} from "react-redux";
 
@@ -91,7 +91,7 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
 
                     >
                         <DayLabel>
-                            {format(addDays(month, j), dayFormat, {locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk})}
+                             {firstChartToUpperCase(format(addDays(month, j), dayFormat, {locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk}))}
                         </DayLabel>
                         <DateLabel >
                             {format(addDays(month, j), dateFormat)}
@@ -102,7 +102,7 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
             months.push(
                 <MonthContainer  key={month}>
                     <MonthYearLabel>
-                        {format(month,  "LLLL yyyy",{locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk})}
+                        {firstChartToUpperCase(format(month,  "LLLL yyyy",{locale: locale === "EN" ? enGB : locale === "RU" ? ru : uk}))}
                     </MonthYearLabel>
                     <DaysContainer>
                         {days}

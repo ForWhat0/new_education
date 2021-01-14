@@ -14,6 +14,7 @@ import {ShowAlert} from "../../src/redux/actions/actions";
 import {useMutation} from "@apollo/client";
 import SEND_COMMENT from "../../src/mutations/sendComment";
 import {useDispatch, useSelector} from "react-redux";
+import {SelectStyled} from "../../src/components/select/select";
 
 const Global = styled.div`
 
@@ -197,6 +198,7 @@ export default function  Appeal({locale,contacts,menu,appeals}){
                 setName('')
                 setLastName('')
                 setPhone('')
+                setReason('')
                 dispatch(ShowAlert(leftComment.sent[locale],'success'))
             }
         },
@@ -205,11 +207,21 @@ export default function  Appeal({locale,contacts,menu,appeals}){
                 setName('')
                 setLastName('')
                 setPhone('')
+                setReason('')
                 dispatch(ShowAlert(leftComment.sent[locale],'success'))
             }
         }
     } )
-
+    const handleChange = selectedOption => {
+        setReason(selectedOption)
+    }
+    const options = [];
+    appeals?.map(less=>
+        options.push({
+            value: less.appealsText,
+            label: less.appealsText
+        })
+    )
 
     return(
         <MainLayout databaseId={16688} contacts={contacts} menu={parsedMenu}>
@@ -233,12 +245,13 @@ export default function  Appeal({locale,contacts,menu,appeals}){
                         <Label>
                             {appeal.reason[locale]}
                         </Label>
-                        <Select  style={{marginTop:'5px',marginBottom:'20px'}} onChange={e => setReason(e.target.value)}>
-                            <option hidden disabled selected value> </option>
-                            {appeals?.map(less=>
-                                <option key={less.appealsText} value={less.appealsText}>{less.appealsText}</option>
-                            )}
-                        </Select>
+                        <div style={{marginBottom:'20px'}}>
+                            <SelectStyled
+                                value={reason}
+                                onChange={handleChange}
+                                options={options}
+                            />
+                        </div>
                         <SendButton
                             sentText={leftComment.sent[locale]}
                             sendText={leftComment.send[locale]}

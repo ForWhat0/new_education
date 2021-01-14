@@ -162,6 +162,9 @@ export const  WindowDimensionsOffVisuallyImpaired=() =>{
         width !== 0 && width < 1024 && dispatch(ClickVisuallyImpairedModeOff())
         ,[width])
 }
+export const  firstChartToUpperCase=(string) =>{
+    return string.charAt(0).toUpperCase() + string.slice(1)
+}
 
 export const registerOnEventHook = async (eventName,time, fName, lName) => {
     const eventTime = `${format(time, "HH")}:${format(time, "mm")}`
