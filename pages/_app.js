@@ -22,9 +22,7 @@ Router.events.on('routeChangeError', () => NProgress.done())
 function MyApp({ Component, pageProps }) {
     const router = useRouter()
   return (
-      <ApolloProvider client={client}>
-          <ApolloHooksProvider client={client}>
-      <Provider store={store}>
+      <>
           <Head>
               <link
                   rel="stylesheet"
@@ -37,10 +35,14 @@ function MyApp({ Component, pageProps }) {
               <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
               <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
           </Head>
-            <Component {...pageProps} />
-      </Provider>
-          </ApolloHooksProvider>
-      </ApolloProvider>
+          <ApolloProvider client={client}>
+              <ApolloHooksProvider client={client}>
+                  <Provider store={store}>
+                      <Component {...pageProps} />
+                  </Provider>
+              </ApolloHooksProvider>
+          </ApolloProvider>
+      </>
   )
 }
 
