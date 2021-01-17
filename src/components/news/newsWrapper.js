@@ -1,10 +1,6 @@
-import {useSelector} from "react-redux";
-import {NewsLsi} from "../../Lsi/lsi"
 import styled from 'styled-components'
 import News from "./news"
-import StyledLoader from "../loader/loader";
 import {device} from "../deviceSizes/deviceSizes";
-const {review} = NewsLsi
 
 const NewsContainer = styled.div`
 @media screen and ${device.laptop}{
@@ -41,12 +37,10 @@ const StyledContainer = styled.div`
   }
 `
 export default function NewsWrapper({posts}){
-    const {loading} = useSelector(state=>state.app)
-    const {language} = useSelector(state=>state.app)
     return(
             <NewsContainer>
                 {posts.map(node =>
-                    <StyledContainer>
+                    <StyledContainer key={node.databaseId}>
                         <News
                             databaseId={node.databaseId}
                             key={node.slug}
@@ -55,7 +49,6 @@ export default function NewsWrapper({posts}){
                             date={node.date}
                             slug={node.slug}
                             excerpt={node.excerpt}
-                            textForIcon={review[language]}
                         />
 
                     </StyledContainer>

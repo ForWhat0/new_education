@@ -1,11 +1,6 @@
 import {
     hideLoader,
     showLoader,
-    showAlert,
-    hideAlert,
-    changeLanguage,
-    showExtraLoader,
-    hideExtraLoader,
     clickBurger,
     clickModal,
     clickOnOffImages,
@@ -15,12 +10,9 @@ import {
 } from '../types/types'
 
 const initialState = {
+
     loading:false,
-    extraLoading:false,
-    alert:null,
     title:'HOME',
-    type:'success',
-    language:'ukr',
     menuBurgerIsOpen:false,
     modal:false,
     visuallyImpairedMode:false,
@@ -72,12 +64,7 @@ export const appReducer = ( state = initialState,action ) =>{
                 images: !state.images
             }
         }
-        case changeLanguage:{
-            return {
-                ...state,
-                language: action.payload.language
-            }
-        }
+
         case showLoader:{
             return {
                 ...state,
@@ -88,31 +75,6 @@ export const appReducer = ( state = initialState,action ) =>{
             return {
                 ...state,
                 loading: false
-            }
-        }
-        case showExtraLoader:{
-            return {
-                ...state,
-                extraLoading: true
-            }
-        }
-        case hideExtraLoader:{
-            return {
-                ...state,
-                extraLoading: false
-            }
-        }
-        case showAlert:{
-            return {
-                ...state,
-                type:action.payload.type,
-                alert: action.payload.text
-            }
-        }
-        case hideAlert:{
-            return {
-                ...state,
-                alert: null
             }
         }
         case clickBurger:{

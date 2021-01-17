@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Link from "next/link"
-import { Link as ScrollLink} from 'react-scroll'
 import {StyledButton} from "../button/button"
 import {ChangeLanguageSelector} from './changeLanguageSelector'
 import {SearchBarStyled} from "../searchBar/searchBar"
@@ -8,16 +7,15 @@ import Icon from "../icon/icon";
 import {AnimationSearchBarStyled} from "../searchBar/animationSearchBar";
 import {device} from "../deviceSizes/deviceSizes";
 import Burger from "../burgerMenu/burgerMenu";
-import {cutUri, ParcUri} from "../hooks/hooks";
-import {
-    actionClickModal, ClickOnChangeFontSizeNormal,
+import {ParcUri} from "../hooks/hooks";
+import {ClickOnChangeFontSizeNormal,
     ClickOnOffImages, ClickOnOffWhiteTheme,
-    ClickVisuallyImpairedMode,
     ClickVisuallyImpairedModeOff, ClickVisuallyImpairedModeOn, OnchangeInputSearchNews
 } from "../../redux/actions/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {headerLsi} from "../../Lsi/lsi";
 import {useRouter} from "next/router";
+
 export const HeaderWrapper = styled.header`
     justify-content: flex-start;
     display: flex;
@@ -96,22 +94,14 @@ export const RestPagesHeaderWrapper = styled.div`
     flex: 1;
   min-height: 70px;
 `
- const ALink = styled.a`
-  color: ${props=>props.color};
-  font-size: 16px;
-  line-height: 15px;
-      margin-right: 40px;
-    list-style: none;
-    text-decoration: none;
-    display: inline;
-`
- const Links = styled.a`
+
+ const Links = styled.div`
   width: 100%;
    @media screen and ${device.laptop}{
     display:none;
   }
 `
-const LargeLinks = styled.a`
+const LargeLinks = styled.div`
    @media screen and ${device.laptop}{
     display:none!important;
   }
@@ -164,9 +154,7 @@ const BurgerAndSearchIconsMain = styled.div`
      width:20%;
   }
 `
- const Logo =({src,height,width,right,color,radius,padding,left})=>{
-    return <LogoImg height={height} width={width} left={left} right={right} color={color} radius={radius} padding={padding} src={src}/>
-}
+
 const MainContent = styled.div`
   display:flex;
   align-items: center;
@@ -216,10 +204,6 @@ const Subtitle = styled.span`
     display:none;
   }
 `
-const Dropdown = styled.div`
-    float: left;
-  overflow: hidden;
-  `
 
 export const Navmanu = styled.nav`
 a {
@@ -489,7 +473,7 @@ export const NavBarVisuallyImpaired=({locale,display,footer})=>{
                <span>{headerLsi.image[locale]}</span>
                <Handle>
                    <Switch>
-                       <InputCheckbox checked={images} onClick={()=>dispatch(ClickOnOffImages())} type="checkbox" />
+                       <InputCheckbox checked={images} onChange={()=>null} onClick={()=>dispatch(ClickOnOffImages())} type="checkbox" />
                        <SliderRound/>
                    </Switch>
                </Handle>
@@ -510,7 +494,7 @@ export const NavBarVisuallyImpaired=({locale,display,footer})=>{
        </NavVisually>
    )
 }
-export const NavBar =({language,navButtons,register,logIn})=>{
+export const NavBar =({navButtons,register,logIn})=>{
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const color=!visuallyImpairedModeWhiteTheme ? 'white' : 'black'
     return (
@@ -519,18 +503,18 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                 <Navmanu  color={color} role="navigation">
                     <ul>
                         {
-                            navButtons.map(button=>
+                            navButtons.map((button,index)=>
                                 button.children.length > 0 ?
-                                    <li><a href="#" aria-haspopup="true">{button.title} <i className="fa fa-caret-down"></i></a>
+                                    <li key={index}><a href="#" aria-haspopup="true">{button.title} <i className="fa fa-caret-down"/></a>
                                         <ul className="dropdown" aria-label="submenu">
                                             {
-                                                button.children.map(el=>
+                                                button.children.map((el,i)=>
                                                     el.path.charAt(0) === '#' ?
-                                                        <Link href={`/${el.path}`} passHref>
+                                                        <Link key={i} href={`/${el.path}`} passHref>
                                                             <li><a>{el.title}</a></li>
                                                         </Link>
                                                         :
-                                                        <Link href={ParcUri(el.path)}>
+                                                        <Link key={i} href={ParcUri(el.path)}>
                                                             <li>
                                                                 <a>
                                                                     { el.title}
@@ -542,7 +526,7 @@ export const NavBar =({language,navButtons,register,logIn})=>{
                                         </ul>
                                     </li>
                                     :
-                                    <Link href={ParcUri(button.path)}>
+                                    <Link key={index} href={ParcUri(button.path)}>
                                         <li>
                                             <a>
                                                 {button.title}
@@ -582,7 +566,7 @@ const ArrowIcon = styled.i`
      display:${props=>props.displayUserIcon};
   }
 `
-export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,language,navButtons,register,logIn,changeLanguageIcon,glassIcon})=>{
+export const NavBarMain =({globeDarkIcon,searchBarColor,color,navButtons,glassIcon})=>{
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const dispatch = useDispatch()
     const router = useRouter()
@@ -596,19 +580,23 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                 <Navmanu color={!visuallyImpairedModeWhiteTheme ? 'white' : color} role="navigation">
                     <ul>
                         {
-                            navButtons.map(button=>
+                            navButtons.map((button,indexNavBarMain)=>
                                 button.children.length > 0 ?
-                                    <li><a href="#" aria-haspopup="true">{button.title} <i  className="fa fa-caret-down"></i></a>
+                                    <li key={indexNavBarMain}>
+                                        <a href="#" aria-haspopup="true">
+                                        {button.title}
+                                        <i  className="fa fa-caret-down"/>
+                                        </a>
                                         <ul className="dropdown" aria-label="submenu">
                                             {
-                                                button.children.map(el=>
+                                                button.children.map((el,index)=>
                                                     el.path.charAt(0) === '#' ?
-                                                        <Link href={`/${el.path}`} passHref>
+                                                        <Link key={index} href={`/${el.path}`} passHref>
                                                             <li><a>{el.title}</a></li>
                                                         </Link>
 
                                                         :
-                                                        <Link href={ParcUri(el.path)}>
+                                                        <Link key={index} href={ParcUri(el.path)}>
                                                             <li>
                                                                 <a>
                                                                     { el.title}
@@ -620,7 +608,7 @@ export const NavBarMain =({globeDarkIcon,navMain,footer,searchBarColor,color,lan
                                         </ul>
                                     </li>
                                     :
-                                    <Link href={ParcUri(button.path)}>
+                                    <Link key={indexNavBarMain} href={ParcUri(button.path)}>
                                         <li>
                                             <a>
                                                 {button.title}
@@ -734,7 +722,7 @@ const Logos = styled.div`
   }
 `
 
-export const Footer =({inputName,inputFunc,inputPlaceholder,contacts,display,minWidth})=>{
+export const Footer =({inputName,contacts,display,minWidth})=>{
     const dispatch = useDispatch()
     const router = useRouter()
     const locale = router.locale

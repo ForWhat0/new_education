@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import  {useEffect, useState} from "react";
 import {
     addDays,
     addMonths,
@@ -21,11 +21,10 @@ import {firstChartToUpperCase, maxDay, minDay} from "../hooks/hooks"
 import {useRouter} from "next/router"
 import {useSelector} from "react-redux";
 
-export default function DatePicker({ selectDate, getSelectedDay, labelFormat,tileDisabled}) {
+export default function DatePicker({ selectDate, getSelectedDay,tileDisabled}) {
 
     const router = useRouter()
     const locale = router.locale
-    const {visuallyImpairedMode} = useSelector(state=>state.app)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const [selectedDate, setSelectedDate] = useState(new Date());
 

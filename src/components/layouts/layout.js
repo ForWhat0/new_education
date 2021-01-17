@@ -2,11 +2,9 @@ import Head from 'next/head'
 import {StyledLeftComment} from "../leftComment/leftComment"
 import { useDispatch, useSelector} from "react-redux"
 import Menu from "../burgerMenu/menu";
-import React, {useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 
 import {
-    main,
-    ShowWindowDimensions,
     useOnClickOutside,
     useWindowSize,
     WindowDimensionsOffVisuallyImpaired
@@ -17,11 +15,11 @@ import {PageFooter} from "../footer/footer";
 import {StyledRegisterZNO} from "../leftComment/registerOnZNO";
 import {Element} from "react-scroll";
 
-import styled from 'styled-components'
+
 import NewsWrapper from "../news/newsWrapper";
 import StyledLoader from "../loader/loader";
 import {LoaderContainer} from "../../../pages/calendar";
-import {calendarLsi, NewsLsi} from "../../Lsi/lsi";
+import { NewsLsi} from "../../Lsi/lsi";
 import {useRouter} from "next/router";
 import {Container} from "../../../pages/news";
 import {RouterLink} from "../routerLink/routerLink";
@@ -90,11 +88,13 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
                                   <NewsWrapper posts={newsByTitle}/>
                               </Container>
                    :
-                              <div style={{textAlign:'center',margin:'50px 0 50px 0'}}>
+                              <div
+                                   style={{textAlign:'center',margin:'50px 0 50px 0'}}
+                              >
                                   <h1>{NewsLsi.notExist[locale]}</h1>
                                   <h2
-                                      style={{borderBottom:'1px solid',paddingBottom:'10px',display: 'inline',cursor:'pointer'}}
                                       onClick={()=>dispatch(OnchangeInputSearchNews(''))}
+                                      style={{borderBottom:'1px solid',paddingBottom:'10px',display: 'inline',cursor:'pointer'}}
                                   >
                                       {NewsLsi.cleanInput[locale]}
                                   </h2>

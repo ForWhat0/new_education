@@ -1,7 +1,5 @@
-import React  from 'react'
 import { Swiper ,SwiperSlide} from 'swiper/react';
 import {
-    ArrowIcon,
     ArrowIconMobile,
     ArrowsMobile,
     EmployerContainer,
@@ -10,8 +8,9 @@ import {
     PhotoContainer,
     SwiperContainer
 } from "./teamStyledComponents"
+import {createRef} from "react";
 
-const swiperRef = React.createRef()
+const swiperRef = createRef()
 
 export const previous= () => {
     const swiper = swiperRef?.current?.swiper?  swiperRef.current.swiper : null
@@ -33,11 +32,10 @@ export const TeamSwiper = ({employees})=>{
                 centeredSlides
                 initialSlide={2}
                 spaceBetween={20}
-                visibilityFullFit
             >
-            {employees.map(employer => {
+            {employees.map((employer,index) => {
                 return (
-                    <SwiperSlide>
+                    <SwiperSlide key={index+employer.name}>
                         {({isActive}) => (
                             <EmployerContainer >
                                 <PhotoContainer >

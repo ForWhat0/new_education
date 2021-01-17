@@ -1,8 +1,6 @@
 import {useSelector} from "react-redux";
 import {events} from "../../Lsi/lsi"
 import styled from 'styled-components'
-import StyledLoader from "../loader/loader";
-import React from "react";
 import {StyledButton} from '../button/button'
 import {TitleForComponent} from "../titleForComponent/title";
 import {device} from "../deviceSizes/deviceSizes";
@@ -42,7 +40,7 @@ export default function Events({locale,posts,titleEvent}){
             <TitleForComponent text={titleEvent}/>
             <ServicesContainer margin={visuallyImpairedMode ? '100px 0 80px 0' : '50px 0 0 0'} grid={visuallyImpairedMode ? '1fr' : '1fr 1fr 1fr'}>
                 {posts.map((node,i) =>
-                    <Link href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt.substring(0,10)}`}>
+                    <Link key={i} href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt.substring(0,10)}`}>
                         <a>
                             <Event
                                 locale={locale}

@@ -1,8 +1,6 @@
 import CalendarEvent from "./CalendarEvent"
-import Event from "./event";
 import StyledLoader from "../loader/loader";
 import styled from "styled-components";
-import {MainLayout} from "../layouts/mainLayout";
 import Link from "next/link";
 import {device} from "../deviceSizes/deviceSizes";
 
@@ -34,7 +32,7 @@ export default function CalendarEvents({loading,posts}){
                     posts.hours.slice().sort(function(a,b){
                         return new Date(a.hoursEvents.hoursEvents) - new Date(b.hoursEvents.hoursEvents)
                     }).map((el,i)=>
-                        <Link href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
+                        <Link key={i} href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
                             <a>
                                 <CalendarEvent
                                 hoursOne={el}

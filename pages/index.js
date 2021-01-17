@@ -3,7 +3,6 @@ import {HomePageLayout} from "../src/components/layouts/homePageLayout"
 import LAST_EVENTS_AND_LAST_NEWS_QUERY from "../src/queries/get-all-data-for-home-page"
 import LastNews from "../src/components/news/lastNews"
 import ProjectsWrapper from "../src/components/projects/projectWrapper";
-import {  Element   } from 'react-scroll'
 import Services from "../src/components/services/services";
 import Team from "../src/components/team/team";
 import Events from "../src/components/events/events";
@@ -11,10 +10,9 @@ import EventsMobile from "../src/components/events/eventsMobile";
 import {ParcMenu} from "../src/components/hooks/hooks";
 import GET_EVENTS_DATE from "../src/queries/get_all_events_dete";
 import '../styles/Home.module.css'
-import {NewsLsi} from "../src/Lsi/lsi";
 import {useSelector} from "react-redux";
 
-export default function Home({contacts,locale,menu,news,events,data,projects,services,allDates}) {
+export default function Home({contacts,locale,menu,news,events,data,services,allDates}) {
   const {mainPageFields} = data
   const parsedMenu = ParcMenu(menu)
   const {visuallyImpairedMode} = useSelector(state=>state.app)
@@ -39,7 +37,7 @@ export default function Home({contacts,locale,menu,news,events,data,projects,ser
         {events.length > 0 &&<Events locale={locale} titleEvent={mainPageFields?.titleEvent}  posts={events}/>}
         {events.length > 0 &&<EventsMobile locale={locale} titleEvent={mainPageFields?.titleEvent} allDates={allDates}  posts={events[0]}/>}
         {services?.nodes.length > 0 &&
-        <div id="Services" name="#Services" className="element">
+        <div id="Services"  className="element">
           <Services locale={locale} titleServices={mainPageFields?.titleServices}  posts={services.nodes}  pageInfo={services.pageInfo} />
         </div>
         }
@@ -48,7 +46,7 @@ export default function Home({contacts,locale,menu,news,events,data,projects,ser
           !visuallyImpairedMode &&
 
           teamData?.employees?.length > 0 &&
-        <div id="Team" name="#Team" className="element">
+        <div id="Team"  className="element">
           <Team  posts={teamData}/>
         </div>
         }

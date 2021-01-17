@@ -1,19 +1,16 @@
 import styled from 'styled-components'
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import client from "../../src/apollo/client";
-import GET_NEWS from "../../src/queries/getNews";
 import GET_MENU_AND_CONTACTS from "../../src/queries/getMenuAndContacts";
 import {MainLayout} from "../../src/components/layouts/mainLayout";
-import React, {useState} from "react";
-import {ParcMenu, registerOnEventHook, sendAppeal, sendMail} from "../../src/components/hooks/hooks";
+import  {useState} from "react";
+import {ParcMenu, sendAppeal,} from "../../src/components/hooks/hooks";
 import {InputStyled} from "../../src/components/input/input";
-import {appeal, leftComment, leftCommentZno} from "../../src/Lsi/lsi";
-import {InputsFields, Label, Select} from "../../src/components/leftComment/leftCommentStyLedComponents";
+import {appeal, leftComment} from "../../src/Lsi/lsi";
+import { Label} from "../../src/components/leftComment/leftCommentStyLedComponents";
 import {SendButton} from "../../src/components/sendButton/sendButton";
-import {ShowAlert} from "../../src/redux/actions/actions";
 import {useMutation} from "@apollo/client";
 import SEND_COMMENT from "../../src/mutations/sendComment";
-import {useDispatch, useSelector} from "react-redux";
 import {SelectStyled} from "../../src/components/select/select";
 
 const Global = styled.div`
@@ -150,7 +147,6 @@ z-index: 2;
   }
 `
 export default function  Appeal({locale,contacts,menu,appeals}){
-    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const parsedMenu = ParcMenu(menu)
     const [name, setName] = useState('')
     const [lastName, setLastName] = useState('')

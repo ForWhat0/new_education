@@ -2,13 +2,12 @@ import {useDispatch, useSelector} from "react-redux"
 import { StyledModal} from "./modalStyled"
 import {InputStyled} from "../input/input";
 import {LoaderContainer} from "../leftComment/leftCommentStyLedComponents";
-import React, {useEffect, useState} from "react";
-import StyledLoader from "../loader/loader";
+import {useEffect, useState} from "react";
 import {SendButton} from "../sendButton/sendButton";
-import {actionClickModal, ShowAlert} from "../../redux/actions/actions";
-import {leftComment, ModalLsi, registerOnEventModalLsi} from "../../Lsi/lsi";
+import {actionClickModal} from "../../redux/actions/actions";
+import {ModalLsi} from "../../Lsi/lsi";
 import {useRouter} from "next/router";
-import {registerOnEventHook, registerOnServiceHook, sendMail} from "../hooks/hooks";
+import {registerOnEventHook, registerOnServiceHook} from "../hooks/hooks";
 import {useMutation} from "@apollo/client";
 import SEND_COMMENT from "../../mutations/sendComment";
 import {StyledButton} from "../button/button";
@@ -23,7 +22,7 @@ const renderCircles = ()=>{
                 left='45px'
                 top='45px'
                 width='100px'
-                background='rgba(0, 174, 239, 0.08);'
+                background='rgba(0,174, 239, 0.08);'
                 zIndex='-1'
             />
             <CircleBackground

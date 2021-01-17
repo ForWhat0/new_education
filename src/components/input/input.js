@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import {device} from "../deviceSizes/deviceSizes";
 import {useSelector} from "react-redux";
-import {useCallback, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 
 const InputField = styled.div`
 @media screen and ${device.laptop} {

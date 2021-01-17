@@ -1,17 +1,11 @@
 import client from "../../src/apollo/client"
-import {HomePageLayout} from "../../src/components/layouts/homePageLayout"
-import LAST_EVENTS_AND_LAST_NEWS_QUERY from "../../src/queries/get-all-data-for-home-page"
 import {ParcMenu} from "../../src/components/hooks/hooks";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
-import React from "react";
-import {LinkIcon} from "../../src/components/headers/headerStyledElements";
 import styled from "styled-components";
-import {device} from "../../src/components/deviceSizes/deviceSizes";
 import {MainLayout} from "../../src/components/layouts/mainLayout";
 import GET_CONTACTS from "../../src/queries/get_contacts";
 import {contactsLsi} from "../../src/Lsi/lsi";
 import {IconBackgroundSvg} from "../../src/components/icon/icon";
-import { StyledMenu} from "../../src/components/burgerMenu/menuStyled";
 import {useSelector} from "react-redux";
 
 const Global = styled.div`

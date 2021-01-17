@@ -1,10 +1,8 @@
 import client from "../src/apollo/client";
 import GET_CONTACTS from "../src/queries/get_contacts";
 import {MainLayout} from "../src/components/layouts/mainLayout";
-import {TitleForComponent} from "../src/components/titleForComponent/title";
 import {ParcMenu} from "../src/components/hooks/hooks";
 import styled from 'styled-components'
-import Link from 'next/link'
 import {errorsLsi} from "../src/Lsi/lsi";
 import {device} from "../src/components/deviceSizes/deviceSizes";
 

@@ -1,8 +1,6 @@
-import React from 'react'
 import Project from "./project"
 import {TitleForComponent} from "../titleForComponent/title";
 import styled from "styled-components";
-import {LinkIcon} from "../headers/headerStyledElements";
 import Link from "next/link";
 import {useSelector} from "react-redux";
 
@@ -23,7 +21,7 @@ export default function Projects({textForIcon,posts,title}){
               <TitleForComponent  text={title} fontSize='40px' />
           </TitleContainer>
           {posts.map((node,i) =>
-              <Link href={`/projects/[slug]`} as={`/projects/${node.slug}`}>
+              <Link key={node.slug} href={`/projects/[slug]`} as={`/projects/${node.slug}`}>
                   <a>
                       <Project
                           flexDirection={i%2 ? 'row-reverse':'row'}

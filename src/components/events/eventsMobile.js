@@ -1,21 +1,15 @@
-import {useSelector} from "react-redux";
-import {events, NewsLsi} from "../../Lsi/lsi"
+import {events} from "../../Lsi/lsi"
 import styled from 'styled-components'
 import StyledLoader from "../loader/loader";
-import React, {useCallback, useEffect, useState} from "react";
+import  {useCallback, useState} from "react";
 import {StyledButton} from '../button/button'
 import {TitleForComponent} from "../titleForComponent/title";
 import {device} from "../deviceSizes/deviceSizes";
 import Event from "./event";
 import Link from "next/link";
 import DatePicker from "../datePicker/datePicker";
-import {formatDate} from "../hooks/hooks";
 import client from "../../apollo/client";
-import GET_EVENTS_BY_DATE from "../../queries/get_events_by_date";
-import {isSameDay} from "date-fns";
 import GET_EVENT_BY_DATE from "../../queries/get_event_by_date";
-import CalendarEvent from "./CalendarEvent";
-const {review} = NewsLsi
 
 
 const GlobalContainer = styled.div`
@@ -112,7 +106,7 @@ export default function EventsMobile({locale,titleEvent,posts,allDates}){
                          currentDate.eventsFields.hours.slice().sort(function(a,b){
                              return new Date(a.hoursEvents.hoursEvents) - new Date(b.hoursEvents.hoursEvents)
                          }).map((el,i)=>
-                             <Link href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
+                             <Link key={i} href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
                                  <a>
                                      <Event
                                          locale={locale}

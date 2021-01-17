@@ -1,13 +1,7 @@
-import {useSelector} from "react-redux";
-import {NewsLsi} from "../../Lsi/lsi"
 import styled from 'styled-components'
-import StyledLoader from "../loader/loader";
-import React from "react";
-import {StyledButton} from '../button/button'
 import Service from "./service";
 import {TitleForComponent} from "../titleForComponent/title";
 import {device} from "../deviceSizes/deviceSizes";
-const {review} = NewsLsi
 
 const ServicesContainer = styled.div`
  @media screen and (max-width:1250px) {
@@ -36,7 +30,7 @@ export default function Services({posts,titleServices,locale}){
                             index={index}
                             locale={locale}
                             slug={node.slug}
-                            key={node.databaseId}
+                            key={node.slug}
                             title={node.title}
                             coverImage={node.featuredImage?.node.sourceUrl}
                         />

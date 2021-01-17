@@ -3,7 +3,6 @@ import {MainLayout} from "../../src/components/layouts/mainLayout"
 import {ParcMenu, startEndPagination} from "../../src/components/hooks/hooks";
 import GET_PROJECTS from "../../src/queries/getProjects";
 import Projects from "../../src/components/projects/projects";
-import React from "react";
 import styled from 'styled-components'
 import {Pagination} from "../../src/components/pagination/pagination"
 import {ProjectsLsi} from "../../src/Lsi/lsi";

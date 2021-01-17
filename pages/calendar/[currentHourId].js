@@ -1,24 +1,15 @@
 import client from "../../src/apollo/client"
 import {MainLayout} from "../../src/components/layouts/mainLayout"
 import styled from 'styled-components'
-import {formatDate, ParcMenu, startEndPagination, useOnClickOutside} from "../../src/components/hooks/hooks";
+import {formatDate, ParcMenu, useOnClickOutside} from "../../src/components/hooks/hooks";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import GET_HOUR_BY_ID from "../../src/queries/get_hour_by_id";
 import GET_DATABASE_ID_FROM_TIME from "../../src/queries/get_all_databaseId_from_time";
 import Time from "../../src/components/time/time";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
-import {StyledDivWithIconBackGround} from "../../src/components/backgroundWithIcon/backgroundWithIcon";
 import Calendar from "react-calendar";
 import React, {useEffect, useRef, useState} from "react";
 import GET_EVENTS_DATE from "../../src/queries/get_all_events_dete";
-import {
-    addDays,
-    addMonths,
-    format,
-    isSameDay,
-    lastDayOfMonth,
-    startOfMonth
-} from "date-fns";
 import {useRouter} from "next/router";
 import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
 import StyledLoader from "../../src/components/loader/loader";

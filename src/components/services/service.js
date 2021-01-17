@@ -1,6 +1,4 @@
-import styled, {keyframes} from 'styled-components'
-import React from "react"
-import StyledTextComponent from "../textComponent/textComponent"
+import styled from 'styled-components'
 import Link from "next/link"
 import {StyledButton} from "../button/button";
 import {device} from "../deviceSizes/deviceSizes";
@@ -80,21 +78,23 @@ export default function Service({locale,slug,coverImage,title,index}) {
     const borderB = visuallyImpairedMode  || !visuallyImpairedMode && !images ? 'unset' : '1px solid'
     const borderL = visuallyImpairedMode && index === 1 && !images ? '1px solid' : 'unset'
     return (
-        <Link href={`/service/[slug]`} as={`/service/${slug}`}>
-            <Global>
-                <ServiceContainer borderL={borderL} borderB={borderB}>
-                    <ContainerWrapper>
-                        <StyledPhoto
-                            display={ !images ? 'none' : 'block' }
-                            src={coverImage}
-                        />
-                        <StyledText>{title}</StyledText>
-                    </ContainerWrapper>
-                </ServiceContainer>
-                <ButtonContainer>
-                    <StyledButton text={services.learnMore[locale]}/>
-                </ButtonContainer>
-            </Global>
+        <Link  href={`/service/[slug]`} as={`/service/${slug}`}>
+            <a>
+                <Global>
+                    <ServiceContainer borderL={borderL} borderB={borderB}>
+                        <ContainerWrapper>
+                            <StyledPhoto
+                                display={ !images ? 'none' : 'block' }
+                                src={coverImage}
+                            />
+                            <StyledText>{title}</StyledText>
+                        </ContainerWrapper>
+                    </ServiceContainer>
+                    <ButtonContainer>
+                        <StyledButton text={services.learnMore[locale]}/>
+                    </ButtonContainer>
+                </Global>
+            </a>
         </Link>
     )
 }

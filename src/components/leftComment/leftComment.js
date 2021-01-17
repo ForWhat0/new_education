@@ -1,5 +1,5 @@
 import {useMutation} from "@apollo/client"
-import React, {useState} from "react"
+import  {useState} from "react"
 import {useSelector} from "react-redux"
 import {InputStyled} from "../input/input"
 import {SendButton} from "../sendButton/sendButton"

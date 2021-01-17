@@ -3,13 +3,13 @@ import $ from 'jquery';
 
 export default function animationButton(){
         $('.button--bubble').each(function() {
-            var $circlesTopLeft = $(this).parent().find('.circle.top-left');
-            var $circlesBottomRight = $(this).parent().find('.circle.bottom-right');
+            let $circlesTopLeft = $(this).parent().find('.circle.top-left');
+            let $circlesBottomRight = $(this).parent().find('.circle.bottom-right');
 
-            var tl = new TimelineLite();
-            var tl2 = new TimelineLite();
+            let tl = new TimelineLite();
+            let tl2 = new TimelineLite();
 
-            var btTl = new TimelineLite({ paused: true });
+            let btTl = new TimelineLite({ paused: true });
 
             tl.set($circlesTopLeft, { x: 0, y: 0 ,opacity: 1 ,  rotation: -45});
             tl.to($circlesTopLeft, 1.2, { x: -25, y: -25, scaleY: 2, ease: SlowMo.ease.config(0.1, 0.7, false) });
@@ -20,8 +20,8 @@ export default function animationButton(){
             tl.to($circlesTopLeft.eq(1), 1, { scaleX: 0.4, scaleY: 0.4, x: '-=10', y: '-=10', opacity: 0 }, '-=1');
             tl.to($circlesTopLeft.eq(2), 1, { scale: 0, x: '-=15', y: '+=5', opacity: 0 }, '-=1');
 
-            var tlBt1 = new TimelineLite();
-            var tlBt2 = new TimelineLite();
+            let tlBt1 = new TimelineLite();
+            let tlBt2 = new TimelineLite();
 
             tlBt1.set($circlesTopLeft, { x: 0, y: 0, rotation: -45 });
             tlBt1.add(tl);

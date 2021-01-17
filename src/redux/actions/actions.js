@@ -1,21 +1,14 @@
 import {
     hideLoader,
     showLoader,
-    showAlert,
-    hideAlert,
-    changeLanguage,
     getNews,
-    showExtraLoader,
-    hideExtraLoader,
-    getProjectById,
     getNewsForMobile,
     clickBurger,
     clickModal,
-    clickVisuallyImpairedMode,
     clickOnOffImages,
     clickVisuallyImpairedModeOn,
     clickVisuallyImpairedModeOff,
-    clickOnOffVisuallyImpairedModeWhiteTheme, changeFontSizeNormal, searchNewsByTitle, inputNewsByTitle, getNewsByTitle
+    clickOnOffVisuallyImpairedModeWhiteTheme, changeFontSizeNormal, inputNewsByTitle, getNewsByTitle
 } from '../types/types'
 import GET_MOORE_NEWS from "../../queries/get_moore_news";
 import reduxClient from "../../apollo/reduxClient";
@@ -61,14 +54,7 @@ export function actionGetNextNewsForMobile(offset,data,locale) {
         }
     }
 }
-export function ChangeLanguage(language){
-    return dispatch=>{
-        dispatch({
-            type:changeLanguage,
-            payload:{ language }
-        })
-    }
-}
+
 export function actionClickBurger(){
     return dispatch=>{
         dispatch({
@@ -84,26 +70,9 @@ export function actionClickModal(obj){
         })
     }
 }
-export function ShowAlert(text,type){
-    return dispatch=>{
-        dispatch({
-            type:showAlert,
-            payload:{
-                text,
-                type
-            }
-        })
-        setTimeout(()=>{
-            dispatch(HideAlert())
-        },3000)
-    }
-}
 
-function HideAlert(){
-    return{
-        type:hideAlert
-    }
-}
+
+
 
 
 export function ShowLoader(){
@@ -117,17 +86,7 @@ export function HideLoader(){
         type:hideLoader
     }
 }
-export function ShowExtraLoader(){
-    return{
-        type:showExtraLoader
-    }
-}
 
-export function HideExtraLoader(){
-    return{
-        type:hideExtraLoader
-    }
-}
 export function ClickVisuallyImpairedModeOn(){
     return{
         type:clickVisuallyImpairedModeOn

@@ -21,6 +21,6 @@ position:absolute;
    animation: ${rotate} 2s linear infinite;
 `
 const StyledLoader =()=>{
-    return <Loader></Loader>
+    return <Loader/>
 }
 export default StyledLoader

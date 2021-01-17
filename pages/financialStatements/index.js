@@ -3,14 +3,13 @@ import styled from 'styled-components'
 import {GET_PAGE} from "../../src/queries/pages/get-page"
 import { useRouter } from 'next/router'
 import {MainLayout} from "../../src/components/layouts/mainLayout"
-import React from "react";
+import  { useState } from "react";
 import {formatBytes, getDateIn_DD_MM_YYYY_Format, ParcMenu} from "../../src/components/hooks/hooks";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import Icon from "../../src/components/icon/icon";
 import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
 import {finance} from "../../src/Lsi/lsi";
 import {useSelector} from "react-redux";
-const { useState, Fragment } = React;
 
 const Container = styled.div`
 width:80%;
@@ -210,7 +209,7 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                                 open ={shownComments[index] ? '180deg' : '0' }
                                 onClick={() => toggleComment(index)}>
                                 {el.yearTitle}
-                                <i className="fa fa-caret-down"></i></Year>
+                                <i className="fa fa-caret-down"/></Year>
 
                             <DownloadContent
                                 height ={shownComments[index] ? '500px' : '0' }

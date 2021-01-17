@@ -1,19 +1,12 @@
-import { useRouter } from 'next/router'
 import reduxClient from "../../src/apollo/reduxClient"
 import StyledLoader from "../../src/components/loader/loader";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import PostBody from "../../src/components/post-body/post-body";
-import LastNews from "../../src/components/news/lastNews";
 import styled from "styled-components";
 import {MainLayout} from "../../src/components/layouts/mainLayout";
 import GET_ALL_SLUG_FROM_PROJECTS from "../../src/queries/get-all-slug-from-projects";
 import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
-import React from "react";
-import Icon from "../../src/components/icon/icon";
 import {ParcMenu} from "../../src/components/hooks/hooks";
-import GET_DATABASE_ID_FROM_TIME from "../../src/queries/get_all_databaseId_from_time";
-import GET_HOUR_BY_ID from "../../src/queries/get_hour_by_id";
-import GET_EVENTS_DATE from "../../src/queries/get_all_events_dete";
 import {useSelector} from "react-redux";
 
  const Container = styled.div`
@@ -92,7 +85,6 @@ margin-left:${props=>props.marginR};
   }
 `
 export default function ProjectDetails({projectBySlug,menu,contacts}) {
-     const router = useRouter();
     const parsedMenu = ParcMenu(menu)
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
@@ -166,7 +158,7 @@ export async function getStaticProps({params,locale}){
     const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
     const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
 
-    const { data ,loading } = await reduxClient.query( {
+    const { data  } = await reduxClient.query( {
         query: GET_PROJECT_BY_SLUG,
         variables: {
             slug,

@@ -1,14 +1,9 @@
 import {TitleForComponent} from "../titleForComponent/title";
-import Icon from "../icon/icon";
-import React, {useEffect} from "react";
 import styled from "styled-components";
-import Date from "../date/date"
 import {device} from "../deviceSizes/deviceSizes";
 import {StyledButton} from "../button/button";
 import {ProjectsLsi} from "../../Lsi/lsi";
 import {useRouter} from "next/router";
-import animationButton, {animationForArrowButton} from "../button/animationButton";
-import {useSelector} from "react-redux";
 import {ReviewButton} from "../button/reviewButton";
 
 
@@ -45,13 +40,12 @@ const StyledDate = styled.div`
   }
 `
 
-const StyledTextComponent =({id,offBorder,fontSize,paddingBottom,bottom,title,excerpt,textForIcon ,date})=>{
+const StyledTextComponent =({offBorder,fontSize,paddingBottom,bottom,title,excerpt ,date})=>{
     const border = excerpt  ? 'unset' : '2px solid;'
     const position = bottom ? 'absolute' : 'relative'
     const width = bottom ? '100%' : 'auto'
     const router = useRouter()
     const locale = router.locale
-    const {visuallyImpairedMode} = useSelector(state=>state.app)
     return (
         <>
             <TitleForComponent
@@ -78,7 +72,7 @@ const StyledTextComponent =({id,offBorder,fontSize,paddingBottom,bottom,title,ex
                                     {
                                         date &&
                                         <StyledDate>
-                                            <Date date={date}/>
+                                            {date.slice(0, 10).split('-').reverse().join('.')}
                                         </StyledDate>
                                     }
                                 </>

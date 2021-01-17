@@ -1,17 +1,15 @@
-import React from "react"
 import {
     HeaderWrapper,
     WrapperInner,
     Main,
     NavBar,
     Footer,
-    LogoImgMain,
     NavBarVisuallyImpaired
 } from './headerStyledElements'
 import {headerLsi} from '../../Lsi/lsi'
 import { useSelector} from "react-redux"
 import {useRouter} from "next/router";
-const {navButtons,register,logIn,title,subtitle,inputPlaceholder} = headerLsi
+const {register,logIn,subtitle,inputPlaceholder} = headerLsi
 
 export default function LargeHeader({menu,contacts,title}) {
     const router = useRouter()

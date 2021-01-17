@@ -1,5 +1,4 @@
 import styled, {keyframes} from 'styled-components'
-import React from "react"
 import StyledTextComponent from "../textComponent/textComponent"
 import Link from 'next/link';
 import {useSelector} from "react-redux";

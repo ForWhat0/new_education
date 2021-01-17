@@ -3,15 +3,13 @@ import {MainLayout} from "../../src/components/layouts/mainLayout"
 import GET_NEWS from "../../src/queries/getNews"
 import NewsWrapper from "../../src/components/news/newsWrapper"
 import styled from 'styled-components'
-import {formatDate, ParcMenu, startEndPagination, useOnClickOutside} from "../../src/components/hooks/hooks";
+import { ParcMenu, startEndPagination, useOnClickOutside} from "../../src/components/hooks/hooks";
 import {Pagination} from "../../src/components/pagination/pagination";
 import React, {useEffect, useRef, useState} from "react";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import Calendar from "react-calendar";
-import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
 import reduxClient from "../../src/apollo/reduxClient";
-import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
 import GET_NEWS_BY_DATE from "../../src/queries/get_news_by_date";
 import StyledLoader from "../../src/components/loader/loader";
 import {NewsLsi} from "../../src/Lsi/lsi";

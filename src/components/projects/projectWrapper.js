@@ -1,4 +1,3 @@
-import React from 'react'
 import {ProjectsLsi} from "../../Lsi/lsi"
 import styled from 'styled-components'
 import {StyledButton} from '../button/button'

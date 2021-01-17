@@ -1,12 +1,7 @@
 import styled from 'styled-components'
-import React from "react";
-import {TitleForComponent} from '../titleForComponent/title'
-import Icon from '../icon/icon'
-import Link from "next/link";
 import StyledTextComponent from "../textComponent/textComponent";
 import {StyledDivWithIconBackGround} from "./backgroundWithIcon";
 import {device} from "../deviceSizes/deviceSizes";
-import {hexToRgbA} from "../hooks/hooks";
 import {useSelector} from "react-redux";
 
 const Container = styled.div`

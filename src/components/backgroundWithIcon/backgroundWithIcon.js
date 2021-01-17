@@ -13,8 +13,6 @@ const Container = styled.div`
 
 export const StyledDivWithIconBackGround =({display,src,align})=>{
     return (
-        <Container src={src} display={display} align={align}>
-
-        </Container>
+        <Container src={src} display={display} align={align}/>
     )
 }

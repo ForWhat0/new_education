@@ -1,10 +1,9 @@
 import {useMutation} from "@apollo/client"
-import React, {useState} from "react"
-import {useDispatch, useSelector} from "react-redux"
+import  {useState} from "react"
+import { useSelector} from "react-redux"
 import {InputStyled} from "../input/input"
 import {SendButton} from "../sendButton/sendButton"
 import SEND_COMMENT from "../../mutations/sendComment"
-import {ShowAlert} from "../../redux/actions/actions"
 import StyledLoader from '../loader/loader'
 import {
     Container,
@@ -13,7 +12,6 @@ import {
     IconBackgroundZNO,
     InputsFields, LoaderContainer,
     SubTitle,
-    Text,
     Title, Label, TextZno
 } from "./leftCommentStyLedComponents"
 import {PageFooter} from "../footer/footer";
@@ -27,7 +25,6 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const router = useRouter()
     const locale = router.locale
-    const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')

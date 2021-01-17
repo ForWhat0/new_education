@@ -48,16 +48,7 @@ const SuccessIcon = styled.i`
   font-size:18px;
    animation: ${props => props.animation};
 `
-const ErrorIcon = styled.i`
-   display:${props => props.display};
-   position: absolute; 
-   color: red;
-   left:20px;
-  z-index: 1; 
-  top:12px;
-  font-size:20px;
-   animation: ${props => props.animation};
-`
+
 const Button = styled.button`
   background: #1D1D1B;
   border: none;
@@ -82,10 +73,7 @@ const Text = styled.span`
   color:white;
   margin-left:10px;
 `
-const ErrorText = styled.span`
-  display:${props => props.display};
-  color:red;
-`
+
 const Global = styled.div`
 width:100%;
     display: flex;

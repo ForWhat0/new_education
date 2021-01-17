@@ -6,7 +6,6 @@ import {InputStyled} from "../../src/components/input/input"
 import {StyledButton} from "../../src/components/button/button"
 import Link from "next/link"
 import LogInRegisterLayout from "../../src/components/layouts/lognIn_register_layout"
-import {device} from "../../src/components/deviceSizes/deviceSizes";
 
 export const LogInRegisterFooter = styled.div`
 align-items:center;

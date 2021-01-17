@@ -1,13 +1,8 @@
 import styled, {keyframes} from 'styled-components'
-import Link from "next/link"
 import {device} from "../deviceSizes/deviceSizes";
 import {format,isToday} from "date-fns";
 import {uk,enGB, ru} from "date-fns/locale";
-import {MonthYearLabel} from "../datePicker/styledDatePicker";
 import {events} from "../../Lsi/lsi"
-import React from "react";
-import {ArrowContainer} from "../textComponent/textComponent";
-import {ArrowIcon} from "../textComponent/textComponent";
 import {useSelector} from "react-redux";
 import {StyledButton} from "../button/button";
 import {firstChartToUpperCase} from "../hooks/hooks";
