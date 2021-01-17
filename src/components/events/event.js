@@ -11,6 +11,7 @@ import {ArrowIcon} from "../textComponent/textComponent";
 import {useSelector} from "react-redux";
 import {StyledButton} from "../button/button";
 import {firstChartToUpperCase} from "../hooks/hooks";
+import {ReviewButton} from "../button/reviewButton";
 
 const opacity = keyframes`
  0%   { opacity: 0; }
@@ -24,7 +25,7 @@ padding-bottom:${props=>props.visuallyImpairedMode ? '20px' : '50px'};
 display:${props=>props.visuallyImpairedMode ? 'flex' : 'block'};
 align-items:center;
 border-bottom:${props=>!props.visuallyImpairedModeWhiteTheme ? '1px solid white' : props=>props.visuallyImpairedMode ? '1px solid'  : 'unset'};
-background: ${props=>props.visuallyImpairedModeWhiteTheme ? '#FFFFFF' : 'transparent'};
+background:transparent;
 box-shadow: ${props=>props.visuallyImpairedMode ? 'unset' : '0px 0px 20px rgba(29, 29, 27, 0.2)'};
 border-radius: ${props=>props.visuallyImpairedMode ? 'unset' : '28px'};
 color:${props=>!props.visuallyImpairedModeWhiteTheme ? 'white' : 'black'};
@@ -138,11 +139,6 @@ const Review = styled.div`
 display:none;
   }
 `
-const IconText = styled.div`
-   margin-left: 10px;
-   font-weight:bold;
-   line-height:15px;  
-`
 
 
 export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
@@ -210,13 +206,8 @@ export default function Event({offBorder,locale,borderLeftColor,hoursOne}) {
                     visuallyImpairedMode ?
                         <StyledButton  text={events.review[locale]}/>
                         :
-                        <Review >
-                            <ArrowContainer>
-                                <ArrowIcon/>
-                            </ArrowContainer>
-                            <IconText>
-                                {events.review[locale]}
-                            </IconText>
+                        <Review>
+                        <ReviewButton/>
                         </Review>
                 }
             </EventContainer>

@@ -1,7 +1,6 @@
-
+import Head from 'next/head'
 import {StyledLeftComment} from "../leftComment/leftComment"
-import {Provider, useDispatch, useSelector} from "react-redux"
-import {Alert} from "../alert/alert"
+import { useDispatch, useSelector} from "react-redux"
 import Menu from "../burgerMenu/menu";
 import React, {useEffect, useRef} from 'react';
 
@@ -27,6 +26,7 @@ import {useRouter} from "next/router";
 import {Container} from "../../../pages/news";
 import {RouterLink} from "../routerLink/routerLink";
 import { Modal } from "../modal/modal";
+import {BubbleBg} from "../bubbleBg/bubbleBg";
 
 
 
@@ -45,7 +45,6 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
     const node = useRef();
     const {menuBurgerIsOpen} = useSelector(state=>state.app)
     useOnClickOutside(node,  () => menuBurgerIsOpen === true  &&  dispatch(actionClickBurger()));
-    const {alert} = useSelector(state=>state.app)
 
     WindowDimensionsOffVisuallyImpaired()
     useEffect(()=>{
@@ -54,15 +53,21 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
 
     return (
         <>
+            <Head>
+                <link rel="shortcut icon" href={contacts?.iconSite?.sourceUrl} />
+                <meta name="description" content={contacts?.descrSite} />
+                <title>{contacts?.titleSite}</title>
+            </Head>
 
-
-            {alert && <Alert/>}
             <Modal/>
 
                 <div  ref={node}>
                     {header}
                     <Menu menu={menu}/>
                 </div>
+            {
+                !visuallyImpairedMode && <BubbleBg/>
+            }
             {
                 showLinks && <RouterLink/>
             }

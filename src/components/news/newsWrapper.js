@@ -10,6 +10,9 @@ const NewsContainer = styled.div`
 @media screen and ${device.laptop}{
   grid-template-columns: 1fr 1fr;
   }
+  @media screen and ${device.tablet}{
+  grid-template-columns: 1fr;
+  }
 margin-top:40px;
 gap: 30px;
 grid-gap: 30px;

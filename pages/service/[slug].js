@@ -152,6 +152,7 @@ const DownloadContent = styled.div`
     transition: max-height 0.15s ease-out;
     border-bottom: ${props=>props.bBottom};
     padding-bottom: ${props=>props.pBottom};
+    overflow: hidden;
     margin-bottom: ${props=>props.pTop};
     margin-top: ${props=>props.mTop};
   @media screen and ${device.mobileL}{

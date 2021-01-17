@@ -18,6 +18,7 @@ align-items:center;
 justify-content: center;
 overflow: hidden;
 position: relative;
+
 `
 const ContainerWrapper = styled.div`
 z-index:1;

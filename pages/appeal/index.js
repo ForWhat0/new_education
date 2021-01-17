@@ -156,24 +156,35 @@ export default function  Appeal({locale,contacts,menu,appeals}){
     const [lastName, setLastName] = useState('')
     const [phone, setPhone] = useState('')
     const [reason, setReason] = useState('')
-    const dispatch = useDispatch()
-
+    const [nameWarning, setNameWarning] = useState(null)
+    const [lastNameWarning, setLastNameWarning] = useState(null)
+    const [phoneWarning, setPhoneWarning] = useState(null)
 
     const registerOnEvent = async (event) => {
         event.preventDefault()
-        if ( name && lastName  && phone && reason ){
+
+        if ( !name ) {
+            return  setNameWarning(leftComment.errors.emptyFields[locale])
+        }
+        if ( !lastName ) {
+            return  setLastNameWarning(leftComment.errors.emptyFields[locale])
+        }
+        if ( !phone ) {
+            return  setPhoneWarning(leftComment.errors.emptyFields[locale])
+        }
+        if (!reason){
+            return setNameWarning(leftComment.errors.emptyFields[locale])
+        }
+
             if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
                 await sendWordpress()
                 await sendAppeal( name,lastName,reason,phone )
             }
           else {
-                dispatch(ShowAlert(leftComment.errors.wrongPhoneNumber[locale], 'error'))
+              setPhone('')
+               return setPhoneWarning(leftComment.errors.wrongPhoneNumber[locale])
             }
 
-        }
-        else {
-            dispatch(ShowAlert(leftComment.errors.emptyFields[locale], 'error'))
-        }
     }
     const content =
         `
@@ -199,7 +210,9 @@ export default function  Appeal({locale,contacts,menu,appeals}){
                 setLastName('')
                 setPhone('')
                 setReason('')
-                dispatch(ShowAlert(leftComment.sent[locale],'success'))
+                setNameWarning('')
+                setLastNameWarning('')
+                setPhoneWarning('')
             }
         },
         onError: ( error ) => {
@@ -208,7 +221,9 @@ export default function  Appeal({locale,contacts,menu,appeals}){
                 setLastName('')
                 setPhone('')
                 setReason('')
-                dispatch(ShowAlert(leftComment.sent[locale],'success'))
+                setNameWarning('')
+                setLastNameWarning('')
+                setPhoneWarning('')
             }
         }
     } )
@@ -239,9 +254,9 @@ export default function  Appeal({locale,contacts,menu,appeals}){
                         </Text>
                     </GrayBackground>
                     <Form>
-                        <InputStyled value={name}   text={appeal.name[locale]} onChange={e => setName(e.target.value)}  width='100%'/>
-                        <InputStyled  value={lastName}  text={appeal.lastName[locale]} onChange={e => setLastName(e.target.value)}  width='100%'/>
-                        <InputStyled  value={phone}  text={appeal.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='100%'/>
+                        <InputStyled maxlength='20' warning={nameWarning}  value={name}   text={appeal.name[locale]} onChange={e => setName(e.target.value)}  width='100%'/>
+                        <InputStyled maxlength='20' warning={lastNameWarning}   value={lastName}  text={appeal.lastName[locale]} onChange={e => setLastName(e.target.value)}  width='100%'/>
+                        <InputStyled maxlength='20' warning={phoneWarning}   value={phone}  text={appeal.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='100%'/>
                         <Label>
                             {appeal.reason[locale]}
                         </Label>

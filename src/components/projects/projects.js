@@ -4,6 +4,7 @@ import {TitleForComponent} from "../titleForComponent/title";
 import styled from "styled-components";
 import {LinkIcon} from "../headers/headerStyledElements";
 import Link from "next/link";
+import {useSelector} from "react-redux";
 
 const TitleContainer = styled.div`
 margin-left: 10%;
@@ -11,6 +12,11 @@ margin-bottom:60px;
 `
 
 export default function Projects({textForIcon,posts,title}){
+
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
+
+    const color = !visuallyImpairedMode ? 'transparent' : '#FFFFFF'
+
     return(
       <>
           <TitleContainer>
@@ -21,7 +27,7 @@ export default function Projects({textForIcon,posts,title}){
                   <a>
                       <Project
                           flexDirection={i%2 ? 'row-reverse':'row'}
-                          background={i%2 ? "#FFFFFF" : node.projectFields?.bgColor? node.projectFields.bgColor :"#FFFFFF"}
+                          background={i%2 ? color : node.projectFields?.bgColor? node.projectFields.bgColor : color}
                           backgroundIconAlign='right'
                           backgroundIconDisplay={i%2 ? "none":'block'}
                           backgroundIcon={i%2 ? null : node.projectFields?.bgImg?.sourceUrl? node.projectFields.bgImg.sourceUrl : null}

@@ -55,6 +55,9 @@ export const Modal=()=>{
     const [fName, setFName] = useState('')
     const [lName, setLName] = useState('')
     const [phone, setPhone] = useState('')
+    const [fNameWarning, setFNameWarning] = useState(null)
+    const [lNameWarning, setLNameWarning] = useState(null)
+    const [phoneWarning, setPhoneWarning] = useState(null)
     const [done, setDone] = useState(false)
     const {
         titleEvent,
@@ -79,31 +82,36 @@ export const Modal=()=>{
 
     const registerOnEvent = async (event) => {
         event.preventDefault()
-        if ( fName && lName ){
-
+        if ( !fName ) {
+            return  setFNameWarning(emptyFields[locale])
+        }
+        if ( !lName ) {
+            return  setLNameWarning(emptyFields[locale])
+        }
                await sendWordpress()
                 await registerOnEventHook( modal.title, new Date(modal.hoursEvents?.hoursEvents), fName, lName )
-
-        }
-        else {
-            dispatch(ShowAlert(emptyFields[locale], 'error'))
-        }
     }
     const registerOnService = async (event) => {
         event.preventDefault()
-        if ( fName && lName  && phone){
+        if ( !fName ) {
+            return  setFNameWarning(emptyFields[locale])
+        }
+        if ( !lName ) {
+            return  setLNameWarning(emptyFields[locale])
+        }
+        if ( !phone ) {
+            return  setPhoneWarning(emptyFields[locale])
+        }
+
             if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
                 await sendWordpress()
                 await registerOnServiceHook( modal.title, fName, lName,phone )
             }
             else {
-                dispatch(ShowAlert(wrongData[locale], 'error'))
+                setPhone('')
+              return setPhoneWarning(wrongData[locale])
             }
 
-        }
-        else {
-            dispatch(ShowAlert(emptyFields[locale], 'error'))
-        }
     }
     const contentEvent =
         `
@@ -135,13 +143,11 @@ export const Modal=()=>{
         onCompleted: () => {
             if ( !error ) {
                 setDone(true)
-                dispatch(ShowAlert(sent[locale],'success'))
             }
         },
         onError: ( error ) => {
             if ( error ) {
                 setDone(true)
-                dispatch(ShowAlert(sent[locale],'success'))
             }
         }
     } )
@@ -150,6 +156,10 @@ export const Modal=()=>{
            dispatch(actionClickModal(false)),
            setFName(''),
            setLName(''),
+           setPhone(''),
+           setPhoneWarning(''),
+           setFNameWarning(''),
+           setLNameWarning(''),
            setDone(false)
        )
 
@@ -169,11 +179,11 @@ export const Modal=()=>{
                                     <h3>
                                         { modal.type === 'event' ? subTitleEvent[locale] : subTitleService[locale] }
                                     </h3>
-                                    <InputStyled background='transparent'  text={name[locale]} onChange={e => setFName(e.target.value)}   width='100%'/>
-                                    <InputStyled  background='transparent' text={lastName[locale]} onChange={e => setLName(e.target.value)}   width='100%'/>
+                                    <InputStyled value={fName} maxlength='20' warning={fNameWarning} background='transparent'  text={name[locale]} onChange={e => setFName(e.target.value)}   width='100%'/>
+                                    <InputStyled  value={lName} maxlength='20' warning={lNameWarning}  background='transparent' text={lastName[locale]} onChange={e => setLName(e.target.value)}   width='100%'/>
                                     {
                                         modal.type !== 'event' &&
-                                        <InputStyled  background='transparent' text={phoneNumber[locale]} onChange={e => setPhone(e.target.value)}   width='100%'/>
+                                        <InputStyled  value={phone} maxlength='20' warning={phoneWarning} background='transparent' text={phoneNumber[locale]} onChange={e => setPhone(e.target.value)}   width='100%'/>
                                     }
                                     <LoaderContainer>
                                         <SendButton

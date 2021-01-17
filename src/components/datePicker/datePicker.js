@@ -34,10 +34,10 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
     const lastDate = maxDay(selectDate,30)
 
     const selectedStyle = {
-        background:!visuallyImpairedModeWhiteTheme ? '#FFFFFF' : visuallyImpairedMode  ? '#1D1D1B' :  ' rgba(0, 114, 188, 0.2)',
+        background: !visuallyImpairedModeWhiteTheme ? '#1D1D1B' : '#FFFFFF',
         opacity: 1,
         borderRadius:' 20px',
-        color:!visuallyImpairedModeWhiteTheme ? '#000' : visuallyImpairedMode ?  ' rgba(255,255,255,1)' : '#000'
+        border:' 3px solid rgba(255,222,0,0.35)'
     }
 
     const eventDayStyle = {
@@ -47,19 +47,41 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
         borderRadius:' 20px'
     }
 
+    const isToday = {
+        background: ' rgba(0, 114, 188, 0.2)',
+        opacity: 1,
+        borderRadius:' 20px',
+        color:visuallyImpairedModeWhiteTheme ? '#000'  : 'white'
+    }
+
     const getStyles = (day) => {
 
-        if (isSameDay(day, selectedDate)) {
-            return (selectedStyle);
+        if (isSameDay(day, new Date())){
+            if (
+                tileDisabled.some(dayEvent=>
+                    (isSameDay(day, new Date(dayEvent.dateGmt)))
+                )
+            ) {
+                return ({style:isToday,isDisabled:false})
+            }
+            else {
+                return ({style:isToday,isDisabled:true})
+            }
         }
+
+        else if (isSameDay(day, selectedDate)) {
+            return ({style:selectedStyle,isDisabled:false})
+        }
+        
         else if (
             tileDisabled.some(dayEvent=>
                 (isSameDay(day, new Date(dayEvent.dateGmt)))
             )
         ) {
-            return (eventDayStyle);
+            return ({style:eventDayStyle,isDisabled:false})
         }
-        return null
+
+        return ({style:null,isDisabled:true})
     };
 
     const getId = (day) => {
@@ -85,9 +107,9 @@ export default function DatePicker({ selectDate, getSelectedDay, labelFormat,til
                 days.push(
                     <DateDayItem id={`${getId(addDays(month, j))}`}
 
-                         style={style}
+                         style={style.style}
                          key={addDays(month, j)}
-                         onClick={() => style && onDateClick(addDays(month, j))}
+                         onClick={() => !style.isDisabled && onDateClick(addDays(month, j))}
 
                     >
                         <DayLabel>

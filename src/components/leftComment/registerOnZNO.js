@@ -33,6 +33,10 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
     const [email, setEmail] = useState('')
     const [comment, setComment] = useState('')
     const [learn, setLearn] = useState('')
+    const [emptyFieldWarning, setEmptyFieldWarning] = useState(null)
+    const [phoneWarning, setPhoneWarning] = useState(null)
+    const [emailWarning, setEmailWaring] = useState(null)
+    const [commentWarning, setCommentWarning] = useState(null)
     const content =
         `
         <h1>реєстрація на курси підготовки до ЗНО</h1>
@@ -61,7 +65,10 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
                 setPhone('')
                 setEmail('')
                 setLearn('')
-                dispatch(ShowAlert(leftComment.sent[locale],'success'))
+                setEmptyFieldWarning('')
+                setCommentWarning('')
+                setPhoneWarning('')
+                setEmailWaring('')
             }
         },
         onError: ( error ) => {
@@ -71,30 +78,50 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
                 setPhone('')
                 setEmail('')
                 setLearn('')
-                dispatch(ShowAlert(leftComment.sent[locale],'success'))
+                setEmptyFieldWarning('')
+                setCommentWarning('')
+                setPhoneWarning('')
+                setEmailWaring('')
             }
         }
     } )
 
     const handleSendClick = async () => {
-        if (name && phone && email && comment && learn) {
+
+        if ( !name ) {
+            return  setNameWarning(leftComment.errors.emptyFields[locale])
+        }
+        if ( !phone ) {
+            return  setPhoneWarning(leftComment.errors.emptyFields[locale])
+        }
+        if ( !email ) {
+            return  setEmailWaring(leftComment.errors.emptyFields[locale])
+        }
+        if ( !comment ) {
+            return setCommentWarning(leftComment.errors.emptyFields[locale])
+        }
+        if (!learn){
+            return setCommentWarning(leftComment.errors.emptyFields[locale])
+        }
+
             if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
                 if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)) {
                     if (comment.length > 6) {
                         await send()
                         await registerZnoHook(name, phone, email, comment, learn)
                     } else {
-                        dispatch(ShowAlert(leftCommentZno.errors.commentShort[locale], 'error'))
+                        setComment('')
+                        return  setCommentWarning(leftComment.errors.commentShort[locale])
                     }
                 } else {
-                    dispatch(ShowAlert(leftCommentZno.errors.wrongEmail[locale], 'error'))
+                    setEmail('')
+                    return   setEmailWaring(leftComment.errors.wrongEmail[locale])
                 }
             } else {
-                dispatch(ShowAlert(leftCommentZno.errors.wrongPhoneNumber[locale], 'error'))
+                setPhone('')
+                return  setPhoneWarning(leftComment.errors.wrongPhoneNumber[locale])
             }
-        } else {
-            dispatch(ShowAlert(leftCommentZno.errors.emptyFields[locale], 'error'))
-        }
+
     }
 
     const handleChange = selectedOption => {
@@ -121,16 +148,15 @@ export const StyledRegisterZNO =({databaseId,showZNORegister,contacts,menu,displ
                 </TextZno>
                 <InputsFields>
                     <Flex>
-                        <InputStyled  value={name} text= {leftCommentZno.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
-                        <InputStyled  value={phone}  text= {leftCommentZno.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
+                        <InputStyled maxlength='20' warning={emptyFieldWarning}  value={name} text= {leftCommentZno.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
+                        <InputStyled maxlength='20' warning={phoneWarning}   value={phone}  text= {leftCommentZno.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled  value={email}  maxlength='40' text= {leftCommentZno.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled  value={comment}  maxlength='100' text= {leftCommentZno.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled   warning={emailWarning} value={email}  maxlength='40' text= {leftCommentZno.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled warning={commentWarning}   value={comment}  maxlength='100' text= {leftCommentZno.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <Label>
                         {leftCommentZno.choose[locale]}
                     </Label>
                     <SelectStyled
-                        
                         value={learn}
                         onChange={handleChange}
                         options={options}

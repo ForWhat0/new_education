@@ -1,10 +1,9 @@
 import {useMutation} from "@apollo/client"
 import React, {useState} from "react"
-import {useDispatch, useSelector} from "react-redux"
+import {useSelector} from "react-redux"
 import {InputStyled} from "../input/input"
 import {SendButton} from "../sendButton/sendButton"
 import SEND_COMMENT from "../../mutations/sendComment"
-import {ShowAlert} from "../../redux/actions/actions"
 import StyledLoader from '../loader/loader'
 import { useRouter } from 'next/router'
 
@@ -27,11 +26,14 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
     const router = useRouter()
     const locale = router.locale
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
-    const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [comment, setComment] = useState('')
+    const [nameWarning, setNameWarning] = useState(null)
+    const [phoneWarning, setPhoneWarning] = useState(null)
+    const [emailWarning, setEmailWaring] = useState(null)
+    const [commentWarning, setCommentWarning] = useState(null)
     const content =
         `
        <h1>Коментар</h1>
@@ -58,7 +60,10 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
                 setComment('')
                 setPhone('')
                 setEmail('')
-                dispatch(ShowAlert(leftComment.sent[locale],'success'))
+                setNameWarning('')
+                setCommentWarning('')
+                setPhoneWarning('')
+                setEmailWaring('')
             }
         },
         onError: ( error ) => {
@@ -67,30 +72,45 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
                 setComment('')
                 setPhone('')
                 setEmail('')
-                dispatch(ShowAlert(leftComment.sent[locale],'success'))
+                setNameWarning('')
+                setCommentWarning('')
+                setPhoneWarning('')
+                setEmailWaring('')
             }
         }
     } )
 
     const handleSendClick = async() => {
-        if (name && phone && email && comment) {
+
+        if ( !name ) {
+           return  setNameWarning(leftComment.errors.emptyFields[locale])
+        }
+        if ( !phone ) {
+            return  setPhoneWarning(leftComment.errors.emptyFields[locale])
+        }
+        if ( !email ) {
+            return  setEmailWaring(leftComment.errors.emptyFields[locale])
+        }
+        if ( !comment ) {
+            return setCommentWarning(leftComment.errors.emptyFields[locale])
+        }
             if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
                 if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/im)) {
                     if (comment.length > 6) {
                         await send()
                         await sendComment(name,phone,email,comment)
                     } else {
-                        dispatch(ShowAlert(leftComment.errors.commentShort[locale], 'error'))
+                        setComment('')
+                        return  setCommentWarning(leftComment.errors.commentShort[locale])
                     }
                 } else {
-                    dispatch(ShowAlert(leftComment.errors.wrongEmail[locale], 'error'))
+                    setEmail('')
+                    return   setEmailWaring(leftComment.errors.wrongEmail[locale])
                 }
             } else {
-                dispatch(ShowAlert(leftComment.errors.wrongPhoneNumber[locale], 'error'))
+                setPhone('')
+                return  setPhoneWarning(leftComment.errors.wrongPhoneNumber[locale])
             }
-        } else {
-            dispatch(ShowAlert(leftComment.errors.emptyFields[locale], 'error'))
-        }
     }
 
     return (
@@ -107,11 +127,11 @@ export const StyledLeftComment =({databaseId,contacts,menu,display,src,align})=>
                 </Text>
                 <InputsFields>
                     <Flex>
-                        <InputStyled  value={name} text={leftComment.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
-                        <InputStyled  value={phone}  text={leftComment.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
+                        <InputStyled maxlength='20' warning={nameWarning}  value={name} text={leftComment.name[locale]} onChange={e => setName(e.target.value)}   width='47.5%'/>
+                        <InputStyled maxlength='20' warning={phoneWarning}  value={phone}  text={leftComment.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='47.5%'/>
                     </Flex>
-                    <InputStyled  value={email}   maxlength='40' text={leftComment.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
-                    <InputStyled  value={comment}  maxlength='100' text={leftComment.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
+                    <InputStyled warning={emailWarning}  value={email}   maxlength='40' text={leftComment.email[locale]} onChange={e => setEmail(e.target.value)} width='100%'/>
+                    <InputStyled warning={commentWarning}  value={comment}  maxlength='100' text={leftComment.comment[locale]} onChange={e => setComment(e.target.value)} width='100%'/>
                     <LoaderContainer>
                         {loading &&  <StyledLoader/>}
                         <SendButton

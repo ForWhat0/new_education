@@ -306,6 +306,11 @@ export const calendarLsi = {
         UK:"Такої події не існує",
         EN:"There is no such event",
         RU:"Такого события не существует"
+    },
+    todayNotExist:{
+        UK:"Вибачте, на сьогодні не заплановано ніяких подій.",
+        EN:"Sorry, no events are scheduled for today.",
+        RU:"Извините, на сегодня нет мероприятий."
     }
 }
 export const leftCommentZno={

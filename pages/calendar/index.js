@@ -1,29 +1,24 @@
 import client from "../../src/apollo/client"
 import {MainLayout} from "../../src/components/layouts/mainLayout"
 import styled from 'styled-components'
-import {formatDate, ParcMenu, startEndPagination, useOnClickOutside} from "../../src/components/hooks/hooks";
+import {formatDate, ParcMenu, useOnClickOutside} from "../../src/components/hooks/hooks";
 import GET_EVENTS_BY_DATE from "../../src/queries/get_events_by_date";
 import CalendarEvents from "../../src/components/events/CalendarEvents";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import Calendar from 'react-calendar';
-import {useEffect, useRef} from 'react'
-import React, { useState } from 'react';
-import { useRouter } from 'next/router'
-import DayPicker from '../../src/components/datePicker/datePicker';
+import React, {useEffect, useRef, useState} from 'react'
+import {useRouter} from 'next/router'
+import DatePicker from '../../src/components/datePicker/datePicker';
 import 'react-day-picker/lib/style.css';
 import GET_EVENTS_DATE from "../../src/queries/get_all_events_dete";
-import Icon from "../../src/components/icon/icon";
-import {useDispatch, useSelector} from "react-redux";
-import {actionClickBurger} from "../../src/redux/actions/actions";
+import {useSelector} from "react-redux";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
-import DatePicker from "../../src/components/datePicker/datePicker";
 import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
-import {isSameDay} from "date-fns";
 import StyledLoader from "../../src/components/loader/loader";
 import reduxClient from "../../src/apollo/reduxClient";
 import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
 import {calendarLsi} from "../../src/Lsi/lsi";
-import {enGB, ru, uk} from "date-fns/locale";
+
 const Container = styled.div`
 width:80%;
 margin-left:10%;
@@ -104,7 +99,7 @@ export default function EventCalendar({locale,loading,event,menu,allDates,contac
 
     const router = useRouter()
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
-    const [value, onChange] = useState(event.length > 0 ? new Date(event[0].dateGmt ): null);
+    const [value, onChange] = useState(event.length > 0 ? new Date(event[0].dateGmt ): new Date());
     const [calendarOpen, setCalendarOpen] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const [searchLoading, setSearchLoading] = useState(false);
@@ -173,13 +168,12 @@ export default function EventCalendar({locale,loading,event,menu,allDates,contac
                             inputFunc={(e)=>setSearchInput(e.target.value)} />
                     </Input>
                 </Header>
-                {
-                    event.length > 0 &&
+
                     <DatePicker getSelectedDay={selectedDay}
                                 tileDisabled={allDates}
                                 selectDate={new Date(value)}
                     />
-                }
+
                 {
                     searchInput.length > 0  ?
 
@@ -204,7 +198,12 @@ export default function EventCalendar({locale,loading,event,menu,allDates,contac
                                 </LoaderContainer>
 
                             :
-                        event.length > 0 &&<CalendarEvents loading={loading}  posts={event[0].eventsFields}/>
+
+                        event.length > 0 ? <CalendarEvents loading={loading}  posts={event[0].eventsFields}/>
+                        :
+                            <LoaderContainer>
+                                <h2>{calendarLsi.todayNotExist[locale]}</h2>
+                            </LoaderContainer>
                 }
 
 
@@ -222,13 +221,15 @@ export async function getStaticProps({locale,params}){
 
     const currentDate = params?.currentDate
     const today = new Date()
-    const currentDateFormatDate =  currentDate && new Date(`${currentDate}T23:59:00`)
-    const statusFromCurrentDate = currentDate && currentDateFormatDate > today ? "FUTURE" : "PUBLISH"
+    const todayFormat = new Date().setHours(23,59,59,59)
+    const currentDateFormatDate =  currentDate ?
+        new Date(`${currentDate}T23:59:00`) :
+       new Date(todayFormat)
 
-    const status = currentDate ? statusFromCurrentDate : "FUTURE"
-    const year = currentDate ? currentDateFormatDate.getFullYear() : null
-    const month = currentDate ? currentDateFormatDate.getMonth()+1 : null
-    const day = currentDate ? currentDateFormatDate.getDate() : null
+    const status =  currentDateFormatDate > today ? "FUTURE" : "PUBLISH"
+    const year =  currentDateFormatDate.getFullYear()
+    const month = currentDateFormatDate.getMonth()+1
+    const day = currentDateFormatDate.getDate()
 
     const { data ,loading } = await client.query( {
         query: GET_EVENTS_BY_DATE,
