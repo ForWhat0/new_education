@@ -6,7 +6,6 @@ import {useEffect, useRef} from 'react';
 
 import {
     useOnClickOutside,
-    useWindowSize,
     WindowDimensionsOffVisuallyImpaired
 } from '../hooks/hooks';
 import {actionClickBurger, OnchangeInputSearchNews} from "../../redux/actions/actions";

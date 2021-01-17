@@ -5,7 +5,7 @@ import NewsWrapper from "../../src/components/news/newsWrapper"
 import styled from 'styled-components'
 import { ParcMenu, startEndPagination, useOnClickOutside} from "../../src/components/hooks/hooks";
 import {Pagination} from "../../src/components/pagination/pagination";
-import React, {useEffect, useRef, useState} from "react";
+import  {useEffect, useRef, useState} from "react";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import Calendar from "react-calendar";
 import {device} from "../../src/components/deviceSizes/deviceSizes";

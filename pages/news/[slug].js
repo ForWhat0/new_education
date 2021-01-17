@@ -3,7 +3,6 @@ import client from "../../src/apollo/client"
 import GET_ALL_SLUG_FROM_NEWS from "../../src/queries/get-all-slug-from-news";
 import StyledLoader from "../../src/components/loader/loader";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
-import Date from "../../src/components/date/date";
 import PostBody from "../../src/components/post-body/post-body";
 import LastNews from "../../src/components/news/lastNews";
 import styled from "styled-components";
@@ -44,7 +43,7 @@ export default function MicrophoneDetail({locale,newBySlug,news,menu,contacts}) 
                         <Container>
 
                             <TitleForComponent displayYellowDiv={false} marginBottom='40px' text={newBySlug.title} fontSize='40px'/>
-                            <Date date={newBySlug.date}/>
+                            {newBySlug.date.slice(0, 10).split('-').reverse().join('.')}
                             <PostBody content={newBySlug.content} />
                         </Container>
                         <LastNews background='rgba(157, 157, 157, 0.08);'
