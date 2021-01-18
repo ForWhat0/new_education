@@ -16,7 +16,7 @@ export default function LargeHeader({menu,contacts,title}) {
     const locale = router.locale
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     return (
-        <HeaderWrapper background={visuallyImpairedMode ? 'none' : 'url(https://epo.org.ua/wp-content/uploads/2020/11/diia_gradient_03.png)'}>
+        <HeaderWrapper background={visuallyImpairedMode ? 'none' : 'url(/diia_gradient_03.webp)'}>
             <WrapperInner>
                 <NavBarVisuallyImpaired display={visuallyImpairedMode ? 'flex' : 'none'} locale={locale}/>
                 <NavBar

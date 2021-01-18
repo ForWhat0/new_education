@@ -1,4 +1,3 @@
-import React from "react"
 import {Provider} from 'react-redux'
 import {createWrapper} from 'next-redux-wrapper'
 import store from "../src/redux/store/store"
@@ -12,8 +11,6 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import {ApolloProvider} from "@apollo/client";
 import client from "../src/apollo/client";
-import {ApolloProvider as ApolloHooksProvider} from "react-apollo-hooks/lib/ApolloContext";
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 Router.events.on('routeChangeStart', () => NProgress.start())
@@ -21,11 +18,9 @@ Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
 function MyApp({ Component, pageProps }) {
-    const router = useRouter()
   return (
       <>
           <ApolloProvider client={client}>
-              <ApolloHooksProvider client={client}>
                   <Provider store={store}>
                       <Head>
                           <link
@@ -41,7 +36,6 @@ function MyApp({ Component, pageProps }) {
                       </Head>
                       <Component {...pageProps} />
                   </Provider>
-              </ApolloHooksProvider>
           </ApolloProvider>
       </>
   )

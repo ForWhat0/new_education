@@ -9,7 +9,6 @@ import Events from "../src/components/events/events";
 import EventsMobile from "../src/components/events/eventsMobile";
 import {ParcMenu} from "../src/components/hooks/hooks";
 import GET_EVENTS_DATE from "../src/queries/get_all_events_dete";
-import '../styles/Home.module.css'
 import {useSelector} from "react-redux";
 
 export default function Home({contacts,locale,menu,news,events,data,services,allDates}) {

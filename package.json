@@ -35,7 +35,8 @@
     "redux-thunk": "^2.3.0",
     "sass": "^1.30.0",
     "styled-components": "^5.2.1",
-    "swiper": "^6.4.1"
+    "swiper": "^6.4.1",
+    "browserslist": "> 0.25%, not dead"
   },
   "devDependencies": {
     "axios": "^0.21.1",
