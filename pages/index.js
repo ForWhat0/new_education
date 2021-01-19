@@ -97,7 +97,6 @@ export async function getStaticProps({locale} ){
       news: data?.news?.nodes ? data.news : [],
       data: data?.page ? data.page : [],
       allDates
-    },
-    revalidate: 1
+    }
   }
 }
