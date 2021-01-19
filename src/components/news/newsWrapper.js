@@ -18,6 +18,7 @@ grid-template-columns: 1fr 1fr 1fr;
 const StyledContainer = styled.div`
  display:flex;
  cursor:pointer;
+ position:relative;
  flex-direction: column;
  overflow: hidden;
  margin: 0 0 40px;

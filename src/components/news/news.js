@@ -12,7 +12,7 @@ const NewsContainer = styled.div`
     animation: ${opacity} 1s linear;
     height:100%;
     width:100%;
-    position:relative;
+    position:initial;
     padding-bottom: 10px;
 `
 

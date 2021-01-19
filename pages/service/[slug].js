@@ -75,7 +75,11 @@ list-style-type: none;
     cursor:pointer;
     
     i{
-    transform: rotateX(${props=>props.open});
+    -webkit-transform: rotate(${props=>props.open});
+  -moz-transform: rotate(${props=>props.open});
+  -o-transform: rotate(${props=>props.open});
+  -ms-transform: rotate(${props=>props.open});
+  transform: rotate(${props=>props.open});
     color:${props=>props.color};
 margin-left:10px;
 font-size:17px;

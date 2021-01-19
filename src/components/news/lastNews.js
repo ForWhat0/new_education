@@ -69,6 +69,7 @@ const StyledContainer = styled.div`
  margin: 0 0 40px;
  padding: 0 20px 40px;
  min-height: 250px;
+ position:relative;
  background-size: cover;
   transition: transform .2s linear;
     &:hover  {

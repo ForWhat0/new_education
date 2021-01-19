@@ -36,7 +36,11 @@ margin-right:5px;
 i{
 position:absolute;
 right:0;
-    transform: rotateX(${props=>props.open});
+     -webkit-transform: rotate(${props=>props.open});
+  -moz-transform: rotate(${props=>props.open});
+  -o-transform: rotate(${props=>props.open});
+  -ms-transform: rotate(${props=>props.open});
+  transform: rotate(${props=>props.open});
     color:${props=>props.color};
 font-size: 24px;
     }
