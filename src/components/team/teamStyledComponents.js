@@ -24,7 +24,7 @@ export const EmployerContainer = styled.div`
 export const EmployerPhoto = styled.img`
 margin-bottom:20px;
 object-fit: cover;
-filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
+box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
 width:100%;
   top:${props => props.top};
   height: 100%;

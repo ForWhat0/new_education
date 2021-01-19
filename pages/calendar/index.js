@@ -85,7 +85,7 @@ export const LoaderContainer = styled.div`
   display:flex;
   justify-content:center;
   position:relative;
-  margin:50px 0 50px 0;
+  padding:50px 0 50px 0;
 `
 const Header = styled.div`
 display:flex;
