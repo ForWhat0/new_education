@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 
  const ArrowIconContainer = styled.div`
-     background-color: white;
+  background-color: white;
   height: 28px;
   width: 30px;
   border: 1px solid;
@@ -12,9 +12,12 @@ import {useSelector} from "react-redux";
   border-radius: 30px;
   align-items: center;
   justify-content: center;
+   transition: all 0.5s ease-in-out;
+   position:absolute;
+   left:0;
 `
 const IconText = styled.div`
-   margin-left:10px;
+   margin-left:40px;
    margin-right:40px;
    font-weight:400;
    line-height:15px;  
@@ -24,27 +27,28 @@ const IconText = styled.div`
     width: 20px;
   height: 25px;
   position:absolute;
-  transition: all 0.5s linear;
+
 `
  const ArrowContainer = styled.div`
     display: flex;
     position: relative;
     overflow: hidden;
     align-items: center;
-    justify-content: center;
   position: relative;
   vertical-align: middle;
   box-sizing: border-box;
-  transition: all 0.25s;
    height:30px;
+  ${props=>props.animation}{
   
+  }
   &:hover{
- 
   ${ArrowIconContainer}{
-     border:  ${props=>props.animation &&  '1px solid'};
-      background-color: ${props=>props.animation ? 'transparent' : 'white'};
-      width:100%;
-    } 
+      background-color:${props=>props.animation ? 'transparent' : 'white' };;
+      width:${props=>props.animation ? '99%' : '30px' };
+    }
+    ${ArrowIcon}{
+     right:${props=>props.animation ? '10px' : 'unset' };
+    }  
   }
 
 `

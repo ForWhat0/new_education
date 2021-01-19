@@ -8,7 +8,7 @@ import GET_DATABASE_ID_FROM_TIME from "../../src/queries/get_all_databaseId_from
 import Time from "../../src/components/time/time";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
 import Calendar from "react-calendar";
-import React, {useEffect, useRef, useState} from "react";
+import  {useEffect, useRef, useState} from "react";
 import GET_EVENTS_DATE from "../../src/queries/get_all_events_dete";
 import {useRouter} from "next/router";
 import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
@@ -107,7 +107,7 @@ const LoaderContainer = styled.div`
 export default function EventCalendar({locale,contacts,loading,time,menu,allDates}) {
     const calendar = useRef();
     const parsedMenu = ParcMenu(menu)
-    const timeFormatted = new Date(time.hoursEvents?.hoursEvents)
+    const timeFormatted = new Date(time.hoursEvents?.hoursEvents.replace(/-/g, "/"))
     const [value, onChange] = useState(timeFormatted)
     const router = useRouter()
     const [calendarOpen, setCalendarOpen] = useState(false);

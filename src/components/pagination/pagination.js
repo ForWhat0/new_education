@@ -90,7 +90,7 @@ export const Pagination=(
             <ul>
                 {
                     [...Array((endPage + 1) - startPage).keys()].map(i =>
-                        <Link href={`/${href}/page/[currentPage]`} as={`/${href}/page/${startPage+i}`}>
+                        <Link key={i} href={`/${href}/page/[currentPage]`} as={`/${href}/page/${startPage+i}`}>
                             <a>
                                 <NumberOfPage
                                     color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}

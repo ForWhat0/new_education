@@ -18,7 +18,7 @@ export default function MainHeader({whiteTheme,menu,footer}) {
    const color = whiteTheme ? '#FFFFFF' : '#000'
     const globeDarkIcon = !footer
     const searchBarColor =  whiteTheme ? '#FFFFFF' : 'transition'
-    const background = whiteTheme ? 'unset' : 'url(/diia_gradient_03.webp)'
+    const background = whiteTheme ? 'unset' : 'url(/diia_gradient.png)'
     const router = useRouter()
     const locale = router.locale
     const {visuallyImpairedMode} = useSelector(state=>state.app)

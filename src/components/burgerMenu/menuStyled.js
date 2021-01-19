@@ -80,7 +80,7 @@ export const ALink = styled.a`
 `
 
 export const Header = styled.div`
-background: url(https://epo.org.ua/wp-content/uploads/2020/11/diia_gradient_03.png);
+background: url(/diia_gradient.png);
     padding-left: 15px;
     height: 74px;
     z-index: 6;

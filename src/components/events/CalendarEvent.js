@@ -1,5 +1,5 @@
 import styled, {keyframes} from 'styled-components'
-import {format} from "date-fns";
+import format from "date-fns/format";
 import {useSelector} from "react-redux";
 
 const opacity = keyframes`
@@ -16,7 +16,7 @@ cursor:pointer;
 const TimeContainer = styled.div`
 display:flex;
 align-items: center;
-margin-bottom: 20px;
+margin-bottom: 10px;
 padding-right:20px;
 position: relative;
 `
@@ -26,7 +26,7 @@ display:flex;
 margin-left: -10px;
 flex-direction:row;
 align-items:center;
-position: absolute;
+position: relative;
 `
 const Icon = styled.i`
     display: flex;
@@ -49,7 +49,9 @@ border-left: ${props=>props.border};
 
 export default function CalendarEvent({offBorder,hoursOne}) {
 
-    const inputDate = new Date(hoursOne?.hoursEvents?.hoursEvents)
+    const inputDate = hoursOne?.hoursEvents?.hoursEvents ?
+        new Date(hoursOne.hoursEvents.hoursEvents.replace(/-/g, "/"))
+        : new  Date()
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
 
     return (

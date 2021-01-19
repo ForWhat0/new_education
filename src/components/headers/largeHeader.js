@@ -16,7 +16,7 @@ export default function LargeHeader({menu,contacts,title}) {
     const locale = router.locale
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     return (
-        <HeaderWrapper background={visuallyImpairedMode ? 'none' : 'url(/diia_gradient_03.webp)'}>
+        <HeaderWrapper background={visuallyImpairedMode ? 'none' : 'url(/diia_gradient.png)'}>
             <WrapperInner>
                 <NavBarVisuallyImpaired display={visuallyImpairedMode ? 'flex' : 'none'} locale={locale}/>
                 <NavBar
