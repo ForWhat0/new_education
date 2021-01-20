@@ -16,6 +16,24 @@ import {useDispatch, useSelector} from "react-redux";
 import {headerLsi} from "../../Lsi/lsi";
 import {useRouter} from "next/router";
 
+export const LargeHeaderDesktop = styled.div`
+display:block;
+@media screen and ${device.laptop}{
+    display:none;
+}
+`
+export const LargeHeaderMobile = styled.div`
+display:none;
+@media screen and ${device.laptop}{
+    display:block;
+     background: url(/diia_gradient.png);
+     padding-bottom: 20px;
+}
+@media screen and ${device.mobileL}{
+     padding-bottom: unset;
+}
+`
+
 export const HeaderWrapper = styled.header`
     justify-content: flex-start;
     display: flex;
@@ -54,6 +72,10 @@ const NavMain = styled.nav`
     margin: 0px;
     padding-left:40px;
   align-items: center;
+   @media screen and ${device.laptop}{
+    width:92px;
+    padding-left:unset;
+  }
 `
 export const WrapperInner = styled.div`
   width:80%;
@@ -69,6 +91,12 @@ export const RestWrapper = styled.div`
   width:100%;
   }
 `
+export const RestWrapperBackground = styled.div`
+width:100%;
+@media screen and ${device.laptop}{
+     background: ${props=>props.background};
+  }
+`
 export const RestWrapperInner = styled.div`
   margin-top: 20px;
   display:flex;
@@ -76,14 +104,20 @@ export const RestWrapperInner = styled.div`
   align-items:center;
   border-bottom:1px solid ${props=>props.borderBottomColor};
    @media screen and ${device.laptop}{
-     background: ${props=>props.background};
-     padding-left: 15px;
+   
+     margin-left:10%;
   background-size: cover;
-  width:100%;
+  width:80%;
   margin-top: unset;
   background-position: center;
    padding-bottom:unset;
   border-bottom:unset;
+  justify-content: space-between;
+  }
+  @media screen and ${device.tablet}{
+     padding-left: 2%;
+  width:96%;
+   margin-left:unset;
   }
 `
 export const RestPagesHeaderWrapper = styled.div`
@@ -108,6 +142,7 @@ const LargeLinks = styled.div`
 `
 const RegisterLink = styled.a`
   color:${props=>props.color};  
+  cursor:pointer;
   font-size: 16px;
   line-height: 15px;
       margin-right: 40px;
@@ -115,45 +150,38 @@ const RegisterLink = styled.a`
     text-decoration: none;
     display: inline;
     display:flex;
-    align-items:center
+    align-items:center;
+    @media screen and (max-width:1290px){
+     margin-right: unset;
+     margin-bottom:20px;
+  }
+`
+const ChangeLanguageAndSearchContainer = styled.div`
+display:flex;
+@media screen and (max-width:1290px){
+    flex-direction: column;
+    align-items: flex-end;
+  }
 `
  const SignIn = styled.div`
 display:flex;
 margin-left: 60px;
-
+align-items:center;
    @media screen and ${device.laptop}{
      top:unset!important;
      right: ${props=>props.right};
+     margin-left: unset;
   }
 `
 const SignInMain = styled.div`
 display:flex;
 padding-bottom: 10px;
+ align-items:center;
+@media screen and (max-width:1290px){
+     flex-direction:column;
+  }
+`
 
-   @media screen and ${device.laptop}{
-     display:none;
-  }
-`
-const BurgerAndSearchIconsMain = styled.div`
- display:none;
-   @media screen and ${device.laptop}{
-     display:flex;
-         position: absolute;
-    width: 8%;
-    align-items: center;
-    right: 0;
-  }
-   @media screen and ${device.tablet}{
-     width:12%;
-  }
-  @media screen and (max-width:470px){
-     width:15%;
-     top: 16px;
-  }
-   @media screen and ${device.mobileM}{
-     width:20%;
-  }
-`
 
 const MainContent = styled.div`
   display:flex;
@@ -187,7 +215,7 @@ line-height: 15px;
 display:flex;
 align-items:center;
 @media screen and ${device.laptop}{
-    margin-top:30px;
+    margin:unset;
     font-size: 30px;
   }
   @media screen and ${device.tablet}{
@@ -551,10 +579,6 @@ export const NavBar =({navButtons,register,logIn})=>{
                     </a>
                 </Link>
             </SignInMain>
-            <BurgerAndSearchIconsMain>
-                <AnimationSearchBarStyled color='transparent'/>
-                <Burger dark='true'/>
-            </BurgerAndSearchIconsMain>
         </Nav>
     )
 }
@@ -620,31 +644,33 @@ export const NavBarMain =({globeDarkIcon,searchBarColor,color,navButtons,glassIc
                     </ul>
                 </Navmanu>
             </Links>
-            <ChangeLanguageContainer minWidth={visuallyImpairedMode ? 'none' : '220px'} >
+            <ChangeLanguageAndSearchContainer>
+                <ChangeLanguageContainer minWidth={visuallyImpairedMode ? 'none' : '220px'} >
                     <ChangeLanguageSelector globeDarkIcon={globeDarkIcon} />
                     <Glass display={visuallyImpairedMode ? 'none' : 'block'} onClick={()=>dispatch(ClickVisuallyImpairedModeOn())}>
                         <Icon  src={glassIcon}  width={'30px'} height='30px'/>
                     </Glass>
-            </ChangeLanguageContainer>
-            <SignIn>
-                <AnimationSearchBarStyled
-                    color={!visuallyImpairedModeWhiteTheme ? 'white' : searchBarColor}
-                    inputFunc={(e)=>dispatch(OnchangeInputSearchNews(e.target.value,locale))}
-                    value={inputNewsByTitle}
-                    inputPlaceholder={headerLsi.inputPlaceholder[locale]}
-                />
-                <Link href='/logIn'>
-                    <a>
-                        <ArrowIcon
-                            color={!visuallyImpairedModeWhiteTheme ? 'white' : color}
-                            displayUserIcon='none'
-                            className="fa fa-user-circle"
-                            aria-hidden="true"
-                            onClick={()=>console.log('click')}
-                        />
-                    </a>
-                </Link>
-            </SignIn>
+                </ChangeLanguageContainer>
+                <SignIn>
+                    <AnimationSearchBarStyled
+                        color={!visuallyImpairedModeWhiteTheme ? 'white' : searchBarColor}
+                        inputFunc={(e)=>dispatch(OnchangeInputSearchNews(e.target.value,locale))}
+                        value={inputNewsByTitle}
+                        inputPlaceholder={headerLsi.inputPlaceholder[locale]}
+                    />
+                    <Link href='/logIn'>
+                        <a>
+                            <ArrowIcon
+                                style={{fontSize:'29px',marginLeft:'20px'}}
+                                color={!visuallyImpairedModeWhiteTheme ? 'white' : color}
+                                displayUserIcon='none'
+                                className="fa fa-user-circle"
+                                aria-hidden="true"
+                            />
+                        </a>
+                    </Link>
+                </SignIn>
+            </ChangeLanguageAndSearchContainer>
             <Burger color={!visuallyImpairedModeWhiteTheme ? 'white' : color}/>
         </NavMain>
     )
@@ -671,13 +697,11 @@ display:flex;
 margin-bottom:40px;
 align-items: center;
 margin-top:40px;
-@media screen and ${device.mobileL}{
-      display:none;
-  }
 `
 
 const ChangeLanguageContainer = styled.div`
 display:flex;
+justify-content: flex-end;
 min-width:${props=>props.minWidth};
 align-items: center;
 margin-left:30px;

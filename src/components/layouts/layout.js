@@ -51,7 +51,7 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
     return (
         <>
             <Head>
-                <link rel="shortcut icon" href={contacts?.iconSite?.sourceUrl} />
+                <link rel="icon" sizes="10x10" href={contacts?.iconSite?.sourceUrl} />
                 <meta name="description" content={contacts?.descrSite} />
                 <title>{contacts?.titleSite}</title>
             </Head>

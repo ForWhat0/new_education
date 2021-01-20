@@ -25,7 +25,7 @@ export const EmployerPhoto = styled.img`
 margin-bottom:20px;
 object-fit: cover;
 box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
-width:100%;
+width:100%;    
   top:${props => props.top};
   height: 100%;
     position: absolute;
@@ -130,6 +130,7 @@ margin-top:50px;
 `
 export const ArrowsMobile = styled.div`
 display:flex;
+padding-top: 30px;
 height:50px;
 align-items:center;
  display:none;

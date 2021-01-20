@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import {LinkIcon} from "../headers/headerStyledElements"
 import Icon from "../icon/icon";
 import {footer} from "../../Lsi/lsi";
+import {device} from "../deviceSizes/deviceSizes";
 
 export const FooterWrapper = styled.footer`
  background: #1D1D1B;
@@ -24,6 +25,10 @@ const Wrapper = styled.div`
  width:80%;
  margin-left:10%;
  margin-top:30px;
+  @media screen and ${device.tablet} {
+ width:96%;
+ margin-left:2%;
+  }
 `
 export const Logos = ({telegram,facebook,gmail})=>{
     return (
@@ -50,6 +55,10 @@ const TextContainer = styled.div`
     width: 80%;
     @media screen and (max-width:1200px){
       flex-direction:column;
+  }
+    @media screen and ${device.tablet} {
+ width:96%;
+ margin-left:2%;
   }
 `
 const List = styled.ul`
@@ -109,6 +118,10 @@ margin-left:10%;
 display:flex;
 align-items:center;
 flex-direction:column;
+ @media screen and ${device.tablet} {
+ width:96%;
+ margin-left:2%;
+  }
 `
 const Develop = styled.div`
 display:flex;
@@ -119,6 +132,9 @@ opacity: 0.5;
 opacity:1;
 }
 }
+@media screen and ${device.mobileL} {
+ flex-direction:column;
+  }
 `
 const DevelopText = styled.span`
 color:${props=>props.color};

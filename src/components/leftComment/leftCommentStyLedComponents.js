@@ -9,8 +9,8 @@ align-items:center;
 `
 export  const Title = styled.h1`
  @media screen and ${device.tablet} {
- width:100%;
-     margin-left:3%;
+ width:96%;
+     margin-left:2%;
      font-size:20px;
   }
   width:40%;
@@ -29,8 +29,8 @@ export const Container = styled.div`
 export const ContainerWrapper = styled.div`
   @media screen and ${device.tablet} {
     padding-bottom:20px;
-     margin-left:3%;
-      width:94%;
+     margin-left:2%;
+      width:96%;
       flex-direction:column;
   }
     padding-bottom:40px;

@@ -14,7 +14,6 @@ const TextContent = styled.div`
     @media screen and ${device.tablet} {
    flex-direction:column;
       margin-top:unset;
-       padding-top: unset;
   }
 `
 const Review = styled.div`

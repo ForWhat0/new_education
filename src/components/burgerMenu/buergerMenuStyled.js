@@ -5,9 +5,8 @@ export const StyledBurger = styled.button`
    @media screen and ${device.laptop}{
       display: flex;
   }
-  position:${({ open }) => open ? 'fixed' : 'absolute'};
+  position:${({ open }) => open ? 'fixed' : 'relative'};
   display:none;
-   right:12px;
   flex-direction: column;
       padding: 7px!important;
   align-items: center;

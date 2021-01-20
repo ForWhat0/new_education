@@ -16,8 +16,9 @@ const GlobalContainer = styled.div`
  @media screen and ${device.mobileL} {
      width: 96%;
     margin-left: 2%;
+    padding: 40px 0 40px 0;
   }
-      padding: 40px 0 40px 10%;
+ padding: 40px 0 40px 10%;
  width: 80%;
 `
 export default function Services({posts,titleServices,locale}){

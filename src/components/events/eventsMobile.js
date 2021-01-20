@@ -25,10 +25,12 @@ const EventContainer = styled.div`
  margin:40px 0 40px 0;
 `
 const ButtonContainer = styled.div`
+      text-align: center;
   width:100%;
-  display:flex;
-  justify-content:center;
    margin:0 0 20px 0;
+    @media screen and ${device.mobileL} {
+     width: 96%;
+  }
 `
 
 const LoaderContainer = styled.div`
