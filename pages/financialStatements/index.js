@@ -18,8 +18,8 @@ margin-bottom:100px;
 background: 80% / 20% auto no-repeat fixed url(${props=>props.bgImg});   
 @media screen and (max-width:700px) {
  background:unset;
- width:90%;
- margin-left:5%;
+ width:94%;
+ margin-left:2%;
   }
 
 `
@@ -148,7 +148,7 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                     <TitleForComponent marginBottom='40px' borderBottom='unset' text={page.title}  />
                     <Input>
                         <SearchBarStyled
-                            value={setSearchInput}
+                            value={searchInput}
                             maxlength={10}
                             width='100%'
                             inputPlaceholder={finance.search[locale]}
@@ -160,8 +160,8 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                 {searchInput.length > 0 ?
                     page?.financeField?.year?.map(el=>
                         el.filePdf?.filter(file=>
-                            file.dateFile && file.dateFile.includes(searchInput)).map(filteredFiles=>
-                            <DownloadItem href={filteredFiles.downloadPdf.mediaItemUrl} download target='_blank'>
+                            file.dateFile && file.dateFile.includes(searchInput)).map((filteredFiles,index)=>
+                            <DownloadItem key={index+index} href={filteredFiles.downloadPdf.mediaItemUrl} download target='_blank'>
                                 <Icon src='/pdf.svg' width='50px' height='100px' alt='PDF File'/>
                                 <DownloadFile
                                 color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
@@ -175,10 +175,10 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                                         {
                                             `
                                                 ${finance.report[locale]}
-                                                ${file.dateFile? file.dateFile : null}
+                                                ${filteredFiles.dateFile? filteredFiles.dateFile : null}
                                                 (
                                                 ${finance.date[locale]} 
-                                                ${getDateIn_DD_MM_YYYY_Format(file.downloadPdf.dateGmt)}
+                                                ${getDateIn_DD_MM_YYYY_Format(filteredFiles.downloadPdf.dateGmt)}
                                                 )
                                                 `
                                         }
@@ -204,7 +204,7 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
 
                     page?.financeField?.year?.map((el,index)=>
 
-                        <>
+                        <div key={index}>
                             <Year
                                 open ={shownComments[index] ? '180deg' : '0' }
                                 onClick={() => toggleComment(index)}>
@@ -256,7 +256,7 @@ const FinancialStatements = ({ menu,page ,contacts,locale}) => {
                                 )}
                             </DownloadContent>
 
-                        </>
+                        </div>
                     )
                 }
             </Container>

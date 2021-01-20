@@ -19,6 +19,10 @@ import {useSelector} from "react-redux";
 export const Container = styled.div`
 width:80%;
 margin-left:10%;
+ @media screen and ${device.tablet} {
+width:94%;
+margin-left:2%;
+  }
 `
 
 const Title = styled.div`

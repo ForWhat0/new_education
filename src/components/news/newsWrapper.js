@@ -9,6 +9,8 @@ const NewsContainer = styled.div`
   @media screen and ${device.tablet}{
   grid-template-columns: 1fr;
   }
+width:80%;
+margin-left:10%;  
 margin-top:40px;
 gap: 30px;
 grid-gap: 30px;
@@ -35,6 +37,7 @@ const StyledContainer = styled.div`
     flex-direction: column;
     padding-bottom: 40px;
     border-top: 0;
+     margin: 0 0 20px;
   }
 `
 export default function NewsWrapper({posts}){

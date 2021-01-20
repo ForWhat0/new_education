@@ -46,6 +46,8 @@ width:100%;
    display:block;
     border-top:${props => props.border};
    padding-top: ${props=>props.pTop};
+   position: absolute;
+    bottom: 0;
   }
 `
 
