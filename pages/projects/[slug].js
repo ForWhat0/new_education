@@ -23,8 +23,8 @@ width:80%;
   margin-top:40px;
 margin-left:10%;   
 @media screen and (max-width:700px) {
-       width: 90%;
-    margin-left: 4%;
+       width: 92%;
+    margin-left: 2%;
   }
 h1{
 @media screen and (max-width:700px) {

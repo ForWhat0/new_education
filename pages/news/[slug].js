@@ -13,7 +13,11 @@ import {ParcMenu} from "../../src/components/hooks/hooks";
 export const Container = styled.div`
 position:relative;
 width:80%;
-margin-left:10%;      
+margin-left:10%;   
+@media screen and (max-width:700px) {
+    width: 92%;
+    margin-left: 2%;
+  }   
 `
 const LoaderContainer = styled.div`
                 width: 100%;
