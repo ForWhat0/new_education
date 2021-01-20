@@ -2,9 +2,7 @@ import { gql } from "@apollo/client";
 
 const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query(
 $uri: ID!,
-$language: LanguageCodeFilterEnum,
-$location:MenuLocationEnum,
-$contactsUri:ID!
+$language: LanguageCodeFilterEnum
 ) {
     events(first: 3, where: { language: $language,status: FUTURE, orderby: {field: DATE, order: ASC}}) {
     nodes {

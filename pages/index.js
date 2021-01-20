@@ -50,8 +50,6 @@ export default function Home({locale,news,events,data,services,allDates}) {
 export async function getStaticProps({locale} ){
 
   const uri = locale === "EN" ? "/en/glavnaya-english/" : locale === "RU" ? "/ru/glavnaya-2/"  : "/"
-  const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
-  const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
 
   const { data } = await client.query( {
     query: LAST_EVENTS_AND_LAST_NEWS_QUERY,
