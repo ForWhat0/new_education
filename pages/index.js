@@ -11,9 +11,8 @@ import {ParcMenu} from "../src/components/hooks/hooks";
 import GET_EVENTS_DATE from "../src/queries/get_all_events_dete";
 import {useSelector} from "react-redux";
 
-export default function Home({contacts,locale,menu,news,events,data,services,allDates}) {
+export default function Home({locale,news,events,data,services,allDates}) {
   const {mainPageFields} = data
-  const parsedMenu = ParcMenu(menu)
   const {visuallyImpairedMode} = useSelector(state=>state.app)
 
     const teamData =  {
@@ -26,12 +25,7 @@ export default function Home({contacts,locale,menu,news,events,data,services,all
       projects:mainPageFields.projectPopular
     }
   return (
-      <HomePageLayout
-          databaseId={data.databaseId}
-     contacts={contacts}
-     menu={parsedMenu}
-     title = {mainPageFields.titleBanner}
-      >
+      <>
 
         {events.length > 0 &&<Events locale={locale} titleEvent={mainPageFields?.titleEvent}  posts={events}/>}
         {events.length > 0 &&<EventsMobile locale={locale} titleEvent={mainPageFields?.titleEvent} allDates={allDates}  posts={events[0]}/>}
@@ -50,7 +44,7 @@ export default function Home({contacts,locale,menu,news,events,data,services,all
         </div>
         }
         {news.nodes.length > 0 &&<LastNews locale={locale} titleNews={mainPageFields?.titleNews} padding='40px 0 80px 0'  posts={news.nodes}  pageInfo={news.pageInfo} />}
-      </HomePageLayout>
+      </>
   )
 }
 export async function getStaticProps({locale} ){
@@ -90,8 +84,8 @@ export async function getStaticProps({locale} ){
   return {
     props: {
       locale,
-      contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
-      menu:data?.menuItems?.nodes ? data.menuItems.nodes : [],
+
+
       events: data?.events?.nodes ?   data.events.nodes : [],
       services:data?.services?.nodes ? data.services : [],
       news: data?.news?.nodes ? data.news : [],

@@ -52,15 +52,7 @@ $contactsUri:ID!
             }
         }
   }
-   menuItems(where: {location: $location}) {
-    nodes {
-       key: id
-      parentId
-      path
-      title: label
-      url
-    }
-  }
+
   services (where: {language: $language}){
     nodes {
       title
@@ -72,23 +64,7 @@ $contactsUri:ID!
       }
     }
   }
-  contacts: page(id: $contactsUri, idType: URI) {
 
-    contactsFields {
-      telegramLink
-      phoneNumber
-      group
-      gmail
-      facebookLink
-      authorship
-      adress
-       iconSite {
-        sourceUrl
-      }
-      titleSite
-      descrSite
-    }
-  }
    page(id: $uri, idType: URI) {
    databaseId
     mainPageFields {
