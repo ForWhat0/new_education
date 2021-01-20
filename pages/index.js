@@ -55,9 +55,7 @@ export async function getStaticProps({locale} ){
     query: LAST_EVENTS_AND_LAST_NEWS_QUERY,
     variables: {
       uri,
-      language:locale,
-      location,
-      contactsUri
+      language:locale
       }
   } )
 
