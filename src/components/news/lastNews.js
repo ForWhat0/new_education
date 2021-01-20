@@ -27,7 +27,10 @@ margin-left:unset;
 `
 const Header = styled.div`
 display:flex;
-align-items:center;    
+align-items:center; 
+ @media screen and (max-width:650px) {
+ margin-left:2%;
+  }   
 `
 export const IconContainer = styled.button`
 margin-left:40px;  

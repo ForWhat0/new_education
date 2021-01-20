@@ -19,7 +19,7 @@ const SearchBar = styled.span`
 `
 const Icon = styled.i`
    position: absolute; 
-  right: 20px; 
+  right: 15px; 
   z-index: 1; 
   font-size:20px;
 `

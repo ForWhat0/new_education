@@ -73,7 +73,7 @@ const NavMain = styled.nav`
     padding-left:40px;
   align-items: center;
    @media screen and ${device.laptop}{
-    width:92px;
+     width:auto;
     padding-left:unset;
   }
 `

@@ -24,7 +24,7 @@ background: url(${props=>props.bgImg}) no-repeat center center fixed;
 @media screen and (max-width:700px) {
  background:unset;
  width:94%;
- margin-left:3%;
+ margin-left:2%;
   }
 
 `
@@ -44,23 +44,21 @@ align-items: center;
 position:relative;
 margin-bottom: 30px;
 
-div{
+ @media screen and (max-width:950px) {
+  flex-direction:column;
+  }
+`
+const RegisterOnZnoContainer = styled.div`
 position:absolute;
 right:0;
 @media screen and (max-width:950px) {
   position:relative;
   }
-}
-div a button{
+a button{
 @media screen and (max-width:950px) {
   font-size:14px;
   }
 }
-
-
- @media screen and (max-width:950px) {
-  flex-direction:column;
-  }
 `
 
 const Year = styled.span`
@@ -164,11 +162,11 @@ export default function GetEvent({serviceBySlug,menu,contacts,locale}) {
                     <TitleForComponent  borderBottom='unset' text={serviceBySlug.title}  />
                     {
                         zno &&
-                        <div>
+                        <RegisterOnZnoContainer>
                             <ScrollLink to={"#RegisterZNO"}  hashSpy={true}   offset={-100} spy={true} smooth={true}  duration={500} >
                                 <StyledButton  text={services.registerZNO[locale]}/>
                             </ScrollLink>
-                        </div>
+                        </RegisterOnZnoContainer>
                     }
                 </Header>
                 {

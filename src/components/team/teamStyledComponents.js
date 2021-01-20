@@ -87,9 +87,9 @@ flex-direction:column;
   }
   @media screen and ${device.tablet}{
  margin-top: unset;
- margin-left: unset;
+ margin-left: 2%;
  max-width: unset;
- padding:20px;
+width:94%;
   }
 `
 export const SwiperContainer = styled.div`

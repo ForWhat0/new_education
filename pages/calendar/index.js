@@ -23,8 +23,8 @@ const Container = styled.div`
 width:80%;
 margin-left:10%;
  @media screen and ${device.tablet} {
-    width: 90%;
-    margin-left: 5%;
+    width: 94%;
+    margin-left: 2%;
   }
 `
 const Title = styled.div`
@@ -84,6 +84,7 @@ export const LoaderContainer = styled.div`
   width:100%;
   display:flex;
   justify-content:center;
+  text-align: center;
   position:relative;
   padding:50px 0 50px 0;
 `

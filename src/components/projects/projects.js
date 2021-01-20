@@ -3,10 +3,16 @@ import {TitleForComponent} from "../titleForComponent/title";
 import styled from "styled-components";
 import Link from "next/link";
 import {useSelector} from "react-redux";
+import {device} from "../deviceSizes/deviceSizes";
 
 const TitleContainer = styled.div`
 margin-left: 10%;
 margin-bottom:60px;
+ @media screen and ${device.tablet}{
+  margin-left: 2%;
+  width:96%;
+  margin-bottom:20px;
+  }
 `
 
 export default function Projects({textForIcon,posts,title}){

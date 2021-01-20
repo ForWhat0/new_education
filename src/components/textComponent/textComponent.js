@@ -39,12 +39,23 @@ const StyledDate = styled.div`
   }
 `
 
+const Date = styled.div`
+   display:none;
+@media screen and ${device.mobileL}{
+width:100%;
+   display:block;
+    border-top:${props => props.border};
+   padding-top: ${props=>props.pTop};
+  }
+`
+
 const StyledTextComponent =({offBorder,fontSize,paddingBottom,bottom,title,excerpt ,date})=>{
     const border = excerpt  ? 'unset' : '2px solid;'
     const position = bottom ? 'absolute' : 'relative'
     const width = bottom ? '100%' : 'auto'
     const router = useRouter()
     const locale = router.locale
+    const dateFormat = date &&   date.slice(0, 10).split('-').reverse().join('.')
     return (
         <>
             <TitleForComponent
@@ -61,6 +72,12 @@ const StyledTextComponent =({offBorder,fontSize,paddingBottom,bottom,title,excer
 
 
             }
+            {
+                date &&
+                    <Date pTop={offBorder ? '40px' : '20px'}   border={border}>
+                        {dateFormat}
+                    </Date>
+            }
                     <Review pTop={offBorder ? '40px' : '20px'} width={width} position={position} border={border}>
                         {
                             offBorder ?
@@ -71,7 +88,7 @@ const StyledTextComponent =({offBorder,fontSize,paddingBottom,bottom,title,excer
                                     {
                                         date &&
                                         <StyledDate>
-                                            {date.slice(0, 10).split('-').reverse().join('.')}
+                                            {dateFormat}
                                         </StyledDate>
                                     }
                                 </>

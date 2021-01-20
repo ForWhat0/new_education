@@ -7,13 +7,16 @@ const ServicesContainer = styled.div`
  @media screen and (max-width:1250px) {
       grid-template-columns: 1fr;
   }
+   @media screen and ${device.tablet} {
+    margin-top:20px;
+  }
   margin-top:60px;
  display: grid;
     grid-template-columns: 1fr 1fr 1fr;
    grid-gap: 30px;
 `
 const GlobalContainer = styled.div`
- @media screen and ${device.mobileL} {
+ @media screen and ${device.tablet} {
      width: 96%;
     margin-left: 2%;
     padding: 40px 0 40px 0;

@@ -13,6 +13,7 @@ export const StyledBurger = styled.button`
   border: none;
   cursor: pointer;
   padding: 0;
+  margin-left: 20px;
   z-index: 10;
    background: ${ props => props.open ? '#000' : props.dark ? '#000' : props.color};
     border-radius: 29px;

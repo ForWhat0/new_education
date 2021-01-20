@@ -52,7 +52,7 @@ padding-right:15px;
  @media screen and ${device.mobileL} {
 border-left: unset;
 padding-left:10px;
-margin-bottom: 20px;
+padding-bottom: 20px;
   }
 `
 const MonthAndDay = styled.div`
