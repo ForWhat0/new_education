@@ -29,6 +29,7 @@ const PhotoContainer = styled.div`
   }
 }
 `
+
 const StyledPhoto = styled.img`
    border-radius: 30px;
      position: relative;
@@ -40,22 +41,25 @@ const StyledPhoto = styled.img`
 
 export default function News(props) {
     const {images} = useSelector(state=>state.app)
+    console.log(props.slug)
     return (
         <Link href="/news/[slug]/" as={`/news/${props.slug}/`} prefetch={false}>
-    <NewsContainer>
-        <PhotoContainer display={images ? 'block' : 'none'} >
-            <StyledPhoto
-                src={props.coverImage?.sourceUrl}
-            />
-        </PhotoContainer>
-        <StyledTextComponent
-            fontSize='24px!important'
-            paddingBottom='40px'
-            bottom={true}
-            title={props.title}
-            date={props.date}
-            textForIcon={props.textForIcon}/>
-    </NewsContainer>
+            <a>
+                <NewsContainer>
+                    <PhotoContainer display={images ? 'block' : 'none'} >
+                        <StyledPhoto
+                            src={props.coverImage?.sourceUrl}
+                        />
+                    </PhotoContainer>
+                    <StyledTextComponent
+                        fontSize='24px!important'
+                        paddingBottom='40px'
+                        bottom={true}
+                        title={props.title}
+                        date={props.date}
+                        textForIcon={props.textForIcon}/>
+                </NewsContainer>
+            </a>
         </Link>
     )
 }

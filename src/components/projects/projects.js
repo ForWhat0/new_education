@@ -27,7 +27,7 @@ export default function Projects({textForIcon,posts,title}){
               <TitleForComponent  text={title} fontSize='40px' />
           </TitleContainer>
           {posts.map((node,i) =>
-              <Link key={node.slug} href="/projects/[slug]" as={`/projects/${node.slug}`}>
+              <Link key={node.slug} href="/projects/[slug]" as={`/projects/${node.slug}/`}>
                   <a>
                       <Project
                           flexDirection={i%2 ? 'row-reverse':'row'}
