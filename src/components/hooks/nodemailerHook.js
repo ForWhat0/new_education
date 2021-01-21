@@ -4,13 +4,12 @@ export const nodemailerHook = ( {subject, text,res} ) => {
 
     const transporter = nodemailer.createTransport({
         service: "Gmail",
-        host: 'smtp.gmail.com',
-        secure: true,
+        host: "smtp.gmail.com",
         port: 465,
         auth: {
             user: process.env.FROM_USER_LOGIN,
             pass: process.env.FROM_USER_PASSWORD,
-        },
+        }
     });
 
     const mailOption = {
@@ -19,12 +18,14 @@ export const nodemailerHook = ( {subject, text,res} ) => {
         subject: subject,
         text: text
     };
+
     transporter.sendMail(mailOption, (err, data) => {
         if (err) {
+            console.log(err);
             res.send("error" + JSON.stringify(err));
         } else {
-            res.send(`${process.env.FROM_USER_LOGIN},${process.env.FROM_USER_PASSWORD},${process.env.TO_USER_LOGIN}`);
+            console.log("mail send");
+            res.send("success");
         }
     });
-    res.send(`${process.env.FROM_USER_LOGIN},${process.env.FROM_USER_PASSWORD},${process.env.TO_USER_LOGIN}`);
 };
