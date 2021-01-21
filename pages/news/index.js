@@ -24,6 +24,10 @@ width:94%;
 margin-left:2%;
   }
 `
+ const NewsContainer = styled.div`
+width:80%;
+margin-left:10%;
+`
 
 const Title = styled.div`
 width:100%;
@@ -121,7 +125,9 @@ export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
                                 <LoaderContainer>
                                     <h2>{NewsLsi.result[locale]}</h2>
                                 </LoaderContainer>
-                                <NewsWrapper posts={news.nodes}/>
+                                <NewsContainer>
+                                    <NewsWrapper posts={news.nodes}/>
+                                </NewsContainer>
                             </>
 
                             :
@@ -132,7 +138,12 @@ export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
 
                         :
                         <>
-                            {news.nodes.length > 0 && <NewsWrapper posts={news.nodes}/>}
+                            {
+                                news.nodes.length > 0 &&
+                                    <NewsContainer>
+                                        <NewsWrapper posts={news.nodes}/>
+                                    </NewsContainer>
+                            }
                             <Pagination
                                 locale={locale}
                                 currentPageNumber={currentPageNumber}

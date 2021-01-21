@@ -2,6 +2,7 @@ import styled, {keyframes} from 'styled-components'
 import StyledTextComponent from "../textComponent/textComponent"
 import Link from 'next/link';
 import {useSelector} from "react-redux";
+import {device} from "../deviceSizes/deviceSizes";
 
 const opacity = keyframes`
  0%   { opacity: 0; }
@@ -14,6 +15,9 @@ const NewsContainer = styled.div`
     width:100%;
     position:initial;
     padding-bottom: 10px;
+     @media screen and ${device.tablet}{
+ padding-bottom: unset;
+  }
 `
 
 const PhotoContainer = styled.div`

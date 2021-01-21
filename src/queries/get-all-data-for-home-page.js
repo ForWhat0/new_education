@@ -103,8 +103,8 @@ $contactsUri:ID!
      projectPopular {
         ... on Project {
           title
-          slug
           databaseId
+          slug
           excerpt
           featuredImage {
         node {

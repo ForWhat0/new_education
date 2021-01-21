@@ -13,7 +13,8 @@ padding-bottom:${props => props.paddingBottom};
 border-bottom:${props => props.borderBottom};
 position:relative;
   @media screen and ${device.tablet}{
-padding-bottom:${props => props.paddingBottom === '40px' && 'unset'};
+padding-bottom:${props => props.paddingBottom === '40px' && '20px'};
+margin-bottom: ${props => props.paddingBottom === '40px' && 'unset'};;
   }
 div{
     display:${props=>props.display};

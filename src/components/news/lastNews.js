@@ -64,7 +64,6 @@ justify-content:center;
 `
 const StyledContainer = styled.div`
  display:flex;
- justify-content: center;
  cursor:pointer;
  flex: 1 1 250px;
  flex-direction: column;
