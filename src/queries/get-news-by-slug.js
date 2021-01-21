@@ -2,12 +2,12 @@ import { gql } from "@apollo/client"
 import {Menu} from "./get-menus"
 
 const GET_NEWS_BY_SLUG_AND_FIRST_THREE_NEWS = gql`query(
-$slug:ID!,
+$id:ID!,
 $location:MenuLocationEnum,
 $language: LanguageCodeFilterEnum,
 $contactsUri:ID!
 ) {
-   new(id: $slug, idType: SLUG) {
+   new(id: $id, idType: DATABASE_ID) {
     slug
     databaseId
     content

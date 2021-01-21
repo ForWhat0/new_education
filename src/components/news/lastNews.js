@@ -180,6 +180,7 @@ export default function LastNews({locale,padding,posts,pageInfo,background,butto
                             {newsForMobile.map(node =>
                                 <StyledContainer key={node.databaseId}>
                                     <News
+                                        paddingBottom='41px'
                                         databaseId={node.databaseId}
                                         key={node.slug}
                                         title={node.title}

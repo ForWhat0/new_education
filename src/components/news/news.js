@@ -46,7 +46,7 @@ const StyledPhoto = styled.img`
 export default function News(props) {
     const {images} = useSelector(state=>state.app)
     return (
-        <Link href="/news/[slug]/" as={`/news/${props.slug}/`} prefetch={false}>
+        <Link href="/news/[id]/" as={`/news/${props.databaseId}/`}>
             <a>
                 <NewsContainer>
                     <PhotoContainer display={images ? 'block' : 'none'} >
@@ -56,7 +56,7 @@ export default function News(props) {
                     </PhotoContainer>
                     <StyledTextComponent
                         fontSize='24px!important'
-                        paddingBottom='40px'
+                        paddingBottom={props.paddingBottom ? props.paddingBottom : '40px'}
                         bottom={true}
                         title={props.title}
                         date={props.date}

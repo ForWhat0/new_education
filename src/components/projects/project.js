@@ -37,7 +37,7 @@ justify-content: ${props=>props.justifyImage};
 display: ${props=>props.display};
 @media screen and ${device.tablet} {
    margin-right: unset;
-   justify-content:unset;
+   justify-content:center;
     width: 90%;
     margin-left: 5%;
   }

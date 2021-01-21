@@ -25,8 +25,11 @@ margin-left:2%;
   }
 `
  const NewsContainer = styled.div`
+ width:100%;
+ @media screen and ${device.tablet} {
 width:80%;
 margin-left:10%;
+  }
 `
 
 const Title = styled.div`

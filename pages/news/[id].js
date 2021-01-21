@@ -68,13 +68,13 @@ export default function MicrophoneDetail({locale,newBySlug,news,menu,contacts}) 
 }
 
 export const getStaticProps = async ({params,locale}) => {
-    const slug = params.slug
+    const id = params.id
     const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
     const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
     const { data } = await client.query( {
         query: GET_NEWS_BY_SLUG_AND_FIRST_THREE_NEWS,
         variables:{
-            slug,
+            id,
             location,
             contactsUri,
             language:locale
@@ -102,7 +102,7 @@ export const getStaticPaths= async ({locales}) => {
     for (const locale of locales) {
         paths = [
             ...paths,
-            ...data.news.nodes.map((el) => ({ params: { slug: el.slug }, locale })),
+            ...data.news.nodes.map((el) => ({ params: { id: el.databaseId.toString() }, locale })),
         ]
     }
 
