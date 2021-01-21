@@ -9,7 +9,7 @@ import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
 import {ParcMenu} from "../../src/components/hooks/hooks";
 import {useSelector} from "react-redux";
 import { GetStaticPaths, GetStaticProps } from 'next';
-import {useRouter} from "../../.next/server/pages";
+import { useRouter } from 'next/router';
 
  const Container = styled.div`
  width:100%;
@@ -180,8 +180,7 @@ export const getStaticProps = async (
             projectBySlug:data?.project ? data.project : [],
             menu: data?.menuItems?.nodes || [],
             contacts:data?.contacts?.contactsFields ? data.contacts.contactsFields : [],
-        },
-        revalidate: 1
+        }
     }
 };
 

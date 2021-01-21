@@ -41,7 +41,7 @@ const StyledPhoto = styled.img`
 export default function News(props) {
     const {images} = useSelector(state=>state.app)
     return (
-        <Link href={`/news/[slug]?newsSlug=${props.slug}`} as={`/news/${props.slug}`} prefetch={false}>
+        <Link href="/news/[slug]" as={`/news/${props.slug}`} prefetch={false}>
     <NewsContainer>
         <PhotoContainer display={images ? 'block' : 'none'} >
             <StyledPhoto
