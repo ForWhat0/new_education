@@ -7,4 +7,5 @@ const reduxClient = new ApolloClient({
     cache: new InMemoryCache()
 })
 
+
 export default reduxClient;
