@@ -2,7 +2,7 @@ import { gql } from "@apollo/client"
 import {Menu} from "./get-menus"
 
 const GET_PROJECT_BY_SLUG = gql`query(
-$slug:ID!,
+$id:ID!,
 $location:MenuLocationEnum,
 $contactsUri:ID!
 ) {
@@ -32,7 +32,7 @@ $contactsUri:ID!
       url
     }
   }
-   project(id: $slug, idType: SLUG) {
+   project(id: $id, idType: DATABASE_ID) {
     slug
     databaseId
     content

@@ -104,6 +104,7 @@ $contactsUri:ID!
         ... on Project {
           title
           slug
+          databaseId
           excerpt
           featuredImage {
         node {
