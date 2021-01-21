@@ -4,15 +4,18 @@ export default ( req , res ) => {
     const {  fName, lName, reason ,phone} = req.body;
 
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: "Gmail",
+        host: 'smtp.gmail.com',
+        secure: true,
+        port: 465,
         auth: {
-            user: 'osvitaSiteKyiv@gmail.com',
-            pass: 'osvitaSiteKyiv12345',
+            user: 'osvitniisitekyiv@gmail.com',
+            pass: 'osvitniisitekyiv12345',
         },
     });
 
     const mailOption = {
-        from: `osvitaSiteKyiv@gmail.com`,
+        from: `osvitniisitekyiv@gmail.com`,
         to: `rzozyla@gmail.com`,
         subject: `Звернення`,
         text: `

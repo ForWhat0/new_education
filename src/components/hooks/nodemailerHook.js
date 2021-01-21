@@ -3,7 +3,10 @@ const nodemailer = require("nodemailer")
 export const nodemailerHook = ( {subject, text,res} ) => {
 
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: "Gmail",
+        host: 'smtp.gmail.com',
+        secure: true,
+        port: 465,
         auth: {
             user: process.env.FROM_USER_LOGIN,
             pass: process.env.FROM_USER_PASSWORD,
