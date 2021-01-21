@@ -47,7 +47,7 @@ const PaperPlane = styled.div`
     height: 60px;
     right: 2%;
     background-size: contain;
-    top: 80px;
+    top: 60px;
   }
 `
 const ThreadTop = styled.div`

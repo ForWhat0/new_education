@@ -5,14 +5,14 @@ export const nodemailerHook = ( {subject, text,res} ) => {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: process.env.FROM_USER_LOGIN,
-            pass: process.env.FROM_USER_PASSWORD,
+            user: "osvitaSiteKyiv@gmail.com",
+            pass: "osvitaSiteKyiv12345",
         },
     });
 
     const mailOption = {
-        from: process.env.FROM_USER_LOGIN,
-        to: process.env.TO_USER_LOGIN,
+        from: "osvitaSiteKyiv@gmail.com",
+        to: "rzozyla@gmail.com",
         subject: subject,
         text: text
     };
