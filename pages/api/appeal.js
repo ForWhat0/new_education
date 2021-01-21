@@ -1,33 +1,14 @@
-const nodemailer = require("nodemailer");
-export default (req, res) => {
+import {nodemailerHook} from "../../src/components/hooks/nodemailerHook"
 
-    const {  fName, lName, reason ,phone} = req.body;
+export default ( req , res ) => {
 
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: 'rzozyla@gmail.com',
-            pass: 'aezakmiaezakmi3004',
-        },
-    });
+    const {  fName, lName, reason ,phone} = req.body
 
-    const mailOption = {
-        from: `rzozyla@gmail.com`,
-        to: `mishutkat@gmail.com`,
-        subject: `Звернення`,
-        text: `
+      const  text = `
     контактні дані: ${fName} ${lName} ;
     телефон: ${phone} ;
-    причина звернення: ${reason}
-    `,
-    };
+    причина звернення: ${reason.label} ;
+    `
+    nodemailerHook({subject:'Звернення',text,res})
 
-    transporter.sendMail(mailOption, (err, data) => {
-        if (err) {
-            res.send("error" + JSON.stringify(err));
-        } else {
-            res.send("success");
-        }
-    });
-    res.send("success");
-};
+}

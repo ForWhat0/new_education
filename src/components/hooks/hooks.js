@@ -1,8 +1,8 @@
-import {useEffect, useLayoutEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
-import {ClickVisuallyImpairedModeOff} from "../../redux/actions/actions";
-import axios from "axios";
-import {format} from "date-fns";
+import {useEffect, useLayoutEffect, useState} from 'react'
+import {useDispatch} from "react-redux"
+import {ClickVisuallyImpairedModeOff} from "../../redux/actions/actions"
+import axios from "axios"
+import {format} from "date-fns"
 
 export const useOnClickOutside = (ref, handler) => {
 

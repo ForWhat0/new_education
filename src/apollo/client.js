@@ -7,7 +7,7 @@ let tokenCache = "";
 let tokenExpiryCache = "";
 
 const fetchHeaderWithToken = async (headers = {}) => {
-	return await fetch('https://testkp.flexreality.pro/graphql', {
+	return await fetch(process.env.WP_NEXT_PUBLIC_URL, {
 		method: "POST",
 		cache: "no-cache",
 		// credentials: "include",
@@ -17,7 +17,7 @@ const fetchHeaderWithToken = async (headers = {}) => {
 		},
 		body: JSON.stringify({
 			operationName: "LoginUser",
-			query: `mutation LoginUser { login(input: {clientMutationId: "dXNlcjox", username: "admin", password: "2wsx@WSX"}) { authToken user { jwtAuthExpiration } } } `,
+			query: `mutation LoginUser { login(input: {clientMutationId: "${process.env.WP_CLIENT_MUTATION_ID}", username: "${process.env.WP_USER_LOGIN}", password: "${process.env.WP_USER_PASSWORD}"}) { authToken user { jwtAuthExpiration } } } `,
 		}),
 	})
 		.then((res) => res.json())
@@ -83,7 +83,7 @@ const customFetch = async (
 			) {
 				console.log("Trying to refresh token ", json);
 				// time to refresh token. Error is internal server error
-				return fetch('https://testkp.flexreality.pro/graphql', {
+				return fetch(process.env.WP_NEXT_PUBLIC_URL, {
 					method: "POST",
 					cache: "no-cache",
 					headers: {
@@ -139,7 +139,7 @@ const customFetch = async (
 
 export const httpLink = new HttpLink({
 	fetch: customFetch, // Switches between unfetch & node-fetch for client & server.
-	uri:'https://testkp.flexreality.pro/graphql',
+	uri:process.env.WP_NEXT_PUBLIC_URL,
 });
 
 const tokenGeneration = setContext(async () => {

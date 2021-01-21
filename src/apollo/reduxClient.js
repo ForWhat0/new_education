@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 
 const reduxClient = new ApolloClient({
-    uri:'https://testkp.flexreality.pro/graphql',
+    uri:process.env.WP_NEXT_PUBLIC_URL,
     cache: new InMemoryCache()
 })
 
