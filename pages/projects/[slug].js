@@ -8,6 +8,7 @@ import GET_ALL_SLUG_FROM_PROJECTS from "../../src/queries/get-all-slug-from-proj
 import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
 import {ParcMenu} from "../../src/components/hooks/hooks";
 import {useSelector} from "react-redux";
+import {useRouter} from "../../.next/server/pages";
 
  const Container = styled.div`
  width:100%;
@@ -88,6 +89,13 @@ export default function ProjectDetails({projectBySlug,menu,contacts}) {
     const parsedMenu = ParcMenu(menu)
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
+    const router = useRouter()
+
+    // If the page is not yet generated, this will be displayed
+    // initially until getStaticProps() finishes running
+    if (router.isFallback) {
+        return <div>Loading...</div>
+    }
     return (
         <MainLayout databaseId={projectBySlug.databaseId} contacts={contacts} menu={parsedMenu}>
             {
@@ -190,7 +198,7 @@ export const getStaticPaths = async ({locales}) => {
     }
 
     return {
-        fallback: false,
+        fallback: true,
         paths
     };
 };
