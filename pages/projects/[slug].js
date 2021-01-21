@@ -8,6 +8,8 @@ import GET_ALL_SLUG_FROM_PROJECTS from "../../src/queries/get-all-slug-from-proj
 import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
 import {ParcMenu} from "../../src/components/hooks/hooks";
 import {useSelector} from "react-redux";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import {useRouter} from "../../.next/server/pages";
 
  const Container = styled.div`
  width:100%;
@@ -88,6 +90,11 @@ export default function ProjectDetails({projectBySlug,menu,contacts}) {
     const parsedMenu = ParcMenu(menu)
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <div>Loading......I'm sorry for the wait!!</div>;
+    }
     return (
         <MainLayout databaseId={projectBySlug.databaseId} contacts={contacts} menu={parsedMenu}>
             {
@@ -152,8 +159,10 @@ export default function ProjectDetails({projectBySlug,menu,contacts}) {
 
 
 
-export async function getStaticProps({params,locale}){
 
+export const getStaticProps = async (
+    {params,locale}
+) => {
     const slug = params?.slug
     const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
     const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
@@ -174,7 +183,8 @@ export async function getStaticProps({params,locale}){
         },
         revalidate: 1
     }
-}
+};
+
 export const getStaticPaths = async ({locales}) => {
     let paths = []
 
@@ -185,7 +195,7 @@ export const getStaticPaths = async ({locales}) => {
     for (const locale of locales) {
         paths = [
             ...paths,
-            ...data.projects?.nodes.map(el => ({ params: { slug: [el.slug] }, locale })),
+            ...data.projects?.nodes.map(el => ({ params: { slug: el.slug }, locale })),
         ]
     }
 
