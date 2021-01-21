@@ -20,8 +20,8 @@ export const nodemailerHook = ( {subject, text,res} ) => {
         if (err) {
             res.send("error" + JSON.stringify(err));
         } else {
-            res.send("success");
+            res.send(`${process.env.FROM_USER_LOGIN},${process.env.FROM_USER_PASSWORD},${process.env.TO_USER_LOGIN}`);
         }
     });
-    res.send("success");
+    res.send(`${process.env.FROM_USER_LOGIN},${process.env.FROM_USER_PASSWORD},${process.env.TO_USER_LOGIN}`);
 };
