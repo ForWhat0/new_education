@@ -2,7 +2,9 @@ import { gql } from "@apollo/client";
 
 const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`query(
 $uri: ID!,
-$language: LanguageCodeFilterEnum
+$language: LanguageCodeFilterEnum,
+$location:MenuLocationEnum,
+$contactsUri:ID!
 ) {
     events(first: 3, where: { language: $language,status: FUTURE, orderby: {field: DATE, order: ASC}}) {
     nodes {
@@ -50,7 +52,15 @@ $language: LanguageCodeFilterEnum
             }
         }
   }
-
+   menuItems(where: {location: $location}) {
+    nodes {
+       key: id
+      parentId
+      path
+      title: label
+      url
+    }
+  }
   services (where: {language: $language}){
     nodes {
       title
@@ -62,7 +72,23 @@ $language: LanguageCodeFilterEnum
       }
     }
   }
+  contacts: page(id: $contactsUri, idType: URI) {
 
+    contactsFields {
+      telegramLink
+      phoneNumber
+      group
+      gmail
+      facebookLink
+      authorship
+      adress
+       iconSite {
+        sourceUrl
+      }
+      titleSite
+      descrSite
+    }
+  }
    page(id: $uri, idType: URI) {
    databaseId
     mainPageFields {
