@@ -4,7 +4,6 @@ module.exports = {
         locales: ['UK', 'EN','RU'],
         defaultLocale: 'UK'
     },
-    trailingSlash: true,
     webpackDevMiddleware: (config) => {
         config.watchOptions = {
             poll: 1000,
