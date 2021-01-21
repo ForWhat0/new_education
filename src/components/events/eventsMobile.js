@@ -65,7 +65,8 @@ export default function EventsMobile({locale,titleEvent,posts,allDates}){
                         status,
                         year,
                         month,
-                        day
+                        day,
+                        language:locale
                     }
                 } )
 

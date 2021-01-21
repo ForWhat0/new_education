@@ -6,9 +6,10 @@ const GET_EVENT_BY_DATE = gql`
     $status: PostStatusEnum,
     $year:Int,
     $month:Int,
-    $day:Int
+    $day:Int,
+    $language: LanguageCodeFilterEnum
   ) {
-    events(where: {orderby: {field: DATE, order: ASC},status: $status, dateQuery: {year: $year, month: $month, day: $day}}, first: 1) {
+    events(where: {language: $language,orderby: {field: DATE, order: ASC},status: $status, dateQuery: {year: $year, month: $month, day: $day}}, first: 1) {
     nodes {
       databaseId
       dateGmt

@@ -1,6 +1,5 @@
 import {
     getNews,
-    getNewsById,
     getNewsByTitle,
     getNewsForMobile,
     inputNewsByTitle,
@@ -9,7 +8,6 @@ import {
 
 const initialState={
     newsReducer:null,
-    newsByID:null,
     offset:3,
     offsetMobile:3,
     newsForMobileSliderReducer:null,
@@ -31,15 +29,11 @@ export const newsReducer = ( state = initialState , action )=>{
             return {
                 ...state,
                 newsForMobileSliderReducer:
-                    state.newsForMobileSliderReducer ? state.newsForMobileSliderReducer.concat(action.payload.news.data.news.nodes) : action.payload.data.concat(action.payload.news.data.news.nodes),
+                    state.newsForMobileSliderReducer
+                        ? state.newsForMobileSliderReducer.concat(action.payload.news.data.news.nodes)
+                        : action.payload.data.concat(action.payload.news.data.news.nodes),
                 newsForMobileSliderReducerPageInfo:action.payload.news.data.news.pageInfo.offsetPagination.hasMore,
-                offset: action.payload.offset
-            }
-        }
-        case getNewsById:{
-            return {
-                ...state,
-                newsByID:action.payload
+                offsetMobile: action.payload.offset
             }
         }
         case inputNewsByTitle:{

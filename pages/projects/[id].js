@@ -8,8 +8,6 @@ import GET_ALL_SLUG_FROM_PROJECTS from "../../src/queries/get-all-slug-from-proj
 import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
 import {ParcMenu} from "../../src/components/hooks/hooks";
 import {useSelector} from "react-redux";
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
 
  const Container = styled.div`
  width:100%;
@@ -90,11 +88,7 @@ export default function ProjectDetails({projectBySlug,menu,contacts}) {
     const parsedMenu = ParcMenu(menu)
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
-    const router = useRouter();
 
-    if (router.isFallback) {
-        return <div>Loading......I'm sorry for the wait!!</div>;
-    }
     return (
         <MainLayout databaseId={projectBySlug.databaseId} contacts={contacts} menu={parsedMenu}>
             {
@@ -133,8 +127,9 @@ export default function ProjectDetails({projectBySlug,menu,contacts}) {
                                             <a target='_blank' href={projectBySlug.projectFields.siteLink}>
                                                 <div style={{width:'40px',height:'40px',background:'url(/linkIconDark.svg) no-repeat'}}/>
                                                 <div>
-                                                    <span style={{color:'rgb(0,114,188)'}}
-                                                    >{projectBySlug.projectFields.siteLink}</span>
+                                                    <span style={{color:'rgb(0,114,188)'}}>
+                                                        {projectBySlug.projectFields.siteLink.substring(0, 20)}...
+                                                    </span>
                                                 </div>
 
                                             </a>

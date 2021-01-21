@@ -26,6 +26,8 @@ const GlobalContainer = styled.div`
 
  @media screen and ${device.mobileL} {
  display:none;
+  }
+  @media screen and ${device.tablet} {
      width: 96%;
     margin-left: 2%;
   }

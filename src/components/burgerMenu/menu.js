@@ -79,9 +79,16 @@ const Menu = ({menu}) => {
                     }
                     <ChangeLanguageSelector navMain={true} globeDarkIcon='/glassIconDark.svg' />
                     <SignIn style={{margin: '40px 0 0 0'}}>
-                        <StyledButton style={{margin: '0 0 20px 0'}} func={null} text={logIn[locale]} />
+                        <Link href='/logIn'>
+                            <a onClick={()=>handlerCloseMenu()}>
+                                <StyledButton
+                                    style={{margin: '0 0 20px 0'}}
+                                    text={logIn[locale]}
+                                />
+                            </a>
+                        </Link>
                         <Link href='/register'>
-                            <ALink style={{margin: '0 0 40px 0'}}>
+                            <ALink onClick={()=>handlerCloseMenu()} style={{margin: '0 0 40px 0'}}>
                                 {register[locale]}
                             </ALink>
                         </Link>

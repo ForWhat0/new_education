@@ -50,7 +50,6 @@ const customFetch = async (
 	uri,
 	options
 )=> {
-	console.log("customFetch() ", tokenCache, tokenExpiryCache);
 	const ex =
 		typeof localStorage !== "undefined"
 			? localStorage.getItem("ex")

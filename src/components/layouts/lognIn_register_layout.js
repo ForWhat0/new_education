@@ -4,7 +4,6 @@ import Icon from "../icon/icon"
 import {LogInLsi} from "../../Lsi/lsi"
 import {device} from "../deviceSizes/deviceSizes"
 import Link from "next/link"
-import { useRouter } from 'next/router'
 
 const Global = styled.div`
 display:flex;
@@ -95,6 +94,7 @@ span{
     align-items: center;
     position: absolute;
     right: 5%;
+    top: 2%;
     z-index: 3;
     cursor:pointer;
 }
@@ -111,7 +111,6 @@ opacity:1;
   } 
 `
 const StyledHeader = ()=>{
-    const router = useRouter()
     return(
         <Header>
             <Link  href='/'>

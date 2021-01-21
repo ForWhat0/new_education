@@ -74,6 +74,7 @@ export const CircleBackground = styled.div`
     position: absolute;
 `
 export const ALink = styled.a`
+cursor:pointer;
  background:${props=>props.activeLink?.background};
   -webkit-background-clip: ${props=>props.activeLink?.text};
   -webkit-text-fill-color:${props=>props.activeLink?.transparent};

@@ -1,4 +1,4 @@
-import  {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {
     addDays,
     addMonths,
@@ -141,20 +141,29 @@ export default function DatePicker({ selectDate, getSelectedDay,tileDisabled}) {
             getSelectedDay(day);
         }
     };
-
-
-
+    function usePrevious(value) {
+        const ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    }
+    const prevAmount = usePrevious({selectDate});
     useEffect(() => {
+
                 setSelectedDate(selectDate);
                 setTimeout(() => {
                     let view = document.getElementById('selected');
-                    if (view) {
+                    if(prevAmount?.selectDate !== selectDate && view){
                         view.scrollIntoView({behavior: "smooth", inline: "center", block: "nearest"});
                     }
                 }, 20);
 
+    }, [selectDate])
 
-    }, [selectDate]);
+
+
+
 
     const nextWeek = () => {
         const e = document.getElementById('container');

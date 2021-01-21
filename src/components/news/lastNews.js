@@ -131,7 +131,7 @@ export default function LastNews({locale,padding,posts,pageInfo,background,butto
         if (loading || !hasNextPageForMobile){
             return null
         }
-        dispatch(actionGetNextNewsForMobile(!newsForMobileSliderReducer ? offsetMobile :  offsetMobile+3 ,!newsForMobileSliderReducer ? newsForMobile :  null,locale))
+        dispatch(actionGetNextNewsForMobile(!newsForMobileSliderReducer ? offsetMobile :  offsetMobile+3 , newsForMobile ,locale))
     }
     const prevNews=()=>{
         if (loading || !hasPreviousPage){
