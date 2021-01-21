@@ -9,8 +9,7 @@ const NewsContainer = styled.div`
   @media screen and ${device.tablet}{
   grid-template-columns: 1fr;
   }
-width:80%;
-margin-left:10%;  
+
 margin-top:40px;
 gap: 30px;
 grid-gap: 30px;

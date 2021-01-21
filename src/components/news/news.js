@@ -41,7 +41,6 @@ const StyledPhoto = styled.img`
 
 export default function News(props) {
     const {images} = useSelector(state=>state.app)
-    console.log(props.slug)
     return (
         <Link href="/news/[slug]/" as={`/news/${props.slug}/`} prefetch={false}>
             <a>
