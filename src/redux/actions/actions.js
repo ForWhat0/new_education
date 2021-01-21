@@ -11,14 +11,14 @@ import {
     clickOnOffVisuallyImpairedModeWhiteTheme, changeFontSizeNormal, inputNewsByTitle, getNewsByTitle
 } from '../types/types'
 import GET_MOORE_NEWS from "../../queries/get_moore_news";
+import reduxClient from "../../apollo/reduxClient";
 import GET_NEWS_BY_TITLE from "../../queries/get-news-by-title";
-import client from "../../apollo/client";
 
 export function actionGetNews(offset,locale) {
     return async dispatch=>{
         try{
             dispatch(ShowLoader())
-            const news = await client.query( {
+            const news = await reduxClient.query( {
                 query: GET_MOORE_NEWS,
                 variables: {
                     size:3,
@@ -38,7 +38,7 @@ export function actionGetNextNewsForMobile(offset,data,locale) {
     return async dispatch=>{
         try{
             dispatch(ShowLoader())
-            const news = await client.query( {
+            const news = await reduxClient.query( {
                 query: GET_MOORE_NEWS,
                 variables: {
                     size:3,
@@ -124,7 +124,7 @@ export function OnchangeInputSearchNews(string,locale) {
             try{
                 dispatch(ChangeInput(string))
                 dispatch(ShowLoader())
-                const news = await client.query( {
+                const news = await reduxClient.query( {
                     query: GET_NEWS_BY_TITLE,
                     variables: {
                         string,

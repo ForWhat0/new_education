@@ -15,6 +15,7 @@ import {useSelector} from "react-redux";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
 import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
 import StyledLoader from "../../src/components/loader/loader";
+import reduxClient from "../../src/apollo/reduxClient";
 import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
 import {calendarLsi} from "../../src/Lsi/lsi";
 
@@ -106,7 +107,7 @@ export default function EventCalendar({locale,loading,event,menu,allDates,contac
     const [eventByTitle, setEventByTitle] = useState([]);
     const Search = async ()=>{
         setSearchLoading(true)
-        const { data  } = await client.query( {
+        const { data  } = await reduxClient.query( {
             query: SEARCH_EVENTS_BY_TITLE,
             variables: {
                 search:searchInput,
