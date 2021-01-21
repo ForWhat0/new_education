@@ -185,7 +185,7 @@ export const getStaticPaths = async ({locales}) => {
     for (const locale of locales) {
         paths = [
             ...paths,
-            ...data.projects?.nodes.map(el => ({ params: { slug: el.slug }, locale })),
+            ...data.projects?.nodes.map(el => ({ params: { slug: [el.slug] }, locale })),
         ]
     }
 
