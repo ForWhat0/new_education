@@ -6,10 +6,9 @@ import GET_EVENTS_BY_DATE from "../../src/queries/get_events_by_date";
 import CalendarEvents from "../../src/components/events/CalendarEvents";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import Calendar from 'react-calendar';
-import React, {useEffect, useRef, useState} from 'react'
+import  {useEffect, useRef, useState} from 'react'
 import {useRouter} from 'next/router'
 import DatePicker from '../../src/components/datePicker/datePicker';
-import 'react-day-picker/lib/style.css';
 import GET_EVENTS_DATE from "../../src/queries/get_all_events_dete";
 import {useSelector} from "react-redux";
 import {device} from "../../src/components/deviceSizes/deviceSizes";

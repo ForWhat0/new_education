@@ -1,5 +1,7 @@
-const path = require("path");
-module.exports = {
+const path = require("path")
+const withOptimizedImages = require("next-optimized-images")
+
+module.exports = withOptimizedImages({
     i18n: {
         locales: ['UK', 'EN','RU'],
         defaultLocale: 'UK'
@@ -17,12 +19,12 @@ module.exports = {
         config.watchOptions = {
             poll: 1000,
             aggregateTimeout: 300,
-        };
+        }
 
         return config;
     },
     sassOptions: {
         includePaths: [path.join(__dirname, "styles")],
-    },
-};
+    }
+})
 

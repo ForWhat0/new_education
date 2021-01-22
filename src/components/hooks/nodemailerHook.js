@@ -2,15 +2,16 @@ const nodemailer = require("nodemailer")
 
 export const nodemailerHook = ( {subject, text,res} ) => {
 
-    const transporter = nodemailer.createTransport({
-        service: "Gmail",
+    const transporter = nodemailer.createTransport(smtpTransport({
+        name: serverName,
         host: "smtp.gmail.com",
         port: 465,
+        secure: true,
         auth: {
             user: process.env.FROM_USER_LOGIN,
             pass: process.env.FROM_USER_PASSWORD,
         }
-    });
+    }));
 
     const mailOption = {
         from: process.env.FROM_USER_LOGIN,

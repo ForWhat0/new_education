@@ -21,8 +21,8 @@ import {actionClickModal} from "../../src/redux/actions/actions";
  margin-left:10%;
  padding-bottom:40px;
 background: url(${props=>props.bgImg}) no-repeat center center fixed;   
-@media screen and (max-width:700px) {
- background:unset;
+  @media screen and ${device.tablet} {
+background:unset;
  width:94%;
  margin-left:2%;
   }
