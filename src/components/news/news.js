@@ -51,6 +51,8 @@ export default function News(props) {
                 <NewsContainer>
                     <PhotoContainer display={images ? 'block' : 'none'} >
                         <StyledPhoto
+                            className="lazyload"
+                            data-src={props.coverImage?.sourceUrl}
                             src={props.coverImage?.sourceUrl}
                         />
                     </PhotoContainer>

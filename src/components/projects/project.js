@@ -43,6 +43,8 @@ display: ${props=>props.display};
   }
 `
 const Image = styled.img`
+width:100%;
+height:100%;
 max-height: 288px;
 max-width: 488px;
 width:100%;
@@ -52,6 +54,7 @@ filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.2));
    width: auto;
   }
 `
+
 const Text = styled.div`
 width:100%;
 color:${props=>props.color};
@@ -91,7 +94,11 @@ export default function Project(props) {
                         src={props.backgroundIcon}/>
                         <ContainerWrapper bBottom={bBottom} pBottom={pBottom}  flexDirection={props.flexDirection}>
                             <ImageContainer display={images ? 'flex' : 'none'}  justifyImage={justifyImage} rightImage={rightImage}>
-                                <Image  src={props.coverImage?.sourceUrl}/>
+                                    <Image
+                                        className="lazyload"
+                                        data-src={props.coverImage?.sourceUrl}
+                                        src={props.coverImage?.sourceUrl}
+                                    />
                             </ImageContainer>
                             <Text color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}  rightText={rightText}>
                                 <StyledTextComponent

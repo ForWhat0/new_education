@@ -40,10 +40,13 @@ export const TeamSwiper = ({employees})=>{
                             <EmployerContainer >
                                 <PhotoContainer >
                                     <EmployerPhoto
+                                        className="lazyload"
+                                        data-src={employer.photo.sourceUrl}
+                                        src={employer.photo.sourceUrl}
                                         height={isActive ? '90%' : '85%'}
                                         top={isActive ? '-45px' : 'unset'}
                                         alt={employer.photo?.sourceUrl}
-                                        src={employer.photo.sourceUrl}/>
+                                    />
                                     <EmployerName
                                         display={isActive ? 'block' : 'none'}
                                     >
