@@ -21,7 +21,7 @@ import {firstChartToUpperCase, maxDay, minDay} from "../hooks/hooks"
 import {useRouter} from "next/router"
 import {useSelector} from "react-redux";
 
-export default function DatePicker({ selectDate, getSelectedDay,tileDisabled}) {
+export default function DatePicker({ selectDate, getSelectedDay,tileDisabled,doScroll}) {
 
     const router = useRouter()
     const locale = router.locale
@@ -148,17 +148,17 @@ export default function DatePicker({ selectDate, getSelectedDay,tileDisabled}) {
         });
         return ref.current;
     }
-    const prevAmount = usePrevious({selectDate});
+    const prevProps = usePrevious({doScroll});
     useEffect(() => {
-
-                setSelectedDate(selectDate);
-                setTimeout(() => {
-                    let view = document.getElementById('selected');
-                    if(prevAmount?.selectDate !== selectDate && view){
-                        view.scrollIntoView({behavior: "smooth", inline: "center", block: "nearest"});
-                    }
-                }, 20);
-
+        if (prevProps?.doScroll !== doScroll){
+            setSelectedDate(selectDate);
+            setTimeout(() => {
+                let view = document.getElementById('selected');
+                if(view){
+                    view.scrollIntoView({behavior: "smooth", inline: "center", block: "nearest"});
+                }
+            }, 20);
+        }
     }, [selectDate])
 
 

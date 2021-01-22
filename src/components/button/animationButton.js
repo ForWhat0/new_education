@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+
 export default function animationButton(){
         $('.button--bubble').each(function() {
             let $circlesTopLeft = $(this).parent().find('.circle.top-left');

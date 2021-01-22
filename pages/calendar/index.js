@@ -172,6 +172,7 @@ export default function EventCalendar({locale,loading,event,menu,allDates,contac
                     <DatePicker getSelectedDay={selectedDay}
                                 tileDisabled={allDates}
                                 selectDate={new Date(value)}
+                                doScroll = {new Date(value).getDate()+new Date(value).getMonth()+1}
                     />
 
                 {

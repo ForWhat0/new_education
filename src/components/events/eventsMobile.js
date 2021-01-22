@@ -82,6 +82,7 @@ export default function EventsMobile({locale,titleEvent,posts,allDates}){
         <GlobalContainer>
             <TitleForComponent text={titleEvent}/>
             <DatePicker getSelectedDay={selectedDay}
+                        doScroll = {new Date(currentDate.dateGmt).getDate()+new Date(currentDate.dateGmt).getMonth()+1}
                         tileDisabled={allDates}
                         selectDate={new Date(currentDate.dateGmt)}
             />

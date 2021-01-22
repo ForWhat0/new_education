@@ -25,6 +25,7 @@ export default function Home({contacts,locale,menu,news,events,data,services,all
       title:mainPageFields.titleProject,
       projects:mainPageFields.projectPopular
     }
+
   return (
       <HomePageLayout
           databaseId={data.databaseId}
