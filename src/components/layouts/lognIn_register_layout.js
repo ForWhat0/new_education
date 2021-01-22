@@ -134,7 +134,7 @@ export default function LogInRegisterLayout ({locale,siteInfo,title,children}){
             <Head>
                 <link
                     rel="stylesheet"
-                    href="/fonts/e-Ukraine_font/e-Ukraine-Regular.ttf"
+                    href="/fonts/e-Ukraine_font/e-Ukraine-Regular.woff2"
                 />
                 <link rel="shortcut icon" href={siteInfo?.iconSite?.sourceUrl} />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />

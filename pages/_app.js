@@ -11,8 +11,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import {ApolloProvider} from "@apollo/client";
 import client from "../src/apollo/client";
-import Head from 'next/head'
-
+import Head   from 'next/head'
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
@@ -24,17 +23,20 @@ function MyApp({ Component, pageProps }) {
                   <Provider store={store}>
                       <Head>
                           <link
-                              rel="stylesheet"
-                              href="/fonts/e-Ukraine_font/e-Ukraine-Regular.ttf"
-                              rel="stylesheet" type="text/css"
+                              href="/fonts/e-Ukraine_font/e-Ukraine-Regular.woff2"
+                              type="text/css"
+                              rel="preload"
                           />
                           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                           <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-                          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
-                          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
-                          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
-                          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
+                          <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
+                          <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
+                          <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
+                          <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
                       </Head>
+                      <Body>
+
+                      </Body>
                       <Component {...pageProps} />
                   </Provider>
           </ApolloProvider>
