@@ -3,6 +3,7 @@ import StyledTextComponent from "../textComponent/textComponent";
 import {StyledDivWithIconBackGround} from "./backgroundWithIcon";
 import {device} from "../deviceSizes/deviceSizes";
 import {useSelector} from "react-redux";
+import 'lazysizes'
 
 const Container = styled.div`
 min-height:${props=>props.minHeight};
@@ -97,7 +98,6 @@ export default function Project(props) {
                                     <Image
                                         className="lazyload"
                                         data-src={props.coverImage?.sourceUrl}
-                                        src={props.coverImage?.sourceUrl}
                                     />
                             </ImageContainer>
                             <Text color={!visuallyImpairedModeWhiteTheme ? 'white' : 'black'}  rightText={rightText}>

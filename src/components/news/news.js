@@ -3,6 +3,7 @@ import StyledTextComponent from "../textComponent/textComponent"
 import Link from 'next/link';
 import {useSelector} from "react-redux";
 import {device} from "../deviceSizes/deviceSizes";
+import 'lazysizes'
 
 const opacity = keyframes`
  0%   { opacity: 0; }
@@ -53,7 +54,6 @@ export default function News(props) {
                         <StyledPhoto
                             className="lazyload"
                             data-src={props.coverImage?.sourceUrl}
-                            src={props.coverImage?.sourceUrl}
                         />
                     </PhotoContainer>
                     <StyledTextComponent
