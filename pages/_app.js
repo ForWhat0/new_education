@@ -24,15 +24,20 @@ function MyApp({ Component, pageProps }) {
                       <Head>
                           <link
                               href="/fonts/e-Ukraine_font/e-Ukraine-Regular.woff2"
-                              type="text/css"
                               rel="preload"
+                              as="font"
+                              type="font/woff2"
                           />
+                          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                                rel="stylesheet"
+                                integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+                                crossOrigin="anonymous"/>
                           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
                           <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
                           <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
                           <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
                           <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
+                          <script async type="text/javascript" src="../styles/loadFontAwesomeFonts.js"></script>
                       </Head>
                       <Component {...pageProps} />
                   </Provider>

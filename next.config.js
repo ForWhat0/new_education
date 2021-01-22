@@ -2,6 +2,7 @@ const path = require("path")
 const withOptimizedImages = require("next-optimized-images")
 
 module.exports = withOptimizedImages({
+    imagesFolder: 'public',
     i18n: {
         locales: ['UK', 'EN','RU'],
         defaultLocale: 'UK'
