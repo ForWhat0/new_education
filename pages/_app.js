@@ -34,9 +34,6 @@ function MyApp({ Component, pageProps }) {
                           <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
                           <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
                       </Head>
-                      <Body>
-
-                      </Body>
                       <Component {...pageProps} />
                   </Provider>
           </ApolloProvider>
