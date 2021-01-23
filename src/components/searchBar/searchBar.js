@@ -30,6 +30,9 @@ const Input = styled.input.attrs(props => ({
     onChange:props.func,
     placeholder :props.inputPlaceholder,
 }))`
+@media screen and ${device.mobileL}{
+   font-size: 16px;
+  }
 &.hasFocus:focus
   color: #333;
  padding-top: 10px;

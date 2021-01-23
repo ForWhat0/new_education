@@ -26,8 +26,8 @@ const Wrapper = styled.div`
  margin-left:10%;
  margin-top:30px;
   @media screen and ${device.tablet} {
- width:96%;
- margin-left:2%;
+ width:93.6%;
+ margin-left:3.2%;
   }
 `
 export const Logos = ({telegram,facebook,gmail})=>{
@@ -57,8 +57,8 @@ const TextContainer = styled.div`
       flex-direction:column;
   }
     @media screen and ${device.tablet} {
- width:96%;
- margin-left:2%;
+ width:93.6%;
+ margin-left:3.2%;
   }
 `
 const List = styled.ul`
@@ -74,8 +74,9 @@ padding-left: unset;
   }
 `
 const ListElement = styled.li`
-    margin: 0 0 20px 0;
+    margin: 0 0 15px 0;
     color:white;
+    line-height:1.5;
     list-style-type: none;
 `
 const Link =styled.a`
@@ -119,8 +120,8 @@ display:flex;
 align-items:center;
 flex-direction:column;
  @media screen and ${device.tablet} {
- width:96%;
- margin-left:2%;
+ width:93.6%;
+ margin-left:3.2%;
   }
 `
 const Develop = styled.div`

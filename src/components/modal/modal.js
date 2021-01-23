@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux"
-import { StyledModal} from "./modalStyled"
+import {FormContainer, StyledModal} from "./modalStyled"
 import {InputStyled} from "../input/input";
 import {LoaderContainer} from "../leftComment/leftCommentStyLedComponents";
 import {useEffect, useState} from "react";
@@ -48,6 +48,7 @@ const renderCircles = ()=>{
 export const Modal=()=>{
     const {modal} = useSelector(state=>state.app)
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
+    const {visuallyImpairedMode} = useSelector(state=>state.app)
     const dispatch = useDispatch()
     const router = useRouter()
     const locale = router.locale
@@ -164,50 +165,54 @@ export const Modal=()=>{
 
      }
     return(
-        <StyledModal background={visuallyImpairedModeWhiteTheme ? 'white' : '#1D1D1B'} open={modal}>
-                    <form>
-                        {
-                            !done ?
-                                <>
-                                    <h2 onClick={()=>dispatch(actionClickModal(false))} >
-                                        X
-                                    </h2>
-                                    <h1>
-                                        { modal.type === 'event' ? titleEvent[locale] : titleService[locale] }
-                                    </h1>
-                                    <h3>
-                                        { modal.type === 'event' ? subTitleEvent[locale] : subTitleService[locale] }
-                                    </h3>
-                                    <InputStyled value={fName} maxlength='20' warning={fNameWarning} background='transparent'  text={name[locale]} onChange={e => setFName(e.target.value)}   width='100%'/>
-                                    <InputStyled  value={lName} maxlength='20' warning={lNameWarning}  background='transparent' text={lastName[locale]} onChange={e => setLName(e.target.value)}   width='100%'/>
-                                    {
-                                        modal.type !== 'event' &&
-                                        <InputStyled  value={phone} maxlength='20' warning={phoneWarning} background='transparent' text={phoneNumber[locale]} onChange={e => setPhone(e.target.value)}   width='100%'/>
-                                    }
-                                    <LoaderContainer>
-                                        <SendButton
-                                            loading={loading}
-                                            click={ modal.type === 'event' ? registerOnEvent : registerOnService}
-                                            sendText={send[locale]}
-                                        />
-                                    </LoaderContainer>
-                                </>
-                                :
-                                <>
-                                    <h2 onClick={()=>dispatch(actionClickModal(false))} >
-                                        X
-                                    </h2>
-                                    <h1>
-                                        {thanks[locale]}
-                                    </h1>
-                                    <h3>
-                                        {sent[locale]}
-                                    </h3>
-                                    <StyledButton style={{marginTop:'60px'}} func={closeModal} text={close[locale]}/>
-                                </>
-                        }
-                        {renderCircles()}
-                    </form>
+        <StyledModal  open={modal}>
+            <FormContainer background={visuallyImpairedModeWhiteTheme ? 'white' : '#1D1D1B'}>
+                <form>
+                    {
+                        !done ?
+                            <>
+                                <h2 onClick={()=>dispatch(actionClickModal(false))} >
+                                    X
+                                </h2>
+                                <h1>
+                                    { modal.type === 'event' ? titleEvent[locale] : titleService[locale] }
+                                </h1>
+                                <h3>
+                                    { modal.type === 'event' ? subTitleEvent[locale] : subTitleService[locale] }
+                                </h3>
+                                <InputStyled value={fName} maxlength='20' warning={fNameWarning} background='transparent'  text={name[locale]} onChange={e => setFName(e.target.value)}   width='100%'/>
+                                <InputStyled  value={lName} maxlength='20' warning={lNameWarning}  background='transparent' text={lastName[locale]} onChange={e => setLName(e.target.value)}   width='100%'/>
+                                {
+                                    modal.type !== 'event' &&
+                                    <InputStyled  value={phone} maxlength='20' warning={phoneWarning} background='transparent' text={phoneNumber[locale]} onChange={e => setPhone(e.target.value)}   width='100%'/>
+                                }
+                                <LoaderContainer>
+                                    <SendButton
+                                        loading={loading}
+                                        click={ modal.type === 'event' ? registerOnEvent : registerOnService}
+                                        sendText={send[locale]}
+                                    />
+                                </LoaderContainer>
+                            </>
+                            :
+                            <>
+                                <h2 onClick={()=>dispatch(actionClickModal(false))} >
+                                    X
+                                </h2>
+                                <h1>
+                                    {thanks[locale]}
+                                </h1>
+                                <h3>
+                                    {sent[locale]}
+                                </h3>
+                                <StyledButton style={{marginTop:'60px'}} func={closeModal} text={close[locale]}/>
+                            </>
+                    }
+                    {
+                      !visuallyImpairedMode &&  renderCircles()
+                    }
+                </form>
+            </FormContainer>
         </StyledModal>
     )
 }

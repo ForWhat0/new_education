@@ -74,11 +74,11 @@ const GrayBackground = styled.div`
     @media screen and (max-width:950px) {
      position: relative;
     height: auto;
-    width: 96%;
+    width: 93.6%;
     top: unset;
     left: unset;
     background: unset;
-    margin-left: 2%;
+    margin-left: 3.2%;
   }
 `
 const Text = styled.div`
@@ -132,7 +132,7 @@ bottom: 30px;
 const Title = styled.div`
 margin-left:10%;
 @media screen and (max-width:950px) {
-  margin-left:2%;
+  margin-left:3.2%;
   }
 
 `
@@ -141,8 +141,8 @@ position:relative;
 width:320px;
 z-index: 2;
 @media screen and (max-width:950px) {
-      width: 96%;
-    margin-left: 2%;
+      width: 93.6%;
+    margin-left: 3.2%;
     margin-top: 40px;
   }
 `
@@ -250,9 +250,9 @@ export default function  Appeal({locale,contacts,menu,appeals}){
                         </Text>
                     </GrayBackground>
                     <Form>
-                        <InputStyled maxlength='20' warning={nameWarning}  value={name}   text={appeal.name[locale]} onChange={e => setName(e.target.value)}  width='100%'/>
-                        <InputStyled maxlength='20' warning={lastNameWarning}   value={lastName}  text={appeal.lastName[locale]} onChange={e => setLastName(e.target.value)}  width='100%'/>
-                        <InputStyled maxlength='20' warning={phoneWarning}   value={phone}  text={appeal.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='100%'/>
+                        <InputStyled borderColor='black' maxlength='20' warning={nameWarning}  value={name}   text={appeal.name[locale]} onChange={e => setName(e.target.value)}  width='100%'/>
+                        <InputStyled borderColor='black' maxlength='20' warning={lastNameWarning}   value={lastName}  text={appeal.lastName[locale]} onChange={e => setLastName(e.target.value)}  width='100%'/>
+                        <InputStyled borderColor='black' maxlength='20' warning={phoneWarning}   value={phone}  text={appeal.phoneNumber[locale]} onChange={e => setPhone(e.target.value)}  width='100%'/>
                         <Label>
                             {appeal.reason[locale]}
                         </Label>

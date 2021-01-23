@@ -17,8 +17,8 @@ const ServicesContainer = styled.div`
 `
 const GlobalContainer = styled.div`
  @media screen and ${device.tablet} {
-     width: 96%;
-    margin-left: 2%;
+     width: 93.6%;
+    margin-left: 3.2%;
     padding: 40px 0 40px 0;
   }
  padding: 40px 0 40px 10%;

@@ -20,8 +20,8 @@ const Global = styled.div`
     background-position: right;
   }
   @media screen and (max-width:500px) {
-   width:96%;
-   margin-left:2%;
+   width:93.6%;
+   margin-left:3.2%;
   }
 `
 const Info = styled.div`

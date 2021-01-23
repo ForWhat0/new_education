@@ -9,16 +9,9 @@ import styled from "styled-components";
 import GET_NEWS_BY_SLUG_AND_FIRST_THREE_NEWS from "../../src/queries/get-news-by-slug";
 import {MainLayout} from "../../src/components/layouts/mainLayout";
 import {ParcMenu} from "../../src/components/hooks/hooks";
+import {Container} from "./index";
 
-export const Container = styled.div`
-position:relative;
-width:80%;
-margin-left:10%;   
-@media screen and (max-width:700px) {
-    width: 92%;
-    margin-left: 2%;
-  }   
-`
+
 const LoaderContainer = styled.div`
                 width: 100%;
                 display:flex;

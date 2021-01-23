@@ -13,41 +13,58 @@ export const StyledModal = styled.div`
     justify-content: center;
     background-color: rgba(0,0,0,0.5);
     display: ${({ open }) => open ? 'flex' : 'none'};
-    
-    form{
-    position:relative;
-    border:1px solid white;
+    z-index: 20;
+`
+export const FormContainer = styled.div`
+    position: relative;
+    border: 1px solid white;
     border-radius: 28px;
     justify-content: center;
-    align-items: center;
     display: flex;
-    flex-direction: column;
-      
-          min-width: 320px;
-  z-index: 1;
-  background: ${({ background }) => background };
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    z-index: 1;
+    background: white;
+    box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px 0 rgba(0,0,0,0.24);  
+    background: ${({ background }) => background };
    
   @media screen and ${device.mobileL}{
-     max-width: unset;
+  width: 100%;
   margin:0;
   }
+    
+    form {
+     @media screen and ${device.mobileL}{
+      padding: 30px 15px;
+    width: 93.6%;
+  }
+   padding: 40px 80px;
+    width: 80%;
+    
+    h1{
+     @media screen and ${device.mobileL}{
+  font-size: 20px;
+  }
+    margin:20px 0 20px 0;
+     text-align:center;
     }
     
-    h1,h3{
-     margin-bottom: 5%;
+    h3{
+    @media screen and ${device.mobileL}{
+  font-size: 16px;
+  }
+     margin:0 0 40px 0;
+      text-align:center;
     }
     
     h2{
+    @media screen and ${device.mobileL}{
+     top: 3%;
+  }
+        margin: 0;
     position: absolute;
-    top: 2%;
+    top: 5%;
     right: 7%;
     cursor: pointer;
     }
-    
- 
+   
+    }
 `

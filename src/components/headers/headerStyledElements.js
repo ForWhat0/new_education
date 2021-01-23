@@ -115,8 +115,8 @@ export const RestWrapperInner = styled.div`
   justify-content: space-between;
   }
   @media screen and ${device.tablet}{
-     padding-left: 2%;
-  width:96%;
+     padding-left: 3.2%;
+  width:93.6%;
    margin-left:unset;
   }
 `
@@ -590,7 +590,7 @@ const ArrowIcon = styled.i`
      display:${props=>props.displayUserIcon};
   }
 `
-export const NavBarMain =({globeDarkIcon,searchBarColor,color,navButtons,glassIcon})=>{
+export const NavBarMain =({footer,globeDarkIcon,searchBarColor,color,navButtons,glassIcon})=>{
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const dispatch = useDispatch()
     const router = useRouter()
@@ -653,6 +653,7 @@ export const NavBarMain =({globeDarkIcon,searchBarColor,color,navButtons,glassIc
                 </ChangeLanguageContainer>
                 <SignIn>
                     <AnimationSearchBarStyled
+                        background={footer && 'white'}
                         color={!visuallyImpairedModeWhiteTheme ? 'white' : searchBarColor}
                         inputFunc={(e)=>dispatch(OnchangeInputSearchNews(e.target.value,locale))}
                         value={inputNewsByTitle}

@@ -32,23 +32,30 @@ const PhotoContainer = styled.div`
      @media (max-width: 768px) {
     min-height:250px;
   }
+  @media (max-width: 650px) {
+    min-height:unset;
+    height:157px;
+  }
 }
 `
 
 const StyledPhoto = styled.img`
    border-radius: 30px;
      position: relative;
+      background: #c5d2d9;
     width: 100%;
     height: 250px;
-    background: #c5d2d9 no-repeat 50%;
-    object-fit: cover
+    object-fit: cover;
+    @media (max-width: 650px) {
+    height: 100%;
+  }
 `
 
 export default function News(props) {
     const {images} = useSelector(state=>state.app)
     return (
         <Link href="/news/[id]/" as={`/news/${props.databaseId}/`}>
-            <a>
+
                 <NewsContainer>
                     <PhotoContainer display={images ? 'block' : 'none'} >
                         <StyledPhoto
@@ -64,7 +71,7 @@ export default function News(props) {
                         date={props.date}
                         textForIcon={props.textForIcon}/>
                 </NewsContainer>
-            </a>
+
         </Link>
     )
 }

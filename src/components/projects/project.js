@@ -26,7 +26,7 @@ border-bottom:${props=>props.bBottom};
 flex-direction:${props => props.flexDirection};
 @media screen and ${device.tablet} {
 padding-top: 20px;
-width:94%;
+width:93.6%;
 padding-bottom:20px;
 flex-direction:column;
      
@@ -67,6 +67,12 @@ margin:0;
  margin-top: 20px;
     text-align: center;
     margin-bottom: 20px;
+    font-size:16px;
+  }
+}
+div {
+@media screen and ${device.tablet} {
+    font-size:12px;
   }
 }
 @media screen and ${device.tablet} {

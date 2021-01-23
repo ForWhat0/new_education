@@ -28,8 +28,8 @@ const GlobalContainer = styled.div`
  display:none;
   }
   @media screen and ${device.tablet} {
-     width: 96%;
-    margin-left: 2%;
+     width: 93.6%;
+    margin-left: 3.2%;
   }
    display:block;
  width: 80%;

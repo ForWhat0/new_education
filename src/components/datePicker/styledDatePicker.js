@@ -83,8 +83,14 @@ export const DaysContainer=styled.div`
 export const DayLabel= styled.div`
 font-size: 16px;
     margin: 4px 0 0 0;
+    @media screen and ${device.mobileL} {
+  font-size: 12px;
+  }
 `
 
 export const DateLabel= styled.div`
     font-size:  40px;
+    @media screen and ${device.mobileL} {
+  font-size: 20px;
+  }
 `

@@ -9,8 +9,8 @@ const TitleContainer = styled.div`
 margin-left: 10%;
 margin-bottom:60px;
  @media screen and ${device.tablet}{
-  margin-left: 2%;
-  width:96%;
+  margin-left: 3.2%;
+  width:93.6%;
   margin-bottom:20px;
   }
 `

@@ -87,9 +87,9 @@ flex-direction:column;
   }
   @media screen and ${device.tablet}{
  margin-top: unset;
- margin-left: 2%;
+ margin-left: 3.2%;
  max-width: unset;
-width:94%;
+width:93.6%;
   }
 `
 export const SwiperContainer = styled.div`
@@ -106,8 +106,8 @@ export const SwiperContainer = styled.div`
   margin-left: 10%;
   }
    @media screen and ${device.tablet}{
-  width: 94%;
-  margin-left: 20px;
+  width: 93.6%;
+  margin-left: 3.2%;
   }
   @media screen and ${device.mobileL}{
   width: 100%;
@@ -116,9 +116,11 @@ export const SwiperContainer = styled.div`
 `
 export const CommandText = styled.p`
         letter-spacing: 1px;
-    font-size: 20px;
-    @media screen and (max-width: 1290px){
-font-size: 12px;
+    font-size: 16px;
+    line-height:1.5;
+    padding-bottom:20px;
+     @media screen and ${device.mobileL}{
+  font-size: 12px;
   }
 `
 export const Arrows = styled.div`

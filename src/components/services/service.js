@@ -79,7 +79,7 @@ export default function Service({locale,slug,coverImage,title,index}) {
     const borderL = visuallyImpairedMode && index === 1 && !images ? '1px solid' : 'unset'
     return (
         <Link  href={`/service/[slug]`} as={`/service/${slug}`}>
-            <a>
+
                 <Global>
                     <ServiceContainer borderL={borderL} borderB={borderB}>
                         <ContainerWrapper>
@@ -94,7 +94,7 @@ export default function Service({locale,slug,coverImage,title,index}) {
                         <StyledButton text={services.learnMore[locale]}/>
                     </ButtonContainer>
                 </Global>
-            </a>
+
         </Link>
     )
 }

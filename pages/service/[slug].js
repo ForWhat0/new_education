@@ -23,8 +23,8 @@ import {actionClickModal} from "../../src/redux/actions/actions";
 background: url(${props=>props.bgImg}) no-repeat center center fixed;   
   @media screen and ${device.tablet} {
 background:unset;
- width:94%;
- margin-left:2%;
+ width:93.6%;
+ margin-left:3.2%;
   }
 
 `
@@ -53,10 +53,12 @@ position:absolute;
 right:0;
 @media screen and (max-width:950px) {
   position:relative;
+  margin-top:20px;
   }
 a button{
 @media screen and (max-width:950px) {
   font-size:14px;
+  line-height: 20px;
   }
 }
 `

@@ -15,9 +15,9 @@ import GET_EVENT_BY_DATE from "../../queries/get_event_by_date";
 const GlobalContainer = styled.div`
    display:none;
  @media screen and ${device.mobileL} {
-     width: 96%;
+     width: 93.6%;
      display:block;
-    margin-left: 2%;
+    margin-left: 3.2%;
       margin-bottom:40px;
   }
 `

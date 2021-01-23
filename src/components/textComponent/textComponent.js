@@ -24,7 +24,10 @@ const Review = styled.div`
    align-items: center;
    position:${props=>props.position};
    padding-top: ${props=>props.pTop};
-    @media screen and ${device.mobileL}{
+    @media screen and ${device.tablet}{
+   display:${props=>props.display};
+  }
+  @media screen and ${device.mobileL}{
    display:none;
   }
 }
@@ -41,7 +44,7 @@ const StyledDate = styled.div`
 
 const Date = styled.div`
    display:none;
-@media screen and ${device.mobileL}{
+@media screen and ${device.tablet}{
 width:100%;
    display:block;
     border-top:${props => props.border};
@@ -80,7 +83,7 @@ const StyledTextComponent =({offBorder,fontSize,paddingBottom,bottom,title,excer
                         {dateFormat}
                     </Date>
             }
-                    <Review pTop={offBorder ? '40px' : '20px'} width={width} position={position} border={border}>
+                    <Review display={date ? 'none' : 'flex'} pTop={offBorder ? '40px' : '20px'} width={width} position={position} border={border}>
                         {
                             offBorder ?
                                 <StyledButton text={ProjectsLsi.review[locale]}/>

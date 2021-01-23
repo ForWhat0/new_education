@@ -20,6 +20,8 @@ import {calendarLsi} from "../../src/Lsi/lsi";
 import {StyledButton} from "../../src/components/button/button";
 import {actionClickModal} from "../../src/redux/actions/actions";
 import {useDispatch} from "react-redux";
+import {Input,LoaderContainer} from "./index";
+
 
 const Container = styled.div`
 width:80%;
@@ -30,9 +32,9 @@ background-position: bottom 50px right 100px;
 background-position: bottom 50px right 100px;
 background: 20% / 60%  no-repeat url(/light_bulb_with_brain.svg);
   }
-@media screen and ${device.mobileL} {
- width:94%;
-margin-left:2%;
+@media screen and ${device.tablet} {
+ width:93.6%;
+margin-left:3.2%;
   }
 `
 
@@ -86,24 +88,8 @@ position: relative;
   flex-direction:column;
   }
 `
-const Input = styled.div`
-position:absolute;
-right:80px;
-width:350px;
- @media screen and ${device.laptop} {
- position:relative;
- margin-bottom:40px;
- right:unset;
-width:unset;
-  }
-`
-const LoaderContainer = styled.div`
-  width:100%;
-  display:flex;
-  justify-content:center;
-  position:relative;
-  margin:50px 0 50px 0;
-`
+
+
 export default function EventCalendar({locale,contacts,loading,time,menu,allDates}) {
     const calendar = useRef();
     const parsedMenu = ParcMenu(menu)

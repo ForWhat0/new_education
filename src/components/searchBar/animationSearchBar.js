@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {device} from "../deviceSizes/deviceSizes";
+import {useSelector} from "react-redux";
 
 const SearchBar = styled.div`
  position: relative;
@@ -59,7 +60,9 @@ border-radius: 28px;
     background-color: white;
   }  
 `;
-export const AnimationSearchBarStyled = ({value,color,inputName,inputFunc,inputPlaceholder})=>{
+export const AnimationSearchBarStyled = ({background,value,inputName,inputFunc,inputPlaceholder})=>{
+    const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
+    const color = !visuallyImpairedModeWhiteTheme ? 'white' : background ? background : 'transparent'
     return(
         <SearchBar>
             <Icon className="fa fa-search" aria-hidden="true"/>

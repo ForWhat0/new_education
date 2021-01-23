@@ -24,13 +24,13 @@ border-radius: 9px;
 padding:10px;
 background:transparent;
 width:100%;
-color:${props=>props.borderColor};
+color:${props=>props.color};
   ::placeholder,
   ::-webkit-input-placeholder {
-    color: ${props=>props.borderColor};
+    color: ${props=>props.color};
   }
   :-ms-input-placeholder {
-     color: ${props=>props.borderColor};
+     color: ${props=>props.color};
   }
 `;
 export const Text = styled.label`
@@ -56,7 +56,7 @@ const Icon = styled.i`
 `
 
 
-export const InputStyled = ({warning,maxlength,text,width,onChange,value})=>{
+export const InputStyled = ({borderColor,warning,maxlength,text,width,onChange,value})=>{
     const [warningText, setWarningText] = useState('');
 
     useEffect(()=>{
@@ -75,7 +75,13 @@ export const InputStyled = ({warning,maxlength,text,width,onChange,value})=>{
             <div>
                 <InputContainer>
                     <Icon display={warningText.length ? 'block' : 'none'} className="fa fa-exclamation-triangle" aria-hidden="true"/>
-                    <Input placeholder={warningText}  borderColor={visuallyImpairedModeWhiteTheme ? '#1D1D1B' : 'white'} value={value}  maxLength={maxlength || 20} onChange={onChange}/>
+                    <Input
+                        placeholder={warningText}
+                        color={visuallyImpairedModeWhiteTheme ? '#1D1D1B' : 'white'}
+                        borderColor={borderColor ? borderColor : visuallyImpairedModeWhiteTheme ? '#1D1D1B' : 'white'}
+                        value={value}
+                        maxLength={maxlength || 20}
+                        onChange={onChange}/>
                 </InputContainer>
             </div>
         </InputField>

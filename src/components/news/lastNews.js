@@ -8,6 +8,7 @@ import NewsWrapper from "./newsWrapper";
 import {actionGetNews, actionGetNextNewsForMobile} from "../../redux/actions/actions";
 import News from "./news";
 import {createRef} from "react";
+import {device} from "../deviceSizes/deviceSizes";
 
 
 export const Back = styled.div`
@@ -20,16 +21,19 @@ export const Container = styled.div`
 position:relative;
 width:80%;
 margin-left:10%;      
- @media screen and (max-width:650px) {
-   width:auto;
-margin-left:unset;  
+ @media screen and  ${device.tablet} {
+    width: 93.6%;
+  margin-left:3.2%;
   }
+  @media screen and (max-width:650px) {
+width: auto;
+  }   
 `
 const Header = styled.div`
 display:flex;
 align-items:center; 
  @media screen and (max-width:650px) {
- margin-left:2%;
+   width: 93.6%;
   }   
 `
 export const IconContainer = styled.button`
@@ -78,9 +82,10 @@ const StyledContainer = styled.div`
     transform: scale(1.01);
   }
 @media screen and (max-width:650px){
-        min-width: 240px;
+        min-width: 220px;
      flex: unset;
-      padding: 10px;
+      padding: unset;
+      margin: 10px 20px 10px 0;
   }
 `
 const ScrollBarStyled = styled.div`

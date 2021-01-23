@@ -9,14 +9,16 @@ align-items:center;
 `
 export  const Title = styled.h1`
  @media screen and ${device.tablet} {
- width:96%;
-     margin-left:2%;
+ width:93.6%;
+     margin-left:3.2%;
      font-size:20px;
+     padding-top: 10px;
   }
   width:40%;
 font-size:40px;
 margin-bottom:20px;
 margin-left: 10%;
+line-height: 30px;
 `
 
 export const Container = styled.div`
@@ -29,8 +31,8 @@ export const Container = styled.div`
 export const ContainerWrapper = styled.div`
   @media screen and ${device.tablet} {
     padding-bottom:20px;
-     margin-left:2%;
-      width:96%;
+     margin-left:3.2%;
+      width:93.6%;
       flex-direction:column;
   }
     padding-bottom:40px;
@@ -65,7 +67,10 @@ margin-right:10%;
 `
 export const SubTitle = styled.span`
 font-size: 24px;
-line-height: 15px;
+line-height: 30px;
+ @media screen and ${device.tablet} {
+  font-size: 16px;
+  }
 `
 export const IconBackground = styled.div`
  @media screen and ${device.tablet} {

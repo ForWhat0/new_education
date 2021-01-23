@@ -18,8 +18,8 @@ margin-bottom:100px;
 background: 80% / 20% auto no-repeat fixed url(${props=>props.bgImg});   
 @media screen and (max-width:700px) {
  background:unset;
- width:94%;
- margin-left:2%;
+ width:93.6%;
+ margin-left:3.2%;
   }
 
 `

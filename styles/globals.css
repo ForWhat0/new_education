@@ -199,7 +199,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 figure img {
   margin-bottom: 40px!important;
   width: 100%!important;
-  height: auto!important;
+  height: unset!important;
+  align-self: flex-start;
+  justify-self: flex-start;
 }
 .wp-block-button a,
 .wp-block-file a.wp-block-file__button {
