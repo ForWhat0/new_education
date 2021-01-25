@@ -9,6 +9,7 @@ import {actionGetNews, actionGetNextNewsForMobile} from "../../redux/actions/act
 import News from "./news";
 import {createRef} from "react";
 import {device} from "../deviceSizes/deviceSizes";
+import StyledLoader from "../loader/loader";
 
 
 export const Back = styled.div`
@@ -57,7 +58,7 @@ margin-top:40px;
 display:${props => props.display};
 justify-content:center;
 `
- const ArrowIcon = styled.div`
+const ArrowIcon = styled.div`
   background:url(${props=>props.arrow}) no-repeat;
     display: flex;
    width:50px;
@@ -88,13 +89,16 @@ const StyledContainer = styled.div`
       margin: 10px 20px 10px 0;
   }
 `
-const ScrollBarStyled = styled.div`
+const ScrollBarStyledContainer = styled.div`
 display:none;
  @media screen and (max-width:650px) {
-   display:block;
+   display:flex;
+   justify-content:center;
+  }
+`
+const ScrollBarStyled = styled.div`
    overflow-x: scroll;
     overflow-y: unset;
-  }
 `
 const NewsForDesctop = styled.div`
 display:block;
@@ -149,6 +153,7 @@ export default function LastNews({locale,padding,posts,pageInfo,background,butto
         const scrollWidth = inputRef.current.scrollWidth;
         const scrollBarWidth =  inputRef.current.offsetWidth
         const newScrollLeft = inputRef.current.scrollLeft;
+
         if (parseInt(scrollWidth - scrollBarWidth) === parseInt(newScrollLeft) ) {
             nextNewsForMobile()
         }
@@ -177,28 +182,32 @@ export default function LastNews({locale,padding,posts,pageInfo,background,butto
                     <NewsForDesctop>
                         <NewsWrapper  posts={news}/>
                     </NewsForDesctop>
-                    <ScrollBarStyled
-                        ref={inputRef}
-                        onScroll={checkScroll}
-                    >
-                        <ScrollBarStyledInner>
-                            {newsForMobile.map(node =>
-                                <StyledContainer key={node.databaseId}>
-                                    <News
-                                        paddingBottom='41px'
-                                        databaseId={node.databaseId}
-                                        key={node.slug}
-                                        title={node.title}
-                                        coverImage={node.featuredImage?.node}
-                                        date={node.date}
-                                        slug={node.slug}
-                                        excerpt={node.excerpt}
-                                    />
+                    <ScrollBarStyledContainer>
+                        <ScrollBarStyled
+                            ref={inputRef}
+                            onScroll={checkScroll}
+                        >
+                            <ScrollBarStyledInner>
 
-                                </StyledContainer>
-                            )}
-                        </ScrollBarStyledInner>
-                    </ScrollBarStyled>
+                                {newsForMobile.map(node =>
+                                    <StyledContainer key={node.databaseId}>
+                                        <News
+                                            paddingBottom='41px'
+                                            databaseId={node.databaseId}
+                                            key={node.slug}
+                                            title={node.title}
+                                            coverImage={node.featuredImage?.node}
+                                            date={node.date}
+                                            slug={node.slug}
+                                            excerpt={node.excerpt}
+                                        />
+                                    </StyledContainer>
+                                )}
+
+                            </ScrollBarStyledInner>
+                        </ScrollBarStyled>
+                        {loading && <StyledLoader/>}
+                    </ScrollBarStyledContainer>
                     <ButtonContainer display={buttonDisplay}>
                         <Link href={'/news'}>
                             <a>
