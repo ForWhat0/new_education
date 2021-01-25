@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
                           <link
                               href="/fonts/e-Ukraine_font/e-Ukraine-Regular.woff2"
                               rel="preload"
-                              as="font"
+                              as="style"
                               type="font/woff2"
                           />
 
@@ -33,10 +33,10 @@ function MyApp({ Component, pageProps }) {
                                 onLoad="this.onload=null;this.rel='stylesheet'"/>
 
                           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                          <script async   type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
-                          <script async  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
-                          <script async  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
-                          <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
+                          <script    type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
+                          <script   type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
+                          <script   type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
+                          <script  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
                       </Head>
                       <Component {...pageProps} />
                   </Provider>
