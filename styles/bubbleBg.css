@@ -1,5 +1,6 @@
 #wrapper {
-    position: relative;
+    position: fixed;
+    position: -ms-device-fixed;
     width:100%;
     margin: 0 auto;
     z-index:-1;

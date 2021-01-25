@@ -9,6 +9,7 @@ export default function animationButton(){
     function parallaxScroll(){
         let scrolled = $(window).scrollTop();
         $('#parallax-lvl-3').css('top',(0-(scrolled*.5))+'px');
+        $('#b3-1').css('top',(0-(scrolled*.5))+'px');
     }
 
 }

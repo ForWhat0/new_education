@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledMenu = styled.nav`
-  display: flex;
+  display: ${({ open }) => open ? 'flex' : 'none)'};
   transform: ${({ open }) => open ? 'unset' : 'translateX(100%)'};
   box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
   flex-direction: column;
