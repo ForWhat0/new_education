@@ -50,6 +50,7 @@ export default function MicrophoneDetail({locale,newBySlug,news,menu,contacts}) 
                                   buttonHide={true}
                                   locale={locale}
                                   title={NewsLsi.otherNews}
+                                  padding='40px 0'
                         />
                     </>
                     :
