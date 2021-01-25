@@ -7,9 +7,10 @@ export const StyledMenu = styled.nav`
   top: 0;
   right: 0;
   overflow-x: hidden;
-  transition: 0.1s;
   box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
+   display: ${({ open }) => open ? 'block' : 'none'};
     width: ${({ open }) => open ? '60%' : '0'};
+      transition: all 0.3s linear;
     padding:0;
   text-align: left;
     background-color: white;
