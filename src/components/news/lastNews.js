@@ -111,7 +111,7 @@ const ScrollBarStyledInner = styled.div`
  cursor:pointer;
  flex-direction: row;
 `
-export default function LastNews({locale,padding,posts,pageInfo,background,buttonHide}){
+export default function LastNews({title,locale,padding,posts,pageInfo,background,buttonHide}){
 
     const buttonDisplay = buttonHide ? 'none' : 'flex';
     const {loading} = useSelector(state=>state.app)
@@ -151,10 +151,11 @@ export default function LastNews({locale,padding,posts,pageInfo,background,butto
 
     const checkScroll = () => {
         const scrollWidth = inputRef.current.scrollWidth;
-        const scrollBarWidth =  inputRef.current.offsetWidth
+        const scrollBarWidth =   inputRef.current.offsetWidth
         const newScrollLeft = inputRef.current.scrollLeft;
+        const medium = (parseInt(scrollWidth - scrollBarWidth) / 2)
 
-        if (parseInt(scrollWidth - scrollBarWidth) === parseInt(newScrollLeft) ) {
+        if (medium < parseInt(newScrollLeft)) {
             nextNewsForMobile()
         }
     };
@@ -163,7 +164,7 @@ export default function LastNews({locale,padding,posts,pageInfo,background,butto
             <Back padding={padding} background={background}>
                 <Container>
                     <Header>
-                        <TitleForComponent marginTop='unset' text={NewsLsi.otherNews[locale]} fontSize='40px' />
+                        <TitleForComponent marginTop='unset' text={title[locale]} fontSize='40px' />
                         <Arrows>
                             <ArrowIcon
                                 arrow={!visuallyImpairedModeWhiteTheme ? '/WhiteLeftArrow.svg' : '/leftArrow.svg'}

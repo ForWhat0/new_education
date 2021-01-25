@@ -30,6 +30,7 @@ import {BubbleBg} from "../bubbleBg/bubbleBg";
 export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,children , header,showZNORegister}) => {
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const router = useRouter()
+    const scrollingToElement = router.asPath.substring(1,2) === '#'
     const locale = router.locale
     const pathname = router.pathname
     const dispatch = useDispatch()
@@ -87,17 +88,15 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
                                   <NewsWrapper posts={newsByTitle}/>
                               </Container>
                    :
-                              <div
-                                   style={{textAlign:'center',margin:'50px 0 50px 0'}}
-                              >
-                                  <h1>{NewsLsi.notExist[locale]}</h1>
-                                  <h2
+                              <LoaderContainer>
+                                  <h2>{NewsLsi.notExist[locale]}</h2>
+                                  <h3
                                       onClick={()=>dispatch(OnchangeInputSearchNews(''))}
                                       style={{borderBottom:'1px solid',paddingBottom:'10px',display: 'inline',cursor:'pointer'}}
                                   >
                                       {NewsLsi.cleanInput[locale]}
-                                  </h2>
-                              </div>
+                                  </h3>
+                              </LoaderContainer>
 
                     :
                         children
@@ -120,6 +119,11 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
              color:${!visuallyImpairedModeWhiteTheme && 'white'};
              background:${!visuallyImpairedModeWhiteTheme && '#1D1D1B'};
         }
+         #__next {
+              overflow: ${!scrollingToElement ? 'hidden' : 'unset'};
+              height:100%;
+              width:100%;
+            }   
         h1 {
           font-size: ${fontSize === 'medium' ? '42px' : fontSize === 'large' ? '44px' : 'off'};
         }

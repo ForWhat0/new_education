@@ -30,7 +30,6 @@ export const Container = styled.div`
 `
 export const ContainerWrapper = styled.div`
   @media screen and ${device.tablet} {
-    padding-bottom:20px;
      margin-left:3.2%;
       width:93.6%;
       flex-direction:column;

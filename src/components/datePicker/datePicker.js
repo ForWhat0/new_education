@@ -27,8 +27,7 @@ export default function DatePicker({ selectDate, getSelectedDay,tileDisabled,doS
     const locale = router.locale
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const [selectedDate, setSelectedDate] = useState(new Date());
-
-
+    const scrollingToElement = router.asPath.substring(1,2) === '#'
     const startDate = minDay(selectDate,30)
     const lastDate = maxDay(selectDate,30)
 
@@ -150,7 +149,7 @@ export default function DatePicker({ selectDate, getSelectedDay,tileDisabled,doS
     }
     const prevProps = usePrevious({doScroll});
     useEffect(() => {
-        if (prevProps?.doScroll !== doScroll){
+        if (prevProps?.doScroll !== doScroll && !scrollingToElement){
             setSelectedDate(selectDate);
             setTimeout(() => {
                 let view = document.getElementById('selected');

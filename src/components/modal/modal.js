@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux"
-import {FormContainer, StyledModal} from "./modalStyled"
+import {CloseModalButton, FormContainer, StyledModal} from "./modalStyled"
 import {InputStyled} from "../input/input";
 import {LoaderContainer} from "../leftComment/leftCommentStyLedComponents";
 import {useEffect, useState} from "react";
@@ -205,7 +205,9 @@ export const Modal=()=>{
                                 <h3>
                                     {sent[locale]}
                                 </h3>
-                                <StyledButton style={{marginTop:'60px'}} func={closeModal} text={close[locale]}/>
+                                <CloseModalButton>
+                                    <StyledButton  func={closeModal} text={close[locale]}/>
+                                </CloseModalButton>
                             </>
                     }
                     {

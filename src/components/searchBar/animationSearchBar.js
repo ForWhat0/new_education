@@ -14,7 +14,7 @@ const SearchBar = styled.div`
  position:${props => props.position};
  right:${props => props.right};
  &:hover{
- width:160px;
+ width:140px;
  }
 `
 const Icon = styled.i`
@@ -56,7 +56,7 @@ border-radius: 28px;
     padding: 9px 18px;
   }
     ${SearchBar}:hover & {
-    width: 160px!important;
+    width: 140px!important;
     background-color: white;
   }  
 `;

@@ -672,7 +672,7 @@ export const NavBarMain =({footer,globeDarkIcon,searchBarColor,color,navButtons,
                     </Link>
                 </SignIn>
             </ChangeLanguageAndSearchContainer>
-            <Burger color={!visuallyImpairedModeWhiteTheme ? 'white' : color}/>
+            <Burger footer={footer} color={!visuallyImpairedModeWhiteTheme ? 'white' : color}/>
         </NavMain>
     )
 }

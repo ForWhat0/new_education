@@ -76,6 +76,7 @@ width:100%;
 export const LoaderContainer = styled.div`
   width:100%;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   text-align: center;
   position:relative;
@@ -83,6 +84,11 @@ export const LoaderContainer = styled.div`
   h2 {
   @media screen and ${device.mobileL} {
   font-size:16px;
+  }
+  }
+   h3 {
+  @media screen and ${device.mobileL} {
+  font-size:12px;
   }
   }
 `

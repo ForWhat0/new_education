@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {useSelector} from "react-redux";
+import {device} from "../deviceSizes/deviceSizes";
 
 const StyledBlock = styled.div`
    display:flow-root;
@@ -8,10 +9,21 @@ const StyledBlock = styled.div`
   border-bottom:1px solid ${props=>props.color};
   padding-bottom:30px;
   position:relative;
-  && h2 {
+  && h2,h1 {
    font-size:24px!important;
   font-weight:500!important;
   margin-bottom:20px!important;
+   @media screen and ${device.tablet}{
+     font-size:16px!important;
+  }
+  }
+  && p , div,li {
+   @media screen and ${device.tablet}{
+     font-size:12px!important;
+  }
+  }
+  && a{
+  display:block;
   }
   && p{
   margin-bottom:40px;
@@ -46,12 +58,19 @@ const StyledBlockZNO = styled.div`
   border-bottom:1px solid ${props=>props.color};
   position:relative;
   line-height: 27px;
-  && h2 {
+  && h2,h1 {
    font-size:24px!important;
   font-weight:500!important;
   margin-bottom:20px!important;
+   @media screen and ${device.tablet}{
+     font-size:16px!important;
   }
-  
+  }
+  && p , div,li {
+   @media screen and ${device.tablet}{
+     font-size:12px!important;
+  }
+  }
   && ul{
       margin: 0 0 40px 0;
     padding: 0;

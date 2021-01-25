@@ -24,19 +24,20 @@ margin-bottom:${props=>props.pBottom};
 padding-bottom:${props=>props.pBottom};
 border-bottom:${props=>props.bBottom};
 flex-direction:${props => props.flexDirection};
-@media screen and ${device.tablet} {
+@media screen and (max-width:950px) {
 padding-top: 20px;
-width:93.6%;
 padding-bottom:20px;
-flex-direction:column;
-     
+flex-direction:column;     
+  }
+@media screen and ${device.tablet} {
+width:93.6%;  
   }
 `
 const ImageContainer = styled.div`
 margin-right: ${props=>props.rightImage};
 justify-content: ${props=>props.justifyImage};
 display: ${props=>props.display};
-@media screen and ${device.tablet} {
+@media screen and (max-width:950px) {
    margin-right: unset;
    justify-content:center;
     width: 90%;
@@ -61,25 +62,29 @@ width:100%;
 color:${props=>props.color};
 width:${props=>props.width};
 margin-right: ${props=>props.rightText};
-h1{
-margin:0;
-@media screen and ${device.tablet} {
- margin-top: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size:16px;
-  }
-}
-div {
-@media screen and ${device.tablet} {
-    font-size:12px;
-  }
-}
-@media screen and ${device.tablet} {
+@media screen and (max-width:950px) {
    width: 100%;
    margin-right: unset;
    margin-bottom: 20px;
   }
+  
+h1{
+margin:0;
+@media screen and (max-width:950px) {
+ margin-top: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  @media screen and ${device.mobileL} {
+    font-size:16px;
+  }
+}
+div {
+@media screen and ${device.mobileL} {
+    font-size:12px;
+  }
+}
+
   
 `
 

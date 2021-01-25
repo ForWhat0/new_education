@@ -10,6 +10,7 @@ import GET_NEWS_BY_SLUG_AND_FIRST_THREE_NEWS from "../../src/queries/get-news-by
 import {MainLayout} from "../../src/components/layouts/mainLayout";
 import {ParcMenu} from "../../src/components/hooks/hooks";
 import {Container} from "./index";
+import {NewsLsi} from "../../src/Lsi/lsi";
 
 
 const LoaderContainer = styled.div`
@@ -48,6 +49,7 @@ export default function MicrophoneDetail({locale,newBySlug,news,menu,contacts}) 
                                   pageInfo={news.pageInfo}
                                   buttonHide={true}
                                   locale={locale}
+                                  title={NewsLsi.otherNews}
                         />
                     </>
                     :

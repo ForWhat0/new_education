@@ -2,13 +2,14 @@ import styled from 'styled-components';
 import {device} from "../deviceSizes/deviceSizes";
 
 export const StyledBurger = styled.button`
-   @media screen and ${device.laptop}{
-       width: ${({ open }) => open ? 'fixed' : 'relative'};
+  @media screen and ${device.laptop}{
+       display:${({ footer,open }) => open && footer ? 'none' : 'flex'};
   }
-  position:relative;
+ position: ${({ open }) => open ? 'fixed' : 'relative'};
   display:none;
+  right:${({ open }) => open ? '3.2%' : 'unset'};
   flex-direction: column;
-      padding: 7px!important;
+  padding: 7px!important;
   align-items: center;
   border: none;
   cursor: pointer;

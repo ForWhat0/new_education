@@ -7,7 +7,7 @@ import {device} from "../deviceSizes/deviceSizes"
 const Global = styled.div`
 margin: 40px 0 40px 10%;
  @media screen and ${device.tablet}{
-    margin: 20px 0 20px 3.2%;
+    margin: 40px 0 40px 3.2%;
   }
 `
 const Home = styled.span`

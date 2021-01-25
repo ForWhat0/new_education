@@ -4,10 +4,11 @@ import Link from "next/link"
 import {headerLsi,events} from "../../Lsi/lsi"
 import {StyledButton} from "../button/button";
 import {ChangeLanguageSelector} from "../headers/changeLanguageSelector";
-import {HeaderWrapper, LogoImg} from "../headers/headerStyledElements";
+import {LogoImg} from "../headers/headerStyledElements";
 import {actionClickBurger} from "../../redux/actions/actions";
 import {useRouter} from "next/router";
 import { ParcUri} from "../hooks/hooks";
+import {createRef, useEffect} from "react";
 const {register,logIn} = headerLsi
 
 const Menu = ({menu}) => {
@@ -18,6 +19,14 @@ const Menu = ({menu}) => {
     const handlerCloseMenu=()=>{
         menuBurgerIsOpen === true  &&  dispatch(actionClickBurger())
     }
+    const ulRef = createRef()
+
+
+
+    useEffect(() => {
+        ulRef.current.scrollTop = 0
+    }, [menuBurgerIsOpen])
+
     const activeLink = {
         background:'linear-gradient(#FFDE00 30%,#00AEEF 60%)',
         text:'text',
@@ -25,7 +34,7 @@ const Menu = ({menu}) => {
     }
 
     return (
-        <StyledMenu open={menuBurgerIsOpen}>
+        <StyledMenu open={menuBurgerIsOpen} ref={ulRef}>
             <CircleBackground/>
             <HeaderInner>
                 <Header>

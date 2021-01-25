@@ -68,3 +68,9 @@ export const FormContainer = styled.div`
    
     }
 `
+export const CloseModalButton = styled.div`
+display:flex;
+margin-top:60px;
+ text-align:center;
+justify-content:center;
+`

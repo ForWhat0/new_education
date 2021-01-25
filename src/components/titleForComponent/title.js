@@ -18,7 +18,7 @@ margin-bottom: ${props => props.paddingBottom === '40px' && 'unset'};;
   }
   @media screen and (max-width:650px){
 line-height: 30px;
-font-size:${props=>props.display === 'none' && '16px'}!important;
+font-size:${props=>props.display === 'none' ? '20px' : '24px'}!important;
   }
   @media screen and ${device.mobileL}{
 font-size: ${props=>props.display === 'none' ? '16px' : '20px'}!important;
@@ -32,7 +32,7 @@ div{
     left: -15px;
     background: rgba(255, 222, 0, 0.35);
       bottom: 10px;
-    @media screen and ${device.mobileL}{
+    @media screen and (max-width:650px){
 height: 8px;
 bottom: 7px;
   }

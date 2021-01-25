@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {device} from "../deviceSizes/deviceSizes";
 
 export const StyledMenu = styled.nav`
   display: flex;
@@ -8,23 +7,20 @@ export const StyledMenu = styled.nav`
   position:fixed;
   height: 100vh;
    right:0;
-   width:0;
+    width: ${({ open }) => open ? '60%' : '0'};
     padding:0;
   text-align: left;
      overflow-y: auto;
     background-color: white;
     z-index: 5;
   top: 0;
-      transition: width 0.1s ease-in-out;
-      @media screen and  (max-width: 900px){
-     width: ${({ open }) => open ? '60%' : '0'};
-  }
+      transition: width 0.1s ease-in-out;    
    @media screen and  (max-width: 500px){
     width: ${({ open }) => open ? '100%' : '0'};
   }
  
   a {
-    font-size: 20px;
+    font-size: 16px;
     padding: 10px 0;
     font-weight: normal;
     color: black;
@@ -89,12 +85,8 @@ width:100%;
     border-bottom: unset;
 `
 export const Header = styled.div`
-    width: 80%;
-    margin-left:10%;
-   @media screen and ${device.tablet}{
-  width:93.6%;
+   width:93.6%;
   margin-left:3.2%;
-  }
      @media (max-width: 500px) {
       height: 70px; 
     }

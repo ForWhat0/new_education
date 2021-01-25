@@ -12,6 +12,7 @@ import {SendButton} from "../../src/components/sendButton/sendButton";
 import {useMutation} from "@apollo/client";
 import SEND_COMMENT from "../../src/mutations/sendComment";
 import {SelectStyled} from "../../src/components/select/select";
+import {device} from "../../src/components/deviceSizes/deviceSizes";
 
 const Global = styled.div`
 
@@ -32,6 +33,7 @@ position: relative;
     align-items: unset;
     height: unset;
     padding-bottom: 40px;
+    margin-top: 20px;
   }
 `
 const PaperPlane = styled.div`
@@ -74,11 +76,15 @@ const GrayBackground = styled.div`
     @media screen and (max-width:950px) {
      position: relative;
     height: auto;
-    width: 93.6%;
+    width: 80%;
     top: unset;
     left: unset;
     background: unset;
-    margin-left: 3.2%;
+    margin-left: 10%;
+  }
+    @media screen and ${device.tablet}{
+     width: 93.6%;
+     margin-left: 3.2%;
   }
 `
 const Text = styled.div`
@@ -131,8 +137,8 @@ bottom: 30px;
 `
 const Title = styled.div`
 margin-left:10%;
-@media screen and (max-width:950px) {
-  margin-left:3.2%;
+  @media screen and ${device.tablet}{
+     margin-left: 3.2%;
   }
 
 `
@@ -141,9 +147,13 @@ position:relative;
 width:320px;
 z-index: 2;
 @media screen and (max-width:950px) {
-      width: 93.6%;
-    margin-left: 3.2%;
+      width: 80%;
+    margin-left: 10%;
     margin-top: 40px;
+  }
+  @media screen and ${device.tablet}{
+        width: 93.6%;
+    margin-left: 3.2%;
   }
 `
 export default function  Appeal({locale,contacts,menu,appeals}){
@@ -235,7 +245,7 @@ export default function  Appeal({locale,contacts,menu,appeals}){
     )
 
     return(
-        <MainLayout databaseId={16688} contacts={contacts} menu={parsedMenu}>
+        <MainLayout databaseId={16688} hideLeftComponent={true} contacts={contacts} menu={parsedMenu}>
             <Global >
                 <Title>
                     <TitleForComponent marginBottom='unset' text={appeal.appeal[locale]}/>

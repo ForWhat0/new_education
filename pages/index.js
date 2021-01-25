@@ -10,12 +10,16 @@ import EventsMobile from "../src/components/events/eventsMobile";
 import {ParcMenu} from "../src/components/hooks/hooks";
 import GET_EVENTS_DATE from "../src/queries/get_all_events_dete";
 import {useSelector} from "react-redux";
+import {NewsLsi} from "../src/Lsi/lsi";
+import {useEffect} from "react";
+import {useRouter} from "next/router";
+import Scroll, {Element} from 'react-scroll'
+
 
 export default function Home({contacts,locale,menu,news,events,data,services,allDates}) {
   const {mainPageFields} = data
   const parsedMenu = ParcMenu(menu)
   const {visuallyImpairedMode} = useSelector(state=>state.app)
-
     const teamData =  {
       text:mainPageFields.text,
       title:mainPageFields.titleCommand,
@@ -26,6 +30,8 @@ export default function Home({contacts,locale,menu,news,events,data,services,all
       projects:mainPageFields.projectPopular
     }
 
+
+
   return (
       <HomePageLayout
           databaseId={data.databaseId}
@@ -35,22 +41,23 @@ export default function Home({contacts,locale,menu,news,events,data,services,all
       >
 
         {events.length > 0 &&<Events locale={locale} titleEvent={mainPageFields?.titleEvent}  posts={events}/>}
-        {events.length > 0 &&<EventsMobile locale={locale} titleEvent={mainPageFields?.titleEvent} allDates={allDates}  posts={events[0]}/>}
+        {events.length > 0 &&<EventsMobile  locale={locale} titleEvent={mainPageFields?.titleEvent} allDates={allDates}  posts={events[0]}/>}
         {services?.nodes.length > 0 &&
-        <div id="Services"  className="element">
+        <Element name="Services" id="Services"  className="element">
           <Services locale={locale} titleServices={mainPageFields?.titleServices}  posts={services.nodes}  pageInfo={services.pageInfo} />
-        </div>
+        </Element>
         }
         {popularProjectsData?.projects?.length > 0 &&<ProjectsWrapper locale={locale}  posts={popularProjectsData}/>}
         {
           !visuallyImpairedMode &&
 
           teamData?.employees?.length > 0 &&
-        <div id="Team"  className="element">
+        <Element name="Team" id="Team"  className="element">
           <Team  posts={teamData}/>
-        </div>
+        </Element>
         }
-        {news.nodes.length > 0 &&<LastNews locale={locale} titleNews={mainPageFields?.titleNews} padding='40px 0 80px 0'  posts={news.nodes}  pageInfo={news.pageInfo} />}
+        {news.nodes.length > 0 &&<LastNews title={NewsLsi.lastNews}  locale={locale} titleNews={mainPageFields?.titleNews} padding='40px 0 80px 0'  posts={news.nodes}  pageInfo={news.pageInfo} />}
+
       </HomePageLayout>
   )
 }
