@@ -9,6 +9,7 @@ import {actionClickBurger} from "../../redux/actions/actions";
 import {useRouter} from "next/router";
 import { ParcUri} from "../hooks/hooks";
 import {createRef, useEffect} from "react";
+import Burger from "./burgerMenu";
 const {register,logIn} = headerLsi
 
 const Menu = ({menu}) => {
@@ -47,6 +48,7 @@ const Menu = ({menu}) => {
                             />
                         </a>
                     </Link>
+                    <Burger/>
                 </Header>
             </HeaderInner>
             <Ul>

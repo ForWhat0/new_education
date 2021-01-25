@@ -3,11 +3,10 @@ import {device} from "../deviceSizes/deviceSizes";
 
 export const StyledBurger = styled.button`
   @media screen and ${device.laptop}{
-       display:${({ footer,open }) => open && footer ? 'none' : 'flex'};
+       display:flex;
   }
- position: ${({ open }) => open ? 'fixed' : 'relative'};
+ position:relative;
   display:none;
-  right:${({ open }) => open ? '3.2%' : 'unset'};
   flex-direction: column;
   padding: 7px!important;
   align-items: center;
@@ -15,7 +14,6 @@ export const StyledBurger = styled.button`
   cursor: pointer;
   padding: 0;
   margin-left:20px;
-  z-index: 10;
    background: ${ props => props.open ? '#000' : props.dark ? '#000' : props.color};
     border-radius: 29px;
     overflow: hidden;
@@ -31,7 +29,7 @@ export const StyledBurger = styled.button`
     height: 3px;
     background:${ props => props.open ? '#FFFFFF' : props.color === '#FFFFFF' ? '#000' : '#FFFFFF'};
     border-radius: 10px;
-    transition: all 0.3s linear;
+    transition: all 0.5s linear;
     position: relative;
     transform-origin: 1px;
 

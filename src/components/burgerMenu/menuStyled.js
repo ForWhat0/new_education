@@ -1,20 +1,18 @@
 import styled from 'styled-components';
 
 export const StyledMenu = styled.nav`
-  display: flex;
+  height: 100%;
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  overflow-x: hidden;
+  transition: 0.1s;
   box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
-  flex-direction: column;
-  position:fixed;
-  height: 100vh;
-   right:0;
     width: ${({ open }) => open ? '60%' : '0'};
     padding:0;
   text-align: left;
-     overflow-y: auto;
     background-color: white;
-    z-index: 5;
-  top: 0;
-      transition: width 0.1s ease-in-out;    
    @media screen and  (max-width: 500px){
     width: ${({ open }) => open ? '100%' : '0'};
   }
@@ -57,7 +55,7 @@ export const SignIn = styled.div`
     align-items-center;
 `
 export const CircleBackground = styled.div`
-    height: 100%;
+    height: 80%;
     z-index: -1;
     background: rgba(0, 174, 239, 0.08);
     width: 150%;
@@ -85,6 +83,9 @@ width:100%;
     border-bottom: unset;
 `
 export const Header = styled.div`
+display: flex;
+    justify-content: space-between;
+    align-items: center;
    width:93.6%;
   margin-left:3.2%;
      @media (max-width: 500px) {
