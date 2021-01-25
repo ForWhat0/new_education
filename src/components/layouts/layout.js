@@ -20,7 +20,7 @@ import StyledLoader from "../loader/loader";
 import {LoaderContainer} from "../../../pages/calendar";
 import { NewsLsi} from "../../Lsi/lsi";
 import {useRouter} from "next/router";
-import {Container} from "../../../pages/news";
+import {Container, NewsContainer} from "../../../pages/news";
 import {RouterLink} from "../routerLink/routerLink";
 import { Modal } from "../modal/modal";
 import {BubbleBg} from "../bubbleBg/bubbleBg";
@@ -79,14 +79,14 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
                           </LoaderContainer>
                       :
                           newsByTitle.length ?
-                              <Container>
+                              <NewsContainer style={{paddingBottom: "40px"}}>
                                   <LoaderContainer>
                                       <h2 style={{margin: "0.67rem 0 0 0"}}>
                                           {NewsLsi.result[locale]}
                                       </h2>
                                   </LoaderContainer>
                                   <NewsWrapper posts={newsByTitle}/>
-                              </Container>
+                              </NewsContainer>
                    :
                               <LoaderContainer>
                                   <h2>{NewsLsi.notExist[locale]}</h2>

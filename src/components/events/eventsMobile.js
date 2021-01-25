@@ -10,6 +10,7 @@ import Link from "next/link";
 import DatePicker from "../datePicker/datePicker";
 import client from "../../apollo/client";
 import GET_EVENT_BY_DATE from "../../queries/get_event_by_date";
+import {LoaderContainer} from "../../../pages/calendar";
 
 
 const GlobalContainer = styled.div`
@@ -33,13 +34,7 @@ const ButtonContainer = styled.div`
   }
 `
 
-const LoaderContainer = styled.div`
-  width:100%;
-  display:flex;
-  justify-content:center;
-  position:relative;
-  margin:50px 0 50px 0;
-`
+
 
 export default function EventsMobile({locale,titleEvent,posts,allDates}){
     const [open, setOpen] = useState(false);

@@ -1,22 +1,21 @@
 import styled from 'styled-components';
+import {device} from "../deviceSizes/deviceSizes";
 
 export const StyledMenu = styled.nav`
-  height: 100%;
+  height: 100vh;
   position: fixed;
   z-index: 5;
   top: 0;
   right: 0;
-  overflow-x: hidden;
+
   box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
    display: ${({ open }) => open ? 'block' : 'none'};
-    width: ${({ open }) => open ? '60%' : '0'};
-      transition: all 0.3s linear;
+    width: ${({ open }) => open ? '100%' : '0'};
+      transition: width 0.3s linear;
     padding:0;
   text-align: left;
     background-color: white;
-   @media screen and  (max-width: 500px){
-    width: ${({ open }) => open ? '100%' : '0'};
-  }
+
  
   a {
     font-size: 16px;
@@ -56,14 +55,18 @@ export const SignIn = styled.div`
     align-items-center;
 `
 export const CircleBackground = styled.div`
-    height: 80%;
+    height: 50%;
     z-index: -1;
     background: rgba(0, 174, 239, 0.08);
-    width: 150%;
+    width: 50%;
     top: 10%;
-    right: 35%;
     border-radius: 50%;
     position: absolute;
+     @media screen and  ${device.mobileL} {
+     width: 100%;
+     left:-50%;
+      height: 80%;
+  }
 `
 export const ALink = styled.a`
 cursor:pointer;
@@ -74,7 +77,7 @@ cursor:pointer;
 export const HeaderInner = styled.div`
 background: url(/diia_gradient.png);
 width:100%;
- height: 74px;
+ height: 73.2px;
     z-index: 6;
     position: fixed;
     background-size: cover;
@@ -87,9 +90,11 @@ export const Header = styled.div`
 display: flex;
     justify-content: space-between;
     align-items: center;
-   width:93.6%;
+   width:80%;
+   height:100%;
+  margin-left:10%;
+  @media screen and  ${device.mobileL} {
+     width:93.6%;
   margin-left:3.2%;
-     @media (max-width: 500px) {
-      height: 70px; 
-    }
+  }
 `

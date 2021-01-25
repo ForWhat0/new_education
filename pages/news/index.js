@@ -24,7 +24,7 @@ width:93.6%;
 margin-left:3.2%;
   }
 `
- const NewsContainer = styled.div`
+ export const NewsContainer = styled.div`
  width:100%;
  @media screen and ${device.tablet} {
 width:80%;
