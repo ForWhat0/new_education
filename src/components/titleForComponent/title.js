@@ -17,7 +17,7 @@ padding-bottom:${props => props.paddingBottom === '40px' ? '16px' : props => pro
 margin-bottom: ${props => props.paddingBottom === '40px' && 'unset'};;
   }
   @media screen and (max-width:650px){
-line-height: 30px;
+line-height: 1;
 font-size:${props=>props.display === 'none' ? '20px' : '24px'}!important;
   }
   @media screen and ${device.mobileL}{

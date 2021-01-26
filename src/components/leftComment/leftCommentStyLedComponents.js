@@ -18,7 +18,7 @@ export  const Title = styled.h1`
 font-size:40px;
 margin-bottom:20px;
 margin-left: 10%;
-line-height: 30px;
+line-height: 1;
 `
 
 export const Container = styled.div`
