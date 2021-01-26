@@ -20,7 +20,7 @@ import StyledLoader from "../loader/loader";
 import {LoaderContainer} from "../../../pages/calendar";
 import { NewsLsi} from "../../Lsi/lsi";
 import {useRouter} from "next/router";
-import {Container, NewsContainer} from "../../../pages/news";
+import { NewsContainer} from "../../../pages/news";
 import {RouterLink} from "../routerLink/routerLink";
 import { Modal } from "../modal/modal";
 import {BubbleBg} from "../bubbleBg/bubbleBg";
@@ -30,7 +30,6 @@ import {BubbleBg} from "../bubbleBg/bubbleBg";
 export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,children , header,showZNORegister}) => {
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     const router = useRouter()
-    const scrollingToElement = router.asPath.substring(1,2) === '#'
     const locale = router.locale
     const pathname = router.pathname
     const dispatch = useDispatch()
@@ -120,9 +119,7 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
              background:${!visuallyImpairedModeWhiteTheme && '#1D1D1B'};
         }
          #__next {
-              overflow: ${!scrollingToElement ? 'hidden' : 'unset'};
-              height:100%;
-              width:100%;
+              overflow: hidden;
             }   
         h1 {
           font-size: ${fontSize === 'medium' ? '42px' : fontSize === 'large' ? '44px' : 'off'};
