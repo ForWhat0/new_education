@@ -1,4 +1,3 @@
-import client from "../../src/apollo/client"
 import {MainLayout} from "../../src/components/layouts/mainLayout"
 import styled from 'styled-components'
 import {formatDate, ParcMenu, useOnClickOutside} from "../../src/components/hooks/hooks";
@@ -14,7 +13,7 @@ import {useRouter} from "next/router";
 import {SearchBarStyled} from "../../src/components/searchBar/searchBar";
 import StyledLoader from "../../src/components/loader/loader";
 import CalendarEvents from "../../src/components/events/CalendarEvents";
-import reduxClient from "../../src/apollo/reduxClient";
+import client from "../../src/apollo/client";
 import {SEARCH_EVENTS_BY_TITLE} from "../../src/queries/search_events_by_title";
 import {calendarLsi} from "../../src/Lsi/lsi";
 import {StyledButton} from "../../src/components/button/button";
@@ -104,7 +103,7 @@ export default function EventCalendar({locale,contacts,loading,time,menu,allDate
     const [eventByTitle, setEventByTitle] = useState([]);
     const Search = async ()=>{
         setSearchLoading(true)
-        const { data  } = await reduxClient.query( {
+        const { data  } = await client.query( {
             query: SEARCH_EVENTS_BY_TITLE,
             variables: {
                 search:searchInput,

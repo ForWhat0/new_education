@@ -1,4 +1,3 @@
-import reduxClient from "../../src/apollo/reduxClient"
 import StyledLoader from "../../src/components/loader/loader";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import PostBody from "../../src/components/post-body/post-body";
@@ -8,6 +7,7 @@ import GET_ALL_SLUG_FROM_PROJECTS from "../../src/queries/get-all-slug-from-proj
 import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
 import {ParcMenu} from "../../src/components/hooks/hooks";
 import {useSelector} from "react-redux";
+import client from "../../src/apollo/client";
 
  const Container = styled.div`
  width:100%;
@@ -162,7 +162,7 @@ export const getStaticProps = async (
     const contactsUri = locale === "EN" ? "/en/contacts/" : locale === "RU" ? "/ru/kontakty/"  : "/kontakti/"
     const location = locale === "EN" ? "HEADER_MENU___EN" : locale === "RU" ? "HEADER_MENU___RU"  : "HEADER_MENU"
 
-    const { data  } = await reduxClient.query( {
+    const { data  } = await client.query( {
         query: GET_PROJECT_BY_SLUG,
         variables: {
             id,
@@ -182,7 +182,7 @@ export const getStaticProps = async (
 export const getStaticPaths = async ({locales}) => {
     let paths = []
 
-    const { data } = await reduxClient.query( {
+    const { data } = await client.query( {
         query: GET_ALL_SLUG_FROM_PROJECTS
     } )
 

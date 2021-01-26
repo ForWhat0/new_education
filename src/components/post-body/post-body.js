@@ -13,7 +13,6 @@ const StyledBlock = styled.div`
    font-size:24px!important;
   font-weight:500!important;
   margin-bottom:20px!important;
-  
    @media screen and ${device.tablet}{
      font-size:16px!important;
   }

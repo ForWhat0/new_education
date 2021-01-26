@@ -9,7 +9,6 @@ import  {useEffect, useRef, useState} from "react";
 import {TitleForComponent} from "../../src/components/titleForComponent/title";
 import Calendar from "react-calendar";
 import {device} from "../../src/components/deviceSizes/deviceSizes";
-import reduxClient from "../../src/apollo/reduxClient";
 import GET_NEWS_BY_DATE from "../../src/queries/get_news_by_date";
 import StyledLoader from "../../src/components/loader/loader";
 import {NewsLsi} from "../../src/Lsi/lsi";
@@ -24,7 +23,7 @@ width:93.6%;
 margin-left:3.2%;
   }
 `
- export const NewsContainer = styled.div`
+  const NewsContainer = styled.div`
  width:100%;
  @media screen and ${device.tablet} {
 width:80%;
@@ -74,7 +73,7 @@ export default function AllNews({news,menu,currentPageNumber,contacts,locale}) {
     const Search = async ()=>{
         setSearchLoading(true)
         const date = new Date(value)
-        const { data  } = await reduxClient.query( {
+        const { data  } = await client.query( {
             query: GET_NEWS_BY_DATE,
             variables: {
                 year:date.getFullYear(),

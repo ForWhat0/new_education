@@ -5,7 +5,7 @@ import {headerLsi,events} from "../../Lsi/lsi"
 import {StyledButton} from "../button/button";
 import {ChangeLanguageSelector} from "../headers/changeLanguageSelector";
 import {LogoImg} from "../headers/headerStyledElements";
-import {actionClickBurger} from "../../redux/actions/actions";
+import {actionClickBurger, ScrollToElement} from "../../redux/actions/actions";
 import {useRouter} from "next/router";
 import { ParcUri} from "../hooks/hooks";
 import {createRef, useEffect} from "react";
@@ -19,6 +19,10 @@ const Menu = ({menu}) => {
     const dispatch = useDispatch()
     const handlerCloseMenu=()=>{
         menuBurgerIsOpen === true  &&  dispatch(actionClickBurger())
+    }
+    const scroll = (string) =>{
+        menuBurgerIsOpen === true  &&  dispatch(actionClickBurger())
+        dispatch(ScrollToElement(string))
     }
     const ulRef = createRef()
 
@@ -54,7 +58,7 @@ const Menu = ({menu}) => {
             <Ul>
                 <Link href={'/calendar'} >
                     <Li  onClick={()=>handlerCloseMenu()}>
-                        <ALink activeLink={router.pathname == '/calendar' && activeLink}>
+                        <ALink activeLink={router.pathname === '/calendar' && activeLink}>
                             {events.calendarEvents[locale]}
                         </ALink>
                     </Li>
@@ -64,9 +68,9 @@ const Menu = ({menu}) => {
                         button.children.length > 0 ?
                             button.children.map(el=>
                                 el.path.charAt(0) === '#' ?
-                                    <Link key={i+el.title} href={`/${el.path}`} passHref>
-                                        <Li onClick={()=>handlerCloseMenu()}>
-                                            <ALink activeLink={router.asPath == `/${el.path}` && activeLink}>
+                                    <Link key={i+el.title}  scroll={false} href="/" >
+                                        <Li onClick={()=>scroll(el.path)}>
+                                            <ALink>
                                                 {el.title}
                                             </ALink>
                                         </Li>
@@ -74,7 +78,7 @@ const Menu = ({menu}) => {
                                     :
                                     <Link key={i+el.title} href={ ParcUri(el.path) }>
                                         <Li onClick={()=>handlerCloseMenu()}>
-                                            <ALink activeLink={router.pathname == ParcUri(el.path) && activeLink}>
+                                            <ALink activeLink={router.pathname === ParcUri(el.path) && activeLink}>
                                                 {el.title}
                                             </ALink>
                                         </Li>
@@ -83,7 +87,7 @@ const Menu = ({menu}) => {
                             :
                             <Link key={i+button.title} href={ParcUri(button.path)}>
                                 <Li onClick={()=>handlerCloseMenu()}>
-                                    <ALink activeLink={router.pathname == ParcUri(button.path) && activeLink}>
+                                    <ALink activeLink={router.pathname === ParcUri(button.path) && activeLink}>
                                         {button.title}
                                     </ALink>
                                 </Li>

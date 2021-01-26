@@ -7,11 +7,11 @@ export const StyledMenu = styled.nav`
   z-index: 5;
   top: 0;
   right: 0;
-
+  overflow-x: hidden;
   box-shadow: 0px 0px 20px rgba(29, 29, 27, 0.2);
    display: ${({ open }) => open ? 'block' : 'none'};
     width: ${({ open }) => open ? '100%' : '0'};
-      transition: width 0.3s linear;
+      transition: all 0.3s linear;
     padding:0;
   text-align: left;
     background-color: white;

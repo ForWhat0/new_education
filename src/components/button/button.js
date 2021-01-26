@@ -5,7 +5,7 @@ import {useEffect} from "react"
 export const StyledButton =({text,func})=>{
     const {visuallyImpairedMode} = useSelector(state=>state.app)
     useEffect(()=>{
-        !visuallyImpairedMode &&  TimelineLite && animationButton()
+        !visuallyImpairedMode && animationButton()
     },[visuallyImpairedMode])
     return (
         <>

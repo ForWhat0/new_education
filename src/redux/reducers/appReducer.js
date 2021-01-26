@@ -6,7 +6,7 @@ import {
     clickOnOffImages,
     clickVisuallyImpairedModeOn,
     clickVisuallyImpairedModeOff,
-    clickOnOffVisuallyImpairedModeWhiteTheme, changeFontSizeNormal
+    clickOnOffVisuallyImpairedModeWhiteTheme, changeFontSizeNormal, scrollToElement
 } from '../types/types'
 
 const initialState = {
@@ -19,11 +19,18 @@ const initialState = {
     fontSize:'normal',
     images:true,
     visuallyImpairedModeWhiteTheme:true,
+    scrollToElement:null
 
 }
 
 export const appReducer = ( state = initialState,action ) =>{
     switch (action.type){
+        case scrollToElement:{
+            return {
+                ...state,
+                scrollToElement: action.payload
+            }
+        }
         case clickModal:{
             return {
                 ...state,

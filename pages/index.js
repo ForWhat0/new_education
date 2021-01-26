@@ -9,17 +9,20 @@ import Events from "../src/components/events/events";
 import EventsMobile from "../src/components/events/eventsMobile";
 import {ParcMenu} from "../src/components/hooks/hooks";
 import GET_EVENTS_DATE from "../src/queries/get_all_events_dete";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {NewsLsi} from "../src/Lsi/lsi";
 import {useEffect} from "react";
-import {useRouter} from "next/router";
-import Scroll, {Element} from 'react-scroll'
+import {  Element, scroller } from 'react-scroll'
+import {ScrollToElement} from "../src/redux/actions/actions";
+
 
 
 export default function Home({contacts,locale,menu,news,events,data,services,allDates}) {
   const {mainPageFields} = data
   const parsedMenu = ParcMenu(menu)
   const {visuallyImpairedMode} = useSelector(state=>state.app)
+  const dispatch = useDispatch()
+  const {scrollToElement} = useSelector(state=>state.app)
     const teamData =  {
       text:mainPageFields.text,
       title:mainPageFields.titleCommand,
@@ -29,6 +32,19 @@ export default function Home({contacts,locale,menu,news,events,data,services,all
       title:mainPageFields.titleProject,
       projects:mainPageFields.projectPopular
     }
+
+    useEffect(()=>{
+
+       if (scrollToElement){
+         scroller.scrollTo(scrollToElement, {
+           duration: 800,
+           delay: 0,
+           smooth: 'easeInOutQuart'
+         })
+         dispatch(ScrollToElement(null))
+       }
+
+    },[scrollToElement])
 
 
 
@@ -43,16 +59,18 @@ export default function Home({contacts,locale,menu,news,events,data,services,all
         {events.length > 0 &&<Events locale={locale} titleEvent={mainPageFields?.titleEvent}  posts={events}/>}
         {events.length > 0 &&<EventsMobile  locale={locale} titleEvent={mainPageFields?.titleEvent} allDates={allDates}  posts={events[0]}/>}
         {services?.nodes.length > 0 &&
-        <Element name="Services" id="Services"  className="element">
+        <Element name="#Services"  className="element">
           <Services locale={locale} titleServices={mainPageFields?.titleServices}  posts={services.nodes}  pageInfo={services.pageInfo} />
         </Element>
+
         }
+
         {popularProjectsData?.projects?.length > 0 &&<ProjectsWrapper locale={locale}  posts={popularProjectsData}/>}
         {
           !visuallyImpairedMode &&
 
           teamData?.employees?.length > 0 &&
-        <Element name="Team" id="Team"  className="element">
+        <Element name="#Team"   className="element">
           <Team  posts={teamData}/>
         </Element>
         }

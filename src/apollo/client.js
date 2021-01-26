@@ -10,7 +10,7 @@ const fetchHeaderWithToken = async (headers = {}) => {
 	return await fetch(process.env.WP_NEXT_PUBLIC_URL, {
 		method: "POST",
 		cache: "no-cache",
-		// credentials: "include",
+
 		headers: {
 			...headers,
 			"Content-Type": "application/json; charset=UTF-8",

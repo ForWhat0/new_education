@@ -8,13 +8,15 @@ import {AnimationSearchBarStyled} from "../searchBar/animationSearchBar";
 import {device} from "../deviceSizes/deviceSizes";
 import Burger from "../burgerMenu/burgerMenu";
 import {ParcUri} from "../hooks/hooks";
-import {ClickOnChangeFontSizeNormal,
+import {
+    ClickOnChangeFontSizeNormal,
     ClickOnOffImages, ClickOnOffWhiteTheme,
-    ClickVisuallyImpairedModeOff, ClickVisuallyImpairedModeOn, OnchangeInputSearchNews
+    ClickVisuallyImpairedModeOff, ClickVisuallyImpairedModeOn, OnchangeInputSearchNews, ScrollToElement
 } from "../../redux/actions/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {headerLsi} from "../../Lsi/lsi";
 import {useRouter} from "next/router";
+import {ALink, Li} from "../burgerMenu/menuStyled";
 
 export const LargeHeaderDesktop = styled.div`
 display:block;
@@ -525,6 +527,7 @@ export const NavBarVisuallyImpaired=({locale,display,footer})=>{
 export const NavBar =({navButtons,register,logIn})=>{
     const {visuallyImpairedModeWhiteTheme} = useSelector(state=>state.app)
     const color=!visuallyImpairedModeWhiteTheme ? 'white' : 'black'
+    const dispatch = useDispatch()
     return (
         <Nav>
             <LargeLinks>
@@ -538,8 +541,12 @@ export const NavBar =({navButtons,register,logIn})=>{
                                             {
                                                 button.children.map((el,i)=>
                                                     el.path.charAt(0) === '#' ?
-                                                        <Link key={i} href={`/${el.path}`} passHref>
-                                                            <li><a>{el.title}</a></li>
+                                                        <Link key={i}  scroll={false} href="/" >
+                                                            <li onClick={()=>dispatch(ScrollToElement(el.path))}>
+                                                                <a>
+                                                                    {el.title}
+                                                                </a>
+                                                            </li>
                                                         </Link>
                                                         :
                                                         <Link key={i} href={ParcUri(el.path)}>
@@ -615,10 +622,13 @@ export const NavBarMain =({footer,globeDarkIcon,searchBarColor,color,navButtons,
                                             {
                                                 button.children.map((el,index)=>
                                                     el.path.charAt(0) === '#' ?
-                                                        <Link key={index} href={`/${el.path}`} passHref>
-                                                            <li><a>{el.title}</a></li>
+                                                        <Link key={index}  scroll={false} href="/" >
+                                                            <li onClick={()=>dispatch(ScrollToElement(el.path))}>
+                                                                <a>
+                                                                    {el.title}
+                                                                </a>
+                                                            </li>
                                                         </Link>
-
                                                         :
                                                         <Link key={index} href={ParcUri(el.path)}>
                                                             <li>

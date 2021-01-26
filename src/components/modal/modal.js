@@ -74,7 +74,11 @@ export const Modal=()=>{
         emptyFields,
         wrongData
     } = ModalLsi
-
+    useEffect(() => {
+        modal ?
+            document.documentElement.style.overflow = 'hidden' :
+            document.documentElement.style.overflow = 'unset'
+    }, [modal])
 
     const registerOnEvent = async (event) => {
         event.preventDefault()
