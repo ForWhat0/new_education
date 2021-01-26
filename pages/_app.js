@@ -29,8 +29,11 @@ function MyApp({ Component, pageProps }) {
                               type="font/woff2"
                           />
 
-                          <link rel="preload" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style"
-                                onLoad="this.onload=null;this.rel='stylesheet'"/>
+                          <link
+                              rel="preload"
+                              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                              as="style"
+                          />
 
                           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                           <script    type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
