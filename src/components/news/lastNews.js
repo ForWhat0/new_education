@@ -16,6 +16,9 @@ export const Back = styled.div`
 width:100%;
 background-color:${props => props.background};
 padding:${props => props.padding};
+ @media screen and  ${device.mobileL} {
+ padding:${props => props.padding && '20px'};
+  }
 `
 
 export const Container = styled.div`

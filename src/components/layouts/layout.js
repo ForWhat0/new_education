@@ -44,7 +44,9 @@ export  const Layout = ({showLinks,databaseId,contacts,menu,hideLeftComponent,ch
 
     WindowDimensionsOffVisuallyImpaired()
     useEffect(()=>{
-        dispatch(OnchangeInputSearchNews(''))
+        if (inputNewsByTitle){
+            dispatch(OnchangeInputSearchNews(''))
+        }
     },[pathname])
 
     return (

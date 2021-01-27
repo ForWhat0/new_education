@@ -115,10 +115,11 @@ const Text = styled.p`
     line-height: 27px;
     font-weight:500;
     width:${props=>props.visuallyImpairedMode ? '70%' : 'auto'};
-    margin:${props=>props.visuallyImpairedMode ? 'unset' : '80px 20px 0'};
-    padding-right:${props=>props.visuallyImpairedMode ? '30px' : 'unset'};
-     @media screen and (max-width:1200px) {
-      margin: 30px 20px 0px;
+    padding:${props=>props.visuallyImpairedMode ? 'unset' : '50px 20px 20px 20px'};
+    margin-right:${props=>props.visuallyImpairedMode ? '30px' : 'unset'};
+     @media screen and (max-width:1300px) {
+     padding:${props=>props.visuallyImpairedMode ? 'unset' : '30px 20px 20px 20px'};
+      }
     @media screen and ${device.mobileL} {
      border-left: ${props=>props.border};
      margin:0 0 20px 19px;
