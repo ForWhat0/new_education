@@ -17,7 +17,7 @@ width:100%;
 background-color:${props => props.background};
 padding:${props => props.padding};
  @media screen and  ${device.mobileL} {
- padding:${props => props.padding && '20px'};
+ padding:${props => props.padding && '0 0 40px 0;'};
   }
 `
 

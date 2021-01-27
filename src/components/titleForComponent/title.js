@@ -34,7 +34,7 @@ div{
       bottom: 10px;
     @media screen and (max-width:650px){
 height: 8px;
-bottom: 7px;
+bottom: 3px;
   }
 }
 `
