@@ -12,7 +12,7 @@ import {device} from "../../src/components/deviceSizes/deviceSizes";
 import GET_NEWS_BY_DATE from "../../src/queries/get_news_by_date";
 import StyledLoader from "../../src/components/loader/loader";
 import {NewsLsi} from "../../src/Lsi/lsi";
-import {CalendarContainer, CalendarIcon, CalendarWrapper} from "../calendar";
+import {CalendarContainer, CalendarIcon, CalendarWrapper,LoaderContainer} from "../calendar";
 import {useSelector} from "react-redux";
 
 export const Container = styled.div`
@@ -37,13 +37,7 @@ position:relative;
     display: flex;
     align-items: center;
 `
-const LoaderContainer = styled.div`
-  width:100%;
-  display:flex;
-  justify-content:center;
-  position:relative;
-  margin:50px 0 50px 0;
-`
+
 const  ShowAll = styled.span`
     color: rgb(0,114,188);
     cursor: pointer;
