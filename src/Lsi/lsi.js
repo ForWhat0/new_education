@@ -173,6 +173,11 @@ export const events={
         EN:"Calendar of Events",
         RU:"Календарь"
     },
+    notExist:{
+        UK:"Найближчим часом не заплановано нових подій.",
+        EN:"No new events are planned in the near future.",
+        RU:"В ближайшее время не запланировано новых событий."
+    },
     today:{
         UK:"сьогодні",
         EN:"today",

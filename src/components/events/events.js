@@ -6,6 +6,7 @@ import {TitleForComponent} from "../titleForComponent/title";
 import {device} from "../deviceSizes/deviceSizes";
 import Event from "./event";
 import Link from "next/link";
+import {LoaderContainer} from "../../../pages/calendar";
 
 
 const ServicesContainer = styled.div`
@@ -40,19 +41,28 @@ export default function Events({locale,posts,titleEvent}){
     return(
         <GlobalContainer  >
             <TitleForComponent text={titleEvent}/>
-            <ServicesContainer margin={visuallyImpairedMode ? '100px 0 80px 0' : '50px 0 0 0'} grid={visuallyImpairedMode ? '1fr' : '1fr 1fr 1fr'}>
-                {posts.map((node,i) =>
-                    <Link key={i} href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt.substring(0,10)}`}>
-                        <a>
-                            <Event
-                                locale={locale}
-                                borderLeftColor={i === 0 ? '#0072BC' : i === 1 ? ' #FFDE00' : '#00AEEF'}
-                                hoursOne={node.eventsFields.hoursOne}
-                            />
-                        </a>
-                    </Link>
-                )}
-            </ServicesContainer>
+            {
+                posts.length > 0 ?
+                    <ServicesContainer margin={visuallyImpairedMode ? '100px 0 80px 0' : '50px 0 0 0'} grid={visuallyImpairedMode ? '1fr' : '1fr 1fr 1fr'}>
+                        {posts.map((node,i) =>
+                            <Link key={i} href={`/calendar/date/[currentDate]`} as={`/calendar/date/${node.dateGmt.substring(0,10)}`}>
+                                <a>
+                                    <Event
+                                        locale={locale}
+                                        borderLeftColor={i === 0 ? '#0072BC' : i === 1 ? ' #FFDE00' : '#00AEEF'}
+                                        hoursOne={node.eventsFields.hoursOne}
+                                    />
+                                </a>
+                            </Link>
+                        )}
+                    </ServicesContainer>
+                    :
+                    <LoaderContainer>
+                        <h2 style={{margin: "0.67rem 0 0 0"}}>
+                            {events.notExist[locale]}
+                        </h2>
+                    </LoaderContainer>
+            }
             <ButtonContainer>
                 <Link href={`/calendar`}>
                     <a>

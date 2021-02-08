@@ -73,58 +73,75 @@ export default function EventsMobile({locale,titleEvent,posts,allDates}){
         },
         [],
     );
+    const eventExist = ()=>{
+        return (
+            <>
+                <DatePicker getSelectedDay={selectedDay}
+                            doScroll = { new Date(currentDate.dateGmt).getDate()+new Date(currentDate.dateGmt).getMonth()+1}
+                            tileDisabled={allDates}
+                            selectDate={ new Date(currentDate.dateGmt)}
+                />
+                {
+                    loading ?
+                        <LoaderContainer>
+                            <StyledLoader/>
+                        </LoaderContainer>
+                        :
+                        !open ?
+                            <EventContainer>
+                                <Link href={`/calendar/[currentHourId]`} as={`/calendar/${currentDate?.eventsFields?.hoursOne?.databaseId}`}>
+                                    <a>
+                                        <Event
+                                            locale={locale}
+                                            hoursOne={currentDate.eventsFields.hoursOne}
+                                            offBorder={true}
+                                        />
+                                    </a>
+                                </Link>
+                            </EventContainer>
+                            :
+                            <EventContainer>
+                                {
+                                    currentDate.eventsFields.hours.slice().sort(function(a,b){
+                                        return new Date(a.hoursEvents.hoursEvents) - new Date(b.hoursEvents.hoursEvents)
+                                    }).map((el,i)=>
+                                        <Link key={i} href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
+                                            <a>
+                                                <Event
+                                                    locale={locale}
+                                                    hoursOne={el}
+                                                    offBorder={currentDate.eventsFields.hours.length === i + 1}
+                                                />
+                                            </a>
+                                        </Link>
+                                    )
+                                }
+                            </EventContainer>
+
+
+                }
+                {
+                    !loading &&
+                    <ButtonContainer>
+                        <StyledButton text={!open ? events.open[locale] : events.close[locale]} func={()=>setOpen(!open)}/>
+                    </ButtonContainer>
+                }
+            </>
+        )
+    }
     return(
         <GlobalContainer>
             <TitleForComponent text={titleEvent}/>
-            <DatePicker getSelectedDay={selectedDay}
-                        doScroll = {new Date(currentDate.dateGmt).getDate()+new Date(currentDate.dateGmt).getMonth()+1}
-                        tileDisabled={allDates}
-                        selectDate={new Date(currentDate.dateGmt)}
-            />
+
             {
-                loading ?
+                posts?.length > 0 ?
+                    eventExist()
+                    :
                     <LoaderContainer>
-                        <StyledLoader/>
+                        <h2 style={{margin: "0.67rem 0 0 0"}}>
+                            {events.notExist[locale]}
+                        </h2>
                     </LoaderContainer>
-                :
-                !open ?
-                    <EventContainer>
-                        <Link href={`/calendar/[currentHourId]`} as={`/calendar/${currentDate?.eventsFields?.hoursOne?.databaseId}`}>
-                            <a>
-                                <Event
-                                    locale={locale}
-                                    hoursOne={currentDate.eventsFields.hoursOne}
-                                    offBorder={true}
-                                />
-                            </a>
-                        </Link>
-                    </EventContainer>
-                :
-                 <EventContainer>
-                     {
-                         currentDate.eventsFields.hours.slice().sort(function(a,b){
-                             return new Date(a.hoursEvents.hoursEvents) - new Date(b.hoursEvents.hoursEvents)
-                         }).map((el,i)=>
-                             <Link key={i} href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
-                                 <a>
-                                     <Event
-                                         locale={locale}
-                                         hoursOne={el}
-                                         offBorder={currentDate.eventsFields.hours.length === i + 1}
-                                     />
-                                 </a>
-                             </Link>
-                         )
-                     }
-                 </EventContainer>
-
-
-            }
-            {
-                !loading &&
-                <ButtonContainer>
-                    <StyledButton text={!open ? events.open[locale] : events.close[locale]} func={()=>setOpen(!open)}/>
-                </ButtonContainer>
             }
 
             <ButtonContainer>
