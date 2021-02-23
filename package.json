@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
+    "export": "next export",
     "start": "next start"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
     "react": "17.0.1",
     "react-calendar": "^3.2.1",
     "react-dom": "17.0.1",
+    "react-player": "^2.8.2",
     "react-scroll": "^1.8.1",
     "react-select": "^3.1.1",
     "react-tsparticles": "^1.18.11",
@@ -31,7 +33,8 @@
     "redux-thunk": "^2.3.0",
     "sass": "^1.30.0",
     "styled-components": "^5.2.1",
-    "swiper": "^6.4.1"
+    "swiper": "^6.4.1",
+    "video-react": "^0.14.1"
   },
   "devDependencies": {
     "axios": "^0.21.1",
@@ -41,6 +44,7 @@
     "jquery": "^3.5.1",
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "^6.7.0",
+    "prettier": "2.2.1",
     "react-autosize-textarea": "^7.1.0",
     "react-particles-js": "^3.4.1",
     "react-redux": "^7.2.2",

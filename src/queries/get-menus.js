@@ -11,10 +11,10 @@ export const Menu = `
     }
   }
   
-`
+`;
 
 export const GET_MENUS = gql`
 query GET_MENUS {
   ${Menu}
 }
-`
+`;

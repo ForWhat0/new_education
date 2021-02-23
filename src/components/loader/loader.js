@@ -1,4 +1,4 @@
-import styled,{keyframes} from 'styled-components'
+import styled, { keyframes } from "styled-components";
 
 const rotate = keyframes`
   from {
@@ -11,16 +11,16 @@ const rotate = keyframes`
 `;
 
 const Loader = styled.div`
-align-self: center;
-position:absolute;
-    border: 16px solid #f3f3f3;
+  align-self: center;
+  position: absolute;
+  border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #3498db;
   width: 30px;
   height: 30px;
-   animation: ${rotate} 2s linear infinite;
-`
-const StyledLoader =()=>{
-    return <Loader/>
-}
-export default StyledLoader
+  animation: ${rotate} 2s linear infinite;
+`;
+const StyledLoader = () => {
+  return <Loader />;
+};
+export default StyledLoader;

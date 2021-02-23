@@ -1,17 +1,17 @@
-import styled from 'styled-components'
-import {LinkIcon} from "../headers/headerStyledElements"
+import styled from "styled-components";
+import { LinkIcon } from "../headers/headerStyledElements";
 import Icon from "../icon/icon";
-import {footer} from "../../Lsi/lsi";
-import {device} from "../deviceSizes/deviceSizes";
+import { footer } from "../../Lsi/lsi";
+import { device } from "../deviceSizes/deviceSizes";
 
 export const FooterWrapper = styled.footer`
- background: #1D1D1B;
-`
+  background: #1d1d1b;
+`;
 const LogosContainer = styled.div`
-  display:flex;
-  cursor:pointer;
-  a{
-  width: 30px;
+  display: flex;
+  cursor: pointer;
+  a {
+    width: 30px;
     height: 30px;
     margin-right: 30px;
     background-color: white;
@@ -19,142 +19,149 @@ const LogosContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-}
-`
+  }
+`;
 const Wrapper = styled.div`
- width:80%;
- margin-left:10%;
- margin-top:30px;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 30px;
   @media screen and ${device.tablet} {
- width:93.6%;
- margin-left:3.2%;
+    width: 93.6%;
+    margin-left: 3.2%;
   }
-`
-export const Logos = ({telegram,facebook,gmail})=>{
-    return (
-        <Wrapper>
-            <LogosContainer>
-                <a href={`https://telegram.im/${telegram}`}  target="_blank">
-                    <LinkIcon  className="fa fa-paper-plane" aria-hidden="true"/>
-                </a>
-                <a href={facebook} target="_blank">
-                    <LinkIcon  className="fa fa-facebook" aria-hidden="true"/>
-                </a>
-                <a href={`mailto:?subject=${gmail}`} target="_blank">
-                    <LinkIcon  className="fa fa-envelope" aria-hidden="true"/>
-                </a>
-            </LogosContainer>
-        </Wrapper>
-    )
-}
+`;
+export const Logos = ({ telegram, facebook, gmail }) => {
+  return (
+    <Wrapper>
+      <LogosContainer>
+        <a href={`https://telegram.im/${telegram}`} target="_blank">
+          <LinkIcon className="fa fa-paper-plane" aria-hidden="true" />
+        </a>
+        <a href={facebook} target="_blank">
+          <LinkIcon className="fa fa-facebook" aria-hidden="true" />
+        </a>
+        <a href={`mailto:?subject=${gmail}`} target="_blank">
+          <LinkIcon className="fa fa-envelope" aria-hidden="true" />
+        </a>
+      </LogosContainer>
+    </Wrapper>
+  );
+};
 const TextContainer = styled.div`
-    margin-top: 40px;
-    position: relative;
-    display: flex;
-    margin-left: 10%;
-    width: 80%;
-    @media screen and (max-width:1200px){
-      flex-direction:column;
+  margin-top: 40px;
+  position: relative;
+  display: flex;
+  margin-left: 10%;
+  width: 80%;
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
   }
-    @media screen and ${device.tablet} {
- width:93.6%;
- margin-left:3.2%;
+  @media screen and ${device.tablet} {
+    width: 93.6%;
+    margin-left: 3.2%;
   }
-`
+`;
 const List = styled.ul`
-text-align:${props=>props.align};
-position:${props=>props.position};
-right:${props=>props.right};
-padding-left: unset;
-@media screen and (max-width:1300px){
-     position:unset;
+  text-align: ${(props) => props.align};
+  position: ${(props) => props.position};
+  right: ${(props) => props.right};
+  padding-left: unset;
+  @media screen and (max-width: 1300px) {
+    position: unset;
   }
- @media screen and (max-width:1200px){
-     text-align:unset;
+  @media screen and (max-width: 1200px) {
+    text-align: unset;
   }
-`
+`;
 const ListElement = styled.li`
-    margin: 0 0 15px 0;
-    color:white;
-    line-height:1.5;
-    list-style-type: none;
-`
-const Link =styled.a`
-color:rgb(0,114,188);
-`
-export const Text =({
-    locale,
-    adress,
-    gmail,
-    phoneNumber,
-    group
-})=>{
-    return(
-        <TextContainer>
-            <List position='relative' right='unset'>
-                <ListElement>
-                    {footer.adress[locale]} {adress}
-                </ListElement>
-                <ListElement>
-                    {footer.phoneNumber[locale]} {phoneNumber}
-                </ListElement>
-                <ListElement>
-                    {footer.email[locale]} <Link href={`mailto:?subject=${gmail}`} target="_blank" >{gmail}</Link>
-                </ListElement>
-            </List>
-            <List align='end' position='absolute' right='0'>
-                <ListElement>
-                    {footer.courses[locale]} <Link href={`mailto:?subject=${gmail}`} target="_blank">{gmail}</Link>
-                </ListElement>
-                <ListElement>
-                    {footer.group[locale]} {group}
-                </ListElement>
-            </List>
-        </TextContainer>
-    )
-}
+  margin: 0 0 15px 0;
+  color: white;
+  line-height: 1.5;
+  list-style-type: none;
+`;
+const Link = styled.a`
+  color: rgb(0, 114, 188);
+`;
+export const Text = ({ locale, adress, gmail, phoneNumber, group }) => {
+  return (
+    <TextContainer>
+      <List position="relative" right="unset">
+        <ListElement>
+          {footer.adress[locale]} {adress}
+        </ListElement>
+        <ListElement>
+          {footer.phoneNumber[locale]} {phoneNumber}
+        </ListElement>
+        <ListElement>
+          {footer.email[locale]}{" "}
+          <Link href={`mailto:?subject=${gmail}`} target="_blank">
+            {gmail}
+          </Link>
+        </ListElement>
+      </List>
+      <List align="end" position="absolute" right="0">
+        <ListElement>
+          {footer.courses[locale]}{" "}
+          <Link href={`mailto:?subject=${gmail}`} target="_blank">
+            {gmail}
+          </Link>
+        </ListElement>
+        <ListElement>
+          {footer.group[locale]} {group}
+        </ListElement>
+      </List>
+    </TextContainer>
+  );
+};
 const CompanyContainer = styled.div`
-width:80%;
-margin-left:10%;
-display:flex;
-align-items:center;
-flex-direction:column;
- @media screen and ${device.tablet} {
- width:93.6%;
- margin-left:3.2%;
+  width: 80%;
+  margin-left: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  @media screen and ${device.tablet} {
+    width: 93.6%;
+    margin-left: 3.2%;
   }
-`
+`;
 const Develop = styled.div`
-display:flex;
-align-items:center;
-a{
-opacity: 0.5;
-&:hover{
-opacity:1;
-}
-}
-@media screen and ${device.mobileL} {
- flex-direction:column;
+  display: flex;
+  align-items: center;
+  a {
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
   }
-`
+  @media screen and ${device.mobileL} {
+    flex-direction: column;
+  }
+`;
 const DevelopText = styled.span`
-color:${props=>props.color};
-margin-right:10px;
-text-align: center;
-margin-bottom: ${props=>props.marginBottom};
-`
-export const Company =({authorship,locale})=>{
-return(
+  color: ${(props) => props.color};
+  margin-right: 10px;
+  text-align: center;
+  margin-bottom: ${(props) => props.marginBottom};
+`;
+export const Company = ({ authorship, locale }) => {
+  return (
     <CompanyContainer>
-        <Develop >
-            <DevelopText marginBottom='unset' color='white'>
-                {footer.developBy[locale]}
-            </DevelopText>
-            <a href='https://flexreality.pro/' target='_blank'>
-                <Icon src='/flexReality.svg' width='100px' height='50px' alt='Flex Reality' />
-            </a>
-        </Develop>
-        <DevelopText marginBottom='40px' color='#4F4F4F'>{authorship}</DevelopText>
+      <Develop>
+        <DevelopText marginBottom="unset" color="white">
+          {footer.developBy[locale]}
+        </DevelopText>
+        <a href="https://flexreality.pro/" target="_blank">
+          <Icon
+            src="/flexReality.svg"
+            width="100px"
+            height="50px"
+            alt="Flex Reality"
+          />
+        </a>
+      </Develop>
+      <DevelopText marginBottom="40px" color="#4F4F4F">
+        {authorship}
+      </DevelopText>
     </CompanyContainer>
-)
-}
+  );
+};

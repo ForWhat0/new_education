@@ -1,14 +1,13 @@
-import {nodemailerHook} from "../../src/components/hooks/nodemailerHook";
+import { nodemailerHook } from "../../src/components/hooks/nodemailerHook";
 
-export default ( req , res ) => {
+export default (req, res) => {
+  const { fName, lName, reason, email, textForMail, file } = req.body;
 
-    const {  fName, lName, reason ,phone} = req.body;
-
-      const  text = `
+  const text = `
     контактні дані: ${fName} ${lName} ;
-    телефон: ${phone} ;
-    причина звернення: ${reason.label} ;
-    `
-    nodemailerHook({subject:'Звернення',text,res})
-
-}
+    email: ${email} ;
+    тип звернення: ${reason.label} ;
+    текст звертання ${textForMail} ;
+    `;
+  nodemailerHook({ subject: "Звернення", text, res, file });
+};

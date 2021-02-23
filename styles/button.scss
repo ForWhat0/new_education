@@ -1,27 +1,27 @@
-.btn{
-  background: #1D1D1B;
+.btn {
+  background: #1d1d1b;
   border: 1px solid white;
   border-radius: 28px;
-  text-align:center;
-  color: #FFFFFF;
+  text-align: center;
+  color: #ffffff;
   font-size: 16px;
   padding: 8px 22px;
   cursor: pointer;
 }
 
 .button {
-  background: #1D1D1B;
-  border:unset;
+  background: #1d1d1b;
+  border: unset;
   border-radius: 28px;
-  text-align:center;
-  color: #FFFFFF;
+  text-align: center;
+  color: #ffffff;
   font-size: 16px;
   padding: 8px 22px;
   cursor: pointer;
   transition: all 0.1s ease-out;
 
   &:hover {
-    background-color: #1D1D1B;
+    background-color: #1d1d1b;
     color: #fff;
   }
 
@@ -43,11 +43,11 @@
     }
 
     &:hover + .button--bubble__effect-container .circle {
-      background: darken(#1D1D1B, 15%);
+      background: darken(#1d1d1b, 15%);
     }
 
     &:hover + .button--bubble__effect-container .button {
-      background: darken(#1D1D1B, 15%);
+      background: darken(#1d1d1b, 15%);
     }
 
     &:active + .button--bubble__effect-container {
@@ -63,12 +63,12 @@
         position: absolute;
         width: 50%;
         height: 25%;
-        padding:0;
+        padding: 0;
         top: 50%;
         left: 25%;
         z-index: 1;
         transform: translateY(-50%);
-        background: #1D1D1B;
+        background: #1d1d1b;
         transition: background 0.1s ease-out;
       }
     }
@@ -93,7 +93,7 @@
     width: 25px;
     height: 25px;
     border-radius: 15px;
-    background: #1D1D1B;
+    background: #1d1d1b;
     transition: background 0.1s ease-out;
 
     &.top-left {
@@ -114,8 +114,3 @@
   width: 1px;
   height: 1px;
 }
-
-
-
-
-

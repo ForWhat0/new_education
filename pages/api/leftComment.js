@@ -1,15 +1,13 @@
-import {nodemailerHook} from "../../src/components/hooks/nodemailerHook"
+import { nodemailerHook } from "../../src/components/hooks/nodemailerHook";
 
 export default (req, res) => {
+  const { name, phone, email, comment } = req.body;
 
-    const {  name, phone , email , comment } = req.body;
-
-    const  text = `
+  const text = `
     ім'я: ${name} ;
     телефон: ${phone} ;
     email: ${email} ;
     коментар: ${comment} ;
-    `
-    nodemailerHook({subject:'Коментар',text,res})
-
-}
+    `;
+  nodemailerHook({ subject: "Коментар", text, res });
+};

@@ -1,156 +1,162 @@
-import {events} from "../../Lsi/lsi"
-import styled from 'styled-components'
+import { events } from "../../Lsi/lsi";
+import styled from "styled-components";
 import StyledLoader from "../loader/loader";
-import  {useCallback, useState} from "react";
-import {StyledButton} from '../button/button'
-import {TitleForComponent} from "../titleForComponent/title";
-import {device} from "../deviceSizes/deviceSizes";
+import { useCallback, useState } from "react";
+import { StyledButton } from "../button/button";
+import { TitleForComponent } from "../titleForComponent/title";
+import { device } from "../deviceSizes/deviceSizes";
 import Event from "./event";
 import Link from "next/link";
 import DatePicker from "../datePicker/datePicker";
 import client from "../../apollo/client";
 import GET_EVENT_BY_DATE from "../../queries/get_event_by_date";
-import {LoaderContainer} from "../../../pages/calendar";
-
+import { LoaderContainer } from "../../../pages/calendar";
 
 const GlobalContainer = styled.div`
-   display:none;
- @media screen and ${device.mobileL} {
-     width: 93.6%;
-     display:block;
+  display: none;
+  @media screen and ${device.mobileL} {
+    width: 93.6%;
+    display: block;
     margin-left: 3.2%;
-      margin-bottom:40px;
+    margin-bottom: 40px;
   }
-`
+`;
 const EventContainer = styled.div`
- margin:40px 0 40px 0;
-`
+  margin: 40px 0 40px 0;
+`;
 const ButtonContainer = styled.div`
-      text-align: center;
-  width:100%;
-   margin:0 0 20px 0;
-    @media screen and ${device.mobileL} {
-     width: 96%;
+  text-align: center;
+  width: 100%;
+  margin: 0 0 20px 0;
+  @media screen and ${device.mobileL} {
+    width: 96%;
   }
-`
+`;
 
+export default function EventsMobile({ locale, titleEvent, posts, allDates }) {
+  const [open, setOpen] = useState(false);
+  const [currentDate, setCurrentDate] = useState(posts);
+  const [loading, setLoading] = useState(false);
 
+  const selectedDay = useCallback((value) => {
+    const selectedDay = async () => {
+      const today = new Date();
+      const currentDateFormatDate = new Date(value.setHours(23, 59, 59));
+      const status = currentDateFormatDate > today ? "FUTURE" : "PUBLISH";
 
-export default function EventsMobile({locale,titleEvent,posts,allDates}){
-    const [open, setOpen] = useState(false);
-    const [currentDate, setCurrentDate] = useState(posts);
-    const [loading, setLoading] = useState(false);
+      const year = currentDateFormatDate.getFullYear();
+      const month = currentDateFormatDate.getMonth() + 1;
+      const day = currentDateFormatDate.getDate();
 
-    const selectedDay = useCallback(
-        (value) => {
-            const selectedDay  = async () => {
-                const today = new Date()
-                const currentDateFormatDate = new Date(value.setHours(23, 59, 59))
-                const status =  currentDateFormatDate > today ? "FUTURE" : "PUBLISH"
+      setLoading(true);
 
-                const year =  currentDateFormatDate.getFullYear()
-                const month = currentDateFormatDate.getMonth()+1
-                const day =  currentDateFormatDate.getDate()
-
-                setLoading(true)
-
-                const { data  } = await client.query( {
-                    query: GET_EVENT_BY_DATE,
-                    variables: {
-                        status,
-                        year,
-                        month,
-                        day,
-                        language:locale
-                    }
-                } )
-
-                setLoading(false)
-                setCurrentDate(data?.events.nodes[0])
-
-            };
-            selectedDay()
+      const { data } = await client.query({
+        query: GET_EVENT_BY_DATE,
+        variables: {
+          status,
+          year,
+          month,
+          day,
+          language: locale,
         },
-        [],
-    );
-    const eventExist = ()=>{
-        return (
-            <>
-                <DatePicker getSelectedDay={selectedDay}
-                            doScroll = { new Date(currentDate.dateGmt).getDate()+new Date(currentDate.dateGmt).getMonth()+1}
-                            tileDisabled={allDates}
-                            selectDate={ new Date(currentDate.dateGmt)}
+      });
+
+      setLoading(false);
+      setCurrentDate(data?.events.nodes[0]);
+    };
+    selectedDay();
+  }, []);
+  const eventExist = () => {
+    return (
+      <>
+        <DatePicker
+          getSelectedDay={selectedDay}
+          doScroll={
+            new Date(currentDate.dateGmt).getDate() +
+            new Date(currentDate.dateGmt).getMonth() +
+            1
+          }
+          tileDisabled={allDates}
+          selectDate={new Date(currentDate.dateGmt)}
+        />
+        {loading ? (
+          <LoaderContainer>
+            <StyledLoader />
+          </LoaderContainer>
+        ) : !open ? (
+          <EventContainer>
+            <Link
+              href={`/calendar/[currentHourId]`}
+              as={`/calendar/${currentDate?.eventsFields?.hoursOne?.databaseId}`}
+            >
+              <a>
+                <Event
+                  locale={locale}
+                  hoursOne={currentDate.eventsFields.hoursOne}
+                  offBorder={true}
                 />
-                {
-                    loading ?
-                        <LoaderContainer>
-                            <StyledLoader/>
-                        </LoaderContainer>
-                        :
-                        !open ?
-                            <EventContainer>
-                                <Link href={`/calendar/[currentHourId]`} as={`/calendar/${currentDate?.eventsFields?.hoursOne?.databaseId}`}>
-                                    <a>
-                                        <Event
-                                            locale={locale}
-                                            hoursOne={currentDate.eventsFields.hoursOne}
-                                            offBorder={true}
-                                        />
-                                    </a>
-                                </Link>
-                            </EventContainer>
-                            :
-                            <EventContainer>
-                                {
-                                    currentDate.eventsFields.hours.slice().sort(function(a,b){
-                                        return new Date(a.hoursEvents.hoursEvents) - new Date(b.hoursEvents.hoursEvents)
-                                    }).map((el,i)=>
-                                        <Link key={i} href={`/calendar/[currentHourId]`} as={`/calendar/${el.databaseId}`}>
-                                            <a>
-                                                <Event
-                                                    locale={locale}
-                                                    hoursOne={el}
-                                                    offBorder={currentDate.eventsFields.hours.length === i + 1}
-                                                />
-                                            </a>
-                                        </Link>
-                                    )
-                                }
-                            </EventContainer>
-
-
-                }
-                {
-                    !loading &&
-                    <ButtonContainer>
-                        <StyledButton text={!open ? events.open[locale] : events.close[locale]} func={()=>setOpen(!open)}/>
-                    </ButtonContainer>
-                }
-            </>
-        )
-    }
-    return(
-        <GlobalContainer>
-            <TitleForComponent text={titleEvent}/>
-
-            {
-                posts?.length > 0 ?
-                    eventExist()
-                    :
-                    <LoaderContainer>
-                        <h2 style={{margin: "0.67rem 0 0 0"}}>
-                            {events.notExist[locale]}
-                        </h2>
-                    </LoaderContainer>
-            }
-
-            <ButtonContainer>
-                <Link href={`/calendar`}>
-                    <a>
-                        <StyledButton  text={events.calendarEvents[locale]} />
-                    </a>
+              </a>
+            </Link>
+          </EventContainer>
+        ) : (
+          <EventContainer>
+            {currentDate.eventsFields.hours
+              .slice()
+              .sort(function (a, b) {
+                return (
+                  new Date(a.hoursEvents.hoursEvents) -
+                  new Date(b.hoursEvents.hoursEvents)
+                );
+              })
+              .map((el, i) => (
+                <Link
+                  key={i}
+                  href={`/calendar/[currentHourId]`}
+                  as={`/calendar/${el.databaseId}`}
+                >
+                  <a>
+                    <Event
+                      locale={locale}
+                      hoursOne={el}
+                      offBorder={
+                        currentDate.eventsFields.hours.length === i + 1
+                      }
+                    />
+                  </a>
                 </Link>
-            </ButtonContainer>
-        </GlobalContainer>
-    )
+              ))}
+          </EventContainer>
+        )}
+        {!loading && (
+          <ButtonContainer>
+            <StyledButton
+              text={!open ? events.open[locale] : events.close[locale]}
+              func={() => setOpen(!open)}
+            />
+          </ButtonContainer>
+        )}
+      </>
+    );
+  };
+  return (
+    <GlobalContainer>
+      <TitleForComponent text={titleEvent} />
+
+      {posts?.length > 0 ? (
+        eventExist()
+      ) : (
+        <LoaderContainer>
+          <h2 style={{ margin: "0.67rem 0 0 0" }}>{events.notExist[locale]}</h2>
+        </LoaderContainer>
+      )}
+
+      <ButtonContainer>
+        <Link href={`/calendar`}>
+          <a>
+            <StyledButton text={events.calendarEvents[locale]} />
+          </a>
+        </Link>
+      </ButtonContainer>
+    </GlobalContainer>
+  );
 }

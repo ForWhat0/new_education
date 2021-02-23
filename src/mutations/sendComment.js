@@ -1,11 +1,11 @@
 import gql from "graphql-tag";
 
 const SEND_COMMENT = gql`
- mutation ($input:CreateCommentInput!) {
+  mutation($input: CreateCommentInput!) {
     createComment(input: $input) {
-        success
+      success
     }
-}
+  }
 `;
 
 export default SEND_COMMENT;

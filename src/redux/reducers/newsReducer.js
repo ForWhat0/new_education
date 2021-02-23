@@ -1,53 +1,55 @@
 import {
-    getNews,
-    getNewsByTitle,
-    getNewsForMobile,
-    inputNewsByTitle,
-} from "../types/types"
+  getNews,
+  getNewsByTitle,
+  getNewsForMobile,
+  inputNewsByTitle,
+} from "../types/types";
 
+const initialState = {
+  newsReducer: null,
+  offset: 3,
+  offsetMobile: 3,
+  newsForMobileSliderReducer: null,
+  newsForMobileSliderReducerPageInfo: null,
+  inputNewsByTitle: "",
+  newsByTitle: null,
+};
 
-const initialState={
-    newsReducer:null,
-    offset:3,
-    offsetMobile:3,
-    newsForMobileSliderReducer:null,
-    newsForMobileSliderReducerPageInfo:null,
-    inputNewsByTitle:'',
-    newsByTitle:null
-}
-
-export const newsReducer = ( state = initialState , action )=>{
-    switch (action.type){
-        case getNews:{
-            return {
-                ...state,
-                newsReducer:action.payload.news,
-                offset: action.payload.offset
-            }
-        }
-        case getNewsForMobile:{
-            return {
-                ...state,
-                newsForMobileSliderReducer:
-                    state.newsForMobileSliderReducer
-                        ? state.newsForMobileSliderReducer.concat(action.payload.news.data.news.nodes)
-                        : action.payload.data.concat(action.payload.news.data.news.nodes),
-                newsForMobileSliderReducerPageInfo:action.payload.news.data.news.pageInfo.offsetPagination.hasMore,
-                offsetMobile: action.payload.offset
-            }
-        }
-        case inputNewsByTitle:{
-            return {
-                ...state,
-                inputNewsByTitle:action.payload
-            }
-        }
-        case getNewsByTitle:{
-            return {
-                ...state,
-                newsByTitle:action.payload.data.news.nodes
-            }
-        }
-        default: return state
+export const newsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case getNews: {
+      return {
+        ...state,
+        newsReducer: action.payload.news,
+        offset: action.payload.offset,
+      };
     }
-}
+    case getNewsForMobile: {
+      return {
+        ...state,
+        newsForMobileSliderReducer: state.newsForMobileSliderReducer
+          ? state.newsForMobileSliderReducer.concat(
+              action.payload.news.data.news.nodes
+            )
+          : action.payload.data.concat(action.payload.news.data.news.nodes),
+        newsForMobileSliderReducerPageInfo:
+          action.payload.news.data.news.pageInfo.offsetPagination.hasMore,
+        offsetMobile: action.payload.offset,
+      };
+    }
+    case inputNewsByTitle: {
+      return {
+        ...state,
+        inputNewsByTitle: action.payload,
+      };
+    }
+    case getNewsByTitle: {
+      return {
+        ...state,
+        newsByTitle: action.payload.data.news.nodes,
+      };
+    }
+    default:
+      return state;
+  }
+};
