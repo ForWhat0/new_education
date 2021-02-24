@@ -10,9 +10,9 @@ module.exports = {
     FROM_USER_PASSWORD: "osvitniisitekyiv12345",
     TO_USER_LOGIN: "rzozyla@gmail.com",
     WP_NEXT_PUBLIC_URL: "https://testkp.flexreality.pro/graphql",
-    WP_USER_LOGIN: "admin",
-    WP_USER_PASSWORD: "2wsx@WSX",
-    WP_CLIENT_MUTATION_ID: "dXNlcjox",
+    WP_USER_LOGIN: "user",
+    WP_USER_PASSWORD: "kvDNklN#oIJ%TV11(IIDnRBI",
+    WP_CLIENT_MUTATION_ID: "dXNlcjo3",
   },
   webpackDevMiddleware: (config) => {
     config.watchOptions = {

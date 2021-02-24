@@ -6,7 +6,7 @@ const Container = styled.div`
   height: 100%;
   position: absolute;
   z-index: 0;
-  background: ${(props) => props.align} 50% / 25% auto no-repeat
+  background: ${(props) => props.align} 50% / 15% auto no-repeat
     url(${(props) => props.src});
   display: ${(props) => props.display};
   @media screen and ${device.tablet} {
