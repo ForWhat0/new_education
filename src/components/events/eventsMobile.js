@@ -142,7 +142,7 @@ export default function EventsMobile({ locale, titleEvent, posts, allDates }) {
     <GlobalContainer>
       <TitleForComponent text={titleEvent} />
 
-      {posts?.length > 0 ? (
+      {posts ? (
         eventExist()
       ) : (
         <LoaderContainer>
