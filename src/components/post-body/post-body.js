@@ -27,6 +27,8 @@ const StyledBlock = styled.div`
   }
   && a {
     display: block;
+    color: rgb(0, 114, 188);
+    border-bottom: 1px solid;
   }
   && p {
     margin-bottom: 40px;

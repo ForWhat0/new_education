@@ -9,6 +9,7 @@ const SearchBar = styled.div`
   align-items: center;
   width: 36px;
   height: 36px;
+  transition: width 0.3s ease-in-out;
   border: ${(props) => props.border};
   border-radius: 30px;
   position: ${(props) => props.position};
