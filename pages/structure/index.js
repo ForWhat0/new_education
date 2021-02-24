@@ -36,7 +36,6 @@ const CircleBackground = styled.div`
   position: absolute;
 `;
 export default function Home({ menu, contacts, locale, structure }) {
-  console.log(structure);
   const parsedMenu = ParcMenu(menu);
   return (
     <MainLayout

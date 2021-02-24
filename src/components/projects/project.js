@@ -41,6 +41,7 @@ const ImageContainer = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
+  border-radius: 30px;
   @media screen and (max-width: 950px) {
     margin-right: unset;
     width: 90%;

@@ -75,6 +75,14 @@ const IconLink = styled.div`
   padding-left: 10px;
   background: url(/linkIconDark.svg) no-repeat;
 `;
+
+const Content = styled.div`
+  h2 {
+    @media screen and (max-width: 650px) {
+      font-size: 16px;
+    }
+  }
+`;
 const FinancialStatements = ({ menu, page, contacts, locale }) => {
   const router = useRouter();
   const { visuallyImpairedModeWhiteTheme } = useSelector((state) => state.app);
@@ -116,7 +124,7 @@ const FinancialStatements = ({ menu, page, contacts, locale }) => {
           <span>{finance.law[locale]}</span>
         </LinkContainer>
         <TextContainer>
-          <div dangerouslySetInnerHTML={{ __html: page.content }} />
+          <Content dangerouslySetInnerHTML={{ __html: page.content }} />
           <PdfComponent
             mBottom="60px"
             href={page.financeField?.file?.mediaItemUrl}

@@ -14,7 +14,12 @@ const SearchBar = styled.div`
   position: ${(props) => props.position};
   right: ${(props) => props.right};
   &:hover {
-    width: 140px;
+    width: 200px;
+  }
+  @media screen and ${device.mobileM} {
+    &:hover {
+      width: 140px;
+    }
   }
 `;
 const Icon = styled.i`
@@ -26,7 +31,7 @@ const Icon = styled.i`
     font-size: 25px;
   }
   ${SearchBar}:hover & {
-    right: 10px;
+    right: 0;
   }
 `;
 const Input = styled.input.attrs((props) => ({
@@ -49,15 +54,20 @@ const Input = styled.input.attrs((props) => ({
   font-size: 16px;
   width: 0;
   border: 1px solid #000000;
-  transition: width 0.25s;
+  transition: width 0.3s ease-in-out;
   z-index: 2;
   border-radius: 28px;
   @media screen and ${device.laptop} {
     padding: 9px 18px;
   }
   ${SearchBar}:hover & {
-    width: 140px !important;
+    width: 200px !important;
     background-color: white;
+  }
+  @media screen and ${device.mobileM} {
+    ${SearchBar}:hover & {
+      width: 140px !important;
+    }
   }
 `;
 export const AnimationSearchBarStyled = ({

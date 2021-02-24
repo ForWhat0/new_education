@@ -197,6 +197,7 @@ export const StyledRegisterZNO = ({
           <Label>{leftCommentZno.choose[locale]}</Label>
           <SelectStyled
             value={learn}
+            warning=""
             onChange={handleChange}
             options={options}
           />

@@ -36,10 +36,6 @@ align-items:center;
   @media screen and (max-width:700px) {
 font-size:16px;
   }  
-  @media screen and (max-width:450px){
-  bottom: -40px;
-    left: -15px;
-  }
  span{
  margin-left:5px;
  font:size:16px;

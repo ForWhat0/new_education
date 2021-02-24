@@ -22,9 +22,9 @@ const Global = styled.div`
 
 const Container = styled.div`
   background: rgba(157, 157, 157, 0.08);
-  max-width: 50%;
+  max-width: 45%;
   padding: 10px;
-  overflow: auto;
+  overflow-x: auto;
   @media screen and (max-width: 1300px) {
     max-width: 80%;
   }
@@ -65,7 +65,6 @@ const Name = styled.span`
 `;
 export default function Home({ menu, contacts, locale, leaders }) {
   const parsedMenu = ParcMenu(menu);
-  console.log(leaders);
   return (
     <MainLayout
       databaseId={contacts.databaseId}

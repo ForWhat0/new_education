@@ -35,6 +35,7 @@ export const Layout = ({
   routerLinkTitle,
 }) => {
   const { visuallyImpairedMode } = useSelector((state) => state.app);
+  const canUseDOM = typeof window !== "undefined";
   const router = useRouter();
   const locale = router.locale;
   const pathname = router.pathname;
@@ -52,7 +53,7 @@ export const Layout = ({
     () => menuBurgerIsOpen === true && dispatch(actionClickBurger())
   );
 
-  WindowDimensionsOffVisuallyImpaired();
+  canUseDOM && WindowDimensionsOffVisuallyImpaired();
   useEffect(() => {
     if (inputNewsByTitle) {
       dispatch(OnchangeInputSearchNews(""));

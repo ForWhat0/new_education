@@ -73,6 +73,9 @@ export const Input = styled.div`
     right: unset;
     width: 100%;
   }
+  @media screen and ${device.mobileL} {
+    margin-top: ${(props) => props.mTop};
+  }
 `;
 export const LoaderContainer = styled.div`
   width: 100%;
@@ -192,7 +195,7 @@ export default function EventCalendar({
               </CalendarContainer>
             </CalendarWrapper>
           </Title>
-          <Input>
+          <Input mTop="20px">
             <SearchBarStyled
               maxlength={10}
               width="100%"
