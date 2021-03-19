@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import client from "../../src/apollo/client";
 import GET_ALL_SLUG_FROM_NEWS from "../../src/queries/get-all-slug-from-news";
 import StyledLoader from "../../src/components/loader/loader";
@@ -26,18 +25,7 @@ export default function MicrophoneDetail({
   menu,
   contacts,
 }) {
-  const router = useRouter();
   const parsedMenu = ParcMenu(menu);
-  if (router.isFallback) {
-    return (
-      <MainLayout>
-        <LoaderContainer>
-          <StyledLoader />
-        </LoaderContainer>
-      </MainLayout>
-    );
-  }
-
   return (
     <MainLayout
       databaseId={newBySlug.databaseId}
@@ -131,7 +119,7 @@ export const getStaticPaths = async ({ locales }) => {
   }
 
   return {
-    fallback: false,
+    fallback: "blocking",
     paths,
   };
 };

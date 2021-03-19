@@ -1,13 +1,12 @@
-import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import styled, { css, keyframes } from "styled-components";
 import StyledLoader from "../../src/components/loader/loader";
 import { TitleForComponent } from "../../src/components/titleForComponent/title";
 import PostBody from "../../src/components/post-body/post-body";
-import styled, { css, keyframes } from "styled-components";
 import { MainLayout } from "../../src/components/layouts/mainLayout";
 import GET_ALL_SLUG_FROM_PROJECTS from "../../src/queries/get-all-slug-from-projects";
 import GET_PROJECT_BY_SLUG from "../../src/queries/get-project-by-slug";
 import { ParcMenu } from "../../src/components/hooks/hooks";
-import { useSelector } from "react-redux";
 import client from "../../src/apollo/client";
 import { SwiperComponent } from "../../src/components/swiper/swiper";
 
@@ -118,12 +117,8 @@ const IconItem = styled.div`
 `;
 export default function ProjectDetails({ projectBySlug, menu, contacts }) {
   const parsedMenu = ParcMenu(menu);
-  const router = useRouter();
   const { visuallyImpairedMode } = useSelector((state) => state.app);
   const { visuallyImpairedModeWhiteTheme } = useSelector((state) => state.app);
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
   return (
     <MainLayout
       databaseId={projectBySlug.databaseId}
