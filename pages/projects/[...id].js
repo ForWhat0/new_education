@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import StyledLoader from "../../src/components/loader/loader";
 import { TitleForComponent } from "../../src/components/titleForComponent/title";
 import PostBody from "../../src/components/post-body/post-body";
@@ -117,8 +118,12 @@ const IconItem = styled.div`
 `;
 export default function ProjectDetails({ projectBySlug, menu, contacts }) {
   const parsedMenu = ParcMenu(menu);
+  const router = useRouter();
   const { visuallyImpairedMode } = useSelector((state) => state.app);
   const { visuallyImpairedModeWhiteTheme } = useSelector((state) => state.app);
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
   return (
     <MainLayout
       databaseId={projectBySlug.databaseId}
@@ -274,7 +279,7 @@ export const getStaticPaths = async ({ locales }) => {
   }
 
   return {
-    fallback: false,
+    fallback: "blocking",
     paths,
   };
 };
