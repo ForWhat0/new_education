@@ -34,6 +34,7 @@ export const Container = styled.div`
 `;
 const NewsContainer = styled.div`
   width: 100%;
+  min-height: 360px;
   @media screen and ${device.tablet} {
     width: 80%;
     margin-left: 10%;
