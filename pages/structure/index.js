@@ -31,7 +31,7 @@ const CircleBackground = styled.div`
   background: rgba(0, 174, 239, 0.08);
   width: 100px;
   left: -5px;
-  bottom: 0;
+  bottom: -20px;
   border-radius: 50%;
   position: absolute;
 `;
@@ -51,17 +51,10 @@ export default function Home({ menu, contacts, locale, structure }) {
         />
         {structure &&
           structure.map((item) => (
-            <TreeSelect
-              title={`${item.numberDepartment} ${item.nameDepartment}`}
-            >
+            <TreeSelect title={item.nameDepartment}>
               <Info>
                 <CircleBackground />
                 <FieldTextIcon title={item.position} content={item.nameLast} />
-                <FieldTextIcon
-                  icon="/phone.svg"
-                  title={contactsLsi.phoneNumber[locale]}
-                  content={item.numberPhoneDepartment}
-                />
                 <FieldTextIcon
                   icon="/gmailIcon.svg"
                   title={contactsLsi.email[locale]}

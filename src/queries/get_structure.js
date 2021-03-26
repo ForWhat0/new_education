@@ -20,11 +20,9 @@ const GET_STRUCTURE = gql`
       nodes {
         structureField {
           department {
-            numberDepartment
             nameDepartment
             position
             nameLast
-            numberPhoneDepartment
             gmailDepartment
           }
         }

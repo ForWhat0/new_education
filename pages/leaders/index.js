@@ -22,7 +22,7 @@ const Global = styled.div`
 
 const Container = styled.div`
   background: rgba(157, 157, 157, 0.08);
-  max-width: 45%;
+  max-width: 50%;
   padding: 10px;
   overflow-x: auto;
   @media screen and (max-width: 1300px) {
@@ -59,7 +59,7 @@ const Text = styled.div`
 `;
 const Name = styled.span`
   font-size: 20px;
-  line-height: 15px;
+  line-height: 25px;
   padding-bottom: 10px;
   font-weight: 400;
 `;
