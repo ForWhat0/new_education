@@ -107,7 +107,6 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`
       mainPageFields {
         titleServices
         titleProject
-        titleOffers
         titleNews
         titleEvent
         titleCommand
