@@ -36,6 +36,7 @@ const Container = styled.div`
 const TextImage = styled.div`
   display: flex;
   flex-direction: row;
+
   img {
     height: auto;
     width: auto;
@@ -63,6 +64,9 @@ const Name = styled.span`
   padding-bottom: 10px;
   font-weight: 400;
 `;
+const Space = styled.div`
+  padding: 25px 0;
+`;
 export default function Home({ menu, contacts, locale, leaders }) {
   const parsedMenu = ParcMenu(menu);
   return (
@@ -80,29 +84,35 @@ export default function Home({ menu, contacts, locale, leaders }) {
         <Container>
           {leaders.length > 0 &&
             leaders.map((item, index) => (
-              <>
+              <Space>
                 <TextImage key={index + item.leaderField.nameLastname}>
                   <img alt="Leader" src={item.featuredImage.node.sourceUrl} />
                   <Text>
                     <Name>{item.leaderField.nameLastname}</Name>
                     <FieldTextIcon content={item.leaderField?.position} />
-                    <FieldTextIcon
-                      icon="/phone.svg"
-                      content={item.leaderField.phoneNum}
-                    />
-                    <FieldTextIcon
-                      icon="/gmailIcon.svg"
-                      content={item.leaderField.gmail}
-                    />
+                    {item?.leaderField?.phoneNum && (
+                      <FieldTextIcon
+                        icon="/phone.svg"
+                        content={item.leaderField.phoneNum}
+                      />
+                    )}
+                    {item?.leaderField?.gmail && (
+                      <FieldTextIcon
+                        icon="/gmailIcon.svg"
+                        content={item.leaderField.gmail}
+                      />
+                    )}
                   </Text>
                 </TextImage>
-                <PdfComponent
-                  href={item.leaderField.fileBio.mediaItemUrl}
-                  text={item.leaderField.bioInformation}
-                  size={item.leaderField.fileBio.fileSize}
-                  locale={locale}
-                />
-              </>
+                {item?.leaderField?.fileBio?.mediaItemUrl && (
+                  <PdfComponent
+                    href={item.leaderField.fileBio.mediaItemUrl}
+                    text={item.leaderField.bioInformation}
+                    size={item.leaderField.fileBio.fileSize}
+                    locale={locale}
+                  />
+                )}
+              </Space>
             ))}
         </Container>
       </Global>
