@@ -238,6 +238,6 @@ export const getStaticProps = async ({ locale }) => {
       menu: data?.menuItems?.nodes || [],
       page: data?.page ? data.page : [],
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 };

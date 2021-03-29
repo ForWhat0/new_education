@@ -313,6 +313,6 @@ export async function getStaticProps({ locale, params }) {
         ? data.contacts.contactsFields
         : [],
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 }

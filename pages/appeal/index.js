@@ -403,6 +403,6 @@ export async function getStaticProps({ locale }) {
         : [],
       menu: data?.menuItems?.nodes || [],
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 }

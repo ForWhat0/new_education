@@ -86,7 +86,9 @@ export default function Home({ menu, contacts, locale, leaders }) {
             leaders.map((item, index) => (
               <Space>
                 <TextImage key={index + item.leaderField.nameLastname}>
-                  <img alt="Leader" src={item.featuredImage.node.sourceUrl} />
+                  {item?.featuredImage?.node?.sourceUrl && (
+                    <img alt="Leader" src={item.featuredImage.node.sourceUrl} />
+                  )}
                   <Text>
                     <Name>{item.leaderField.nameLastname}</Name>
                     <FieldTextIcon content={item.leaderField?.position} />
@@ -150,6 +152,6 @@ export async function getStaticProps({ locale }) {
       menu: data?.menuItems?.nodes ? data.menuItems.nodes : [],
       leaders: data?.leader?.nodes ? data.leader.nodes : [],
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 }

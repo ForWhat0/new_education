@@ -151,6 +151,6 @@ export async function getStaticProps({ locale }) {
       data: data?.page ? data.page : [],
       allDates,
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 }

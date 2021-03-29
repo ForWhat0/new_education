@@ -218,6 +218,6 @@ export async function getStaticProps({ params, locale }) {
       menu: data?.menuItems?.nodes || [],
       news: data?.news?.nodes ? data.news : [],
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 }

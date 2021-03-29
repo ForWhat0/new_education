@@ -67,6 +67,6 @@ export async function getStaticProps({ locale }) {
         ? data.page.mainPageFields.titleBanner
         : [],
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 }
