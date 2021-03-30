@@ -11,7 +11,7 @@ const GET_PROJECTS = gql`
       contactsFields {
         telegramLink
         phoneNumber
-
+        instagramLink
         iconSite {
           sourceUrl
         }

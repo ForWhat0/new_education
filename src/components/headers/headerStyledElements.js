@@ -786,13 +786,14 @@ export const Footer = ({ inputName, contacts, display, minWidth }) => {
   const { inputNewsByTitle } = useSelector((state) => state.news);
   const telegram = contacts.telegramLink && contacts.telegramLink;
   const facebook = contacts.facebookLink && contacts.facebookLink;
+  const instagram = contacts?.instagramLink && contacts.instagramLink;
   const gmail = contacts.gmail && contacts.gmail;
   const color = visuallyImpairedMode ? "#1D1D1B" : "#0072BC";
   const border = visuallyImpairedMode ? "1px solid" : "unset";
   return (
     <FooterContainer>
       <Logos border={border}>
-        <a href={`https://telegram.im/${telegram}`} target="_blank">
+        <a href={telegram} target="_blank">
           <LinkIcon
             color={color}
             className="fa fa-paper-plane"
@@ -803,6 +804,14 @@ export const Footer = ({ inputName, contacts, display, minWidth }) => {
           <LinkIcon
             color={color}
             className="fa fa-facebook"
+            aria-hidden="true"
+          />
+        </a>
+        <a href={instagram} target="_blank">
+          <LinkIcon
+            color={color}
+            style={{ fontWeight: 600 }}
+            className="fa fa-instagram"
             aria-hidden="true"
           />
         </a>

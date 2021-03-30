@@ -6,7 +6,7 @@ const GET_PROJECT_BY_SLUG = gql`
       contactsFields {
         telegramLink
         phoneNumber
-
+        instagramLink
         iconSite {
           sourceUrl
         }

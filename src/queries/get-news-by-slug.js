@@ -18,7 +18,7 @@ const GET_NEWS_BY_SLUG_AND_FIRST_THREE_NEWS = gql`
       contactsFields {
         telegramLink
         phoneNumber
-
+        instagramLink
         iconSite {
           sourceUrl
         }

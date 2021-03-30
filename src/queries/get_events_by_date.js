@@ -31,7 +31,7 @@ const GET_EVENTS_BY_DATE = gql`
 
         gmail
         facebookLink
-
+        instagramLink
         authorship
         adress
       }

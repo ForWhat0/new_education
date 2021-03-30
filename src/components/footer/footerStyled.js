@@ -30,15 +30,22 @@ const Wrapper = styled.div`
     margin-left: 3.2%;
   }
 `;
-export const Logos = ({ telegram, facebook, gmail }) => {
+export const Logos = ({ telegram, facebook, gmail, instagram }) => {
   return (
     <Wrapper>
       <LogosContainer>
-        <a href={`https://telegram.im/${telegram}`} target="_blank">
+        <a href={telegram} target="_blank">
           <LinkIcon className="fa fa-paper-plane" aria-hidden="true" />
         </a>
         <a href={facebook} target="_blank">
           <LinkIcon className="fa fa-facebook" aria-hidden="true" />
+        </a>
+        <a href={instagram} target="_blank">
+          <LinkIcon
+            style={{ fontWeight: 600 }}
+            className="fa fa-instagram"
+            aria-hidden="true"
+          />
         </a>
         <a href={`mailto:?subject=${gmail}`} target="_blank">
           <LinkIcon className="fa fa-envelope" aria-hidden="true" />

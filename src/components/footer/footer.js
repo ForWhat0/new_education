@@ -7,6 +7,7 @@ export const PageFooter = ({ menu, contacts }) => {
   const locale = router.locale;
   const telegram = contacts?.telegramLink && contacts.telegramLink;
   const facebook = contacts?.facebookLink && contacts.facebookLink;
+  const instagram = contacts?.instagramLink && contacts.instagramLink;
   const gmail = contacts?.gmail && contacts.gmail;
   const adress = contacts?.adress && contacts.adress;
   const phoneNumber = contacts?.phoneNumber && contacts.phoneNumber;
@@ -14,7 +15,12 @@ export const PageFooter = ({ menu, contacts }) => {
   return (
     <FooterWrapper>
       <MainHeader footer={true} menu={menu} whiteTheme={true} />
-      <Logos telegram={telegram} gmail={gmail} facebook={facebook} />
+      <Logos
+        instagram={instagram}
+        telegram={telegram}
+        gmail={gmail}
+        facebook={facebook}
+      />
       <Text
         locale={locale}
         adress={adress}

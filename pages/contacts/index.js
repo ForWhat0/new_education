@@ -136,21 +136,19 @@ export default function Home({ menu, contacts, locale }) {
             />
             <Field>
               <a
-                href={`https://telegram.im/${
-                  contacts?.telegramLink ? contacts.telegramLink : null
-                }`}
+                href={contacts?.telegramLink ? contacts.telegramLink : '#'}
                 target="_blank"
               >
                 <IconBackgroundSvg src="/telegramIcon.svg" />
               </a>
               <a
-                href={contacts?.facebookLink ? contacts.facebookLink : null}
+                href={contacts?.facebookLink ? contacts.facebookLink : '#'}
                 target="_blank"
               >
                 <IconBackgroundSvg src="/facebookIcon.svg" />
               </a>
               <a
-                href={contacts?.instagramLink ? contacts.instagramLink : null}
+                href={contacts?.instagramLink ? contacts.instagramLink : '#'}
                 target="_blank"
               >
                 <IconBackgroundSvg src="/instagram.svg" />

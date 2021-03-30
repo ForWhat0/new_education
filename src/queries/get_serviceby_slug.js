@@ -23,7 +23,7 @@ const GET_SERVICE_BY_SLUG = gql`
         descrSite
         gmail
         facebookLink
-
+        instagramLink
         authorship
         adress
       }

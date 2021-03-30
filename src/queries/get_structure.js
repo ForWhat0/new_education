@@ -34,6 +34,7 @@ const GET_STRUCTURE = gql`
       contactsFields {
         adress
         facebookLink
+        instagramLink
         gmail
         iconSite {
           sourceUrl

@@ -15,7 +15,7 @@ const GET_MENU_AND_CONTACTS = gql`
       contactsFields {
         telegramLink
         phoneNumber
-
+        instagramLink
         iconSite {
           sourceUrl
         }

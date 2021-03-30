@@ -42,6 +42,7 @@ const GET_LEADERS = gql`
       contactsFields {
         adress
         facebookLink
+        instagramLink
         gmail
         iconSite {
           sourceUrl

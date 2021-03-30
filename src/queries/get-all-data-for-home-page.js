@@ -90,7 +90,7 @@ const LAST_EVENTS_AND_LAST_NEWS_QUERY = gql`
       contactsFields {
         telegramLink
         phoneNumber
-
+        instagramLink
         gmail
         facebookLink
         authorship

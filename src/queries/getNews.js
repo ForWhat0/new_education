@@ -20,7 +20,7 @@ const GET_NEWS = gql`
       contactsFields {
         telegramLink
         phoneNumber
-
+        instagramLink
         iconSite {
           sourceUrl
         }
