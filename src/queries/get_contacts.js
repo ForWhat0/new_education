@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const instagramGET_CONTACTS = gql`
+const GET_CONTACTS = gql`
   query($location: MenuLocationEnum, $contactsUri: ID!) {
     menuItems(where: { location: $location }) {
       nodes {
