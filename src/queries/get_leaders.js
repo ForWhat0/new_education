@@ -24,6 +24,7 @@ const GET_LEADERS = gql`
           }
         }
         leaderField {
+          isDirector
           nameLastname
           position
           phoneNum

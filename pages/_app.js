@@ -39,6 +39,15 @@ function MyApp({ Component, pageProps }) {
               content="initial-scale=1.0, width=device-width"
             />
             <script
+              async
+              src="https://www.googletagmanager.com/gtag/js?id=G-2VCYCNR9CE"
+            ></script>
+            {/* <script>
+              window.dataLayer = window.dataLayer || []; function gtag()
+              {dataLayer.push(arguments)}
+              gtag('js', new Date()); gtag('config', 'G-2VCYCNR9CE');
+            </script>*/}
+            <script
               type="text/javascript"
               src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"
             ></script>

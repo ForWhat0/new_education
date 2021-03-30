@@ -16,20 +16,26 @@ const Global = styled.div`
   @media screen and (max-width: 700px) {
     width: 93.6%;
     margin-left: 3.2%;
-    margin-bottom: 40px;
   }
 `;
 
-const Container = styled.div`
+const RestContainer = styled.div`
   background: rgba(157, 157, 157, 0.08);
-  max-width: 50%;
   padding: 10px;
-  overflow-x: auto;
-  @media screen and (max-width: 1300px) {
-    max-width: 80%;
+
+  @media screen and ${device.tablet} {
+    overflow-x: auto;
   }
+`;
+
+const RestGlobalContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5%;
+  margin-top: ${(props) => (props.marginTop ? props.marginTop : "unset")};
+
   @media screen and ${device.laptop} {
-    max-width: 100%;
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -64,9 +70,7 @@ const Name = styled.span`
   padding-bottom: 10px;
   font-weight: 400;
 `;
-const Space = styled.div`
-  padding: 25px 0;
-`;
+
 export default function Home({ menu, contacts, locale, leaders }) {
   const parsedMenu = ParcMenu(menu);
   return (
@@ -81,42 +85,92 @@ export default function Home({ menu, contacts, locale, leaders }) {
           borderBottom="unset"
           text={leadersLsi.title[locale]}
         />
-        <Container>
+
+        {leaders.length > 0 &&
+          leaders.map(
+            (item, index) =>
+              item?.leaderField?.isDirector && (
+                <RestGlobalContainer>
+                  <RestContainer>
+                    <TextImage key={index + item.leaderField.nameLastname}>
+                      {item?.featuredImage?.node?.sourceUrl && (
+                        <img
+                          alt="Leader"
+                          src={item.featuredImage.node.sourceUrl}
+                        />
+                      )}
+                      <Text>
+                        <Name>{item.leaderField.nameLastname}</Name>
+                        <FieldTextIcon content={item.leaderField?.position} />
+                        {item?.leaderField?.phoneNum && (
+                          <FieldTextIcon
+                            icon="/phone.svg"
+                            content={item.leaderField.phoneNum}
+                          />
+                        )}
+                        {item?.leaderField?.gmail && (
+                          <FieldTextIcon
+                            icon="/gmailIcon.svg"
+                            content={item.leaderField.gmail}
+                          />
+                        )}
+                      </Text>
+                    </TextImage>
+                    {item?.leaderField?.fileBio?.mediaItemUrl && (
+                      <PdfComponent
+                        href={item.leaderField.fileBio.mediaItemUrl}
+                        text={item.leaderField.bioInformation}
+                        size={item.leaderField.fileBio.fileSize}
+                        locale={locale}
+                      />
+                    )}
+                  </RestContainer>
+                </RestGlobalContainer>
+              )
+          )}
+
+        <RestGlobalContainer marginTop="5%">
           {leaders.length > 0 &&
-            leaders.map((item, index) => (
-              <Space>
-                <TextImage key={index + item.leaderField.nameLastname}>
-                  {item?.featuredImage?.node?.sourceUrl && (
-                    <img alt="Leader" src={item.featuredImage.node.sourceUrl} />
-                  )}
-                  <Text>
-                    <Name>{item.leaderField.nameLastname}</Name>
-                    <FieldTextIcon content={item.leaderField?.position} />
-                    {item?.leaderField?.phoneNum && (
-                      <FieldTextIcon
-                        icon="/phone.svg"
-                        content={item.leaderField.phoneNum}
+            leaders.map(
+              (item, index) =>
+                !item?.leaderField?.isDirector && (
+                  <RestContainer>
+                    <TextImage key={index + item.leaderField.nameLastname}>
+                      {item?.featuredImage?.node?.sourceUrl && (
+                        <img
+                          alt="Leader"
+                          src={item.featuredImage.node.sourceUrl}
+                        />
+                      )}
+                      <Text>
+                        <Name>{item.leaderField.nameLastname}</Name>
+                        <FieldTextIcon content={item.leaderField?.position} />
+                        {item?.leaderField?.phoneNum && (
+                          <FieldTextIcon
+                            icon="/phone.svg"
+                            content={item.leaderField.phoneNum}
+                          />
+                        )}
+                        {item?.leaderField?.gmail && (
+                          <FieldTextIcon
+                            icon="/gmailIcon.svg"
+                            content={item.leaderField.gmail}
+                          />
+                        )}
+                      </Text>
+                    </TextImage>
+                    {item?.leaderField?.fileBio?.mediaItemUrl && (
+                      <PdfComponent
+                        href={item.leaderField.fileBio.mediaItemUrl}
+                        text={item.leaderField.bioInformation}
+                        size={item.leaderField.fileBio.fileSize}
+                        locale={locale}
                       />
                     )}
-                    {item?.leaderField?.gmail && (
-                      <FieldTextIcon
-                        icon="/gmailIcon.svg"
-                        content={item.leaderField.gmail}
-                      />
-                    )}
-                  </Text>
-                </TextImage>
-                {item?.leaderField?.fileBio?.mediaItemUrl && (
-                  <PdfComponent
-                    href={item.leaderField.fileBio.mediaItemUrl}
-                    text={item.leaderField.bioInformation}
-                    size={item.leaderField.fileBio.fileSize}
-                    locale={locale}
-                  />
-                )}
-              </Space>
-            ))}
-        </Container>
+                  </RestContainer>
+                )
+            )}
+        </RestGlobalContainer>
       </Global>
     </MainLayout>
   );
