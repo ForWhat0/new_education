@@ -19,7 +19,7 @@ const GET_HOUR_BY_ID = gql`
       contactsFields {
         telegramLink
         phoneNumber
-        group
+
         iconSite {
           sourceUrl
         }

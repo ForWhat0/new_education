@@ -10,7 +10,6 @@ export const PageFooter = ({ menu, contacts }) => {
   const gmail = contacts?.gmail && contacts.gmail;
   const adress = contacts?.adress && contacts.adress;
   const phoneNumber = contacts?.phoneNumber && contacts.phoneNumber;
-  const group = contacts?.group && contacts.group;
   const authorship = contacts?.authorship && contacts.authorship;
   return (
     <FooterWrapper>
@@ -21,7 +20,6 @@ export const PageFooter = ({ menu, contacts }) => {
         adress={adress}
         phoneNumber={phoneNumber}
         gmail={gmail}
-        group={group}
       />
       <Company locale={locale} authorship={authorship} />
     </FooterWrapper>

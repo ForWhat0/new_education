@@ -15,7 +15,7 @@ const GET_MENU_AND_CONTACTS = gql`
       contactsFields {
         telegramLink
         phoneNumber
-        group
+
         iconSite {
           sourceUrl
         }

@@ -28,7 +28,7 @@ const GET_EVENTS_BY_DATE = gql`
         }
         titleSite
         descrSite
-        group
+
         gmail
         facebookLink
 

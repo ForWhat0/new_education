@@ -82,7 +82,7 @@ const ListElement = styled.li`
 const Link = styled.a`
   color: rgb(0, 114, 188);
 `;
-export const Text = ({ locale, adress, gmail, phoneNumber, group }) => {
+export const Text = ({ locale, adress, gmail, phoneNumber }) => {
   return (
     <TextContainer>
       <List position="relative" right="unset">
@@ -105,9 +105,6 @@ export const Text = ({ locale, adress, gmail, phoneNumber, group }) => {
           <Link href={`mailto:?subject=${gmail}`} target="_blank">
             {gmail}
           </Link>
-        </ListElement>
-        <ListElement>
-          {footer.group[locale]} {group}
         </ListElement>
       </List>
     </TextContainer>

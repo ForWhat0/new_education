@@ -20,7 +20,7 @@ const GET_NEWS = gql`
       contactsFields {
         telegramLink
         phoneNumber
-        group
+
         iconSite {
           sourceUrl
         }

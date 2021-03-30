@@ -15,7 +15,7 @@ const GET_SERVICE_BY_SLUG = gql`
       contactsFields {
         telegramLink
         phoneNumber
-        group
+
         iconSite {
           sourceUrl
         }
