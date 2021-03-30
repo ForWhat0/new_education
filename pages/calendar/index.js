@@ -85,6 +85,7 @@ export const LoaderContainer = styled.div`
   text-align: center;
   position: relative;
   padding: 50px 0 50px 0;
+  min-height: 150px;
   h2 {
     @media screen and ${device.mobileL} {
       font-size: 16px;
