@@ -356,9 +356,9 @@ export const calendarLsi = {
 };
 export const leftCommentZno = {
   offer: {
-    UK: "Маєш пропозицію?",
+    UK: "Маєте пропозицію?",
     EN: "Do you have an offer?",
-    RU: "Имеешь предложение?",
+    RU: "Есть предложение?",
   },
   writeUs: {
     UK: "Щоб зареєструватися, заповніть форму",
