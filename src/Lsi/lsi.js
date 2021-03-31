@@ -244,14 +244,14 @@ export const services = {
 };
 export const leftComment = {
   offer: {
-    UK: "Маєш пропозицію?",
+    UK: "Маєте пропозицію?",
     EN: "Do you have an offer?",
     RU: "Имеешь предложение?",
   },
   writeUs: {
-    UK: "Напиши нам!",
+    UK: "Напишіть нам!",
     EN: "Write to us!",
-    RU: "Напиши нам!",
+    RU: "Напишите нам!",
   },
   name: {
     UK: "Ім'я",
