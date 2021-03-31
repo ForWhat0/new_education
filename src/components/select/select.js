@@ -1,10 +1,21 @@
 import Select, { components } from "react-select";
-export const SelectStyled = ({ value, onChange, options, warning }) => {
+import { useSelector } from "react-redux";
+export const SelectStyled = ({
+  isComment,
+  value,
+  onChange,
+  options,
+  warning,
+}) => {
+  const { visuallyImpairedModeWhiteTheme } = useSelector((state) => state.app);
   const customStyles = {
     menu: (provided, state) => ({
       ...provided,
       width: state.selectProps.width,
-      color: state.selectProps.menuColor,
+      color:
+        isComment && !visuallyImpairedModeWhiteTheme
+          ? "#1D1D1B"
+          : state.selectProps.menuColor,
       padding: 5,
       zIndex: 5,
     }),
@@ -14,7 +25,9 @@ export const SelectStyled = ({ value, onChange, options, warning }) => {
       marginTop: "5px",
       cursor: "pointer",
       backgroundColor: "transparent",
-      border: "1px solid #1D1D1B",
+      border: `1px solid ${
+        isComment && !visuallyImpairedModeWhiteTheme ? "white" : "#1D1D1B"
+      }`,
       boxSizing: "border-box",
       borderRadius: "9px",
       display: "flex",
@@ -24,7 +37,16 @@ export const SelectStyled = ({ value, onChange, options, warning }) => {
   };
 
   const DropdownIndicator = (props) => {
-    const color = !warning || value ? "black" : warning ? "red" : "black";
+    const color =
+      !warning || value
+        ? isComment && !visuallyImpairedModeWhiteTheme
+          ? "white"
+          : "black"
+        : warning
+        ? "red"
+        : isComment && !visuallyImpairedModeWhiteTheme
+        ? "white"
+        : "black";
     const icon =
       !warning || value
         ? "fa fa-caret-down"

@@ -209,6 +209,7 @@ export const StyledLeftComment = ({
           <Label>{appeal.reason[locale]}</Label>
           <div style={{ marginBottom: "20px" }}>
             <SelectStyled
+              isComment={true}
               value={reason}
               warning={reasonWarning}
               onChange={handleChange}
