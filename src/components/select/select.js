@@ -12,10 +12,7 @@ export const SelectStyled = ({
     menu: (provided, state) => ({
       ...provided,
       width: state.selectProps.width,
-      color:
-        isComment && !visuallyImpairedModeWhiteTheme
-          ? "white"
-          : state.selectProps.menuColor,
+      color:state.selectProps.menuColor,
       padding: 5,
       zIndex: 5,
     }),
@@ -71,7 +68,7 @@ export const SelectStyled = ({
       styles={customStyles}
       components={{ DropdownIndicator }}
       width="100%"
-      menuColor="black"
+      menuColor=${ isComment && !visuallyImpairedModeWhiteTheme ? 'white' : 'black'}
       options={options}
     />
   );
