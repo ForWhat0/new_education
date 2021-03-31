@@ -14,7 +14,7 @@ export const SelectStyled = ({
       width: state.selectProps.width,
       color:
         isComment && !visuallyImpairedModeWhiteTheme
-          ? "#1D1D1B"
+          ? "white"
           : state.selectProps.menuColor,
       padding: 5,
       zIndex: 5,
