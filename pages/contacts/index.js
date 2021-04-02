@@ -48,8 +48,11 @@ const MapContainer = styled.div`
   right: 0;
   height: 500px;
   width: 700px;
+  @media screen and (max-width: 1400px) {
+    width: 400px;
+    height:400px;
+  }
   @media screen and (max-width: 1300px) {
-    height: 500px;
     position: relative;
   }
   @media screen and (max-width: 700px) {
@@ -68,12 +71,9 @@ const MapContainer = styled.div`
 const Map = styled.div`
   background: url(${(props) => props.src}) no-repeat;
   width: 100%;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   height: 100%;
-  @media screen and (max-width: 900px) {
-    background-size: contain;
-  }
 `;
 const CircleBackground = styled.div`
   height: 400px;
@@ -163,7 +163,7 @@ export default function Home({ menu, contacts, locale }) {
                 src={
                   contacts?.mapsImg?.sourceUrl
                     ? contacts.mapsImg.sourceUrl
-                    : 'unset'
+                    : "unset"
                 }
               />
               <a
