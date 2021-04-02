@@ -259,6 +259,9 @@ figure img {
   height: unset !important;
   align-self: flex-start;
   justify-self: flex-start;
+  border-radius: 30px;
+  -webkit-filter: drop-shadow(5px 5px 5px #000000);
+  filter: drop-shadow(5px 5px 5px #000000);
 }
 .wp-block-button a,
 .wp-block-file a.wp-block-file__button {

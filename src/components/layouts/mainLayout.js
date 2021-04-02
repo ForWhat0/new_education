@@ -9,9 +9,11 @@ export function MainLayout({
   menu,
   children,
   routerLinkTitle,
+  routerScroll,
 }) {
   return (
     <Layout
+      routerScroll={routerScroll}
       showLinks={true}
       databaseId={databaseId}
       menu={menu}

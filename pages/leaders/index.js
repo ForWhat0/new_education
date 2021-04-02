@@ -49,7 +49,6 @@ const TextImage = styled.div`
     max-width: 195px;
     max-height: 250px;
     border-radius: 30px;
-    box-shadow: 0px 0px 20px rgb(29 29 27 / 20%);
   }
   @media screen and ${device.tablet} {
     flex-direction: column;

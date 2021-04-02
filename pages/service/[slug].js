@@ -115,6 +115,8 @@ export default function GetEvent({ serviceBySlug, menu, contacts, locale }) {
       menu={parsedMenu}
       showZNORegister={zno && znoFields}
       hideLeftComponent={zno && true}
+      routerLinkTitle={serviceBySlug.title}
+      routerScroll={true}
     >
       <Container>
         <Header>

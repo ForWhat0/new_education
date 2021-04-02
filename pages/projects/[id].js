@@ -139,6 +139,8 @@ export default function ProjectDetails({ projectBySlug, menu, contacts }) {
               borderColor={visuallyImpairedModeWhiteTheme ? "#1D1D1B" : "white"}
             >
               <TitleForComponent
+                marginBottom="0"
+                marginTop="0"
                 displayYellowDiv={false}
                 text={projectBySlug.title}
                 fontSize="40px"

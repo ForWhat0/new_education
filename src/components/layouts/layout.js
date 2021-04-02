@@ -33,6 +33,7 @@ export const Layout = ({
   header,
   showZNORegister,
   routerLinkTitle,
+  routerScroll,
 }) => {
   const { visuallyImpairedMode } = useSelector((state) => state.app);
   const canUseDOM = typeof window !== "undefined";
@@ -75,7 +76,12 @@ export const Layout = ({
         <Menu menu={menu} />
       </div>
       {!visuallyImpairedMode && <BubbleBg />}
-      {showLinks && <RouterLink routerLinkTitle={routerLinkTitle} />}
+      {showLinks && (
+        <RouterLink
+          routerScroll={routerScroll}
+          routerLinkTitle={routerLinkTitle}
+        />
+      )}
 
       {inputNewsByTitle.length ? (
         loading ? (
