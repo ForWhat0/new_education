@@ -66,7 +66,7 @@ const MapContainer = styled.div`
   }
 `;
 const Map = styled.div`
-  background: url(/map.svg) no-repeat;
+  background: url(${(props) => props.src}) no-repeat;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -136,19 +136,19 @@ export default function Home({ menu, contacts, locale }) {
             />
             <Field>
               <a
-                href={contacts?.telegramLink ? contacts.telegramLink : '#'}
+                href={contacts?.telegramLink ? contacts.telegramLink : "#"}
                 target="_blank"
               >
                 <IconBackgroundSvg src="/telegramIcon.svg" />
               </a>
               <a
-                href={contacts?.facebookLink ? contacts.facebookLink : '#'}
+                href={contacts?.facebookLink ? contacts.facebookLink : "#"}
                 target="_blank"
               >
                 <IconBackgroundSvg src="/facebookIcon.svg" />
               </a>
               <a
-                href={contacts?.instagramLink ? contacts.instagramLink : '#'}
+                href={contacts?.instagramLink ? contacts.instagramLink : "#"}
                 target="_blank"
               >
                 <IconBackgroundSvg src="/instagram.svg" />
@@ -159,7 +159,13 @@ export default function Home({ menu, contacts, locale }) {
             <MapContainer
               color={!visuallyImpairedModeWhiteTheme ? "white" : "black"}
             >
-              <Map />
+              <Map
+                src={
+                  contacts?.mapsImg?.sourceUrl
+                    ? contacts.mapsImg.sourceUrl
+                    : 'unset'
+                }
+              />
               <a
                 href={contacts?.mapsLink ? contacts.mapsLink : null}
                 target="_blank"

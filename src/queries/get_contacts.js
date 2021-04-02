@@ -15,6 +15,9 @@ const GET_CONTACTS = gql`
     contacts: page(id: $contactsUri, idType: URI) {
       databaseId
       contactsFields {
+        mapsImg {
+          sourceUrl
+        }
         adress
         facebookLink
         instagramLink
