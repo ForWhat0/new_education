@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import StyledTextComponent from "../textComponent/textComponent";
-import { StyledDivWithIconBackGround } from "./backgroundWithIcon";
 import { device } from "../deviceSizes/deviceSizes";
 import { useSelector } from "react-redux";
 import "lazysizes";
@@ -136,11 +135,6 @@ export default function Project(props) {
       minHeight={!images ? "unset" : "350px"}
       background={visuallyImpairedMode ? "none" : background}
     >
-      <StyledDivWithIconBackGround
-        align={props.backgroundIconAlign}
-        display={visuallyImpairedMode ? "none" : props.backgroundIconDisplay}
-        src={props.backgroundIcon}
-      />
       <ContainerWrapper
         bBottom={bBottom}
         pBottom={pBottom}

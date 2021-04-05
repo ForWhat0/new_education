@@ -12,12 +12,7 @@ const InputField = styled.div`
   flex-direction: column;
   width: ${(props) => props.width};
 `;
-const Input = styled.input.attrs((props) => ({
-  type: "text",
-  onChange: props.onChange,
-  maxlength: props.maxlength,
-  placeholder: props.placeholder,
-}))`
+const Input = styled.input`
   border: 1px solid ${(props) => props.borderColor};
   box-sizing: border-box;
   border-radius: 9px;
@@ -25,12 +20,13 @@ const Input = styled.input.attrs((props) => ({
   background: transparent;
   width: 100%;
   color: ${(props) => props.color};
+
   ::placeholder,
   ::-webkit-input-placeholder {
-    color: ${(props) => props.color};
+    color: rgb(255, 0, 0);
   }
   :-ms-input-placeholder {
-    color: ${(props) => props.color};
+    color: rgb(255, 0, 0);
   }
 `;
 export const Text = styled.label`

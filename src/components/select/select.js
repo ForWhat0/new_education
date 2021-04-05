@@ -9,6 +9,12 @@ export const SelectStyled = ({
 }) => {
   const { visuallyImpairedModeWhiteTheme } = useSelector((state) => state.app);
   const customStyles = {
+    placeholder: (defaultStyles) => {
+      return {
+        ...defaultStyles,
+        color: "rgb(255, 0, 0)",
+      };
+    },
     menu: (provided, state) => ({
       ...provided,
       width: state.selectProps.width,
@@ -62,6 +68,7 @@ export const SelectStyled = ({
 
   return (
     <Select
+      placeholderTextColor="red"
       placeholder={warning}
       value={value}
       onChange={onChange}

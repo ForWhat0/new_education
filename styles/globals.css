@@ -63,6 +63,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
   .wp-block-column p {
     width: 100% !important;
+    line-height: 17px;
   }
 }
 
@@ -211,6 +212,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .wp-block-column h2,
 .wp-block-column p {
   width: 80%;
+  line-height: 24px;
 }
 .wp-block-column p a{
   width: 100%;
@@ -260,8 +262,8 @@ figure img {
   align-self: flex-start;
   justify-self: flex-start;
   border-radius: 30px;
-  -webkit-filter: drop-shadow(5px 5px 5px #000000);
-  filter: drop-shadow(5px 5px 5px #000000);
+  -webkit-filter: drop-shadow(5px 5px 5px #808080);
+  filter: drop-shadow(5px 5px 5px #808080);
 }
 .wp-block-button a,
 .wp-block-file a.wp-block-file__button {
